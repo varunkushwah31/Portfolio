@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
 
 @custom-variant dark (&:is(.dark *));
 :root {

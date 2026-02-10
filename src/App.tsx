@@ -1,8 +1,10 @@
+import Home from "./Pages/Home"
 
-
-const App = () => {
+function App() {
   return (
-    <div>App</div>
+    <div className="min-h-screen bg-background text-foreground">
+      <Home />
+    </div>
   )
 }
 
