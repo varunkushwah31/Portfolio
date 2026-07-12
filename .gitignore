@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.agents/**
+Varun_Kushwah_Portfolio_Brief.md
+skills-lock.json
+Varun_Kushwah_Agent_Manifest.md
+AGENTS.md
+DESIGN.md

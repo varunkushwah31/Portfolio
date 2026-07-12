@@ -1,84 +1,95 @@
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Code,
-  Palette,
-  Zap,
-  Cpu,
-  GitBranch,
-  Layers,
-} from "lucide-react"
+const skills = [
+  { value: "JAVA", label: "CORE LANGUAGE" },
+  { value: "SPRING", label: "FRAMEWORK" },
+  { value: "SPRING BOOT", label: "BACKEND" },
+  { value: "REACT", label: "FRONTEND" },
+  { value: "FLUTTER", label: "MOBILE" },
+  { value: "DEVOPS", label: "LEARNING" },
+  { value: "WEBRTC", label: "REAL-TIME" },
+  { value: "GIT", label: "VERSION CONTROL" },
+]
 
-const skillCategories = [
-  {
-    name: "Frontend",
-    icon: Code,
-    skills: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-  },
-  {
-    name: "UI/UX",
-    icon: Palette,
-    skills: ["shadcn/ui", "Responsive Design", "Accessibility", "CSS"],
-  },
-  {
-    name: "Performance",
-    icon: Zap,
-    skills: ["Web Vitals", "Optimization", "SEO", "Testing"],
-  },
-  {
-    name: "Tools",
-    icon: Cpu,
-    skills: ["VS Code", "Git", "Chrome DevTools", "Figma"],
-  },
-  {
-    name: "Version Control",
-    icon: GitBranch,
-    skills: ["Git", "GitHub", "GitLab", "Branching Strategies"],
-  },
-  {
-    name: "Architecture",
-    icon: Layers,
-    skills: ["Component Design", "State Management", "Clean Code", "Design Patterns"],
-  },
+const interests = [
+  { value: "LOCAL AI", label: "IMPLEMENTATIONS" },
+  { value: "ML", label: "MACHINE LEARNING" },
+  { value: "SYSTEMS", label: "MONITORING" },
 ]
 
 const Skills = () => {
   return (
-    <section id="skills" className="max-w-6xl mx-auto px-6 py-24 bg-muted/40">
-      <div className="mb-12">
-        <h3 className="text-3xl font-semibold mb-4">Skills & Stack</h3>
-        <p className="text-muted-foreground">
-          Technologies and tools I work with
-        </p>
-      </div>
+    <section
+      id="skills"
+      className="w-full bg-surface-soft"
+      style={{ paddingTop: "96px", paddingBottom: "96px" }}
+    >
+      <div className="max-w-[1440px] mx-auto px-6">
+        {/* Section label */}
+        <div className="label-uppercase text-muted mb-4">
+          CAPABILITIES
+        </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {skillCategories.map((category) => {
-          const Icon = category.icon
-          return (
-            <Card
-              key={category.name}
-              className="transition hover:shadow-md hover:border-primary/50"
+        {/* Section heading */}
+        <h2 className="text-ink mb-16">
+          TECHNICAL STACK
+        </h2>
+
+        {/* Primary skills — spec-cell grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
+          {skills.map((skill) => (
+            <div
+              key={skill.value}
+              className="bg-canvas p-6 border border-hairline-strong hover:border-hairline transition-colors duration-200"
+              style={{ borderRadius: "0px" }}
             >
-              <CardContent className="pt-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <Icon className="text-primary" size={24} />
-                  <h4 className="font-semibold">{category.name}</h4>
-                </div>
-                <ul className="space-y-2">
-                  {category.skills.map((skill) => (
-                    <li
-                      key={skill}
-                      className="text-sm text-muted-foreground flex items-center gap-2"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          )
-        })}
+              <div
+                className="text-ink mb-3"
+                style={{
+                  fontSize: "var(--font-size-display-sm)",
+                  fontWeight: 700,
+                  lineHeight: 1.15,
+                  textTransform: "uppercase" as const,
+                }}
+              >
+                {skill.value}
+              </div>
+              <div className="label-uppercase text-muted">
+                {skill.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-hairline mb-16" />
+
+        {/* Interests — secondary grid */}
+        <div className="label-uppercase text-muted mb-8">
+          OTHER INTERESTS
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {interests.map((interest) => (
+            <div
+              key={interest.value}
+              className="bg-canvas p-6 border border-hairline-strong"
+              style={{ borderRadius: "0px" }}
+            >
+              <div
+                className="text-ink mb-3"
+                style={{
+                  fontSize: "var(--font-size-title-lg)",
+                  fontWeight: 700,
+                  lineHeight: 1.3,
+                  textTransform: "uppercase" as const,
+                }}
+              >
+                {interest.value}
+              </div>
+              <div className="label-uppercase text-muted">
+                {interest.label}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

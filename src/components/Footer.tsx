@@ -1,58 +1,140 @@
-import { Github, Linkedin, Twitter, Mail } from "lucide-react"
+import MStripe from "./MStripe"
+
+const footerLinks = {
+  navigation: [
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact" },
+  ],
+  projects: [
+    { label: "LeetcodeTracker", href: "#projects" },
+    { label: "MangoShare Clone", href: "#projects" },
+    { label: "System Health Dashboard", href: "#projects" },
+    { label: "Disease Prediction", href: "#projects" },
+    { label: "Daily Quotes App", href: "#projects" },
+  ],
+  social: [
+    { label: "GitHub", href: "https://github.com" },
+    { label: "LinkedIn", href: "https://linkedin.com" },
+    { label: "Email", href: "mailto:your.email@example.com" },
+  ],
+}
 
 const Footer = () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-t py-12 px-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Social Links */}
-        <div className="flex flex-col sm:flex-row items-center justify-between mb-8 pb-8 border-b">
+    <footer className="w-full bg-canvas">
+      {/* M Stripe divider at top of footer */}
+      <MStripe />
+
+      <div
+        className="max-w-[1440px] mx-auto px-6"
+        style={{ paddingTop: "64px", paddingBottom: "64px" }}
+      >
+        {/* Footer columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Brand column */}
           <div>
-            <p className="font-semibold mb-2 sm:mb-0">Connect with me</p>
+            <div className="label-uppercase text-ink mb-6">
+              VARUN KUSHWAH
+            </div>
+            <p
+              className="text-body"
+              style={{
+                fontSize: "var(--font-size-body-sm)",
+                fontWeight: 300,
+                lineHeight: 1.6,
+              }}
+            >
+              Computer Science Student & Software Developer.
+              Java Coordinator at devup.
+            </p>
           </div>
-          <div className="flex gap-4">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition"
-              aria-label="GitHub"
-            >
-              <Github size={20} />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={20} />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition"
-              aria-label="Twitter"
-            >
-              <Twitter size={20} />
-            </a>
-            <a
-              href="mailto:your.email@example.com"
-              className="p-2 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition"
-              aria-label="Email"
-            >
-              <Mail size={20} />
-            </a>
+
+          {/* Navigation column */}
+          <div>
+            <div className="label-uppercase text-muted mb-6">
+              NAVIGATION
+            </div>
+            <ul className="flex flex-col gap-3">
+              {footerLinks.navigation.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-body hover:text-ink transition-colors duration-200"
+                    style={{
+                      fontSize: "var(--font-size-body-sm)",
+                      fontWeight: 300,
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Projects column */}
+          <div>
+            <div className="label-uppercase text-muted mb-6">
+              PROJECTS
+            </div>
+            <ul className="flex flex-col gap-3">
+              {footerLinks.projects.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-body hover:text-ink transition-colors duration-200"
+                    style={{
+                      fontSize: "var(--font-size-body-sm)",
+                      fontWeight: 300,
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Social column */}
+          <div>
+            <div className="label-uppercase text-muted mb-6">
+              SOCIAL
+            </div>
+            <ul className="flex flex-col gap-3">
+              {footerLinks.social.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="text-body hover:text-ink transition-colors duration-200"
+                    style={{
+                      fontSize: "var(--font-size-body-sm)",
+                      fontWeight: 300,
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="text-center text-sm text-muted-foreground">
-          <p>© {year} Your Name. All rights reserved.</p>
-          <p className="mt-1">Built with React, TypeScript & Tailwind CSS</p>
+        {/* Bottom divider */}
+        <div className="border-t border-hairline pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="caption">
+              © {year} Varun Kushwah. All rights reserved.
+            </p>
+            <p className="caption">
+              Built with React, TypeScript & Tailwind CSS
+            </p>
+          </div>
         </div>
       </div>
     </footer>

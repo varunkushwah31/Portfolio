@@ -1,90 +1,109 @@
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Menu, X, Moon, Sun } from "lucide-react"
+import { Link, useLocation } from "react-router-dom"
+import { Menu, X } from "lucide-react"
+
+const navLinks = [
+  { label: "About", href: "/#about" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Contact", href: "/#contact" },
+]
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
-
-  const toggleTheme = () => {
-    setDarkMode(!darkMode)
-    document.documentElement.classList.toggle("dark")
-  }
+  const location = useLocation()
+  const isHome = location.pathname === "/"
 
   const closeMenu = () => setMobileMenuOpen(false)
 
+  /**
+   * On the home page, hash links scroll directly.
+   * On other pages, they navigate to /#section via Link.
+   */
+  const handleNavClick = (href: string) => {
+    closeMenu()
+    if (isHome) {
+      const hash = href.replace("/", "")
+      const el = document.querySelector(hash)
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" })
+      }
+    }
+  }
+
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur border-b bg-background/80">
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <h1 className="font-bold text-lg tracking-tight">
-          Your<span className="text-primary">Name</span>
-        </h1>
+    <nav
+      id="top-nav"
+      className="sticky top-0 z-50 bg-canvas border-b border-hairline"
+      style={{ height: "64px" }}
+    >
+      <div className="max-w-[1440px] mx-auto flex items-center justify-between px-6 h-full">
+        {/* Logo / Name — always links home */}
+        <Link to="/" className="label-uppercase text-ink">
+          VARUN KUSHWAH
+        </Link>
 
-        <div className="hidden md:flex items-center gap-6 text-sm">
-          <a className="hover:text-primary transition" href="#about">About</a>
-          <a className="hover:text-primary transition" href="#skills">Skills</a>
-          <a className="hover:text-primary transition" href="#projects">Projects</a>
-          <a className="hover:text-primary transition" href="#contact">Contact</a>
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-md hover:bg-primary/10 transition"
-            aria-label="Toggle theme"
-          >
-            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+        {/* Desktop Nav Links */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) =>
+            isHome ? (
+              <a
+                key={link.href}
+                href={link.href.replace("/", "")}
+                className="nav-link text-body hover:text-ink transition-colors duration-200"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="nav-link text-body hover:text-ink transition-colors duration-200"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </div>
 
-        <div className="md:hidden flex items-center gap-4">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-md hover:bg-primary/10 transition"
-            aria-label="Toggle theme"
-          >
-            {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-md hover:bg-primary/10 transition"
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        {/* Mobile Hamburger */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="md:hidden p-2 text-ink bg-transparent border-0 cursor-pointer"
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — full-screen black overlay */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t bg-background/95 backdrop-blur">
-          <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
-            <a
-              onClick={closeMenu}
-              className="hover:text-primary transition py-2"
-              href="#about"
-            >
-              About
-            </a>
-            <a
-              onClick={closeMenu}
-              className="hover:text-primary transition py-2"
-              href="#skills"
-            >
-              Skills
-            </a>
-            <a
-              onClick={closeMenu}
-              className="hover:text-primary transition py-2"
-              href="#projects"
-            >
-              Projects
-            </a>
-            <a
-              onClick={closeMenu}
-              className="hover:text-primary transition py-2"
-              href="#contact"
-            >
-              Contact
-            </a>
-            <Button className="w-full mt-2">Get In Touch</Button>
+        <div className="md:hidden fixed inset-0 top-[64px] z-40 bg-canvas flex flex-col">
+          {/* M Stripe at top of mobile menu */}
+          <div className="m-stripe" />
+
+          <div className="flex flex-col px-6 pt-12 gap-8">
+            {navLinks.map((link) =>
+              isHome ? (
+                <a
+                  key={link.href}
+                  href={link.href.replace("/", "")}
+                  onClick={() => handleNavClick(link.href)}
+                  className="text-ink text-[24px] font-bold uppercase tracking-[0px] hover:text-body-strong transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  onClick={closeMenu}
+                  className="text-ink text-[24px] font-bold uppercase tracking-[0px] hover:text-body-strong transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
         </div>
       )}

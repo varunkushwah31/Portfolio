@@ -1,106 +1,95 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Github, ExternalLink } from "lucide-react"
-
-const projects = [
-  {
-    title: "Portfolio Website",
-    description: "Modern personal portfolio built with React, TypeScript and Tailwind.",
-    tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    github: "https://github.com",
-    live: "https://example.com",
-  },
-  {
-    title: "Todo App",
-    description: "A clean and minimal todo app with local storage support and dark mode.",
-    tech: ["React", "localStorage", "Tailwind CSS"],
-    github: "https://github.com",
-    live: "https://example.com",
-  },
-  {
-    title: "E-Commerce Dashboard",
-    description: "Admin dashboard for managing products, orders, and analytics.",
-    tech: ["React", "TypeScript", "shadcn/ui", "Chart.js"],
-    github: "https://github.com",
-    live: "https://example.com",
-  },
-  {
-    title: "Chat Application",
-    description: "Real-time messaging app with user authentication and instant notifications.",
-    tech: ["React", "Firebase", "Tailwind", "Real-time DB"],
-    github: "https://github.com",
-    live: "https://example.com",
-  },
-]
+import { Link } from "react-router-dom"
+import { ArrowRight } from "lucide-react"
+import projects from "@/data/projects"
 
 const Projects = () => {
   return (
-    <section id="projects" className="max-w-6xl mx-auto px-6 py-24">
-      <div className="mb-12">
-        <h3 className="text-3xl font-semibold mb-4">Featured Projects</h3>
-        <p className="text-muted-foreground">
-          A selection of my recent work and side projects
-        </p>
-      </div>
+    <section
+      id="projects"
+      className="w-full bg-canvas"
+      style={{ paddingTop: "96px", paddingBottom: "96px" }}
+    >
+      <div className="max-w-[1440px] mx-auto px-6">
+        {/* Section label */}
+        <div className="label-uppercase text-muted mb-4">
+          WORK
+        </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        {projects.map((project, index) => (
-          <Card
-            key={index}
-            className="transition hover:-translate-y-1 hover:shadow-lg flex flex-col h-full"
-          >
-            <CardHeader>
-              <CardTitle className="text-xl">{project.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex-1 flex flex-col gap-4">
-              <p className="text-muted-foreground">
-                {project.description}
-              </p>
+        {/* Section heading */}
+        <h2 className="text-ink mb-16">
+          PROJECTS
+        </h2>
 
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20"
-                  >
-                    {tech}
+        {/* Project cards — 3-up grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project) => (
+            <Link
+              key={project.slug}
+              to={`/project/${project.slug}`}
+              className="bg-surface-card flex flex-col border border-hairline-strong hover:border-hairline transition-colors duration-200 group"
+              style={{ borderRadius: "0px" }}
+            >
+              {/* Card content */}
+              <div className="p-6 flex flex-col flex-1">
+                {/* Category tag */}
+                <div className="label-uppercase text-m-blue-dark mb-4">
+                  {project.category}
+                </div>
+
+                {/* Title — title-lg */}
+                <h4
+                  className="text-ink mb-4"
+                  style={{
+                    fontSize: "var(--font-size-title-lg)",
+                    fontWeight: 700,
+                    lineHeight: 1.3,
+                    textTransform: "uppercase" as const,
+                    letterSpacing: 0,
+                  }}
+                >
+                  {project.title}
+                </h4>
+
+                {/* Description — body-md / 300 */}
+                <p
+                  className="body-light mb-6 flex-1"
+                  style={{
+                    fontSize: "var(--font-size-body-md)",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {project.description}
+                </p>
+
+                {/* Tech tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tech.slice(0, 3).map((t) => (
+                    <span
+                      key={t}
+                      className="text-muted bg-surface-elevated px-3 py-1"
+                      style={{
+                        fontSize: "var(--font-size-caption)",
+                        fontWeight: 400,
+                        letterSpacing: "0.5px",
+                        borderRadius: "0px",
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Text link — VIEW PROJECT → */}
+                <div className="mt-auto">
+                  <span className="label-uppercase text-ink inline-flex items-center gap-2 group-hover:gap-3 transition-all duration-200">
+                    VIEW PROJECT
+                    <ArrowRight size={14} strokeWidth={2} />
                   </span>
-                ))}
+                </div>
               </div>
-
-              {/* Buttons */}
-              <div className="flex gap-3 pt-2 mt-auto">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="flex-1 gap-2"
-                  asChild
-                >
-                  <a href={project.github} target="_blank" rel="noopener noreferrer">
-                    <Github size={16} />
-                    Code
-                  </a>
-                </Button>
-                <Button
-                  size="sm"
-                  className="flex-1 gap-2"
-                  asChild
-                >
-                  <a href={project.live} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink size={16} />
-                    Live
-                  </a>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   )
