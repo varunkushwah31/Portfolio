@@ -17,7 +17,11 @@ const heroMetrics = [
   { value: "P2P", label: "REAL-TIME WEBRTC" },
 ]
 
-const Hero = () => {
+interface HeroProps {
+  onOpenResume?: () => void
+}
+
+const Hero = ({ onOpenResume }: HeroProps) => {
   const [showSpecDrawer, setShowSpecDrawer] = useState(false)
 
   return (
@@ -130,27 +134,39 @@ const Hero = () => {
             >
               <a
                 href="#projects"
-                className="btn-text group inline-flex items-center gap-3 text-ink bg-transparent border border-ink px-8 hover:bg-ink hover:text-canvas transition-all duration-300 relative overflow-hidden"
+                className="btn-text group inline-flex items-center gap-3 text-canvas bg-ink px-8 hover:bg-body-strong transition-all duration-300 relative overflow-hidden"
                 style={{ height: "48px", borderRadius: "0px" }}
               >
-                <span className="relative z-10 flex items-center gap-3">
+                <span className="relative z-10 flex items-center gap-3 font-bold">
                   VIEW PROJECTS
                   <ArrowRight size={16} strokeWidth={2} className="group-hover:translate-x-1 transition-transform" />
                 </span>
               </a>
+
+              {onOpenResume && (
+                <button
+                  onClick={onOpenResume}
+                  className="btn-text inline-flex items-center gap-2 text-ink bg-transparent border border-ink px-7 hover:bg-ink hover:text-canvas transition-all duration-300 cursor-pointer"
+                  style={{ height: "48px", borderRadius: "0px" }}
+                >
+                  CV / RESUME SPEC
+                </button>
+              )}
+
               <a
                 href="https://github.com/varunkushwah31"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-text inline-flex items-center gap-3 text-ink bg-transparent border border-hairline px-8 hover:border-ink hover:bg-surface-soft transition-all duration-300"
+                className="btn-text inline-flex items-center gap-3 text-ink bg-transparent border border-hairline px-6 hover:border-ink hover:bg-surface-soft transition-all duration-300"
                 style={{ height: "48px", borderRadius: "0px" }}
               >
                 <GitHubIcon size={16} />
                 GITHUB
               </a>
+
               <button
                 onClick={() => setShowSpecDrawer(!showSpecDrawer)}
-                className="btn-text inline-flex items-center gap-2 text-muted hover:text-ink bg-transparent border border-hairline-strong px-6 hover:border-hairline transition-all duration-300 text-xs"
+                className="btn-text inline-flex items-center gap-2 text-muted hover:text-ink bg-transparent border border-hairline-strong px-5 hover:border-hairline transition-all duration-300 text-xs cursor-pointer"
                 style={{ height: "48px", borderRadius: "0px" }}
               >
                 <Terminal size={14} className="text-m-blue-dark" />

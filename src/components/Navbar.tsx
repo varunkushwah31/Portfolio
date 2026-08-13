@@ -10,7 +10,12 @@ const navLinks = [
   { label: "Contact", href: "/#contact", id: "contact" },
 ]
 
-const Navbar = () => {
+interface NavbarProps {
+  onOpenCommandPalette?: () => void
+  onOpenResume?: () => void
+}
+
+const Navbar = ({ onOpenCommandPalette, onOpenResume }: NavbarProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState<string>("")
   const [scrolled, setScrolled] = useState(false)
@@ -87,8 +92,8 @@ const Navbar = () => {
           VARUN KUSHWAH
         </Link>
 
-        {/* Desktop Nav Links */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Nav Links & Action Triggers */}
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
           {navLinks.map((link) => {
             const isActive = isHome && activeSection === link.id
             return isHome ? (
@@ -99,7 +104,7 @@ const Navbar = () => {
                   e.preventDefault()
                   handleNavClick(link.href)
                 }}
-                className={`relative py-2 nav-link text-sm uppercase tracking-wider transition-colors duration-200 ${
+                className={`relative py-2 nav-link text-xs lg:text-sm uppercase tracking-wider transition-colors duration-200 ${
                   isActive ? "text-ink font-bold" : "text-body hover:text-ink"
                 }`}
               >
@@ -116,22 +121,56 @@ const Navbar = () => {
               <Link
                 key={link.href}
                 to={link.href}
-                className="relative py-2 nav-link text-sm uppercase tracking-wider text-body hover:text-ink transition-colors duration-200"
+                className="relative py-2 nav-link text-xs lg:text-sm uppercase tracking-wider text-body hover:text-ink transition-colors duration-200"
               >
                 {link.label}
               </Link>
             )
           })}
+
+          {/* Quick Command HUD Button */}
+          {onOpenCommandPalette && (
+            <button
+              onClick={onOpenCommandPalette}
+              className="btn-text px-2.5 py-1 bg-surface-soft hover:bg-surface-elevated text-muted hover:text-ink border border-hairline text-[11px] font-mono inline-flex items-center gap-1.5 transition-colors cursor-pointer"
+              style={{ borderRadius: "0px" }}
+              title="Open Command Palette (Cmd + K)"
+            >
+              <span>⌘K</span>
+              <span className="hidden lg:inline">COMMAND</span>
+            </button>
+          )}
+
+          {/* Resume Spec Button */}
+          {onOpenResume && (
+            <button
+              onClick={onOpenResume}
+              className="btn-text px-3 py-1.5 bg-ink text-canvas hover:bg-body-strong text-xs font-bold transition-colors cursor-pointer"
+              style={{ borderRadius: "0px" }}
+            >
+              CV / RESUME
+            </button>
+          )}
         </div>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-ink bg-transparent border-0 cursor-pointer focus:outline-none"
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile Right Cluster */}
+        <div className="flex items-center gap-2 md:hidden">
+          {onOpenCommandPalette && (
+            <button
+              onClick={onOpenCommandPalette}
+              className="px-2 py-1 bg-surface-soft text-ink border border-hairline font-mono text-xs"
+            >
+              ⌘K
+            </button>
+          )}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-ink bg-transparent border-0 cursor-pointer focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Overlay with Framer Motion */}

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
@@ -6,16 +7,29 @@ import MStripe from "@/components/MStripe"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import ProjectVisual from "@/components/ProjectVisual"
+import CommandPalette from "@/components/CommandPalette"
+import ResumeModal from "@/components/ResumeModal"
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>()
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
+  const [resumeModalOpen, setResumeModalOpen] = useState(false)
   const project = projects.find((p) => p.slug === slug)
   const projectIndex = projects.findIndex((p) => p.slug === slug)
+
+  useEffect(() => {
+    const handleOpenPalette = () => setCommandPaletteOpen(true)
+    window.addEventListener("open-command-palette", handleOpenPalette)
+    return () => window.removeEventListener("open-command-palette", handleOpenPalette)
+  }, [])
 
   if (!project) {
     return (
       <>
-        <Navbar />
+        <Navbar
+          onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+          onOpenResume={() => setResumeModalOpen(true)}
+        />
         <main
           className="w-full bg-canvas flex items-center justify-center"
           style={{ minHeight: "60vh", paddingTop: "96px", paddingBottom: "96px" }}
@@ -36,6 +50,15 @@ const ProjectDetail = () => {
           </div>
         </main>
         <Footer />
+        <CommandPalette
+          isOpen={commandPaletteOpen}
+          onClose={() => setCommandPaletteOpen(false)}
+          onOpenResume={() => setResumeModalOpen(true)}
+        />
+        <ResumeModal
+          isOpen={resumeModalOpen}
+          onClose={() => setResumeModalOpen(false)}
+        />
       </>
     )
   }
@@ -46,7 +69,10 @@ const ProjectDetail = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar
+        onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+        onOpenResume={() => setResumeModalOpen(true)}
+      />
       <main className="bg-canvas text-ink overflow-hidden">
         {/* Hero band */}
         <section
@@ -252,9 +278,66 @@ const ProjectDetail = () => {
 
         <MStripe />
 
+        {/* Architecture Data-Flow Pipeline Section */}
+        {project.architectureFlow && project.architectureFlow.length > 0 && (
+          <>
+            <section
+              className="w-full bg-canvas"
+              style={{ paddingTop: "96px", paddingBottom: "96px" }}
+            >
+              <div className="max-w-[1440px] mx-auto px-6">
+                <div className="label-uppercase text-muted mb-4">
+                  SYSTEM ARCHITECTURE
+                </div>
+                <h2
+                  className="text-ink mb-12"
+                  style={{
+                    fontSize: "var(--font-size-display-sm)",
+                    fontWeight: 700,
+                    lineHeight: 1.15,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  DATA FLOW & PIPELINE LIFECYCLE
+                </h2>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {project.architectureFlow.map((node, i) => (
+                    <motion.div
+                      key={node.step}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.08 }}
+                      className="bg-surface-card p-6 border border-hairline-strong relative flex flex-col justify-between"
+                      style={{ borderRadius: "0px" }}
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="font-mono text-m-blue-light font-bold text-xs">
+                            PHASE // {node.step}
+                          </span>
+                          <span className="w-2 h-2 bg-m-blue-dark rounded-full" />
+                        </div>
+                        <h4 className="text-ink font-bold uppercase text-sm mb-3">
+                          {node.title}
+                        </h4>
+                        <p className="body-light text-body text-xs leading-relaxed">
+                          {node.detail}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <MStripe />
+          </>
+        )}
+
         {/* Highlights band */}
         <section
-          className="w-full bg-canvas"
+          className="w-full bg-surface-soft"
           style={{ paddingTop: "96px", paddingBottom: "96px" }}
         >
           <div className="max-w-[1440px] mx-auto px-6">
@@ -281,7 +364,7 @@ const ProjectDetail = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 }}
-                  className="bg-surface-soft p-6 border border-hairline-strong hover:border-hairline transition-colors duration-200"
+                  className="bg-canvas p-6 border border-hairline-strong hover:border-hairline transition-colors duration-200"
                   style={{ borderRadius: "0px" }}
                 >
                   <div
@@ -307,6 +390,81 @@ const ProjectDetail = () => {
         </section>
 
         <MStripe />
+
+        {/* Engineering Decisions & Trade-Offs Section */}
+        {project.tradeoffs && project.tradeoffs.length > 0 && (
+          <>
+            <section
+              className="w-full bg-canvas"
+              style={{ paddingTop: "96px", paddingBottom: "96px" }}
+            >
+              <div className="max-w-[1440px] mx-auto px-6">
+                <div className="label-uppercase text-muted mb-4">
+                  DECISION LOG
+                </div>
+                <h2
+                  className="text-ink mb-12"
+                  style={{
+                    fontSize: "var(--font-size-display-sm)",
+                    fontWeight: 700,
+                    lineHeight: 1.15,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  ENGINEERING DECISIONS & TRADE-OFFS
+                </h2>
+
+                <div className="space-y-6">
+                  {project.tradeoffs.map((t, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="bg-surface-card border border-hairline p-6 md:p-8"
+                      style={{ borderRadius: "0px" }}
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="w-3 h-3 bg-m-blue-light" style={{ borderRadius: "0px" }} />
+                        <h4 className="text-ink font-bold text-base md:text-lg uppercase">
+                          {t.decision}
+                        </h4>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-hairline-strong text-xs leading-relaxed">
+                        <div>
+                          <div className="label-uppercase text-muted text-[10px] mb-2 tracking-[1px]">
+                            WHY CHOSEN / RATIONALE
+                          </div>
+                          <p className="body-light text-body-strong">
+                            {t.rationale}
+                          </p>
+                        </div>
+                        <div>
+                          <div className="label-uppercase text-muted text-[10px] mb-2 tracking-[1px]">
+                            ALTERNATIVE CONSIDERED
+                          </div>
+                          <p className="body-light text-body">
+                            {t.alternative}
+                          </p>
+                        </div>
+                        <div>
+                          <div className="label-uppercase text-muted text-[10px] mb-2 tracking-[1px]">
+                            ENGINEERING TRADE-OFF
+                          </div>
+                          <p className="body-light text-m-blue-light font-mono">
+                            {t.tradeoff}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+            <MStripe />
+          </>
+        )}
 
         {/* Navigation band — prev/next project */}
         <section
@@ -379,9 +537,21 @@ const ProjectDetail = () => {
         </section>
       </main>
       <Footer />
+
+      {/* Global Engineering Modals */}
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+        onOpenResume={() => setResumeModalOpen(true)}
+      />
+      <ResumeModal
+        isOpen={resumeModalOpen}
+        onClose={() => setResumeModalOpen(false)}
+      />
     </>
   )
 }
 
 export default ProjectDetail
+
 

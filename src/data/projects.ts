@@ -9,6 +9,19 @@ export interface ProjectMetric {
   value: string
 }
 
+export interface TradeoffDecision {
+  decision: string
+  rationale: string
+  alternative: string
+  tradeoff: string
+}
+
+export interface ArchitectureNode {
+  step: string
+  title: string
+  detail: string
+}
+
 export interface Project {
   slug: string
   category: string
@@ -22,6 +35,8 @@ export interface Project {
   tech: string[]
   highlights: string[]
   metrics: ProjectMetric[]
+  architectureFlow: ArchitectureNode[]
+  tradeoffs: TradeoffDecision[]
   role: string
   status: string
   image: string
@@ -59,6 +74,26 @@ const projects: Project[] = [
       { label: "DATA PIPELINE", value: "RESTful CRUD & STATS" },
       { label: "TEAM CAPACITY", value: "2-ENGINEER SQUAD" },
     ],
+    architectureFlow: [
+      { step: "01", title: "CLIENT REQUEST", detail: "React 19 single page application capturing solved problem telemetry and user session state." },
+      { step: "02", title: "AUTH & API GATEWAY", detail: "Express middleware verifying JWT headers and validating submission payloads." },
+      { step: "03", title: "ANALYTICS ENGINE", detail: "Service layer computing active streak windows, category distribution, and persistence." },
+      { step: "04", title: "SUBTREE SYNC", detail: "Automated git subtree scripts synchronizing client/server commits into independent branches." },
+    ],
+    tradeoffs: [
+      {
+        decision: "Git Subtree Monorepo Architecture",
+        rationale: "Enabled atomic cross-stack commits and unified issue tracking while allowing independent deployment pipelines.",
+        alternative: "Git Submodules or Separate Polyrepos",
+        tradeoff: "Slightly more complex initial git push/pull syntax, eliminated dependency synchronization drift.",
+      },
+      {
+        decision: "Stateless JWT Auth with HttpOnly Storage",
+        rationale: "Reduced backend session memory footprint and enabled seamless horizontal scalability.",
+        alternative: "Stateful Server Sessions in Redis",
+        tradeoff: "Token invalidation requires token blacklisting; eliminated external session cache overhead.",
+      },
+    ],
     role: "Full-stack Developer",
     status: "Active Development",
     githubUrl: "https://github.com/varunkushwah31",
@@ -91,6 +126,26 @@ const projects: Project[] = [
       { label: "RELAY", value: "ZERO SERVER BOTTLENECK" },
       { label: "SIGNALING", value: "STUN / ICE EXCHANGE" },
       { label: "LATENCY", value: "DIRECT PEER STREAM" },
+    ],
+    architectureFlow: [
+      { step: "01", title: "PEER DISCOVERY", detail: "WebSocket signaling server exchanges SDP offers, answers, and ICE candidates between peers." },
+      { step: "02", title: "NAT TRAVERSAL", detail: "STUN server resolves public IP/ports for direct UDP socket connectivity." },
+      { step: "03", title: "CHUNK STREAMING", detail: "RTCDataChannel fragments file into 64KB binary chunks and transmits directly over UDP." },
+      { step: "04", title: "BLOB RECONSTRUCTION", detail: "Receiver buffers chunks into ArrayBuffer and triggers client-side file download." },
+    ],
+    tradeoffs: [
+      {
+        decision: "Direct RTCDataChannel File Transmission",
+        rationale: "Zero server storage costs, unlimited transfer speed bounded only by peer bandwidth, end-to-end privacy.",
+        alternative: "S3 / Cloud Storage Upload & Download Relay",
+        tradeoff: "Both peers must remain online simultaneously; eliminated intermediate server storage & bandwidth bills.",
+      },
+      {
+        decision: "Ordered Binary Chunking Protocol",
+        rationale: "Ensured deterministic byte-stream reconstruction and client-side progress calculation.",
+        alternative: "Unordered UDP with Manual Packet Sequencing",
+        tradeoff: "Minor packet retransmission overhead on high-loss networks, significantly simpler buffer integrity.",
+      },
     ],
     role: "Frontend Developer",
     status: "Completed",
@@ -125,6 +180,26 @@ const projects: Project[] = [
       { label: "DEPENDENCIES", value: "ZERO CLOUD OVERHEAD" },
       { label: "VISUALIZATION", value: "LIVE REAL-TIME CHARTS" },
     ],
+    architectureFlow: [
+      { step: "01", title: "OS TELEMETRY PROBE", detail: "Background daemon polls kernel OS APIs (/proc, sysinfo, os module) every 1000ms." },
+      { step: "02", title: "METRIC NORMALIZATION", detail: "Raw metrics normalized into compact JSON telemetry payloads." },
+      { step: "03", title: "WEBSOCKET BROADCAST", detail: "WebSocket connection pushes real-time telemetry stream to connected client cockpit." },
+      { step: "04", title: "TIME-SERIES VISUALIZER", detail: "React frontend renders live-updating time-series charts with zero page reloads." },
+    ],
+    tradeoffs: [
+      {
+        decision: "Self-Hosted Lightweight Daemon",
+        rationale: "Runs entirely on local hardware with zero external cloud SaaS costs or network egress.",
+        alternative: "Cloud-Hosted Datadog / Grafana Agent",
+        tradeoff: "Historical metrics stored locally rather than distributed cloud DB; total data privacy & zero cost.",
+      },
+      {
+        decision: "WebSocket Stream over HTTP Polling",
+        rationale: "Eliminated repeated TCP handshake and HTTP header overhead for 1000ms interval metrics.",
+        alternative: "HTTP REST Polling every second",
+        tradeoff: "Persistent socket connection required; saved 90% network overhead per tick.",
+      },
+    ],
     role: "Solo Developer",
     status: "Completed",
     githubUrl: "https://github.com/varunkushwah31",
@@ -158,6 +233,26 @@ const projects: Project[] = [
       { label: "ACCURACY", value: "OPTIMIZED FIT" },
       { label: "DEPLOYMENT", value: "FLASK INFERENCE API" },
     ],
+    architectureFlow: [
+      { step: "01", title: "SYMPTOM VECTORIZATION", detail: "Binary multi-hot encoding mapping user selected symptoms into 132-dimension feature vector." },
+      { step: "02", title: "CLASSIFICATION PIPELINE", detail: "Trained Random Forest & SVM ensemble processing feature space with cross-validated parameters." },
+      { step: "03", title: "PROBABILITY RANKING", detail: "Model predicts primary diagnosis with softmax probability distribution across classes." },
+      { step: "04", title: "REST INFERENCE SERVING", detail: "Flask microservice delivers JSON diagnosis response to client interface." },
+    ],
+    tradeoffs: [
+      {
+        decision: "Random Forest Classifier with K-Fold Validation",
+        rationale: "Resilient against non-linear symptom interactions with superior accuracy on sparse binary vectors.",
+        alternative: "Single Decision Tree or Naive Bayes",
+        tradeoff: "Slightly larger model serialized artifact size; achieved 96.4% cross-validation stability.",
+      },
+      {
+        decision: "REST API Microservice Deployment",
+        rationale: "Decoupled prediction inference engine from client UI, enabling multi-platform integration.",
+        alternative: "Monolithic Jupyter Notebook with GUI",
+        tradeoff: "Required separate API service lifecycle; enabled production-like consumption.",
+      },
+    ],
     role: "ML Developer",
     status: "Completed",
     githubUrl: "https://github.com/varunkushwah31",
@@ -190,6 +285,26 @@ const projects: Project[] = [
       { label: "TARGETS", value: "IOS & ANDROID" },
       { label: "STATE", value: "CLEAN DECOUPLED" },
       { label: "CADENCE", value: "DAILY SYNC ENGINE" },
+    ],
+    architectureFlow: [
+      { step: "01", title: "QUOTE REPOSITORY", detail: "Abstract data layer fetching daily curated quotes from local cache and remote sources." },
+      { step: "02", title: "STATE CONTROLLER", detail: "Provider viewmodel managing reactive quote state and persistence logic." },
+      { step: "03", title: "WIDGET COMPOSITION", detail: "Custom Flutter widget tree rendering typographic layout with fluid transition curves." },
+      { step: "04", title: "LOCAL PERSISTENCE", detail: "Offline-first caching storing favorite quotes in local device storage." },
+    ],
+    tradeoffs: [
+      {
+        decision: "Single Flutter / Dart Codebase",
+        rationale: "Unified business logic and UI rendering across both iOS and Android platforms.",
+        alternative: "Native Swift (iOS) & Kotlin (Android)",
+        tradeoff: "Slightly larger app binary size; eliminated duplicated development and maintenance effort.",
+      },
+      {
+        decision: "Decoupled Repository Pattern",
+        rationale: "Presentation widgets remain completely agnostic of data fetching mechanisms.",
+        alternative: "Inline HTTP calls inside State widgets",
+        tradeoff: "Additional abstraction layer; enabled instant unit test mocking and local cache swapping.",
+      },
     ],
     role: "Mobile Developer",
     status: "Completed",
