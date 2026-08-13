@@ -1,15 +1,14 @@
-import { useState } from "react"
 import { useParams, Link } from "react-router-dom"
-import { ArrowLeft, ArrowRight, Maximize2, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { ArrowLeft, ArrowRight } from "lucide-react"
+import { motion } from "framer-motion"
 import projects from "@/data/projects"
 import MStripe from "@/components/MStripe"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import ProjectVisual from "@/components/ProjectVisual"
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>()
-  const [lightboxOpen, setLightboxOpen] = useState(false)
   const project = projects.find((p) => p.slug === slug)
   const projectIndex = projects.findIndex((p) => p.slug === slug)
 
@@ -84,44 +83,73 @@ const ProjectDetail = () => {
                 transition={{ duration: 0.5 }}
                 className="lg:col-span-10 border-l border-hairline-strong pl-6 md:pl-12 py-2"
               >
-                {/* Category badge */}
-                <div className="label-uppercase text-m-blue-dark mb-6 tracking-[1.5px]">
-                  {project.category}
+                {/* Category badge & version */}
+                <div className="flex flex-wrap items-center gap-3 mb-6">
+                  <span className="label-uppercase text-m-blue-light tracking-[1.5px]">
+                    {project.category}
+                  </span>
+                  <span className="text-hairline">|</span>
+                  <span className="text-body-strong font-mono text-xs bg-surface-elevated px-2.5 py-1 border border-hairline-strong">
+                    {project.version}
+                  </span>
+                  <span className="text-body-strong font-mono text-xs bg-surface-elevated px-2.5 py-1 border border-hairline-strong">
+                    {project.year}
+                  </span>
                 </div>
 
                 {/* Project title — display-xl */}
-                <h1 className="text-ink mb-8 max-w-[900px] text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase leading-[0.95]">
+                <h1 className="text-ink mb-4 max-w-[900px] text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase leading-[0.95]">
                   {project.title}
                 </h1>
 
-                {/* Meta row */}
-                <div className="flex flex-wrap gap-8 mb-8">
-                  <div>
-                    <div className="label-uppercase text-muted mb-2">ROLE</div>
-                    <p
-                      className="text-ink"
-                      style={{
-                        fontSize: "var(--font-size-title-sm)",
-                        fontWeight: 400,
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {project.role}
-                    </p>
+                {/* Tagline */}
+                <p className="label-uppercase text-muted text-xs md:text-sm tracking-[1.5px] mb-8 max-w-[800px]">
+                  {project.tagline}
+                </p>
+
+                {/* Meta row & Action links */}
+                <div className="flex flex-wrap items-end justify-between gap-6 mb-8 pb-8 border-b border-hairline-strong">
+                  <div className="flex flex-wrap gap-8">
+                    <div>
+                      <div className="label-uppercase text-muted mb-2 text-xs">ROLE</div>
+                      <p
+                        className="text-ink"
+                        style={{
+                          fontSize: "var(--font-size-title-sm)",
+                          fontWeight: 400,
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {project.role}
+                      </p>
+                    </div>
+                    <div>
+                      <div className="label-uppercase text-muted mb-2 text-xs">STATUS</div>
+                      <p
+                        className="text-ink"
+                        style={{
+                          fontSize: "var(--font-size-title-sm)",
+                          fontWeight: 400,
+                          lineHeight: 1.4,
+                        }}
+                      >
+                        {project.status}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <div className="label-uppercase text-muted mb-2">STATUS</div>
-                    <p
-                      className="text-ink"
-                      style={{
-                        fontSize: "var(--font-size-title-sm)",
-                        fontWeight: 400,
-                        lineHeight: 1.4,
-                      }}
+
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-text inline-flex items-center gap-2 text-xs bg-surface-card hover:bg-surface-elevated text-ink border border-hairline px-5 py-3 transition-colors duration-200"
+                      style={{ borderRadius: "0px" }}
                     >
-                      {project.status}
-                    </p>
-                  </div>
+                      VIEW SOURCE ON GITHUB
+                      <ArrowRight size={14} />
+                    </a>
+                  )}
                 </div>
 
                 {/* Tech tags */}
@@ -129,12 +157,10 @@ const ProjectDetail = () => {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-muted bg-surface-elevated px-4 py-2 border border-hairline-strong"
+                      className="text-muted bg-surface-elevated px-4 py-2 border border-hairline-strong font-mono text-xs"
                       style={{
-                        fontSize: "var(--font-size-caption)",
-                        fontWeight: 400,
-                        letterSpacing: "0.5px",
                         borderRadius: "0px",
+                        letterSpacing: "0.5px",
                       }}
                     >
                       {t}
@@ -148,56 +174,47 @@ const ProjectDetail = () => {
 
         <MStripe />
 
-        {/* Full-width project visual showcase with Lightbox trigger */}
+        {/* Telemetry Specification Matrix Section */}
+        <section className="w-full bg-surface-soft py-12 border-b border-hairline-strong">
+          <div className="max-w-[1440px] mx-auto px-6">
+            <div className="label-uppercase text-muted text-xs mb-6 tracking-[2px]">
+              [ TELEMETRY SPECIFICATION MATRIX ]
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {project.metrics.map((m, idx) => (
+                <div
+                  key={idx}
+                  className="bg-surface-card p-6 border border-hairline flex flex-col justify-between"
+                  style={{ borderRadius: "0px" }}
+                >
+                  <div className="label-uppercase text-muted text-xs mb-3 tracking-[1.5px]">
+                    {m.label}
+                  </div>
+                  <div className="text-ink font-bold font-mono text-lg md:text-xl text-m-blue-light tracking-tight">
+                    {m.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <MStripe />
+
+        {/* Full-width project visual showcase */}
         <section className="w-full bg-canvas py-12 border-b border-hairline-strong">
           <div className="max-w-[1440px] mx-auto px-6">
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="relative aspect-video max-w-[1000px] mx-auto bg-surface-card border border-hairline overflow-hidden group cursor-pointer"
-              onClick={() => setLightboxOpen(true)}
+              className="relative max-w-[1000px] mx-auto bg-surface-card border border-hairline overflow-hidden shadow-2xl"
+              style={{ borderRadius: "0px" }}
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-canvas/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span className="btn-text bg-canvas/90 text-ink border border-ink px-4 py-2 inline-flex items-center gap-2 text-xs">
-                  <Maximize2 size={14} /> EXPAND SCREENSHOT
-                </span>
-              </div>
+              <ProjectVisual slug={project.slug} title={project.title} />
             </motion.div>
           </div>
         </section>
-
-        {/* Lightbox Modal */}
-        <AnimatePresence>
-          {lightboxOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setLightboxOpen(false)}
-              className="fixed inset-0 z-[200] bg-canvas/95 backdrop-blur-md p-6 flex items-center justify-center cursor-zoom-out"
-            >
-              <button
-                onClick={() => setLightboxOpen(false)}
-                className="absolute top-6 right-6 text-ink p-2 border border-hairline bg-surface-card hover:bg-surface-elevated transition-colors"
-                aria-label="Close"
-              >
-                <X size={24} />
-              </button>
-              <img
-                src={project.image}
-                alt={project.title}
-                className="max-w-full max-h-[85vh] object-contain border border-hairline"
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         <MStripe />
 
