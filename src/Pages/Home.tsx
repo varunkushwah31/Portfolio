@@ -1,3 +1,4 @@
+import ScrollProgress from "@/components/ScrollProgress"
 import Navbar from "@/components/Navbar"
 import Hero from "@/components/Hero"
 import MStripe from "@/components/MStripe"
@@ -10,8 +11,9 @@ import Footer from "@/components/Footer"
 const Home = () => {
   return (
     <>
+      <ScrollProgress />
       <Navbar />
-      <main>
+      <main className="overflow-hidden">
         <Hero />
         <MStripe />
         <About />
@@ -28,3 +30,4 @@ const Home = () => {
 }
 
 export default Home
+

@@ -1,3 +1,9 @@
+import leetcodeImg from "../assets/project_leetcode.png"
+import mangoshareImg from "../assets/project_mangoshare.png"
+import dashboardImg from "../assets/project_dashboard.png"
+import diseaseImg from "../assets/project_disease.png"
+import quotesImg from "../assets/project_quotes.png"
+
 export interface Project {
   slug: string
   category: string
@@ -8,6 +14,7 @@ export interface Project {
   highlights: string[]
   role: string
   status: string
+  image: string
 }
 
 const projects: Project[] = [
@@ -17,6 +24,7 @@ const projects: Project[] = [
     title: "LEETCODETRACKER",
     description:
       "A full-stack application designed to track coding progress. Developed collaboratively with a team, effectively managing both frontend and backend integration and complex version control using Git subtree workflows.",
+    image: leetcodeImg,
     longDescription: [
       "LeetcodeTracker is a purpose-built full-stack application that provides developers with a structured way to track their coding progress across competitive programming platforms. The application addresses the common challenge of maintaining consistent practice habits and measuring improvement over time.",
       "Built collaboratively with teammate Prachi, the project demanded rigorous coordination between frontend and backend codebases. We adopted Git subtree workflows to manage both parts as a unified repository while preserving independent development histories — a strategy that taught us practical version control patterns beyond basic branching.",
@@ -38,6 +46,7 @@ const projects: Project[] = [
     title: "MANGOSHARE CLONE",
     description:
       "A file-sharing application clone built from scratch, featuring real-time peer-to-peer communication capabilities.",
+    image: mangoshareImg,
     longDescription: [
       "MangoShare Clone is a file-sharing application rebuilt from the ground up to understand and implement the mechanics of real-time peer-to-peer data transfer. Rather than relying on a central server for file relay, the application establishes direct connections between users using WebRTC.",
       "The React-based frontend manages the user interface for file selection, transfer progress visualization, and connection state management. Under the hood, WebRTC handles the signaling process, ICE candidate exchange, and data channel establishment required for direct browser-to-browser communication.",
@@ -59,6 +68,7 @@ const projects: Project[] = [
     title: "SYSTEM HEALTH DASHBOARD",
     description:
       "A custom-built dashboard designed to accurately monitor local machine performance and resource utilization in real-time.",
+    image: dashboardImg,
     longDescription: [
       "The System Health Dashboard provides real-time visibility into local machine performance — CPU utilization, memory consumption, disk I/O, and network throughput — through a clean, continuously updating interface.",
       "The backend collects system metrics at regular intervals, normalizing data from OS-level APIs into a consistent format. The frontend consumes this data stream and renders it as live charts and gauges that update without page refreshes.",
@@ -80,6 +90,7 @@ const projects: Project[] = [
     title: "DISEASE PREDICTION",
     description:
       "A comprehensive end-to-end Machine Learning project mapping user-inputted symptoms to potential disease predictions.",
+    image: diseaseImg,
     longDescription: [
       "Disease Prediction is an end-to-end Machine Learning project developed for college coursework. The system accepts a set of user-inputted symptoms and maps them to potential disease predictions using trained classification models.",
       "The data pipeline handles symptom encoding, feature normalization, and model training across multiple classification algorithms. The final model was selected based on cross-validated accuracy metrics and tested against a held-out evaluation set.",
@@ -101,6 +112,7 @@ const projects: Project[] = [
     title: "DAILY QUOTES APP",
     description:
       "A mobile application developed to deliver daily inspirational quotes to users.",
+    image: quotesImg,
     longDescription: [
       "The Daily Quotes App is a mobile application built with Flutter that delivers curated inspirational quotes to users on a daily basis. The app combines clean material design with a smooth content-browsing experience.",
       "Flutter's cross-platform capabilities allowed the app to target both Android and iOS from a single Dart codebase. The architecture separates the quote data layer from the presentation layer, making it straightforward to swap data sources or extend the content catalog.",
