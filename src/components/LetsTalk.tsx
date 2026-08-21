@@ -12,21 +12,21 @@ export default function LetsTalk() {
     >
       <motion.div
         whileHover={{ y: -4, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-        className="rounded-2xl border border-[#27272a] bg-[#18181b] p-6 sm:p-8 relative overflow-hidden group shadow-xl hover:border-violet-500/50 hover:shadow-[0_15px_35px_-10px_rgba(124,58,237,0.2)] transition-all duration-300"
+        className="rounded-2xl border border-[#27272a] bg-[#18181b] p-6 sm:p-8 relative overflow-hidden group shadow-xl hover:border-zinc-500 hover:shadow-[0_15px_35px_-10px_rgba(255,255,255,0.06)] transition-all duration-300"
       >
         {/* Subtle breathing ambient background glow */}
-        <div className="absolute -top-16 -right-16 w-56 h-56 bg-violet-600/15 rounded-full blur-3xl pointer-events-none animate-[pulse-slow_5s_ease-in-out_infinite]" />
+        <div className="absolute -top-16 -right-16 w-56 h-56 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none animate-[pulse-slow_5s_ease-in-out_infinite]" />
 
         {/* Header row with launching rocket */}
         <div className="flex items-center gap-3.5 relative z-10">
-          <div className="w-11 h-11 rounded-full bg-[#353046] flex items-center justify-center text-[#c4b5fd] flex-shrink-0 shadow-inner group-hover:bg-[#433d59] transition-colors">
+          <div className="w-11 h-11 rounded-full bg-[#27272a] flex items-center justify-center text-emerald-400 flex-shrink-0 shadow-inner group-hover:bg-[#323238] transition-colors">
             <RocketLaunchIcon
               size={22}
               weight="bold"
               className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:rotate-6"
             />
           </div>
-          <h3 className="font-bold text-white text-lg sm:text-xl tracking-tight group-hover:text-violet-200 transition-colors">
+          <h3 className="font-bold text-white text-lg sm:text-xl tracking-tight group-hover:text-zinc-100 transition-colors">
             Let's work together
           </h3>
         </div>

@@ -166,7 +166,7 @@ const ProjectDetail = () => {
       <div className="max-w-5xl mx-auto px-6 py-16 border-b border-hairline">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
-            <p className="text-sm text-violet-400 font-semibold mb-2">Overview</p>
+            <p className="text-sm text-emerald-400 font-semibold mb-2">Overview</p>
             <h2 className="text-2xl font-bold text-ink">About this project</h2>
           </div>
           <div className="lg:col-span-8 space-y-5">
@@ -182,7 +182,7 @@ const ProjectDetail = () => {
       {/* Architecture Flow */}
       {project.architectureFlow && project.architectureFlow.length > 0 && (
         <div className="max-w-5xl mx-auto px-6 py-16 border-b border-hairline">
-          <p className="text-sm text-violet-400 font-semibold mb-2">System Architecture</p>
+          <p className="text-sm text-emerald-400 font-semibold mb-2">System Architecture</p>
           <h2 className="text-2xl font-bold text-ink mb-10">Data Flow & Pipeline</h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -211,7 +211,7 @@ const ProjectDetail = () => {
 
       {/* Key Highlights */}
       <div className="max-w-5xl mx-auto px-6 py-16 border-b border-hairline">
-        <p className="text-sm text-violet-400 font-semibold mb-2">Key highlights</p>
+        <p className="text-sm text-emerald-400 font-semibold mb-2">Key highlights</p>
         <h2 className="text-2xl font-bold text-ink mb-10">What was built</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -222,9 +222,9 @@ const ProjectDetail = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="p-5 rounded-xl border border-hairline bg-surface-card hover:border-accent/40 transition-colors"
+              className="p-5 rounded-xl border border-hairline bg-surface-card hover:border-zinc-500 transition-colors"
             >
-              <div className="text-accent-light font-mono text-2xl font-bold mb-3">
+              <div className="text-emerald-400 font-mono text-2xl font-bold mb-3">
                 {String(i + 1).padStart(2, "0")}
               </div>
               <p className="text-body text-sm leading-relaxed">{highlight}</p>
@@ -236,7 +236,7 @@ const ProjectDetail = () => {
       {/* Engineering Trade-offs */}
       {project.tradeoffs && project.tradeoffs.length > 0 && (
         <div className="max-w-5xl mx-auto px-6 py-16 border-b border-hairline">
-          <p className="text-sm text-violet-400 font-semibold mb-2">Decision log</p>
+          <p className="text-sm text-emerald-400 font-semibold mb-2">Decision log</p>
           <h2 className="text-2xl font-bold text-ink mb-10">Engineering decisions & trade-offs</h2>
 
           <div className="space-y-5">
@@ -249,7 +249,7 @@ const ProjectDetail = () => {
                 className="p-6 rounded-xl border border-hairline bg-surface-card"
               >
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-3 h-3 rounded-full bg-accent-light" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
                   <h4 className="text-ink font-semibold">{t.decision}</h4>
                 </div>
 
@@ -270,7 +270,7 @@ const ProjectDetail = () => {
                     <div className="text-xs text-muted font-semibold uppercase tracking-wider mb-2">
                       Trade-off
                     </div>
-                    <p className="text-accent-light">{t.tradeoff}</p>
+                    <p className="text-emerald-300">{t.tradeoff}</p>
                   </div>
                 </div>
               </motion.div>
@@ -286,13 +286,13 @@ const ProjectDetail = () => {
             {prevProject && (
               <Link
                 to={`/project/${prevProject.slug}`}
-                className="group block p-4 rounded-xl border border-hairline hover:border-accent/40 transition-all bg-surface-card"
+                className="group block p-4 rounded-xl border border-hairline hover:border-zinc-500 transition-all bg-surface-card"
               >
                 <div className="text-xs text-muted mb-2 flex items-center gap-1">
                   <ArrowLeftIcon size={12} />
                   Previous project
                 </div>
-                <div className="text-ink font-semibold group-hover:text-violet-400 transition-colors">
+                <div className="text-ink font-semibold group-hover:text-white transition-colors">
                   {prevProject.title}
                 </div>
               </Link>
@@ -303,26 +303,26 @@ const ProjectDetail = () => {
             {nextProject ? (
               <Link
                 to={`/project/${nextProject.slug}`}
-                className="group block p-4 rounded-xl border border-hairline hover:border-accent/40 transition-all bg-surface-card"
+                className="group block p-4 rounded-xl border border-hairline hover:border-zinc-500 transition-all bg-surface-card"
               >
                 <div className="text-xs text-muted mb-2 flex items-center justify-end gap-1">
                   Next project
                   <ArrowRightIcon size={12} />
                 </div>
-                <div className="text-ink font-semibold group-hover:text-violet-400 transition-colors">
+                <div className="text-ink font-semibold group-hover:text-white transition-colors">
                   {nextProject.title}
                 </div>
               </Link>
             ) : (
               <Link
                 to="/projects"
-                className="group block p-4 rounded-xl border border-hairline hover:border-accent/40 transition-all bg-surface-card"
+                className="group block p-4 rounded-xl border border-hairline hover:border-zinc-500 transition-all bg-surface-card"
               >
                 <div className="text-xs text-muted mb-2 flex items-center justify-end gap-1">
                   Back to
                   <ArrowRightIcon size={12} />
                 </div>
-                <div className="text-ink font-semibold group-hover:text-violet-400 transition-colors">
+                <div className="text-ink font-semibold group-hover:text-white transition-colors">
                   All Projects
                 </div>
               </Link>

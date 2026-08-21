@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ListIcon, XIcon, MoonIcon, TerminalWindowIcon } from '@phosphor-icons/react'
+import { List, X, Moon, TerminalWindow } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void
-  onOpenResume?: () => void
 }
 
 const navLinks = [
@@ -27,6 +26,10 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [location.pathname])
+
   const isActive = (href: string) => {
     if (href === '/') return location.pathname === '/'
     return location.pathname.startsWith(href)
@@ -44,22 +47,23 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
         style={{ backgroundColor: scrolled ? 'rgba(10,10,10,0.90)' : '#0a0a0a' }}
       >
         <nav className="max-w-5xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-4">
-          {/* Logo */}
+          {/* Logo with 3-bar brand mark matching bonabrian */}
           <Link
             to="/"
             className="flex items-center gap-2.5 shrink-0 group"
             aria-label="Varun Kushwah — home"
           >
-            <motion.span
-              whileHover={{ scale: 1.15, rotate: 6 }}
-              whileTap={{ scale: 0.9 }}
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.92 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-              className="w-7 h-7 rounded-md flex-shrink-0 shadow-sm"
-              style={{
-                background: 'linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%)',
-              }}
-            />
-            <span className="text-sm font-medium text-[#fafafa] group-hover:text-[#a78bfa] transition-colors duration-200">
+              className="flex items-center gap-[3px] py-1 px-0.5 rounded-md"
+            >
+              <span className="w-[3px] h-3 bg-zinc-300 group-hover:bg-white rounded-full transition-colors" />
+              <span className="w-[3px] h-5 bg-white rounded-full transition-colors" />
+              <span className="w-[3px] h-3.5 bg-zinc-300 group-hover:bg-white rounded-full transition-colors" />
+            </motion.div>
+            <span className="text-sm font-medium text-[#fafafa] group-hover:text-white transition-colors duration-200">
               Varun Kushwah
             </span>
           </Link>
@@ -74,7 +78,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
                     to={link.href}
                     className={`relative px-3 py-1.5 rounded-md text-sm transition-colors duration-200 block z-10 ${
                       active
-                        ? 'text-[#a78bfa] font-medium'
+                        ? 'text-white font-medium'
                         : 'text-[#a1a1aa] hover:text-[#fafafa]'
                     }`}
                   >
@@ -82,7 +86,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
                     {active && (
                       <motion.div
                         layoutId="activeNavIndicator"
-                        className="absolute inset-0 bg-violet-600/10 border border-violet-500/30 rounded-md -z-10"
+                        className="absolute inset-0 bg-white/10 border border-white/20 rounded-md -z-10 shadow-sm"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -95,18 +99,16 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
           {/* Right icons cluster */}
           <div className="flex items-center gap-1">
             <motion.button
-              type="button"
               whileHover={{ scale: 1.1, rotate: 15 }}
               whileTap={{ scale: 0.9 }}
               title="Dark mode"
               aria-label="Dark mode"
               className="w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200 cursor-pointer"
             >
-              <MoonIcon size={18} weight="regular" />
+              <Moon size={18} weight="regular" />
             </motion.button>
 
             <motion.button
-              type="button"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               title="Command palette (⌘K)"
@@ -114,17 +116,16 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
               onClick={onOpenCommandPalette}
               className="w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200 cursor-pointer"
             >
-              <TerminalWindowIcon size={18} weight="regular" />
+              <TerminalWindow size={18} weight="regular" />
             </motion.button>
 
             <button
-              type="button"
-              className="md:hidden w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200 cursor-pointer"
+              className="md:hidden w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <XIcon size={18} weight="bold" /> : <ListIcon size={18} weight="bold" />}
+              {mobileOpen ? <X size={18} weight="bold" /> : <List size={18} weight="bold" />}
             </button>
           </div>
         </nav>
@@ -146,11 +147,10 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
                 <Link
                   key={link.href}
                   to={link.href}
-                  onClick={() => setMobileOpen(false)}
                   className={[
                     'px-4 py-3 rounded-lg text-base transition-colors duration-200',
                     isActive(link.href)
-                      ? 'text-[#a78bfa] bg-[#7c3aed]/10'
+                      ? 'text-white bg-white/10'
                       : 'text-[#a1a1aa] hover:text-[#fafafa] hover:bg-[#171717]',
                   ].join(' ')}
                 >

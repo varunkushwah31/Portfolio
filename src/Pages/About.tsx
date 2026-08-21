@@ -1,13 +1,11 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import {
-  GithubLogoIcon,
-  LinkedinLogoIcon,
-  EnvelopeSimpleIcon,
-  FileTextIcon,
-  UsersIcon,
-  GraduationCapIcon,
-  TrophyIcon,
+  GithubLogo,
+  LinkedinLogo,
+  EnvelopeSimple,
+  FileText,
+  Sparkle,
 } from "@phosphor-icons/react"
 
 import {
@@ -23,150 +21,200 @@ import {
   WebRTCIcon,
   TailwindIcon,
   PostgresIcon,
+  LinuxIcon,
+  PostmanIcon,
 } from "@/components/TechIcons"
 
 const techStack = [
-  { name: "Java", icon: JavaIcon },
+  { name: "Java 21", icon: JavaIcon },
   { name: "Spring Boot", icon: SpringIcon },
-  { name: "React", icon: ReactIcon },
+  { name: "React 19", icon: ReactIcon },
+  { name: "TypeScript", icon: TypeScriptIcon },
+  { name: "Node.js", icon: NodeIcon },
   { name: "Flutter", icon: FlutterIcon },
   { name: "Python", icon: PythonIcon },
   { name: "WebRTC", icon: WebRTCIcon },
-  { name: "TypeScript", icon: TypeScriptIcon },
-  { name: "Node.js", icon: NodeIcon },
+  { name: "PostgreSQL", icon: PostgresIcon },
   { name: "Docker", icon: DockerIcon },
   { name: "Git", icon: GitIcon },
   { name: "Tailwind CSS", icon: TailwindIcon },
-  { name: "PostgreSQL", icon: PostgresIcon },
+  { name: "Linux", icon: LinuxIcon },
+  { name: "Postman", icon: PostmanIcon },
 ]
 
 const socials = [
-  { label: "GitHub", href: "https://github.com/varunkushwah31", icon: GithubLogoIcon },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/varun-kushwah/", icon: LinkedinLogoIcon },
-  { label: "Email", href: "mailto:varun.kush3@gmail.com", icon: EnvelopeSimpleIcon },
+  { label: "GitHub", href: "https://github.com/varunkushwah31", icon: GithubLogo },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/varun-kushwah/", icon: LinkedinLogo },
+  { label: "Email", href: "mailto:varun.kush3@gmail.com", icon: EnvelopeSimple },
 ]
-
 
 export default function About() {
   return (
     <div className="min-h-screen bg-transparent">
       {/* Page Header */}
-      <div className="max-w-4xl mx-auto px-6 pt-16 pb-12">
+      <div className="max-w-4xl mx-auto px-6 pt-16 pb-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-ink mb-3">About</h1>
-          <p className="text-body text-lg">A short story of me.</p>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-2">
+            About
+          </h1>
+          <p className="text-zinc-400 text-base sm:text-lg font-normal">
+            A short story of me.
+          </p>
         </motion.div>
       </div>
 
-      {/* Main content */}
-      <div className="max-w-4xl mx-auto px-6 pb-20">
-        {/* Two-column: photo + bio */}
-        <div className="flex flex-col md:flex-row gap-12 mb-16">
-          {/* Photo / Avatar */}
+      {/* Main Container */}
+      <div className="max-w-4xl mx-auto px-6 pb-24">
+        {/* 2-Column Section: Portrait Card on Left + Story on Right */}
+        <div className="flex flex-col md:flex-row items-start gap-10 md:gap-12 mb-16">
+          {/* Left Column: Portrait Card */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex-shrink-0 flex flex-col items-center gap-3"
+            transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+            className="w-full md:w-56 flex-shrink-0 flex flex-col items-center md:items-start"
           >
-            {/* Placeholder avatar */}
-            <div className="w-48 h-48 rounded-xl bg-gradient-to-br from-violet-700 to-violet-900 flex items-center justify-center border border-hairline shadow-2xl">
-              <span className="text-5xl font-bold text-white select-none">VK</span>
+            {/* Styled Portrait Avatar Frame matching bonabrian */}
+            <div className="w-48 sm:w-52 md:w-56 h-60 sm:h-64 rounded-2xl bg-gradient-to-br from-[#27272a] via-[#18181b] to-[#121215] border border-[#3f3f46] flex flex-col items-center justify-center p-4 shadow-2xl relative overflow-hidden group">
+              {/* Subtle background overlay */}
+              <div className="absolute inset-0 bg-radial from-white/5 via-transparent to-transparent opacity-60" />
+
+              {/* Developer Avatar Badge with 3-bar signature */}
+              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-[#27272a] to-[#18181b] flex flex-col items-center justify-center border border-zinc-500/40 shadow-xl group-hover:scale-105 transition-transform duration-300 relative z-10">
+                <div className="flex items-center gap-[4px] mb-1">
+                  <span className="w-1 h-3.5 bg-zinc-400 rounded-full" />
+                  <span className="w-1 h-6 bg-white rounded-full" />
+                  <span className="w-1 h-4 bg-zinc-400 rounded-full" />
+                </div>
+                <span className="text-xs font-bold text-zinc-300 font-mono tracking-wider">
+                  VK
+                </span>
+              </div>
+
+              <div className="mt-4 text-center relative z-10">
+                <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest block">
+                  CS Engineering
+                </span>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="font-semibold text-ink">Varun Kushwah</div>
-              <div className="text-sm text-body">Software Developer</div>
-              <div className="mt-2 inline-flex items-center gap-1.5 text-xs px-3 py-1 rounded-full border border-success/40 text-success bg-success/10">
-                <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-                <span>Open for opportunities</span>
+
+            {/* Profile Info Underneath */}
+            <div className="mt-3.5 text-center md:text-left w-full">
+              <h2 className="text-base font-bold text-white">Varun Kushwah</h2>
+              <p className="text-xs text-zinc-400 mt-0.5 font-normal">Software Developer</p>
+
+              <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/30 bg-[#121217] text-[11px] text-zinc-300 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Open for hire</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Bio content */}
+          {/* Right Column: Story Narrative */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="flex-1 space-y-4"
+            transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
+            className="flex-1 space-y-4 text-sm sm:text-[15px] text-zinc-300 leading-relaxed font-normal"
           >
-            <p className="text-body leading-relaxed">
+            <p>
               Hi there! Thanks for visiting my digital home on the internet.
             </p>
-            <p className="text-body leading-relaxed">
-              I'm{" "}
-              <span className="text-ink font-semibold">Varun Kushwah</span>, a Computer Science student
-              passionate about building robust backend systems that drive real impact. I specialize in{" "}
-              <span className="text-accent-light font-medium">Java & Spring Boot</span> for backend development
-              and enjoy exploring real-time protocols and DevOps practices.
-            </p>
-            <p className="text-body leading-relaxed">
-              I currently serve as the{" "}
-              <span className="text-ink font-semibold">Java Coordinator at </span>
-              <a
-                href="https://devup.co.in/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-violet-300 font-semibold hover:underline inline-flex items-center gap-0.5"
-              >
-                devup
-              </a>
-              {", my college's technical club, where I organize workshops, mentor peers in OOP fundamentals, and champion clean Git workflows across collaborative projects."}
+
+            <p>
+              I'm <strong className="text-white font-semibold">Varun Kushwah</strong>, a Software Developer passionate about building innovative digital solutions that drive real technical and business impact. I specialize in backend architecture and scalable distributed services—the robust processes powering applications behind the scenes—as well as crafting clean, responsive client experiences.
             </p>
 
-            <p className="text-body leading-relaxed">
-              My technical interests span a wide range of areas:
+            <p>
+              I have extensive experience in crafting scalable software systems that align with both technical architecture and product needs, leveraging a wide range of technologies:
             </p>
 
-            <ul className="space-y-2 text-body">
+            {/* Structured Bullet List matching reference image */}
+            <ul className="space-y-2 py-1 pl-1 text-sm sm:text-[14px]">
               <li className="flex items-start gap-2">
-                <span className="text-accent-light mt-1">•</span>
+                <span className="text-zinc-500 mt-0.5">•</span>
                 <span>
-                  <span className="text-body-strong font-medium">Backend:</span> Java 21, Spring Boot 3.x, Spring Data JPA, REST APIs
+                  <strong className="text-white font-medium">Languages: </strong>
+                  <span className="text-zinc-200 font-medium">Java 21</span>,{" "}
+                  <span className="text-zinc-200 font-medium">Python</span>,{" "}
+                  <span className="text-zinc-200 font-medium">TypeScript</span>,{" "}
+                  <span className="text-zinc-200 font-medium">Dart</span>, SQL
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-accent-light mt-1">•</span>
+                <span className="text-zinc-500 mt-0.5">•</span>
                 <span>
-                  <span className="text-body-strong font-medium">Frontend & Mobile:</span> React, TypeScript, Flutter / Dart
+                  <strong className="text-white font-medium">Frontend &amp; Mobile: </strong>
+                  <span className="text-zinc-200 font-medium">React 19</span>,{" "}
+                  <span className="text-zinc-200 font-medium">Flutter</span>,{" "}
+                  <span className="text-zinc-200 font-medium">Tailwind CSS</span>, Vite
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-accent-light mt-1">•</span>
+                <span className="text-zinc-500 mt-0.5">•</span>
                 <span>
-                  <span className="text-body-strong font-medium">Real-Time:</span> WebRTC, WebSockets, Peer-to-Peer protocols
+                  <strong className="text-white font-medium">Backend &amp; Real-Time: </strong>
+                  <span className="text-zinc-200 font-medium">Spring Boot 3.x</span>,{" "}
+                  <span className="text-zinc-200 font-medium">WebRTC</span>,{" "}
+                  <span className="text-zinc-200 font-medium">Node.js</span>, WebSockets
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-accent-light mt-1">•</span>
+                <span className="text-zinc-500 mt-0.5">•</span>
                 <span>
-                  <span className="text-body-strong font-medium">Currently learning:</span> Docker, CI/CD pipelines, DevOps
+                  <strong className="text-white font-medium">Database &amp; DevOps: </strong>
+                  <span className="text-zinc-200 font-medium">PostgreSQL</span>,{" "}
+                  <span className="text-zinc-200 font-medium">Docker</span>, Git Subtrees, Linux
                 </span>
               </li>
             </ul>
 
-            <p className="text-body leading-relaxed">
-              I consider myself a curious and passionate learner, always eager to expand my skills and
-              explore new technologies. I actively seek out new challenges to stay ahead of industry trends.
+            <p>
+              As a Software Developer and <strong className="text-white font-medium">Java Coordinator at </strong>
+              <a
+                href="https://devup.co.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white font-semibold hover:text-emerald-300 underline underline-offset-4 decoration-zinc-600 hover:decoration-emerald-400 transition-colors inline-flex items-center gap-0.5"
+              >
+                <span>devup</span>
+                <Sparkle size={12} className="inline text-emerald-400" />
+              </a>
+              , I take ownership of designing, developing, and maintaining software that meets high technical standards while delivering tangible value. I work closely with peers to mentor 100+ emerging developers in object-oriented architecture, Spring Boot services, and clean Git workflows.
             </p>
 
-            <div className="pt-2">
-              <Link
-                to="/resume"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-hairline text-body-strong text-sm hover:border-accent/60 hover:text-ink transition-all duration-200"
-              >
-                <FileTextIcon size={16} />
-                My Resume
-              </Link>
+            <p>
+              I consider myself a curious and inquisitive learner, always eager to expand my skills. In my free time, I enjoy working on personal side projects, as they allow me to explore new technologies and refine my expertise. I actively seek out new learning opportunities to stay ahead of industry trends and advancements.
+            </p>
+
+            <p>
+              Besides hacking, I also have a strong appreciation for video games, chess, and music. I find that these activities provide an important balance to my professional life, allowing me to relax and recharge after a long day of coding. I believe that maintaining a healthy work-life balance is the key to keeping both my code and my spirits bug-free! 🎮 🎧
+            </p>
+
+            <p>
+              If you'd like to learn more about my professional background and qualifications, feel free to explore my resume.
+            </p>
+
+            {/* My Resume Button matching bonabrian */}
+            <div className="pt-3">
+              <motion.div whileHover={{ scale: 1.03, x: 2 }} whileTap={{ scale: 0.97 }} className="inline-block">
+                <Link
+                  to="/resume"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-xs sm:text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none"
+                >
+                  <FileText size={15} weight="bold" />
+                  <span>My Resume</span>
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         </div>
 
-        {/* Tech Stack */}
+        {/* Tech Stack Section matching Image 1 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -174,102 +222,72 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold text-ink mb-6">Tech Stack</h2>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Tech Stack
+            </h2>
+            <Link
+              to="/tech-stack"
+              className="text-xs text-zinc-400 hover:text-white font-medium transition-colors"
+            >
+              Explore all stack →
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap gap-2.5">
             {techStack.map((tech) => {
               const Icon = tech.icon
               return (
-                <div
+                <motion.div
                   key={tech.name}
-                  className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-hairline bg-surface-card text-sm text-body-strong hover:border-accent/60 hover:text-ink transition-all duration-200"
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27272a] bg-[#141414] hover:bg-[#1a1a1a] text-xs sm:text-sm text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors duration-150 cursor-default shadow-sm"
                 >
                   <Icon size={16} className="w-4 h-4 flex-shrink-0" />
                   <span>{tech.name}</span>
-                </div>
+                </motion.div>
               )
             })}
           </div>
         </motion.div>
 
-        {/* Highlights */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-16"
-        >
-          <h2 className="text-2xl font-bold text-ink mb-6">Highlights</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-5 rounded-xl border border-hairline bg-surface-card hover:border-violet-500/40 transition-colors">
-              <UsersIcon size={22} className="text-accent-light mb-3" />
-              <div className="font-semibold text-ink mb-1 flex items-center justify-between">
-                <span>Java Coordinator @ devup</span>
-                <a
-                  href="https://devup.co.in/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-violet-400 hover:underline"
-                >
-                  Visit ↗
-                </a>
-              </div>
-              <div className="text-sm text-body">
-                Organizing technical workshops and mentoring 100+ students in Java & OOP.
-              </div>
-              <div className="text-xs text-muted mt-2">2024 – Present</div>
-            </div>
-            <div className="p-5 rounded-xl border border-hairline bg-surface-card">
-              <GraduationCapIcon size={22} className="text-accent-light mb-3" />
-              <div className="font-semibold text-ink mb-1">B.Tech Computer Science</div>
-              <div className="text-sm text-body">
-                Focusing on DSA, Distributed Systems, DBMS, and Cloud/DevOps infrastructure.
-              </div>
-              <div className="text-xs text-muted mt-2">2023 – 2027</div>
-            </div>
-            <div className="p-5 rounded-xl border border-hairline bg-surface-card">
-              <TrophyIcon size={22} className="text-accent-light mb-3" />
-              <div className="font-semibold text-ink mb-1">5+ Projects Built</div>
-              <div className="text-sm text-body">
-                Full-stack, real-time P2P, ML, and mobile apps — always exploring new domains.
-              </div>
-              <div className="text-xs text-muted mt-2">2023 – Present</div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Let's Connect */}
+        {/* Let's Connect Section matching Image 1 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl font-bold text-ink mb-3">
-            Let's Connect{" "}
-            <span className="text-accent-light">👋</span>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2.5 tracking-tight">
+            Let's Connect
           </h2>
-          <p className="text-body mb-6">
+          <p className="text-sm sm:text-[15px] text-zinc-400 leading-relaxed mb-5 font-normal max-w-2xl">
             Questions or collaborations? Reach out to me at{" "}
-            <a href="mailto:varun.kush3@gmail.com" className="text-accent-light hover:underline">
+            <a
+              href="mailto:varun.kush3@gmail.com"
+              className="text-white hover:text-emerald-300 underline underline-offset-4 decoration-zinc-600 hover:decoration-emerald-400 font-medium transition-colors"
+            >
               varun.kush3@gmail.com
             </a>{" "}
             or connect through social media. Let's build something amazing together!
           </p>
-          <div className="flex items-center gap-4">
+
+          <div className="flex items-center gap-3">
             {socials.map((s) => {
               const Icon = s.icon
               return (
-                <a
+                <motion.a
                   key={s.label}
                   href={s.href}
                   target={s.href.startsWith("http") ? "_blank" : undefined}
                   rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
                   title={s.label}
-                  className="p-2.5 rounded-lg border border-hairline text-body hover:text-ink hover:border-accent/50 transition-all duration-200 flex items-center justify-center"
+                  whileHover={{ scale: 1.12, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-9 h-9 rounded-lg border border-[#27272a] bg-[#141414] text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors flex items-center justify-center shadow-sm"
                 >
-                  <Icon size={20} />
-                </a>
+                  <Icon size={18} />
+                </motion.a>
               )
             })}
           </div>

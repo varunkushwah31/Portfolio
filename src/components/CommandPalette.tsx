@@ -69,7 +69,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "Home",
       subtitle: "Go to the home page",
       category: "Navigation",
-      icon: <HouseIcon size={16} className="text-violet-400" />,
+      icon: <HouseIcon size={16} className="text-zinc-300" />,
       action: () => goTo("/"),
     },
     {
@@ -77,7 +77,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "About",
       subtitle: "About Varun Kushwah & skills",
       category: "Navigation",
-      icon: <UserIcon size={16} className="text-violet-400" />,
+      icon: <UserIcon size={16} className="text-zinc-300" />,
       action: () => goTo("/about"),
     },
     {
@@ -85,7 +85,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "Tech Stack",
       subtitle: "Languages, frameworks & developer tools",
       category: "Navigation",
-      icon: <CpuIcon size={16} className="text-violet-400" />,
+      icon: <CpuIcon size={16} className="text-zinc-300" />,
       action: () => goTo("/tech-stack"),
     },
     {
@@ -93,7 +93,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "Projects",
       subtitle: "Browse all projects & repositories",
       category: "Navigation",
-      icon: <GitForkIcon size={16} className="text-violet-400" />,
+      icon: <GitForkIcon size={16} className="text-zinc-300" />,
       action: () => goTo("/projects"),
     },
     {
@@ -101,7 +101,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "Resume",
       subtitle: "Education, experience & achievements",
       category: "Navigation",
-      icon: <BriefcaseIcon size={16} className="text-violet-400" />,
+      icon: <BriefcaseIcon size={16} className="text-zinc-300" />,
       action: () => {
         if (onOpenResume) {
           handleClose()
@@ -118,7 +118,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "devup Club Website",
       subtitle: "devup.co.in · Technical club & workshops",
       category: "Actions",
-      icon: <ArrowSquareOutIcon size={16} className="text-violet-400" />,
+      icon: <ArrowSquareOutIcon size={16} className="text-emerald-400" />,
       action: () => {
         window.open("https://devup.co.in/", "_blank", "noopener,noreferrer")
         handleClose()
@@ -165,7 +165,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: p.title,
       subtitle: `${p.category} · ${p.tagline}`,
       category: "Projects" as const,
-      icon: <CodeIcon size={16} className="text-violet-400" />,
+      icon: <CodeIcon size={16} className="text-zinc-300" />,
       action: () => {
         handleClose()
         navigate(`/project/${p.slug}`)
@@ -202,7 +202,9 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       setSelectedIndex((prev) => (flatList.length > 0 ? (prev - 1 + flatList.length) % flatList.length : 0))
     } else if (e.key === "Enter") {
       e.preventDefault()
-      flatList[selectedIndex]?.action()
+      if (flatList[selectedIndex]) {
+        flatList[selectedIndex].action()
+      }
     } else if (e.key === "Escape") {
       e.preventDefault()
       handleClose()
@@ -212,31 +214,26 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
   return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div
-          className="fixed inset-0 z-[99999] flex items-center justify-center p-4 overflow-y-auto"
-          style={{ width: "100vw", height: "100vh", position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+          onClick={handleClose}
         >
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
-            style={{ width: "100vw", height: "100vh", position: "fixed", top: 0, left: 0 }}
-            onClick={handleClose}
-          />
+          {/* Backdrop with dark blur */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
-          {/* Modal Container */}
+          {/* Modal Centered in Viewport */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -6 }}
+            initial={{ opacity: 0, scale: 0.96, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -6 }}
-            transition={{ duration: 0.18, ease: "easeOut" }}
-            className="relative z-10 rounded-2xl border border-[#2e2e2e] bg-[#141414] shadow-2xl overflow-hidden flex flex-col w-full my-auto"
+            exit={{ opacity: 0, scale: 0.96, y: -10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="relative w-full max-w-xl my-auto rounded-xl border border-[#333333] bg-[#121212] shadow-2xl overflow-hidden z-10 flex flex-col"
             style={{
-              width: "100%",
-              maxWidth: "580px",
+              maxHeight: "85vh",
               minWidth: "300px",
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05)",
             }}
@@ -301,7 +298,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
                           onMouseEnter={() => setSelectedIndex(globalIdx)}
                           className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-colors duration-100 ${
                             isSelected
-                              ? "bg-violet-600/20 text-white border border-violet-500/30"
+                              ? "bg-white/10 text-white border border-white/20"
                               : "text-zinc-300 hover:bg-[#1f1f1f] border border-transparent"
                           }`}
                         >
@@ -313,7 +310,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
                             )}
                           </div>
                           {isSelected && (
-                            <ArrowRightIcon size={13} className="text-violet-400 flex-shrink-0" />
+                            <ArrowRightIcon size={13} className="text-white flex-shrink-0" />
                           )}
                         </button>
                       )
@@ -345,7 +342,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
               <span className="text-zinc-600">Quick Navigation</span>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </AnimatePresence>,
     document.body

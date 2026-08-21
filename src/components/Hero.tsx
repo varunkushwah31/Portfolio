@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import { CaretRightIcon, SparkleIcon } from "@phosphor-icons/react"
+import { CaretRight, Sparkle } from "@phosphor-icons/react"
 import TechStack from "./TechStack"
+
+interface HeroProps {
+  onOpenResume?: () => void
+}
 
 const container = {
   hidden: { opacity: 0 },
@@ -16,7 +20,7 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 }
 
-export default function Hero() {
+export default function Hero({ onOpenResume: _onOpenResume }: HeroProps) {
   return (
     <section className="max-w-4xl mx-auto px-6 pt-16 sm:pt-20 pb-12">
       <motion.div
@@ -39,11 +43,11 @@ export default function Hero() {
         <motion.div variants={item} className="mb-6">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.15]">
             Hi, I'm{" "}
-            <span className="text-[#a78bfa] inline-block hover:scale-[1.02] transition-transform duration-200">
+            <span className="text-white inline-block">
               Varun Kushwah
             </span>
           </h1>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mt-1">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-300 tracking-tight mt-1">
             Software Developer
           </h2>
         </motion.div>
@@ -54,7 +58,7 @@ export default function Hero() {
           className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl mb-8 font-normal"
         >
           I craft{" "}
-          <span className="text-violet-300 font-medium underline decoration-violet-500/60 decoration-wavy decoration-1 underline-offset-4 hover:text-violet-200 transition-colors cursor-default">
+          <span className="text-emerald-300 font-medium underline decoration-emerald-500/70 decoration-wavy decoration-1 underline-offset-4 hover:text-emerald-200 transition-colors cursor-default">
             scalable
           </span>{" "}
           things with code. Java Coordinator at{" "}
@@ -62,12 +66,12 @@ export default function Hero() {
             href="https://devup.co.in/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-200 font-medium hover:text-violet-300 underline underline-offset-4 decoration-zinc-600 hover:decoration-violet-400 transition-colors inline-flex items-center gap-0.5"
+            className="text-zinc-200 font-medium hover:text-emerald-300 underline underline-offset-4 decoration-zinc-600 hover:decoration-emerald-400 transition-colors inline-flex items-center gap-0.5"
           >
             <span>devup</span>
-            <SparkleIcon size={12} className="text-violet-400 inline" />
+            <Sparkle size={12} className="text-emerald-400 inline" />
           </a>
-          {", building resilient backend systems with Java & Spring Boot, and exploring real-time WebRTC protocols."}
+          , building resilient backend systems with Java &amp; Spring Boot, and exploring real-time WebRTC protocols.
         </motion.p>
 
         {/* Discover more button */}
@@ -82,7 +86,7 @@ export default function Hero() {
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-xs sm:text-sm font-medium transition-all duration-150 group shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none"
             >
               <span>Discover more</span>
-              <CaretRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
+              <CaretRight size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </motion.div>
         </motion.div>

@@ -5,12 +5,17 @@ interface IconProps {
   size?: number
 }
 
+// 1. JAVA (Official Coffee Cup)
 export const JavaIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path fill="#E76F00" d="M8.85 17.588s-.52.338-.344.475c.677.525 2.164.717 3.328.717 1.34 0 2.946-.24 3.992-.858 0 0 .324-.265.176-.388-.148-.124-.51.107-.51.107-.954.557-2.392.748-3.66.758-1.127.01-2.454-.153-2.982-.81zm-1.042-2.88s-.552.428-.316.57c.78.468 2.217.708 3.52.745 1.547.042 3.428-.198 4.79-.974 0 0 .372-.284.22-.423-.153-.138-.553.155-.553.155-1.196.68-2.883.87-4.46.883-1.398.01-2.617-.26-3.2-.956zm6.812-4.103c.567.653.284 1.258.284 1.258s.77-.73.208-1.573c-.563-.842-1.39-1.272-1.996-1.848-.564-.537-.53-1.026-.53-1.026s-.194.502.26 1.054c.48.583 1.157 1.417 1.774 2.135zM19.467 19.34c-1.328.918-4.707 1.26-7.397 1.26-2.52 0-5.74-.325-7.587-1.386-.24-.138-.284-.285-.14-.395.145-.11.455.074.455.074 1.69.96 4.673 1.298 7.272 1.3 2.502.002 5.617-.298 6.945-1.127 0 0 .393-.205.518-.088.125.116-.066.362-.066.362zm-6.26-9.674c.263.315.688.675 1.08 1.096.56.602.833 1.343.833 1.343s.553-.615.114-1.31c-.437-.698-1.134-1.173-1.637-1.696-.64-.666-.665-1.528-.665-1.528s-.363.85.275 2.095zm7.39 12.06c-1.688 1.01-5.115 1.374-8.067 1.374-2.825 0-6.425-.338-8.52-1.536-.264-.15-.224-.316-.066-.425.158-.108.49.076.49.076 1.954 1.11 5.34 1.456 8.096 1.458 2.656.002 5.89-.317 7.57-1.22 0 0 .428-.184.55-.067.123.118-.053.34-.053.34zm-8.31-18.726s.89 1.01-.274 2.506c-1.126 1.45-.63 2.274-.63 2.274s-.044-.814.773-1.745c.866-.987 1.183-1.85.13-3.035zM7.21 12.637s-1.374.32-.977.44c.484.148 1.57.172 2.378.188 1.026.02 2.766-.08 3.864-.473 0 0 .285-.15.143-.272-.142-.122-.387.03-.387.03-.97.348-2.484.444-3.522.443-.72 0-1.14-.092-1.498-.356zm10.74 3.092c.315-.81-.194-1.356-.91-1.815-.558-.357-1.09-.64-1.09-.64s.22.37.585.645c.502.377.944.664.717 1.25-.327.85-1.554 1.488-2.903 1.92 0 0 .283.184.502.138 1.517-.32 2.788-.737 3.098-1.498z"/>
+    <path fill="#5382A1" d="M8.85 17.588s-.52.338-.344.475c.677.525 2.164.717 3.328.717 1.34 0 2.946-.24 3.992-.858 0 0 .324-.265.176-.388-.148-.124-.51.107-.51.107-.954.557-2.392.748-3.66.758-1.127.01-2.454-.153-2.982-.81zm-1.042-2.88s-.552.428-.316.57c.78.468 2.217.708 3.52.745 1.547.042 3.428-.198 4.79-.974 0 0 .372-.284.22-.423-.153-.138-.553.155-.553.155-1.196.68-2.883.87-4.46.883-1.398.01-2.617-.26-3.2-.956z"/>
+    <path fill="#E76F00" d="M14.62 10.605c.567.653.284 1.258.284 1.258s.77-.73.208-1.573c-.563-.842-1.39-1.272-1.996-1.848-.564-.537-.53-1.026-.53-1.026s-.194.502.26 1.054c.48.583 1.157 1.417 1.774 2.135zM19.467 19.34c-1.328.918-4.707 1.26-7.397 1.26-2.52 0-5.74-.325-7.587-1.386-.24-.138-.284-.285-.14-.395.145-.11.455.074.455.074 1.69.96 4.673 1.298 7.272 1.3 2.502.002 5.617-.298 6.945-1.127 0 0 .393-.205.518-.088.125.116-.066.362-.066.362z"/>
+    <path fill="#5382A1" d="M13.207 9.666c.263.315.688.675 1.08 1.096.56.602.833 1.343.833 1.343s.553-.615.114-1.31c-.437-.698-1.134-1.173-1.637-1.696-.64-.666-.665-1.528-.665-1.528s-.363.85.275 2.095z"/>
+    <path fill="#E76F00" d="M20.597 21.726c-1.688 1.01-5.115 1.374-8.067 1.374-2.825 0-6.425-.338-8.52-1.536-.264-.15-.224-.316-.066-.425.158-.108.49.076.49.076 1.954 1.11 5.34 1.456 8.096 1.458 2.656.002 5.89-.317 7.57-1.22 0 0 .428-.184.55-.067.123.118-.053.34-.053.34zm-8.31-18.726s.89 1.01-.274 2.506c-1.126 1.45-.63 2.274-.63 2.274s-.044-.814.773-1.745c.866-.987 1.183-1.85.13-3.035z"/>
   </svg>
 )
 
+// 2. SPRING BOOT (Official Leaf)
 export const SpringIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
     <path
@@ -24,6 +29,7 @@ export const SpringIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 
   </svg>
 )
 
+// 3. REACT (Official Atom)
 export const ReactIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
     <ellipse cx="12" cy="12" rx="10" ry="4.2" stroke="#61DAFB" strokeWidth="1.5" transform="rotate(0 12 12)" />
@@ -33,6 +39,7 @@ export const ReactIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 1
   </svg>
 )
 
+// 4. FLUTTER (Official Birds/Stripes)
 export const FlutterIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path fill="#02569B" d="M14.314 0L2.3 12 6.07 15.77 21.857 0z" />
@@ -42,6 +49,7 @@ export const FlutterIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size =
   </svg>
 )
 
+// 5. PYTHON (Official Dual Snake)
 export const PythonIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path
@@ -55,6 +63,7 @@ export const PythonIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 
   </svg>
 )
 
+// 6. TYPESCRIPT (Official Blue Box)
 export const TypeScriptIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <rect width="24" height="24" rx="4" fill="#3178C6" />
@@ -62,6 +71,7 @@ export const TypeScriptIcon: React.FC<IconProps> = ({ className = "w-4 h-4", siz
   </svg>
 )
 
+// 7. NODE.JS (Official Hexagon)
 export const NodeIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path fill="#539E43" d="M12 1.5L2.25 7.125v11.25L12 24l9.75-5.625V7.125L12 1.5zm6.5 14.5l-6.5 3.75-6.5-3.75V9.5l6.5-3.75 6.5 3.75v6.5z" />
@@ -69,6 +79,7 @@ export const NodeIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16
   </svg>
 )
 
+// 8. DOCKER (Official Whale with Cargo)
 export const DockerIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path
@@ -78,6 +89,7 @@ export const DockerIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 
   </svg>
 )
 
+// 9. GIT (Official Orange Branching Logo)
 export const GitIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path
@@ -87,6 +99,7 @@ export const GitIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 
   </svg>
 )
 
+// 10. WEBRTC (Official Logo)
 export const WebRTCIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
     <path
@@ -99,6 +112,7 @@ export const WebRTCIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 
   </svg>
 )
 
+// 11. TAILWIND CSS (Official Cyan Waves)
 export const TailwindIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path
@@ -108,15 +122,17 @@ export const TailwindIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size 
   </svg>
 )
 
+// 12. POSTGRESQL (Official Elephant Head)
 export const PostgresIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path
-      fill="#4169E1"
-      d="M11.966 0C5.357 0 0 5.358 0 11.967c0 6.61 5.357 11.967 11.966 11.967 6.61 0 11.968-5.358 11.968-11.967C23.934 5.358 18.576 0 11.966 0zm5.836 17.502h-2.127l-.612-1.837h-3.076l-.612 1.837H9.248l3.18-8.736h2.247l3.127 8.736zm-3.327-3.473l-.974-3.003-.973 3.003h1.947z"
+      fill="#336791"
+      d="M12.002 0c-4.475 0-7.854 2.378-8.887 6.47-.852 3.376-.05 7.15 2.125 9.877l.034.043c.125.153.257.3.397.439l-.49 2.012a.667.667 0 0 0 .788.804l2.12-.472c1.233.567 2.57.858 3.913.858 4.476 0 7.855-2.378 8.888-6.47.852-3.377.05-7.15-2.125-9.877l-.034-.043a6.837 6.837 0 0 0-.397-.439l.49-2.012a.667.667 0 0 0-.788-.804l-2.12.472A8.995 8.995 0 0 0 12.002 0zm1.758 3.513c1.696.064 3.037.93 3.655 2.361.344.797.408 1.705.183 2.598-.445 1.764-1.895 3.048-3.69 3.27l-.447.055.203.402c.414.821.572 1.748.455 2.678l-.05.397-.394-.075c-1.127-.215-2.112-.84-2.772-1.758l-.297-.413-.48.172c-1.28.46-2.674.34-3.823-.33-.943-.55-1.574-1.464-1.73-2.507-.22-1.474.394-2.923 1.64-3.876l.39-.297-.24-.43c-.45-.806-.57-1.762-.338-2.69.445-1.765 1.895-3.05 3.69-3.27l.447-.055-.203-.402a5.418 5.418 0 0 1-.455-2.678l.05-.397.394.075c1.127.215 2.112.84 2.772 1.758l.297.413.48-.172c.382-.138.777-.206 1.173-.206z"
     />
   </svg>
 )
 
+// 13. LINUX (Official Tux / Shell)
 export const LinuxIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path
@@ -126,15 +142,131 @@ export const LinuxIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 1
   </svg>
 )
 
+// 14. POSTMAN (Official Orange Runner/Circle)
 export const PostmanIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
     <path
       fill="#FF6C37"
-      d="M13.5 0C6.044 0 0 6.044 0 13.5S6.044 27 13.5 27 27 20.956 27 13.5 20.956 0 13.5 0zm6.9 14.887l-2.438 1.408a.844.844 0 01-1.154-.309l-.822-1.424a.844.844 0 01.309-1.154l2.438-1.408a.844.844 0 011.154.309l.822 1.424a.844.844 0 01-.309 1.154z"
+      d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.83 14.887l-2.438 1.408a.844.844 0 01-1.154-.309l-.822-1.424a.844.844 0 01.309-1.154l2.438-1.408a.844.844 0 011.154.309l.822 1.424a.844.844 0 01-.309 1.154z"
     />
   </svg>
 )
 
+// 15. INTELLIJ IDEA (Official JetBrains Icon)
+export const IntelliJIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <rect width="24" height="24" rx="5" fill="#000000" />
+    <path
+      d="M4.5 19.5L9.5 4.5H19.5L14.5 19.5H4.5Z"
+      fill="url(#ij-gradient)"
+    />
+    <path d="M7 7.5H8.5V14H7V7.5Z" fill="#FFFFFF" />
+    <path d="M10.5 12.5C10.5 13.6 11.4 14 12.5 14C13.6 14 14.5 13.4 14.5 12.2V7.5H13V12.2C13 12.6 12.7 12.8 12.5 12.8C12.3 12.8 12 12.6 12 12.2V7.5H10.5V12.5Z" fill="#FFFFFF" />
+    <path d="M7 15.5H14.5V17H7V15.5Z" fill="#087CFA" />
+    <defs>
+      <linearGradient id="ij-gradient" x1="4.5" y1="4.5" x2="19.5" y2="19.5" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#FE2857" />
+        <stop offset="0.5" stopColor="#9B30FF" />
+        <stop offset="1" stopColor="#087CFA" />
+      </linearGradient>
+    </defs>
+  </svg>
+)
+
+// 16. VS CODE (Official Visual Studio Code Ribbon)
+export const VSCodeIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <path
+      d="M17.5 1.5L6.5 10.5L2 7L0.5 8.5L4.5 12L0.5 15.5L2 17L6.5 13.5L17.5 22.5L23.5 19.5V4.5L17.5 1.5Z"
+      fill="#007ACC"
+    />
+    <path
+      d="M17.5 1.5L6.5 10.5L17.5 12V1.5Z"
+      fill="#1F8AD2"
+    />
+    <path
+      d="M17.5 22.5L6.5 13.5L17.5 12V22.5Z"
+      fill="#0065A9"
+    />
+    <path
+      d="M17.5 12L23.5 16.5V7.5L17.5 12Z"
+      fill="#1F8AD2"
+    />
+  </svg>
+)
+
+// 17. WARP TERMINAL (Official Warp Lightning / Terminal)
+export const WarpIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <rect width="24" height="24" rx="5" fill="#010409" />
+    <path
+      d="M4.5 7.5L11.5 12L4.5 16.5V7.5Z"
+      fill="url(#warp-grad)"
+    />
+    <path
+      d="M12.5 15H19.5V16.5H12.5V15Z"
+      fill="#29D2BF"
+    />
+    <defs>
+      <linearGradient id="warp-grad" x1="4.5" y1="7.5" x2="11.5" y2="16.5" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#01A8F5" />
+        <stop offset="1" stopColor="#29D2BF" />
+      </linearGradient>
+    </defs>
+  </svg>
+)
+
+// 18. OBSIDIAN (Official Purple Crystal)
+export const ObsidianIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <path
+      d="M12 2L4 9L6.5 20L12 22L17.5 20L20 9L12 2Z"
+      fill="#7C3AED"
+    />
+    <path
+      d="M12 2L6.5 20L12 22V2Z"
+      fill="#6D28D9"
+    />
+    <path
+      d="M12 6L8 10L12 18L16 10L12 6Z"
+      fill="#A78BFA"
+    />
+  </svg>
+)
+
+// 19. SPOTIFY (Official Green Music Waves)
+export const SpotifyIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <circle cx="12" cy="12" r="12" fill="#1DB954" />
+    <path
+      fill="#FFFFFF"
+      d="M17.5 11.2c-2.8-.7-7.3-.8-9.9.1-.4.1-.8-.1-.9-.5-.1-.4.1-.8.5-.9 3-.9 7.9-.8 11.1.1.4.1.6.6.5 1-.1.4-.6.6-1.3.2zm-.1 2.6c-.3.4-.7.5-1.1.2-2.3-.7-5.9-.9-8.4-.2-.4.1-.8-.1-.9-.5-.1-.4.1-.8.5-.9 2.9-.8 6.9-.6 9.6.2.4.2.5.7.3 1.2zm-1.3 2.5c-.2.3-.6.4-.9.2-1.9-.6-4.6-.7-6.5-.2-.3.1-.7-.1-.8-.4-.1-.3.1-.7.4-.8 2.2-.6 5.2-.5 7.4.2.3.2.4.6.4 1z"
+    />
+  </svg>
+)
+
+// 20. CLOUDFLARE (Official Orange Cloud)
+export const CloudflareIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <path
+      d="M18.2 11.2C17.7 8.2 15.1 6 12 6c-2.4 0-4.5 1.3-5.5 3.3C4.2 9.6 2.5 11.6 2.5 14c0 2.8 2.2 5 5 5h10.5c2.2 0 4-1.8 4-4 0-2-1.5-3.6-3.8-3.8z"
+      fill="#F38020"
+    />
+  </svg>
+)
+
+// 21. FIGMA (Official 5-Piece Brand SVG)
+export const FigmaIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
+    <path d="M8 2h4v5H8a2.5 2.5 0 0 1 0-5z" fill="#F24E1E" />
+    <path d="M12 2h4a2.5 2.5 0 0 1 0 5h-4V2z" fill="#FF7262" />
+    <path d="M8 7h4v5H8a2.5 2.5 0 0 1 0-5z" fill="#A259FF" />
+    <path d="M12 7h4a2.5 2.5 0 1 1 0 5h-4V7z" fill="#1ABCFE" />
+    <path d="M8 12h4v5a2.5 2.5 0 1 1-4-2.5V12z" fill="#0ACF83" />
+  </svg>
+)
+
+// 22. VITE (Official Lightning Shield)
 export const ViteIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
     <path
@@ -154,6 +286,7 @@ export const ViteIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16
   </svg>
 )
 
+// 23. WEBSOCKET
 export const WebSocketIcon: React.FC<IconProps> = ({ className = "w-4 h-4", size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className}>
     <path

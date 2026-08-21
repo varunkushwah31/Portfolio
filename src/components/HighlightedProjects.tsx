@@ -32,9 +32,9 @@ const projectBadges: Record<string, Array<{ name: string; icon: React.FC<{ size?
   ],
 }
 
-// Matching the reference background tones: Lavender/Violet for Left, Deep Crimson/Terracotta for Right
+// Vibrant banner gradients for the 2 featured projects
 const cardThemes: Record<string, { bg: string }> = {
-  "leetcode-tracker": { bg: "linear-gradient(135deg, #a78bfa 0%, #818cf8 100%)" },
+  "leetcode-tracker": { bg: "linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%)" },
   "mangoshare-clone": { bg: "linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)" },
 }
 
@@ -48,7 +48,7 @@ export default function HighlightedProjects() {
       className="py-12"
     >
       {/* Section Header */}
-      <p className="text-xs sm:text-sm font-semibold text-violet-400 mb-1">
+      <p className="text-xs sm:text-sm font-semibold text-emerald-400 mb-1">
         Highlighted projects
       </p>
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 tracking-tight">
@@ -72,7 +72,7 @@ export default function HighlightedProjects() {
             >
               <Link
                 to={`/project/${project.slug}`}
-                className="group block rounded-2xl border border-[#27272a] bg-[#141414] hover:border-violet-500/60 hover:shadow-[0_12px_30px_-10px_rgba(124,58,237,0.2)] transition-all duration-300 overflow-hidden shadow-xl"
+                className="group block rounded-2xl border border-[#27272a] bg-[#141414] hover:border-zinc-500 hover:shadow-[0_12px_30px_-10px_rgba(255,255,255,0.06)] transition-all duration-300 overflow-hidden shadow-xl"
               >
                 {/* Top Colorful Display Banner with Laptop Mockup */}
                 <div
@@ -87,7 +87,7 @@ export default function HighlightedProjects() {
                 {/* Bottom Content Area */}
                 <div className="p-5 sm:p-6 bg-[#141414]">
                   <div className="flex items-center justify-between gap-2 mb-1">
-                    <h3 className="font-bold text-white text-lg group-hover:text-violet-300 transition-colors">
+                    <h3 className="font-bold text-white text-lg group-hover:text-white transition-colors">
                       {project.title}
                     </h3>
                     <span className="text-zinc-500 text-xs font-mono group-hover:translate-x-1 transition-transform">
@@ -107,7 +107,7 @@ export default function HighlightedProjects() {
                         <motion.div
                           key={b.name}
                           whileHover={{ scale: 1.2, y: -2 }}
-                          className="w-7 h-7 rounded-md bg-[#1f1f23] border border-[#2e2e33] flex items-center justify-center text-zinc-300 hover:border-violet-400 hover:text-white transition-colors shadow-sm cursor-default"
+                          className="w-7 h-7 rounded-md bg-[#1f1f23] border border-[#2e2e33] flex items-center justify-center text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors shadow-sm cursor-default"
                           title={b.name}
                         >
                           <Icon size={14} className="w-3.5 h-3.5" />

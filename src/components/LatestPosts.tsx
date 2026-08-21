@@ -36,7 +36,7 @@ export const LatestPosts: React.FC = () => {
       className="py-12"
     >
       {/* Section Header */}
-      <p className="text-xs sm:text-sm font-semibold text-violet-400 mb-1">
+      <p className="text-xs sm:text-sm font-semibold text-emerald-400 mb-1">
         Writing
       </p>
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 tracking-tight">
@@ -54,7 +54,7 @@ export const LatestPosts: React.FC = () => {
             transition={{ duration: 0.45, delay: i * 0.12 }}
             whileHover={{ y: -6, transition: { type: "spring", stiffness: 350, damping: 20 } }}
           >
-            <div className="group block rounded-2xl border border-[#27272a] bg-[#141414] hover:border-violet-500/60 hover:shadow-[0_12px_30px_-10px_rgba(124,58,237,0.18)] transition-all duration-300 overflow-hidden shadow-xl cursor-pointer">
+            <div className="group block rounded-2xl border border-[#27272a] bg-[#141414] hover:border-zinc-500 hover:shadow-[0_12px_30px_-10px_rgba(255,255,255,0.06)] transition-all duration-300 overflow-hidden shadow-xl cursor-pointer">
               {/* Thumbnail Image */}
               <div className="h-48 sm:h-52 overflow-hidden relative bg-[#1c1c20]">
                 <img
@@ -78,7 +78,7 @@ export const LatestPosts: React.FC = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="font-bold text-white text-base sm:text-lg group-hover:text-violet-300 transition-colors mb-2 line-clamp-2">
+                <h3 className="font-bold text-white text-base sm:text-lg group-hover:text-white transition-colors mb-2 line-clamp-2">
                   {post.title}
                 </h3>
 

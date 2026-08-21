@@ -36,6 +36,7 @@ function AnimatedRoutes() {
           <Route path="/about" element={<About />} />
           <Route path="/tech-stack" element={<TechStackPage />} />
           <Route path="/stack" element={<TechStackPage />} />
+          <Route path="/uses" element={<TechStackPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
