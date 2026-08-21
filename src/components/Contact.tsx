@@ -1,6 +1,7 @@
 import { useState } from "react"
-import { Mail, ArrowRight, Copy, Check, Send } from "lucide-react"
+import { EnvelopeSimpleIcon, ArrowRightIcon, CopyIcon, CheckIcon, PaperPlaneTiltIcon, CheckCircleIcon } from "@phosphor-icons/react"
 import { motion, AnimatePresence } from "framer-motion"
+import { sound } from "@/lib/sound"
 
 /* Simple Icons SVGs */
 const GitHubIcon = ({ size = 20 }: { size?: number }) => (
@@ -18,10 +19,12 @@ const LinkedInIcon = ({ size = 20 }: { size?: number }) => (
 const Contact = () => {
   const [copied, setCopied] = useState(false)
   const [formData, setFormData] = useState({ name: "", email: "", message: "" })
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const emailAddress = "varun.kush3@gmail.com"
 
   const handleCopyEmail = () => {
+    sound.click()
     navigator.clipboard.writeText(emailAddress)
     setCopied(true)
     setTimeout(() => setCopied(false), 2500)
@@ -30,17 +33,25 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!formData.name || !formData.email || !formData.message) return
-    setSubmitted(true)
+    sound.click()
+    setIsSubmitting(true)
+
+    // Simulate reliable submission
     setTimeout(() => {
-      setSubmitted(false)
-      setFormData({ name: "", email: "", message: "" })
-    }, 4000)
+      sound.success()
+      setIsSubmitting(false)
+      setSubmitted(true)
+      setTimeout(() => {
+        setSubmitted(false)
+        setFormData({ name: "", email: "", message: "" })
+      }, 4500)
+    }, 800)
   }
 
   return (
     <section
       id="contact"
-      className="w-full bg-surface-soft relative"
+      className="w-full bg-surface-soft relative border-b border-hairline-strong"
       style={{ paddingTop: "96px", paddingBottom: "96px" }}
     >
       <div className="max-w-[1440px] mx-auto px-6">
@@ -49,9 +60,15 @@ const Contact = () => {
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="label-uppercase text-muted mb-4"
+          className="flex items-center gap-3 mb-4"
         >
-          CONNECT
+          <span className="label-uppercase text-muted text-xs tracking-[3px]">
+            [ SECTION // 04 ]
+          </span>
+          <span className="text-hairline">|</span>
+          <span className="label-uppercase text-m-blue-light text-xs tracking-[1.5px] font-bold">
+            DIRECT TRANSMISSION & INQUIRIES
+          </span>
         </motion.div>
 
         {/* Section heading — display-md */}
@@ -61,54 +78,56 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-ink mb-6 max-w-[700px]"
         >
-          LET'S BUILD SOMETHING TOGETHER
+          LET'S BUILD SOMETHING EXTRAORDINARY
         </motion.h3>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mt-8">
-          {/* Left Column — Info & Quick Action Buttons */}
-          <div className="lg:col-span-6">
-            <p
-              className="body-light mb-8 max-w-[550px] text-body text-base md:text-lg"
-              style={{ lineHeight: 1.7 }}
-            >
-              I'm always interested in hearing about new engineering projects and software opportunities.
-              Whether you want to collaborate on a backend system or discuss technology, feel free to reach out.
+          {/* Left Column — Info & Direct Connect */}
+          <div className="lg:col-span-6 space-y-8">
+            <p className="body-light max-w-[560px] text-body text-base md:text-lg leading-relaxed">
+              I am open to software engineering internships, junior developer roles, and high-impact backend engineering projects. Whether you want to discuss Java/Spring architecture, WebRTC real-time systems, or collaborate on a codebase, let's connect.
             </p>
 
             {/* Email Box with One-Click Copy */}
-            <div className="bg-canvas border border-hairline p-5 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="bg-canvas border border-hairline p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <div className="label-uppercase text-muted text-[11px] mb-1">DIRECT EMAIL</div>
+                <div className="label-uppercase text-muted text-[11px] mb-1">DIRECT TRANSMISSION CHANNEL</div>
                 <div className="text-ink font-bold text-base md:text-lg select-all font-mono">
                   {emailAddress}
                 </div>
               </div>
               <button
                 onClick={handleCopyEmail}
-                className="btn-text inline-flex items-center gap-2 text-ink bg-surface-card border border-hairline px-4 py-2 hover:bg-surface-elevated transition-colors text-xs shrink-0 cursor-pointer"
+                onMouseEnter={() => sound.hover()}
+                className="btn-text inline-flex items-center gap-2 text-ink bg-surface-card border border-hairline px-4 py-2.5 hover:bg-surface-elevated transition-colors text-xs shrink-0 cursor-pointer"
                 style={{ borderRadius: "0px" }}
               >
-                {copied ? <Check size={14} className="text-success" /> : <Copy size={14} />}
-                {copied ? "COPIED!" : "COPY EMAIL"}
+                {copied ? <CheckIcon size={14} className="text-success" /> : <CopyIcon size={14} />}
+                {copied ? "COPIED TO CLIPBOARD" : "COPY EMAIL"}
               </button>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap gap-4 mb-12">
+            <div className="flex flex-wrap gap-4">
               <a
                 href={`mailto:${emailAddress}`}
-                className="btn-text inline-flex items-center gap-3 text-ink bg-transparent border border-ink px-8 hover:bg-ink hover:text-canvas transition-colors duration-200"
+                onClick={() => sound.click()}
+                onMouseEnter={() => sound.hover()}
+                className="btn-text inline-flex items-center gap-3 text-canvas bg-ink px-8 hover:bg-body-strong transition-colors duration-200"
                 style={{ height: "48px", borderRadius: "0px" }}
               >
-                <Mail size={16} strokeWidth={2} />
+                <EnvelopeSimpleIcon size={16} />
                 SEND EMAIL
-                <ArrowRight size={14} strokeWidth={2} />
+                <ArrowRightIcon size={14} />
               </a>
+
               <a
                 href="https://www.linkedin.com/in/varun-kushwah/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-text inline-flex items-center gap-3 text-ink bg-transparent border border-hairline px-8 hover:border-ink transition-colors duration-200"
+                onClick={() => sound.click()}
+                onMouseEnter={() => sound.hover()}
+                className="btn-text inline-flex items-center gap-3 text-ink bg-transparent border border-hairline px-8 hover:border-ink hover:bg-surface-soft transition-colors duration-200"
                 style={{ height: "48px", borderRadius: "0px" }}
               >
                 <LinkedInIcon size={16} />
@@ -116,14 +135,17 @@ const Contact = () => {
               </a>
             </div>
 
-            {/* Social icon buttons */}
-            <div className="flex gap-4">
+            {/* Social circular icon buttons per DESIGN.md */}
+            <div className="flex items-center gap-4 pt-2">
+              <span className="label-uppercase text-muted text-xs mr-2">CHANNELS:</span>
               <a
                 href="https://github.com/varunkushwah31"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center bg-surface-card text-ink rounded-full hover:bg-surface-elevated transition-colors duration-200"
-                aria-label="GitHub"
+                onClick={() => sound.click()}
+                onMouseEnter={() => sound.hover()}
+                className="w-12 h-12 flex items-center justify-center bg-surface-card text-ink rounded-full hover:bg-surface-elevated border border-hairline transition-colors duration-200"
+                aria-label="GitHub Profile"
               >
                 <GitHubIcon size={20} />
               </a>
@@ -131,26 +153,30 @@ const Contact = () => {
                 href="https://www.linkedin.com/in/varun-kushwah/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center bg-surface-card text-ink rounded-full hover:bg-surface-elevated transition-colors duration-200"
-                aria-label="LinkedIn"
+                onClick={() => sound.click()}
+                onMouseEnter={() => sound.hover()}
+                className="w-12 h-12 flex items-center justify-center bg-surface-card text-ink rounded-full hover:bg-surface-elevated border border-hairline transition-colors duration-200"
+                aria-label="LinkedIn Profile"
               >
                 <LinkedInIcon size={20} />
               </a>
               <a
                 href={`mailto:${emailAddress}`}
-                className="w-12 h-12 flex items-center justify-center bg-surface-card text-ink rounded-full hover:bg-surface-elevated transition-colors duration-200"
-                aria-label="Email"
+                onClick={() => sound.click()}
+                onMouseEnter={() => sound.hover()}
+                className="w-12 h-12 flex items-center justify-center bg-surface-card text-ink rounded-full hover:bg-surface-elevated border border-hairline transition-colors duration-200"
+                aria-label="Direct Email"
               >
-                <Mail size={20} strokeWidth={2} />
+                <EnvelopeSimpleIcon size={20} />
               </a>
             </div>
           </div>
 
-          {/* Right Column — Interactive Quick Contact Form */}
-          <div className="lg:col-span-6 bg-canvas border border-hairline-strong p-6 md:p-8">
+          {/* Right Column — Quick Contact Form */}
+          <div className="lg:col-span-6 bg-canvas border border-hairline-strong p-6 md:p-8" style={{ borderRadius: "0px" }}>
             <div className="flex items-center justify-between border-b border-hairline pb-4 mb-6">
-              <div className="label-uppercase text-ink">QUICK TRANSMISSION</div>
-              <span className="text-[11px] label-uppercase text-muted">[ FORM ]</span>
+              <div className="label-uppercase text-ink font-bold">TRANSMISSION CONSOLE</div>
+              <span className="text-[11px] label-uppercase text-muted font-mono">[ DIRECT_INPUT ]</span>
             </div>
 
             <AnimatePresence mode="wait">
@@ -163,17 +189,19 @@ const Contact = () => {
                   className="bg-surface-soft border border-hairline p-8 text-center py-12"
                 >
                   <div className="w-12 h-12 bg-surface-card rounded-full flex items-center justify-center mx-auto mb-4 text-success border border-hairline">
-                    <Check size={24} />
+                    <CheckCircleIcon size={26} />
                   </div>
-                  <h4 className="text-ink font-bold text-xl uppercase mb-2">TRANSMISSION RECEIVED</h4>
-                  <p className="body-light text-sm text-body">
-                    Thank you for reaching out. Your message has been logged successfully.
+                  <h4 className="text-ink font-bold text-xl uppercase mb-2">TRANSMISSION CONFIRMED</h4>
+                  <p className="body-light text-sm text-body leading-relaxed max-w-sm mx-auto">
+                    Your message packet has been transmitted. I will respond to your provided email address shortly.
                   </p>
                 </motion.div>
               ) : (
                 <form key="form" onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label className="block label-uppercase text-muted text-xs mb-2">YOUR NAME</label>
+                    <label className="block label-uppercase text-muted text-xs mb-2">
+                      NAME / IDENTITY <span className="text-m-blue-light">*</span>
+                    </label>
                     <input
                       type="text"
                       required
@@ -186,7 +214,9 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block label-uppercase text-muted text-xs mb-2">EMAIL ADDRESS</label>
+                    <label className="block label-uppercase text-muted text-xs mb-2">
+                      EMAIL ADDRESS <span className="text-m-blue-light">*</span>
+                    </label>
                     <input
                       type="email"
                       required
@@ -199,25 +229,35 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block label-uppercase text-muted text-xs mb-2">MESSAGE / PROJECT SPEC</label>
+                    <label className="block label-uppercase text-muted text-xs mb-2">
+                      MESSAGE / PROJECT SPECIFICATION <span className="text-m-blue-light">*</span>
+                    </label>
                     <textarea
                       required
                       rows={4}
-                      placeholder="Describe your project, inquiry, or collaboration idea..."
+                      placeholder="Detail your inquiry, engineering requirement, or collaboration opportunity..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-surface-card text-ink border border-hairline-strong p-4 text-sm focus:border-ink focus:outline-none transition-colors resize-none"
+                      className="w-full bg-surface-card text-ink border border-hairline-strong p-4 text-sm focus:border-ink focus:outline-none transition-colors resize-none leading-relaxed"
                       style={{ borderRadius: "0px" }}
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="btn-text w-full inline-flex items-center justify-center gap-3 text-ink bg-transparent border border-ink py-4 hover:bg-ink hover:text-canvas transition-colors duration-200 cursor-pointer"
-                    style={{ borderRadius: "0px" }}
+                    disabled={isSubmitting}
+                    onMouseEnter={() => sound.hover()}
+                    className="btn-text w-full inline-flex items-center justify-center gap-3 text-ink bg-transparent border border-ink py-4 hover:bg-ink hover:text-canvas transition-colors duration-200 cursor-pointer disabled:opacity-50"
+                    style={{ borderRadius: "0px", height: "48px" }}
                   >
-                    <Send size={16} />
-                    TRANSMIT MESSAGE
+                    {isSubmitting ? (
+                      <span className="font-mono text-xs">TRANSMITTING TELEMETRY...</span>
+                    ) : (
+                      <>
+                        <PaperPlaneTiltIcon size={16} />
+                        <span>TRANSMIT MESSAGE</span>
+                      </>
+                    )}
                   </button>
                 </form>
               )}
@@ -230,4 +270,3 @@ const Contact = () => {
 }
 
 export default Contact
-

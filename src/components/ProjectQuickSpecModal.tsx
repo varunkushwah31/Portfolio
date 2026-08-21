@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ArrowRight, ExternalLink, Check, Copy } from "lucide-react"
+import { X, ArrowRight, ArrowSquareOut, Check, Copy } from "@phosphor-icons/react"
 import type { Project } from "@/data/projects"
 import ProjectVisual from "./ProjectVisual"
+import { sound } from "@/lib/sound"
 
 interface ProjectQuickSpecModalProps {
   project: Project | null
@@ -29,6 +30,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
 
   const handleCopyLink = () => {
     if (!project) return
+    sound.click()
     const url = `${window.location.origin}/project/${project.slug}`
     navigator.clipboard.writeText(url)
     setCopied(true)
@@ -44,7 +46,10 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
+            onClick={() => {
+              sound.click()
+              onClose()
+            }}
             className="fixed inset-0 bg-canvas/90 backdrop-blur-md cursor-pointer"
             aria-hidden="true"
           />
@@ -54,7 +59,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 20 }}
-            transition={{ type: "spring", duration: 0.4, bounce: 0 }}
+            transition={{ type: "spring", duration: 0.35, bounce: 0 }}
             className="relative w-full max-w-4xl bg-surface-card border border-hairline my-8 z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
             style={{ borderRadius: "0px" }}
           >
@@ -62,9 +67,9 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
             <div className="m-stripe shrink-0" />
 
             {/* Modal Header */}
-            <div className="p-6 md:px-8 bg-surface-soft border-b border-hairline flex items-center justify-between gap-4 shrink-0">
+            <div className="p-5 md:px-8 bg-surface-soft border-b border-hairline flex items-center justify-between gap-4 shrink-0">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="label-uppercase text-m-blue-light text-xs tracking-[2px]">
+                <span className="label-uppercase text-m-blue-light text-xs tracking-[2px] font-bold">
                   {project.category}
                 </span>
                 <span className="text-hairline">|</span>
@@ -82,7 +87,10 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
 
               {/* Close Button — 48x48 circular button per DESIGN.md */}
               <button
-                onClick={onClose}
+                onClick={() => {
+                  sound.click()
+                  onClose()
+                }}
                 className="w-10 h-10 md:w-12 md:h-12 bg-surface-card hover:bg-surface-elevated text-ink rounded-full flex items-center justify-center border border-hairline transition-colors duration-200 cursor-pointer shrink-0"
                 aria-label="Close Specification Modal"
               >
@@ -105,7 +113,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                 </p>
               </div>
 
-              {/* Visual Architecture Banner (Vector UI Preview) */}
+              {/* Visual Architecture Banner */}
               <div className="relative w-full overflow-hidden bg-surface-elevated border border-hairline-strong">
                 <ProjectVisual slug={project.slug} title={project.title} />
                 <div className="absolute top-3 right-3 bg-canvas/90 backdrop-blur-sm border border-hairline px-3 py-1 text-[11px] font-bold label-uppercase text-ink z-10">
@@ -116,7 +124,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                 </div>
               </div>
 
-              {/* Technical Spec Matrix (Inspired by DESIGN.md spec-cell) */}
+              {/* Technical Spec Matrix */}
               <div>
                 <div className="label-uppercase text-muted text-xs mb-3 tracking-[1.5px]">
                   TELEMETRY SPECIFICATION MATRIX
@@ -192,7 +200,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
             </div>
 
             {/* Modal Footer Actions */}
-            <div className="p-6 md:px-8 bg-surface-soft border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
+            <div className="p-5 md:px-8 bg-surface-soft border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <button
                   onClick={handleCopyLink}
@@ -215,17 +223,21 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => sound.click()}
                     className="btn-text w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs bg-surface-card hover:bg-surface-elevated text-ink border border-hairline px-4 py-3 transition-colors duration-200"
                     style={{ borderRadius: "0px" }}
                   >
-                    <ExternalLink size={14} /> GITHUB
+                    <ArrowSquareOut size={14} /> GITHUB
                   </a>
                 )}
               </div>
 
               <Link
                 to={`/project/${project.slug}`}
-                onClick={onClose}
+                onClick={() => {
+                  sound.click()
+                  onClose()
+                }}
                 className="btn-text w-full sm:w-auto inline-flex items-center justify-center gap-3 text-xs bg-ink text-canvas hover:bg-body-strong px-6 py-3 transition-colors duration-200 group"
                 style={{ borderRadius: "0px" }}
               >

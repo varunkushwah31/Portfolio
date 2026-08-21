@@ -2,19 +2,20 @@ import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  X,
-  FileText,
-  Github,
-  Linkedin,
-  Mail,
-  ArrowRight,
-  FolderGit2,
-  Terminal,
-  Cpu,
-  User,
-  Code
-} from "lucide-react"
+  XIcon,
+  FileTextIcon,
+  GithubLogoIcon,
+  LinkedinLogoIcon,
+  EnvelopeSimpleIcon,
+  ArrowRightIcon,
+  GitForkIcon,
+  TerminalWindowIcon,
+  CpuIcon,
+  UserIcon,
+  CodeIcon,
+} from "@phosphor-icons/react"
 import projects from "@/data/projects"
+import { sound } from "@/lib/sound"
 
 interface CommandPaletteProps {
   isOpen: boolean
@@ -38,26 +39,32 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
   const inputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
 
+  const handleClose = () => {
+    setQuery("")
+    setSelectedIndex(0)
+    setTerminalOutput(null)
+    onClose()
+  }
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden"
       setTimeout(() => inputRef.current?.focus(), 50)
     } else {
       document.body.style.overflow = "unset"
-      setQuery("")
-      setSelectedIndex(0)
-      setTerminalOutput(null)
     }
   }, [isOpen])
 
-  // Handle keyboard shortcuts
+  // Handle global keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault()
-        if (isOpen) onClose()
-        else {
-          // Trigger open via custom event or prop
+        if (isOpen) {
+          sound.click()
+          onClose()
+        } else {
+          sound.openModal()
           const event = new CustomEvent("open-command-palette")
           window.dispatchEvent(event)
         }
@@ -68,7 +75,8 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
   }, [isOpen, onClose])
 
   const scrollToSection = (id: string) => {
-    onClose()
+    sound.click()
+    handleClose()
     if (window.location.pathname !== "/") {
       navigate(`/#${id}`)
     } else {
@@ -83,9 +91,9 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
     {
       id: "nav-hero",
       title: "OVERVIEW // HERO",
-      subtitle: "Jump to introduction and status",
+      subtitle: "Jump to introduction and telemetry status",
       category: "NAVIGATION",
-      icon: <User size={15} className="text-m-blue-light" />,
+      icon: <UserIcon size={15} className="text-m-blue-light" />,
       action: () => scrollToSection("hero"),
     },
     {
@@ -93,15 +101,15 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
       title: "ABOUT & LEADERSHIP TRACK",
       subtitle: "devup Coordinator & background",
       category: "NAVIGATION",
-      icon: <FileText size={15} className="text-m-blue-light" />,
+      icon: <FileTextIcon  size={15} className="text-m-blue-light" />,
       action: () => scrollToSection("about"),
     },
     {
       id: "nav-skills",
       title: "TECHNICAL CAPABILITIES & STACK",
-      subtitle: "Java, Spring Boot, React, WebRTC, Systems",
+      subtitle: "Java 21, Spring Boot, React 19, WebRTC, Systems",
       category: "NAVIGATION",
-      icon: <Cpu size={15} className="text-m-blue-dark" />,
+      icon: <CpuIcon size={15} className="text-m-blue-dark" />,
       action: () => scrollToSection("skills"),
     },
     {
@@ -109,7 +117,7 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
       title: "ENGINEERING PROJECTS & SPECIFICATIONS",
       subtitle: "Browse all 5 technical repositories",
       category: "NAVIGATION",
-      icon: <FolderGit2 size={15} className="text-m-red" />,
+      icon: <GitForkIcon size={15} className="text-m-red" />,
       action: () => scrollToSection("projects"),
     },
     {
@@ -117,7 +125,7 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
       title: "DIRECT TRANSMISSION // CONTACT",
       subtitle: "Reach out for engineering collaboration",
       category: "NAVIGATION",
-      icon: <Mail size={15} className="text-m-blue-light" />,
+      icon: <EnvelopeSimpleIcon size={15} className="text-m-blue-light" />,
       action: () => scrollToSection("contact"),
     },
 
@@ -127,9 +135,10 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
       title: "VIEW RESUME // CV SPECIFICATION",
       subtitle: "Open printable engineering resume spec",
       category: "ACTIONS",
-      icon: <FileText size={15} className="text-success" />,
+      icon: <FileTextIcon size={15} className="text-success" />,
       action: () => {
-        onClose()
+        sound.openModal()
+        handleClose()
         onOpenResume()
       },
     },
@@ -138,10 +147,11 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
       title: "OPEN GITHUB PROFILE",
       subtitle: "https://github.com/varunkushwah31",
       category: "ACTIONS",
-      icon: <Github size={15} className="text-body-strong" />,
+      icon: <GithubLogoIcon size={15} className="text-body-strong" />,
       action: () => {
+        sound.click()
         window.open("https://github.com/varunkushwah31", "_blank")
-        onClose()
+        handleClose()
       },
     },
     {
@@ -149,10 +159,11 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
       title: "OPEN LINKEDIN PROFILE",
       subtitle: "Connect with Varun Kushwah",
       category: "ACTIONS",
-      icon: <Linkedin size={15} className="text-m-blue-dark" />,
+      icon: <LinkedinLogoIcon size={15} className="text-m-blue-dark" />,
       action: () => {
+        sound.click()
         window.open("https://www.linkedin.com/in/varun-kushwah/", "_blank")
-        onClose()
+        handleClose()
       },
     },
     {
@@ -160,10 +171,11 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
       title: "COPY DIRECT EMAIL",
       subtitle: "varun.kush3@gmail.com",
       category: "ACTIONS",
-      icon: <Mail size={15} className="text-warning" />,
+      icon: <EnvelopeSimpleIcon size={15} className="text-warning" />,
       action: () => {
+        sound.success()
         navigator.clipboard.writeText("varun.kush3@gmail.com")
-        setTerminalOutput("COPIED: varun.kush3@gmail.com")
+        setTerminalOutput("COPIED TO CLIPBOARD: varun.kush3@gmail.com")
       },
     },
 
@@ -173,9 +185,10 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
       title: `SPEC: ${p.title}`,
       subtitle: `${p.category} · ${p.version} · ${p.tagline}`,
       category: "PROJECTS" as const,
-      icon: <Code size={15} className="text-m-blue-light" />,
+      icon: <CodeIcon size={15} className="text-m-blue-light" />,
       action: () => {
-        onClose()
+        sound.click()
+        handleClose()
         navigate(`/project/${p.slug}`)
       },
     })),
@@ -192,21 +205,24 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
     )
   })
 
-  // Handle Terminal CLI commands when user enters text
+  // Handle Terminal CLI commands
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Escape") {
+      sound.click()
       onClose()
       return
     }
 
     if (e.key === "ArrowDown") {
       e.preventDefault()
+      sound.hover()
       setSelectedIndex((prev) => (prev + 1) % Math.max(1, filteredCommands.length))
       return
     }
 
     if (e.key === "ArrowUp") {
       e.preventDefault()
+      sound.hover()
       setSelectedIndex((prev) => (prev - 1 + filteredCommands.length) % Math.max(1, filteredCommands.length))
       return
     }
@@ -217,28 +233,34 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
 
       // Terminal direct commands
       if (trimmed === "help") {
+        sound.click()
         setTerminalOutput("COMMANDS: whoami, skills, projects, resume, contact, clear, sudo hire")
         return
       }
       if (trimmed === "whoami") {
+        sound.click()
         setTerminalOutput("Varun Kushwah — Software Developer & Java Coordinator @ devup. Focus: Java/Spring, Full-Stack, Real-time Systems.")
         return
       }
       if (trimmed === "skills") {
-        setTerminalOutput("CORE: Java 21, Spring Boot, React, WebRTC, Flutter, Git Subtrees, Systems Monitoring.")
+        sound.click()
+        setTerminalOutput("CORE: Java 21, Spring Boot, React 19, WebRTC, Flutter, Git Subtrees, Systems Monitoring.")
         return
       }
       if (trimmed === "resume") {
+        sound.openModal()
         onClose()
         onOpenResume()
         return
       }
       if (trimmed === "clear") {
+        sound.click()
         setTerminalOutput(null)
         setQuery("")
         return
       }
       if (trimmed === "sudo hire") {
+        sound.success()
         setTerminalOutput("ACCESS GRANTED: Candidate initialized for immediate engineering impact. Direct email: varun.kush3@gmail.com")
         return
       }
@@ -258,7 +280,10 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
+            onClick={() => {
+              sound.click()
+              onClose()
+            }}
             className="fixed inset-0 bg-canvas/90 backdrop-blur-md cursor-pointer"
           />
 
@@ -276,7 +301,7 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
 
             {/* Header & Search Bar */}
             <div className="p-4 bg-surface-soft border-b border-hairline flex items-center gap-3">
-              <Terminal size={18} className="text-m-blue-light shrink-0" />
+              <TerminalWindowIcon size={18} className="text-m-blue-light shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -293,17 +318,18 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
               {query && (
                 <button
                   onClick={() => {
+                    sound.click()
                     setQuery("")
                     setTerminalOutput(null)
                   }}
-                  className="text-muted hover:text-ink transition-colors p-1"
+                  className="text-muted hover:text-ink transition-colors p-1 cursor-pointer"
                 >
-                  <X size={16} />
+                  <XIcon size={16} />
                 </button>
               )}
             </div>
 
-            {/* Terminal Response HUD (if any) */}
+            {/* Terminal Response HUD */}
             {terminalOutput && (
               <div className="p-4 bg-canvas border-b border-hairline font-mono text-xs text-m-blue-light leading-relaxed flex items-start gap-2">
                 <span className="text-muted shrink-0">&gt;</span>
@@ -359,7 +385,7 @@ const CommandPalette = ({ isOpen, onClose, onOpenResume }: CommandPaletteProps) 
                         <span className="text-[9px] font-mono text-muted bg-surface-soft px-1.5 py-0.5 border border-hairline-strong hidden sm:inline">
                           {cmd.category}
                         </span>
-                        {isSelected && <ArrowRight size={14} className="text-m-blue-light" />}
+                        {isSelected && <ArrowRightIcon size={14} className="text-m-blue-light" />}
                       </div>
                     </div>
                   )

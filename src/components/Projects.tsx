@@ -2,30 +2,30 @@ import { useState, useMemo } from "react"
 import { Link } from "react-router-dom"
 import {
   ArrowRight,
-  Search,
+  MagnifyingGlass,
   X,
-  LayoutGrid,
-  ListFilter,
+  SquaresFour,
+  Table,
   Eye,
   Cpu,
-  Sparkles,
+  Sparkle,
   SlidersHorizontal,
-  RotateCcw,
-  Terminal,
-  Activity,
-  Radio,
+  ArrowCounterClockwise,
+  TerminalWindow,
+  Pulse,
+  Broadcast,
   Brain,
-  Smartphone,
-  Layers
-} from "lucide-react"
+  DeviceMobile,
+  Stack
+} from "@phosphor-icons/react"
 import { motion, AnimatePresence } from "framer-motion"
 import projects from "@/data/projects"
 import type { Project } from "@/data/projects"
 import ProjectQuickSpecModal from "./ProjectQuickSpecModal"
 import ProjectVisual from "./ProjectVisual"
+import { sound } from "@/lib/sound"
 
 const CATEGORIES = ["ALL", "FULL-STACK", "REAL-TIME", "SYSTEMS", "MACHINE LEARNING", "MOBILE"]
-
 const POPULAR_TECH = ["ALL TECH", "React", "WebRTC", "Node.js", "Python", "Flutter", "Git Subtrees"]
 
 type ViewMode = "grid" | "matrix"
@@ -34,17 +34,17 @@ type SortMode = "default" | "featured" | "name"
 const getProjectIcon = (slug: string) => {
   switch (slug) {
     case "leetcode-tracker":
-      return <Terminal size={14} className="text-m-blue-light" />
+      return <TerminalWindow size={14} className="text-m-blue-light" />
     case "mangoshare-clone":
-      return <Radio size={14} className="text-m-blue-dark" />
+      return <Broadcast size={14} className="text-m-blue-dark" />
     case "system-health-dashboard":
-      return <Activity size={14} className="text-m-red" />
+      return <Pulse size={14} className="text-m-red" />
     case "disease-prediction":
       return <Brain size={14} className="text-m-blue-light" />
     case "daily-quotes-app":
-      return <Smartphone size={14} className="text-m-blue-dark" />
+      return <DeviceMobile size={14} className="text-m-blue-dark" />
     default:
-      return <Layers size={14} className="text-muted" />
+      return <Stack size={14} className="text-muted" />
   }
 }
 
@@ -56,7 +56,7 @@ const Projects = () => {
   const [sortMode, setSortMode] = useState<SortMode>("default")
   const [quickSpecProject, setQuickSpecProject] = useState<Project | null>(null)
 
-  // Category project counts
+  // Category counts
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { ALL: projects.length }
     CATEGORIES.forEach((cat) => {
@@ -67,19 +67,16 @@ const Projects = () => {
     return counts
   }, [])
 
-  // Filtered & Sorted Projects
+  // Filtered & sorted projects
   const filteredProjects = useMemo(() => {
     let list = projects.filter((project) => {
-      // Category filter
       const matchesCategory =
         selectedCategory === "ALL" || project.category.toUpperCase() === selectedCategory
 
-      // Tech tag filter
       const matchesTech =
         selectedTech === "ALL TECH" ||
         project.tech.some((t) => t.toLowerCase() === selectedTech.toLowerCase())
 
-      // Search query filter (title, tagline, description, tech, role, status)
       const q = searchQuery.trim().toLowerCase()
       const matchesSearch =
         !q ||
@@ -93,7 +90,6 @@ const Projects = () => {
       return matchesCategory && matchesTech && matchesSearch
     })
 
-    // Sort order
     if (sortMode === "featured") {
       list = [...list].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
     } else if (sortMode === "name") {
@@ -104,6 +100,7 @@ const Projects = () => {
   }, [selectedCategory, selectedTech, searchQuery, sortMode])
 
   const handleResetFilters = () => {
+    sound.click()
     setSelectedCategory("ALL")
     setSelectedTech("ALL TECH")
     setSearchQuery("")
@@ -116,7 +113,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="w-full bg-canvas relative"
+      className="w-full bg-canvas relative border-b border-hairline-strong"
       style={{ paddingTop: "96px", paddingBottom: "96px" }}
     >
       <div className="max-w-[1440px] mx-auto px-6">
@@ -145,7 +142,7 @@ const Projects = () => {
           >
             <span className="inline-flex items-center gap-2">
               <span className="w-2 h-2 bg-success rounded-full animate-pulse" />
-              {projects.length} SYSTEMS DEPLOYED
+              {projects.length} REPOSITORIES VERIFIED
             </span>
             <span className="text-hairline">|</span>
             <span>100% SPEC VERIFIED</span>
@@ -167,9 +164,9 @@ const Projects = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="body-light text-body text-base md:text-lg max-w-3xl"
+            className="body-light text-body text-base md:text-lg max-w-3xl leading-relaxed"
           >
-            Custom distributed systems, WebRTC P2P networks, low-latency telemetry dashboards, and ML diagnostic pipelines built with clean decoupled architectures.
+            Custom distributed architectures, WebRTC P2P streaming engines, low-latency telemetry dashboards, and ML diagnostic pipelines built with decoupled engineering layers.
           </motion.p>
         </div>
 
@@ -177,17 +174,17 @@ const Projects = () => {
         <div className="bg-surface-card border border-hairline p-6 mb-12" style={{ borderRadius: "0px" }}>
           {/* Top Row: Search & View Mode Switcher */}
           <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center mb-6 pb-6 border-b border-hairline-strong">
-            {/* Search Input adhering to DESIGN.md text-input token */}
+            {/* Search Input */}
             <div className="relative flex-1 max-w-2xl">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted">
-                <Search size={16} />
+                <MagnifyingGlass size={16} />
               </div>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="SEARCH ARCHITECTURES, PROTOCOLS, OR REPOSITORIES..."
-                className="w-full bg-surface-soft text-ink pl-11 pr-10 py-3 text-xs md:text-sm font-sans placeholder:text-muted placeholder:font-light border border-hairline focus:border-ink focus:outline-none transition-colors"
+                className="w-full bg-surface-soft text-ink pl-11 pr-10 py-3 text-xs md:text-sm font-sans placeholder:text-muted placeholder:font-light border border-hairline focus:border-ink focus:outline-none transition-colors uppercase"
                 style={{ borderRadius: "0px", height: "48px" }}
               />
               {searchQuery && (
@@ -209,7 +206,10 @@ const Projects = () => {
                 <span className="label-uppercase text-muted text-[11px] mr-2">SORT:</span>
                 <select
                   value={sortMode}
-                  onChange={(e) => setSortMode(e.target.value as SortMode)}
+                  onChange={(e) => {
+                    sound.click()
+                    setSortMode(e.target.value as SortMode)
+                  }}
                   className="bg-transparent text-ink text-xs font-sans font-bold uppercase focus:outline-none cursor-pointer"
                 >
                   <option value="default" className="bg-surface-card text-ink">DEFAULT</option>
@@ -221,7 +221,11 @@ const Projects = () => {
               {/* View Mode Toggle Switcher */}
               <div className="flex items-center bg-surface-soft border border-hairline p-1 h-[48px]">
                 <button
-                  onClick={() => setViewMode("grid")}
+                  onClick={() => {
+                    sound.click()
+                    setViewMode("grid")
+                  }}
+                  onMouseEnter={() => sound.hover()}
                   className={`btn-text px-3 h-full flex items-center gap-2 text-xs transition-colors cursor-pointer ${
                     viewMode === "grid"
                       ? "bg-surface-elevated text-ink border border-hairline"
@@ -230,11 +234,15 @@ const Projects = () => {
                   style={{ borderRadius: "0px" }}
                   aria-label="Grid View"
                 >
-                  <LayoutGrid size={14} />
+                  <SquaresFour size={14} />
                   <span className="hidden sm:inline">GRID</span>
                 </button>
                 <button
-                  onClick={() => setViewMode("matrix")}
+                  onClick={() => {
+                    sound.click()
+                    setViewMode("matrix")
+                  }}
+                  onMouseEnter={() => sound.hover()}
                   className={`btn-text px-3 h-full flex items-center gap-2 text-xs transition-colors cursor-pointer ${
                     viewMode === "matrix"
                       ? "bg-surface-elevated text-ink border border-hairline"
@@ -243,14 +251,14 @@ const Projects = () => {
                   style={{ borderRadius: "0px" }}
                   aria-label="Technical Matrix View"
                 >
-                  <ListFilter size={14} />
+                  <Table size={14} />
                   <span className="hidden sm:inline">SPEC MATRIX</span>
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Category Tabs Row (DESIGN.md category-tab / category-tab-active) */}
+          {/* Category Tabs Row */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-4">
             {CATEGORIES.map((cat) => {
               const isActive = selectedCategory === cat
@@ -258,7 +266,11 @@ const Projects = () => {
               return (
                 <button
                   key={cat}
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => {
+                    sound.switchTab()
+                    setSelectedCategory(cat)
+                  }}
+                  onMouseEnter={() => sound.hover()}
                   className={`relative pb-2 label-uppercase transition-colors duration-200 cursor-pointer flex items-center gap-2 ${
                     isActive ? "text-ink font-bold" : "text-muted hover:text-ink"
                   }`}
@@ -294,7 +306,11 @@ const Projects = () => {
               return (
                 <button
                   key={tech}
-                  onClick={() => setSelectedTech(tech)}
+                  onClick={() => {
+                    sound.click()
+                    setSelectedTech(tech)
+                  }}
+                  onMouseEnter={() => sound.hover()}
                   className={`text-xs px-2.5 py-1 font-mono transition-colors duration-200 cursor-pointer border ${
                     isActive
                       ? "bg-ink text-canvas border-ink font-bold"
@@ -310,9 +326,10 @@ const Projects = () => {
             {isFiltered && (
               <button
                 onClick={handleResetFilters}
+                onMouseEnter={() => sound.hover()}
                 className="ml-auto inline-flex items-center gap-1.5 text-xs text-m-blue-light hover:text-ink label-uppercase transition-colors cursor-pointer"
               >
-                <RotateCcw size={12} /> RESET ALL
+                <ArrowCounterClockwise size={12} /> RESET ALL
               </button>
             )}
           </div>
@@ -326,7 +343,7 @@ const Projects = () => {
           </div>
           {isFiltered && (
             <div className="text-m-blue-light">
-              [ FILTER APPLIED: {selectedCategory} // {selectedTech} ]
+              [ FILTER: {selectedCategory} // {selectedTech} ]
             </div>
           )}
         </div>
@@ -344,14 +361,14 @@ const Projects = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.25 }}
                   className="h-full"
                 >
                   <div
                     className="bg-surface-card flex flex-col border border-hairline-strong hover:border-hairline transition-all duration-300 group overflow-hidden h-full relative"
                     style={{ borderRadius: "0px" }}
                   >
-                    {/* Visual Architecture Header (Vector UI Preview instead of AI image) */}
+                    {/* Visual Architecture Header (Vector UI Preview) */}
                     <div className="relative w-full overflow-hidden bg-surface-elevated">
                       <ProjectVisual slug={project.slug} title={project.title} />
 
@@ -359,7 +376,7 @@ const Projects = () => {
                       <div className="absolute top-2.5 right-2.5 flex items-center gap-2 z-10">
                         {project.featured && (
                           <div className="bg-canvas/90 backdrop-blur-sm border border-m-blue-light px-2 py-0.5 text-[9px] font-bold label-uppercase text-m-blue-light flex items-center gap-1">
-                            <Sparkles size={9} /> FEATURED
+                            <Sparkle size={9} /> FEATURED
                           </div>
                         )}
                         <div className="bg-canvas/90 backdrop-blur-sm border border-hairline px-2 py-0.5 text-[9px] font-mono text-muted">
@@ -368,9 +385,12 @@ const Projects = () => {
                       </div>
 
                       {/* Hover Action Strip */}
-                      <div className="absolute inset-0 bg-canvas/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3 p-4 z-20">
+                      <div className="absolute inset-0 bg-canvas/85 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-3 p-4 z-20">
                         <button
-                          onClick={() => setQuickSpecProject(project)}
+                          onClick={() => {
+                            sound.openModal()
+                            setQuickSpecProject(project)
+                          }}
                           className="btn-text bg-canvas text-ink border border-ink px-4 py-2 text-xs hover:bg-ink hover:text-canvas transition-colors inline-flex items-center gap-2 cursor-pointer"
                           style={{ borderRadius: "0px" }}
                         >
@@ -378,6 +398,7 @@ const Projects = () => {
                         </button>
                         <Link
                           to={`/project/${project.slug}`}
+                          onClick={() => sound.click()}
                           className="btn-text bg-ink text-canvas border border-ink px-4 py-2 text-xs hover:bg-body-strong transition-colors inline-flex items-center gap-2"
                           style={{ borderRadius: "0px" }}
                         >
@@ -409,7 +430,7 @@ const Projects = () => {
                           textTransform: "uppercase",
                         }}
                       >
-                        <Link to={`/project/${project.slug}`}>
+                        <Link to={`/project/${project.slug}`} onClick={() => sound.click()}>
                           {project.title}
                         </Link>
                       </h4>
@@ -421,8 +442,7 @@ const Projects = () => {
 
                       {/* Description — body-md / 300 */}
                       <p
-                        className="body-light mb-6 flex-1 text-sm text-body line-clamp-3"
-                        style={{ lineHeight: 1.6 }}
+                        className="body-light mb-6 flex-1 text-sm text-body line-clamp-3 leading-relaxed"
                       >
                         {project.description}
                       </p>
@@ -465,7 +485,11 @@ const Projects = () => {
                       {/* Card Footer Actions */}
                       <div className="mt-auto pt-4 border-t border-hairline-strong flex items-center justify-between">
                         <button
-                          onClick={() => setQuickSpecProject(project)}
+                          onClick={() => {
+                            sound.openModal()
+                            setQuickSpecProject(project)
+                          }}
+                          onMouseEnter={() => sound.hover()}
                           className="label-uppercase text-muted text-xs hover:text-ink inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                         >
                           <Eye size={13} /> QUICK SPEC
@@ -473,7 +497,9 @@ const Projects = () => {
 
                         <Link
                           to={`/project/${project.slug}`}
-                          className="label-uppercase text-ink text-xs inline-flex items-center gap-2 group-hover:gap-3 group-hover:text-m-blue-light transition-all duration-200"
+                          onClick={() => sound.click()}
+                          onMouseEnter={() => sound.hover()}
+                          className="label-uppercase text-ink text-xs inline-flex items-center gap-2 group-hover:gap-3 group-hover:text-m-blue-light transition-all duration-200 font-bold"
                         >
                           EXPLORE SPEC
                           <ArrowRight size={13} strokeWidth={2} className="group-hover:translate-x-1 transition-transform duration-200" />
@@ -525,6 +551,7 @@ const Projects = () => {
                           <div>
                             <Link
                               to={`/project/${project.slug}`}
+                              onClick={() => sound.click()}
                               className="text-ink font-bold uppercase group-hover:text-m-blue-light transition-colors block text-base"
                             >
                               {project.title}
@@ -594,7 +621,11 @@ const Projects = () => {
                       <td className="p-4 text-right whitespace-nowrap">
                         <div className="flex items-center justify-end gap-2">
                           <button
-                            onClick={() => setQuickSpecProject(project)}
+                            onClick={() => {
+                              sound.openModal()
+                              setQuickSpecProject(project)
+                            }}
+                            onMouseEnter={() => sound.hover()}
                             className="btn-text p-2.5 bg-surface-soft hover:bg-surface-elevated text-ink border border-hairline transition-colors cursor-pointer"
                             title="Quick Spec HUD"
                             aria-label="Open Quick Spec"
@@ -603,6 +634,8 @@ const Projects = () => {
                           </button>
                           <Link
                             to={`/project/${project.slug}`}
+                            onClick={() => sound.click()}
+                            onMouseEnter={() => sound.hover()}
                             className="btn-text px-4 py-2 bg-ink text-canvas hover:bg-body-strong inline-flex items-center gap-1.5 text-xs transition-colors"
                             style={{ borderRadius: "0px" }}
                           >
@@ -627,7 +660,7 @@ const Projects = () => {
             style={{ borderRadius: "0px" }}
           >
             <div className="w-16 h-16 bg-surface-soft border border-hairline text-muted mx-auto flex items-center justify-center mb-6">
-              <Search size={28} />
+              <MagnifyingGlass size={28} />
             </div>
             <h3 className="text-ink text-xl font-bold uppercase mb-2">
               NO REPOSITORIES MATCH SPECIFIED CRITERIA
@@ -637,10 +670,11 @@ const Projects = () => {
             </p>
             <button
               onClick={handleResetFilters}
+              onMouseEnter={() => sound.hover()}
               className="btn-text bg-transparent text-ink border border-ink px-8 py-3 hover:bg-ink hover:text-canvas transition-colors duration-200 inline-flex items-center gap-2 cursor-pointer text-xs"
               style={{ borderRadius: "0px" }}
             >
-              <RotateCcw size={14} /> RESET ALL FILTERS
+              <ArrowCounterClockwise size={14} /> RESET ALL FILTERS
             </button>
           </motion.div>
         )}

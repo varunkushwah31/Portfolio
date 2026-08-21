@@ -5,12 +5,13 @@ import {
   Printer,
   Copy,
   Check,
-  Mail,
-  Award,
+  EnvelopeSimple,
+  Medal,
   BookOpen,
-  FolderGit2,
+  GitFork,
   Cpu
-} from "lucide-react"
+} from "@phosphor-icons/react"
+import { sound } from "@/lib/sound"
 
 interface ResumeModalProps {
   isOpen: boolean
@@ -22,7 +23,10 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose()
+      if (e.key === "Escape") {
+        sound.click()
+        onClose()
+      }
     }
     if (isOpen) {
       document.body.style.overflow = "hidden"
@@ -35,6 +39,7 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
   }, [isOpen, onClose])
 
   const handlePrint = () => {
+    sound.click()
     window.print()
   }
 
@@ -48,7 +53,7 @@ Computer Science student and software developer specializing in building robust 
 
 TECHNICAL SKILLS
 - Languages: Java 21, Python, TypeScript, JavaScript, Dart, SQL
-- Frameworks & Libs: Spring Boot, Spring Data JPA, React, Node.js, Express, Flutter, Tailwind CSS
+- Frameworks & Libs: Spring Boot, Spring Data JPA, React 19, Node.js, Express, Flutter, Tailwind CSS
 - Protocols & Systems: WebRTC (RTCDataChannel), WebSockets, REST APIs, OS-level APIs
 - Tools & DevOps: Git, Git Subtree Monorepos, Docker, CI/CD, Postman, Linux
 
@@ -73,6 +78,7 @@ EDUCATION
 B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
 
   const handleCopyText = () => {
+    sound.click()
     navigator.clipboard.writeText(rawResumeText)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
@@ -87,7 +93,10 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
+            onClick={() => {
+              sound.click()
+              onClose()
+            }}
             className="fixed inset-0 bg-canvas/90 backdrop-blur-md cursor-pointer"
           />
 
@@ -106,7 +115,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
             {/* Header Toolbar */}
             <div className="p-4 md:px-8 bg-surface-soft border-b border-hairline flex flex-wrap items-center justify-between gap-4 shrink-0">
               <div className="flex items-center gap-3">
-                <span className="label-uppercase text-m-blue-light text-xs tracking-[2px]">
+                <span className="label-uppercase text-m-blue-light text-xs tracking-[2px] font-bold">
                   CURRICULUM VITAE // SPECIFICATION
                 </span>
                 <span className="text-hairline hidden sm:inline">|</span>
@@ -119,6 +128,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               <div className="flex items-center gap-2">
                 <button
                   onClick={handlePrint}
+                  onMouseEnter={() => sound.hover()}
                   className="btn-text px-3 py-2 bg-surface-card hover:bg-surface-elevated text-ink border border-hairline text-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                   style={{ borderRadius: "0px" }}
                   title="Print / Save PDF"
@@ -129,6 +139,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
 
                 <button
                   onClick={handleCopyText}
+                  onMouseEnter={() => sound.hover()}
                   className="btn-text px-3 py-2 bg-surface-card hover:bg-surface-elevated text-ink border border-hairline text-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                   style={{ borderRadius: "0px" }}
                   title="Copy Plain Text"
@@ -138,7 +149,10 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
                 </button>
 
                 <button
-                  onClick={onClose}
+                  onClick={() => {
+                    sound.click()
+                    onClose()
+                  }}
                   className="w-9 h-9 bg-surface-card hover:bg-surface-elevated text-ink rounded-full flex items-center justify-center border border-hairline transition-colors cursor-pointer ml-2"
                   aria-label="Close Resume Modal"
                 >
@@ -156,7 +170,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
                     <h1 className="text-3xl md:text-5xl font-bold uppercase tracking-tight text-ink mb-2">
                       VARUN KUSHWAH
                     </h1>
-                    <p className="label-uppercase text-m-blue-light text-sm tracking-[2px]">
+                    <p className="label-uppercase text-m-blue-light text-sm tracking-[2px] font-bold">
                       SOFTWARE DEVELOPER · JAVA COORDINATOR @ DEVUP
                     </p>
                   </div>
@@ -188,7 +202,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
                   <div className="bg-surface-soft p-4 border border-hairline-strong">
                     <div className="label-uppercase text-ink text-xs mb-2">FRAMEWORKS & LIBS</div>
                     <div className="font-mono text-xs text-body leading-relaxed">
-                      Spring Boot, Spring Data JPA, React, Node.js, Express, Flutter, Tailwind CSS
+                      Spring Boot, Spring Data JPA, React 19, Node.js, Express, Flutter, Tailwind CSS
                     </div>
                   </div>
                   <div className="bg-surface-soft p-4 border border-hairline-strong">
@@ -209,7 +223,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               {/* Leadership & Experience */}
               <div>
                 <div className="label-uppercase text-muted text-xs mb-4 tracking-[2px] flex items-center gap-2">
-                  <Award size={14} className="text-m-blue-dark" />
+                  <Medal size={14} className="text-m-blue-dark" />
                   LEADERSHIP & EXPERIENCE
                 </div>
                 <div className="bg-surface-soft p-5 border border-hairline-strong space-y-2">
@@ -228,7 +242,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               {/* Featured Engineering Projects */}
               <div>
                 <div className="label-uppercase text-muted text-xs mb-4 tracking-[2px] flex items-center gap-2">
-                  <FolderGit2 size={14} className="text-m-red" />
+                  <GitFork size={14} className="text-m-red" />
                   FEATURED ENGINEERING PROJECTS
                 </div>
                 <div className="space-y-4">
@@ -283,7 +297,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
                     </div>
                     <div className="text-xs text-muted">Undergraduate Degree Program</div>
                   </div>
-                  <div className="font-mono text-xs text-m-blue-light">
+                  <div className="font-mono text-xs text-m-blue-light font-bold">
                     2023 – 2027 [IN PROGRESS]
                   </div>
                 </div>
@@ -295,10 +309,11 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               <span>STATUS: AVAILABLE FOR INTERNSHIPS & SDE ROLES</span>
               <a
                 href="mailto:varun.kush3@gmail.com"
+                onClick={() => sound.click()}
                 className="btn-text bg-ink text-canvas hover:bg-body-strong px-5 py-2.5 inline-flex items-center gap-2 text-xs transition-colors"
                 style={{ borderRadius: "0px" }}
               >
-                <Mail size={14} /> CONTACT DIRECTLY
+                <EnvelopeSimple size={14} /> CONTACT DIRECTLY
               </a>
             </div>
           </motion.div>

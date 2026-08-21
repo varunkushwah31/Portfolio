@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import { ArrowLeft, ArrowRight, ArrowSquareOut } from "@phosphor-icons/react"
 import { motion } from "framer-motion"
 import projects from "@/data/projects"
 import MStripe from "@/components/MStripe"
@@ -9,6 +9,7 @@ import Footer from "@/components/Footer"
 import ProjectVisual from "@/components/ProjectVisual"
 import CommandPalette from "@/components/CommandPalette"
 import ResumeModal from "@/components/ResumeModal"
+import { sound } from "@/lib/sound"
 
 const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -35,16 +36,17 @@ const ProjectDetail = () => {
           style={{ minHeight: "60vh", paddingTop: "96px", paddingBottom: "96px" }}
         >
           <div className="max-w-[1440px] mx-auto px-6 text-center">
-            <h1 className="text-ink mb-6">PROJECT NOT FOUND</h1>
-            <p className="body-light mb-12">
-              The project you're looking for doesn't exist.
+            <h1 className="text-ink mb-6 text-4xl font-bold uppercase">PROJECT NOT FOUND</h1>
+            <p className="body-light mb-12 text-muted">
+              The project specification you are looking for does not exist or has been relocated.
             </p>
             <Link
               to="/"
+              onClick={() => sound.click()}
               className="btn-text inline-flex items-center gap-3 text-ink bg-transparent border border-ink px-8 hover:bg-ink hover:text-canvas transition-colors duration-200"
-              style={{ height: "48px" }}
+              style={{ height: "48px", borderRadius: "0px" }}
             >
-              <ArrowLeft size={16} strokeWidth={2} />
+              <ArrowLeft size={16} />
               BACK TO HOME
             </Link>
           </div>
@@ -78,7 +80,7 @@ const ProjectDetail = () => {
         <section
           className="w-full bg-canvas flex items-center relative overflow-hidden"
           style={{
-            paddingTop: "96px",
+            paddingTop: "64px",
             paddingBottom: "64px",
           }}
         >
@@ -87,18 +89,19 @@ const ProjectDetail = () => {
             <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
               <Link
                 to="/#projects"
-                className="label-uppercase text-muted inline-flex items-center gap-2 mb-12 hover:text-ink transition-colors duration-200"
+                onClick={() => sound.click()}
+                className="label-uppercase text-muted inline-flex items-center gap-2 mb-8 hover:text-ink transition-colors duration-200"
               >
-                <ArrowLeft size={14} strokeWidth={2} />
-                ALL PROJECTS
+                <ArrowLeft size={14} />
+                ALL REPOSITORIES & PROJECTS
               </Link>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Asymmetric section index marker */}
               <div className="hidden lg:block lg:col-span-2 pt-2">
-                <div className="label-uppercase text-muted tracking-[3px] text-xs">
-                  [ DETAIL ]
+                <div className="label-uppercase text-muted tracking-[3px] text-xs font-mono">
+                  [ SPEC // {String(projectIndex + 1).padStart(2, "0")} ]
                 </div>
               </div>
 
@@ -111,7 +114,7 @@ const ProjectDetail = () => {
               >
                 {/* Category badge & version */}
                 <div className="flex flex-wrap items-center gap-3 mb-6">
-                  <span className="label-uppercase text-m-blue-light tracking-[1.5px]">
+                  <span className="label-uppercase text-m-blue-light tracking-[1.5px] font-bold">
                     {project.category}
                   </span>
                   <span className="text-hairline">|</span>
@@ -124,7 +127,7 @@ const ProjectDetail = () => {
                 </div>
 
                 {/* Project title — display-xl */}
-                <h1 className="text-ink mb-4 max-w-[900px] text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase leading-[0.95]">
+                <h1 className="text-ink mb-4 max-w-[900px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase leading-[0.96]">
                   {project.title}
                 </h1>
 
@@ -138,27 +141,14 @@ const ProjectDetail = () => {
                   <div className="flex flex-wrap gap-8">
                     <div>
                       <div className="label-uppercase text-muted mb-2 text-xs">ROLE</div>
-                      <p
-                        className="text-ink"
-                        style={{
-                          fontSize: "var(--font-size-title-sm)",
-                          fontWeight: 400,
-                          lineHeight: 1.4,
-                        }}
-                      >
+                      <p className="text-ink font-sans font-bold uppercase text-base">
                         {project.role}
                       </p>
                     </div>
                     <div>
                       <div className="label-uppercase text-muted mb-2 text-xs">STATUS</div>
-                      <p
-                        className="text-ink"
-                        style={{
-                          fontSize: "var(--font-size-title-sm)",
-                          fontWeight: 400,
-                          lineHeight: 1.4,
-                        }}
-                      >
+                      <p className="text-ink font-mono text-base flex items-center gap-2">
+                        <span className="w-2 h-2 bg-success rounded-full" />
                         {project.status}
                       </p>
                     </div>
@@ -169,9 +159,11 @@ const ProjectDetail = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => sound.click()}
                       className="btn-text inline-flex items-center gap-2 text-xs bg-surface-card hover:bg-surface-elevated text-ink border border-hairline px-5 py-3 transition-colors duration-200"
                       style={{ borderRadius: "0px" }}
                     >
+                      <ArrowSquareOut size={14} />
                       VIEW SOURCE ON GITHUB
                       <ArrowRight size={14} />
                     </a>
@@ -183,11 +175,8 @@ const ProjectDetail = () => {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="text-muted bg-surface-elevated px-4 py-2 border border-hairline-strong font-mono text-xs"
-                      style={{
-                        borderRadius: "0px",
-                        letterSpacing: "0.5px",
-                      }}
+                      className="text-muted bg-surface-elevated px-3 py-1.5 border border-hairline-strong font-mono text-xs"
+                      style={{ borderRadius: "0px" }}
                     >
                       {t}
                     </span>
@@ -216,7 +205,7 @@ const ProjectDetail = () => {
                   <div className="label-uppercase text-muted text-xs mb-3 tracking-[1.5px]">
                     {m.label}
                   </div>
-                  <div className="text-ink font-bold font-mono text-lg md:text-xl text-m-blue-light tracking-tight">
+                  <div className="text-ink font-bold font-mono text-base md:text-xl text-m-blue-light tracking-tight">
                     {m.value}
                   </div>
                 </div>
@@ -227,7 +216,7 @@ const ProjectDetail = () => {
 
         <MStripe />
 
-        {/* Full-width project visual showcase */}
+        {/* Project Visual Showcase */}
         <section className="w-full bg-canvas py-12 border-b border-hairline-strong">
           <div className="max-w-[1440px] mx-auto px-6">
             <motion.div
@@ -253,20 +242,20 @@ const ProjectDetail = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
               {/* Left — section label */}
               <div className="lg:col-span-4">
-                <div className="label-uppercase text-muted mb-4">
+                <div className="label-uppercase text-muted mb-4 text-xs tracking-[2px]">
                   OVERVIEW
                 </div>
-                <h2 className="text-ink" style={{ fontSize: "var(--font-size-display-sm)", fontWeight: 700, lineHeight: 1.15, textTransform: "uppercase" }}>
-                  ABOUT THIS PROJECT
+                <h2 className="text-ink text-2xl md:text-3xl font-bold uppercase">
+                  ABOUT THIS ARCHITECTURE
                 </h2>
               </div>
 
               {/* Right — description paragraphs */}
-              <div className="lg:col-span-8">
+              <div className="lg:col-span-8 space-y-6">
                 {project.longDescription.map((paragraph, i) => (
                   <p
                     key={i}
-                    className="body-light mb-8 last:mb-0 text-base md:text-lg leading-relaxed text-body"
+                    className="body-light text-base md:text-lg leading-relaxed text-body"
                   >
                     {paragraph}
                   </p>
@@ -286,18 +275,10 @@ const ProjectDetail = () => {
               style={{ paddingTop: "96px", paddingBottom: "96px" }}
             >
               <div className="max-w-[1440px] mx-auto px-6">
-                <div className="label-uppercase text-muted mb-4">
+                <div className="label-uppercase text-muted mb-4 text-xs tracking-[2px]">
                   SYSTEM ARCHITECTURE
                 </div>
-                <h2
-                  className="text-ink mb-12"
-                  style={{
-                    fontSize: "var(--font-size-display-sm)",
-                    fontWeight: 700,
-                    lineHeight: 1.15,
-                    textTransform: "uppercase",
-                  }}
-                >
+                <h2 className="text-ink mb-12 text-2xl md:text-3xl font-bold uppercase">
                   DATA FLOW & PIPELINE LIFECYCLE
                 </h2>
 
@@ -341,19 +322,11 @@ const ProjectDetail = () => {
           style={{ paddingTop: "96px", paddingBottom: "96px" }}
         >
           <div className="max-w-[1440px] mx-auto px-6">
-            <div className="label-uppercase text-muted mb-4">
+            <div className="label-uppercase text-muted mb-4 text-xs tracking-[2px]">
               KEY HIGHLIGHTS
             </div>
-            <h2
-              className="text-ink mb-16"
-              style={{
-                fontSize: "var(--font-size-display-sm)",
-                fontWeight: 700,
-                lineHeight: 1.15,
-                textTransform: "uppercase",
-              }}
-            >
-              WHAT WAS BUILT
+            <h2 className="text-ink mb-12 text-2xl md:text-3xl font-bold uppercase">
+              WHAT WAS BUILT & VALIDATED
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -367,20 +340,10 @@ const ProjectDetail = () => {
                   className="bg-canvas p-6 border border-hairline-strong hover:border-hairline transition-colors duration-200"
                   style={{ borderRadius: "0px" }}
                 >
-                  <div
-                    className="text-m-blue-dark mb-3 font-mono"
-                    style={{
-                      fontSize: "var(--font-size-display-sm)",
-                      fontWeight: 700,
-                      lineHeight: 1.15,
-                    }}
-                  >
+                  <div className="text-m-blue-dark mb-3 font-mono text-2xl font-bold">
                     {String(i + 1).padStart(2, "0")}
                   </div>
-                  <p
-                    className="body-light text-body text-base"
-                    style={{ lineHeight: 1.6 }}
-                  >
+                  <p className="body-light text-body text-base leading-relaxed">
                     {highlight}
                   </p>
                 </motion.div>
@@ -399,18 +362,10 @@ const ProjectDetail = () => {
               style={{ paddingTop: "96px", paddingBottom: "96px" }}
             >
               <div className="max-w-[1440px] mx-auto px-6">
-                <div className="label-uppercase text-muted mb-4">
+                <div className="label-uppercase text-muted mb-4 text-xs tracking-[2px]">
                   DECISION LOG
                 </div>
-                <h2
-                  className="text-ink mb-12"
-                  style={{
-                    fontSize: "var(--font-size-display-sm)",
-                    fontWeight: 700,
-                    lineHeight: 1.15,
-                    textTransform: "uppercase",
-                  }}
-                >
+                <h2 className="text-ink mb-12 text-2xl md:text-3xl font-bold uppercase">
                   ENGINEERING DECISIONS & TRADE-OFFS
                 </h2>
 
@@ -478,16 +433,14 @@ const ProjectDetail = () => {
                 {prevProject ? (
                   <Link
                     to={`/project/${prevProject.slug}`}
-                    className="group block"
+                    onClick={() => sound.click()}
+                    className="group block p-4 bg-canvas border border-hairline-strong hover:border-hairline transition-colors"
                   >
-                    <div className="label-uppercase text-muted mb-3 flex items-center gap-2">
+                    <div className="label-uppercase text-muted mb-2 flex items-center gap-2 text-xs">
                       <ArrowLeft size={12} strokeWidth={2} />
-                      PREVIOUS PROJECT
+                      PREVIOUS SPECIFICATION
                     </div>
-                    <div
-                      className="text-ink group-hover:text-m-blue-light transition-colors duration-200 font-bold uppercase"
-                      style={{ fontSize: "var(--font-size-title-lg)" }}
-                    >
+                    <div className="text-ink group-hover:text-m-blue-light transition-colors duration-200 font-bold uppercase text-lg">
                       {prevProject.title}
                     </div>
                   </Link>
@@ -501,33 +454,29 @@ const ProjectDetail = () => {
                 {nextProject ? (
                   <Link
                     to={`/project/${nextProject.slug}`}
-                    className="group block"
+                    onClick={() => sound.click()}
+                    className="group block p-4 bg-canvas border border-hairline-strong hover:border-hairline transition-colors"
                   >
-                    <div className="label-uppercase text-muted mb-3 flex items-center justify-end gap-2">
-                      NEXT PROJECT
+                    <div className="label-uppercase text-muted mb-2 flex items-center justify-end gap-2 text-xs">
+                      NEXT SPECIFICATION
                       <ArrowRight size={12} strokeWidth={2} />
                     </div>
-                    <div
-                      className="text-ink group-hover:text-m-blue-light transition-colors duration-200 font-bold uppercase"
-                      style={{ fontSize: "var(--font-size-title-lg)" }}
-                    >
+                    <div className="text-ink group-hover:text-m-blue-light transition-colors duration-200 font-bold uppercase text-lg">
                       {nextProject.title}
                     </div>
                   </Link>
                 ) : (
                   <Link
                     to="/"
-                    className="group block"
+                    onClick={() => sound.click()}
+                    className="group block p-4 bg-canvas border border-hairline-strong hover:border-hairline transition-colors"
                   >
-                    <div className="label-uppercase text-muted mb-3 flex items-center justify-end gap-2">
-                      BACK TO
+                    <div className="label-uppercase text-muted mb-2 flex items-center justify-end gap-2 text-xs">
+                      RETURN TO
                       <ArrowRight size={12} strokeWidth={2} />
                     </div>
-                    <div
-                      className="text-ink group-hover:text-m-blue-light transition-colors duration-200 font-bold uppercase"
-                      style={{ fontSize: "var(--font-size-title-lg)" }}
-                    >
-                      HOME
+                    <div className="text-ink group-hover:text-m-blue-light transition-colors duration-200 font-bold uppercase text-lg">
+                      HOME / REPOSITORIES
                     </div>
                   </Link>
                 )}
@@ -553,5 +502,3 @@ const ProjectDetail = () => {
 }
 
 export default ProjectDetail
-
-
