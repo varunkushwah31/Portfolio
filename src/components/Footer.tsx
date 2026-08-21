@@ -1,148 +1,117 @@
-import MStripe from "./MStripe"
-import { sound } from "@/lib/sound"
+import { Link } from 'react-router-dom'
+import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
 
-const footerLinks = {
-  navigation: [
-    { label: "About", href: "/#about" },
-    { label: "Skills", href: "/#skills" },
-    { label: "Projects", href: "/#projects" },
-    { label: "Contact", href: "/#contact" },
-  ],
-  projects: [
-    { label: "LeetcodeTracker", href: "/project/leetcode-tracker" },
-    { label: "MangoShare Clone", href: "/project/mangoshare-clone" },
-    { label: "System Health Dashboard", href: "/project/system-health-dashboard" },
-    { label: "Disease Prediction", href: "/project/disease-prediction" },
-    { label: "Daily Quotes App", href: "/project/daily-quotes-app" },
-  ],
-  social: [
-    { label: "GitHub", href: "https://github.com/varunkushwah31" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/varun-kushwah/" },
-    { label: "Email Transmission", href: "mailto:varun.kush3@gmail.com" },
-  ],
+interface NavLinkItem {
+  label: string
+  href: string
+  external?: boolean
 }
 
-const Footer = () => {
-  const year = new Date().getFullYear()
+interface NavColumn {
+  title: string
+  links: NavLinkItem[]
+}
 
+const footerNav: NavColumn[] = [
+  {
+    title: 'Navigation',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'About', href: '/about' },
+      { label: 'Projects', href: '/projects' },
+      { label: 'Resume', href: '/resume' },
+    ],
+  },
+  {
+    title: 'Content',
+    links: [
+      { label: 'Writing', href: '/#writing' },
+      { label: 'Repositories', href: '/projects' },
+      { label: 'Devup Club', href: 'https://devup.co.in/', external: true },
+      { label: 'Tech Stack', href: '/tech-stack' },
+    ],
+  },
+  {
+    title: 'Social & Connect',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/varunkushwah31', external: true },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/varun-kushwah/', external: true },
+      { label: 'Email', href: 'mailto:varun.kush3@gmail.com', external: true },
+    ],
+  },
+]
+
+export default function Footer() {
   return (
-    <footer className="w-full bg-canvas">
-      {/* M Stripe divider at top of footer per DESIGN.md */}
-      <MStripe />
-
-      <div
-        className="max-w-[1440px] mx-auto px-6"
-        style={{ paddingTop: "64px", paddingBottom: "64px" }}
-      >
-        {/* Footer 4-Column Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand column */}
-          <div>
-            <div className="label-uppercase text-ink mb-4 font-bold flex items-center gap-2">
-              <span className="w-2 h-2 bg-m-blue-light" />
-              VARUN KUSHWAH
-            </div>
-            <p
-              className="text-body text-sm mb-4"
-              style={{
-                fontWeight: 300,
-                lineHeight: 1.6,
-              }}
-            >
-              Computer Science Student & Software Developer.
-              Java Coordinator at <strong className="text-body-strong font-normal">devup</strong>.
-            </p>
-            <div className="font-mono text-xs text-muted space-y-1">
-              <div>LOCATION: INDIA</div>
-              <div>TIMEZONE: UTC+5:30 (IST)</div>
-              <div className="text-success flex items-center gap-1.5 pt-1">
-                <span className="w-1.5 h-1.5 bg-success rounded-full" />
-                STATUS: AVAILABLE
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation column */}
-          <div>
-            <div className="label-uppercase text-muted mb-4 text-xs tracking-[1.5px]">
-              NAVIGATION
-            </div>
-            <ul className="flex flex-col gap-3">
-              {footerLinks.navigation.map((link) => (
-                <li key={link.label}>
+    <footer className="border-t border-[#27272a] bg-[#0a0a0a] text-zinc-400">
+      {/* 3-Column Navigation Grid */}
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
+          {footerNav.map((col) => (
+            <div key={col.title} className="flex flex-col gap-3 min-w-0">
+              <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-1">
+                {col.title}
+              </p>
+              {col.links.map((link) =>
+                link.external ? (
                   <a
+                    key={link.label}
                     href={link.href}
-                    onClick={() => sound.click()}
-                    className="text-body hover:text-ink transition-colors duration-200 text-sm"
-                    style={{ fontWeight: 300 }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-zinc-400 hover:text-white transition-colors duration-150 w-fit"
                   >
                     {link.label}
                   </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Projects column */}
-          <div>
-            <div className="label-uppercase text-muted mb-4 text-xs tracking-[1.5px]">
-              REPOSITORIES & SPECS
-            </div>
-            <ul className="flex flex-col gap-3">
-              {footerLinks.projects.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    onClick={() => sound.click()}
-                    className="text-body hover:text-ink transition-colors duration-200 text-sm"
-                    style={{ fontWeight: 300 }}
+                ) : (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className="text-sm text-zinc-400 hover:text-white transition-colors duration-150 w-fit"
                   >
                     {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social column */}
-          <div>
-            <div className="label-uppercase text-muted mb-4 text-xs tracking-[1.5px]">
-              CONNECTIVITY
+                  </Link>
+                )
+              )}
             </div>
-            <ul className="flex flex-col gap-3">
-              {footerLinks.social.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    onClick={() => sound.click()}
-                    className="text-body hover:text-ink transition-colors duration-200 text-sm"
-                    style={{ fontWeight: 300 }}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          ))}
         </div>
+      </div>
 
-        {/* Bottom Telemetry & Copyright Divider */}
-        <div className="border-t border-hairline pt-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-muted text-xs font-mono">
-            <p className="caption text-muted">
-              © {year} VARUN KUSHWAH · ALL RIGHTS RESERVED
-            </p>
-            <p className="caption text-muted flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-m-blue-light" />
-              <span>BUILT WITH REACT 19, TYPESCRIPT & TAILWIND CSS v4</span>
-            </p>
+      {/* Bottom Bar with Copyright & Socials */}
+      <div className="border-t border-[#1f1f23]">
+        <div className="max-w-4xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
+          <p>© 2025 Varun Kushwah — India</p>
+
+          <div className="flex items-center gap-3">
+            <a
+              href="https://github.com/varunkushwah31"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="p-1 text-zinc-400 hover:text-white transition-colors"
+            >
+              <GithubLogo size={16} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/varun-kushwah/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="p-1 text-zinc-400 hover:text-white transition-colors"
+            >
+              <LinkedinLogo size={16} />
+            </a>
+            <a
+              href="mailto:varun.kush3@gmail.com"
+              aria-label="Email"
+              className="p-1 text-zinc-400 hover:text-white transition-colors"
+            >
+              <EnvelopeSimple size={16} />
+            </a>
           </div>
         </div>
       </div>
     </footer>
   )
 }
-
-export default Footer

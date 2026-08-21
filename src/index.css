@@ -1,70 +1,66 @@
 @import "tailwindcss";
 
 /* ============================================================
-   BMW M Design System — Tailwind v4 CSS-first Configuration
-   Source of truth: DESIGN.md
-   Font substitute: Inter (variable) for BMW Type Next Latin
+   Portfolio Design System — Clean Minimal Developer Aesthetic
+   Inspired by bonabrian.com visual style
+   Font: Inter (variable)
    ============================================================ */
 
 @theme {
   /* ------------------------------------------------------------------
-     COLORS — exact hex values from DESIGN.md
+     COLORS
      ------------------------------------------------------------------ */
 
   /* Canvas & Surfaces */
-  --color-canvas: #000000;
-  --color-surface-soft: #0d0d0d;
-  --color-surface-card: #1a1a1a;
-  --color-surface-elevated: #262626;
-  --color-carbon-gray: #2b2b2b;
+  --color-canvas: #0a0a0a;
+  --color-surface-soft: #111111;
+  --color-surface-card: #171717;
+  --color-surface-elevated: #1f1f1f;
 
   /* Text */
-  --color-ink: #ffffff;
-  --color-body: #bbbbbb;
-  --color-body-strong: #e6e6e6;
-  --color-muted: #7e7e7e;
+  --color-ink: #fafafa;
+  --color-body: #a1a1aa;
+  --color-body-strong: #d4d4d8;
+  --color-muted: #71717a;
 
-  /* Hairlines & Borders */
-  --color-hairline: #3c3c3c;
-  --color-hairline-strong: #262626;
+  /* Borders */
+  --color-hairline: #27272a;
+  --color-hairline-strong: #1f1f1f;
 
-  /* M Tricolor */
-  --color-m-blue-light: #0066b1;
-  --color-m-blue-dark: #1c69d4;
-  --color-m-red: #e22718;
-
-  /* Brand */
-  --color-bmw-blue: #1c69d4;
-  --color-electric-blue: #0653b6;
+  /* Accent — Violet */
+  --color-accent: #7c3aed;
+  --color-accent-light: #a78bfa;
+  --color-accent-muted: #4c1d95;
 
   /* Semantic */
-  --color-warning: #f4b400;
-  --color-success: #0fa336;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
 
   /* Tailwind semantic mappings */
-  --color-background: #000000;
-  --color-foreground: #ffffff;
-  --color-primary: #ffffff;
-  --color-primary-foreground: #000000;
-  --color-secondary: #1a1a1a;
-  --color-secondary-foreground: #ffffff;
-  --color-border: #3c3c3c;
-  --color-input: #1a1a1a;
-  --color-ring: #ffffff;
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-primary: #7c3aed;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #171717;
+  --color-secondary-foreground: #fafafa;
+  --color-border: #27272a;
+  --color-input: #171717;
+  --color-ring: #7c3aed;
+  --color-muted-foreground: #71717a;
 
   /* ------------------------------------------------------------------
-     TYPOGRAPHY — font sizes from the DESIGN.md hierarchy
+     TYPOGRAPHY
      ------------------------------------------------------------------ */
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  --font-size-display-xl: 80px;
-  --font-size-display-lg: 56px;
-  --font-size-display-md: 40px;
-  --font-size-display-sm: 32px;
-  --font-size-title-lg: 24px;
-  --font-size-title-md: 20px;
-  --font-size-title-sm: 18px;
-  --font-size-label: 14px;
+  --font-size-display-xl: 72px;
+  --font-size-display-lg: 48px;
+  --font-size-display-md: 36px;
+  --font-size-display-sm: 28px;
+  --font-size-title-lg: 22px;
+  --font-size-title-md: 18px;
+  --font-size-title-sm: 16px;
+  --font-size-label: 13px;
   --font-size-body-md: 16px;
   --font-size-body-sm: 14px;
   --font-size-caption: 12px;
@@ -72,7 +68,7 @@
   --font-size-nav: 14px;
 
   /* ------------------------------------------------------------------
-     SPACING — 4px base unit from DESIGN.md
+     SPACING — 4px base unit
      ------------------------------------------------------------------ */
   --spacing-xxs: 4px;
   --spacing-xs: 8px;
@@ -81,20 +77,18 @@
   --spacing-lg: 24px;
   --spacing-xl: 40px;
   --spacing-xxl: 64px;
-  --spacing-section: 96px;
+  --spacing-section: 80px;
 
   /* ------------------------------------------------------------------
-     BORDER RADIUS — almost always 0, sometimes circular
+     BORDER RADIUS — rounded cards
      ------------------------------------------------------------------ */
   --radius-none: 0px;
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 0px;
-  --radius-xl: 0px;
-  --radius-2xl: 0px;
-  --radius-3xl: 0px;
-  --radius-4xl: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
   --radius-full: 9999px;
 
   /* ------------------------------------------------------------------
@@ -102,7 +96,8 @@
      ------------------------------------------------------------------ */
   --animate-fade-in: fade-in 0.3s ease-out;
   --animate-slide-up: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
+  --animate-float: float 3s ease-in-out infinite;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -114,9 +109,14 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(0.98); }
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.25; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(1.08); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
   }
 }
 
@@ -136,38 +136,35 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    background-color: #000000;
+    background-color: #0a0a0a;
   }
 
   body {
     font-family: var(--font-sans);
-    font-weight: 300;
+    font-weight: 400;
     font-size: var(--font-size-body-md);
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--color-ink);
-    background-color: var(--color-canvas);
+    background-color: #0a0a0a;
     min-height: 100vh;
     overflow-x: hidden;
   }
 
-  /* Selection highlight */
   ::selection {
-    background-color: #1c69d4;
+    background-color: #7c3aed;
     color: #ffffff;
   }
 
-  /* Display headings — heavy UPPERCASE */
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: -0.5px;
-    line-height: 1.05;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
     color: var(--color-ink);
   }
 
-  h1 { font-size: var(--font-size-display-xl); line-height: 0.98; }
-  h2 { font-size: var(--font-size-display-lg); line-height: 1.05; }
-  h3 { font-size: var(--font-size-display-md); line-height: 1.1; }
+  h1 { font-size: var(--font-size-display-xl); }
+  h2 { font-size: var(--font-size-display-lg); }
+  h3 { font-size: var(--font-size-display-md); }
 
   a {
     color: inherit;
@@ -179,120 +176,113 @@
     display: block;
   }
 
-  /* Engineered focus ring */
   :focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
 
-  /* Custom engineered scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #0d0d0d;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #2b2b2b;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #1c69d4;
-  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
 }
 
 /* ============================================================
    UTILITY CLASSES
    ============================================================ */
 
-/* M Stripe — the 4px tricolor brand divider */
-.m-stripe {
-  height: 4px;
-  width: 100%;
-  background: linear-gradient(
-    to right,
-    var(--color-m-blue-light) 0%,
-    var(--color-m-blue-light) 33.33%,
-    var(--color-m-blue-dark) 33.33%,
-    var(--color-m-blue-dark) 66.66%,
-    var(--color-m-red) 66.66%,
-    var(--color-m-red) 100%
-  );
+/* Section label — small colored uppercase tag */
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-accent-light);
 }
 
-/* Label uppercase — the "machined" letterspaced treatment */
-.label-uppercase {
-  font-size: var(--font-size-label);
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+/* Subtle card border */
+.card-border {
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
 }
 
-/* Nav link style */
-.nav-link {
-  font-size: var(--font-size-nav);
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0.5px;
-}
-
-/* Button text style — uppercase letterspaced machined feel */
-.btn-text {
-  font-size: var(--font-size-button);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-}
-
-/* Body light — BMW's "engineered" voice */
+/* Body text styles */
 .body-light {
-  font-weight: 300;
+  font-weight: 400;
   color: var(--color-body);
+  line-height: 1.7;
 }
 
-/* Body strong */
 .body-strong {
-  font-weight: 300;
+  font-weight: 500;
   color: var(--color-body-strong);
 }
 
-/* Caption style */
 .caption {
   font-size: var(--font-size-caption);
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0.5px;
   color: var(--color-muted);
+  line-height: 1.5;
 }
 
-/* High-tech telemetry scanline overlay */
-.telemetry-grid {
-  background-size: 32px 32px;
+/* Tech pill */
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-surface-card);
+  font-size: 13px;
+  color: var(--color-body-strong);
+  font-weight: 500;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.tech-pill:hover {
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+}
+
+/* Background grid with smooth fade at top & bottom */
+.bg-grid-fade {
   background-image: 
-    linear-gradient(to right, rgba(60, 60, 60, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(60, 60, 60, 0.08) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 18%,
+    rgba(0, 0, 0, 0) 36%,
+    rgba(0, 0, 0, 0) 64%,
+    rgba(0, 0, 0, 0.4) 82%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.4) 18%,
+    rgba(0, 0, 0, 0) 36%,
+    rgba(0, 0, 0, 0) 64%,
+    rgba(0, 0, 0, 0.4) 82%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
 }
 
 /* ============================================================
    RESPONSIVE TYPOGRAPHY
-   Mobile: display-xl scales 80px → 48px
    ============================================================ */
 
 @media (max-width: 767px) {
-  h1 { font-size: 44px; }
-  h2 { font-size: 32px; }
-  h3 { font-size: 24px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 22px; }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  h1 { font-size: 64px; }
-  h2 { font-size: 44px; }
-  h3 { font-size: 32px; }
+  h1 { font-size: 56px; }
+  h2 { font-size: 36px; }
+  h3 { font-size: 28px; }
 }
 
 /* Respect reduced motion */

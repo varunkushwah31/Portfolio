@@ -40,6 +40,7 @@ export interface Project {
   role: string
   status: string
   image: string
+  accentColor: string   // Card background color for visual variety
   githubUrl?: string
   liveUrl?: string
 }
@@ -47,12 +48,13 @@ export interface Project {
 const projects: Project[] = [
   {
     slug: "leetcode-tracker",
-    category: "FULL-STACK",
-    title: "LEETCODETRACKER",
-    tagline: "FULL-STACK REPOSITORY & PROGRESS ENGINE WITH GIT SUBTREE ARCHITECTURE",
+    category: "Full-Stack",
+    title: "LeetcodeTracker",
+    tagline: "Full-stack progress tracking app with Git subtree monorepo architecture.",
     version: "v2.4",
     year: "2024",
     featured: true,
+    accentColor: "#1e3a5f",
     description:
       "A full-stack application designed to track coding progress. Developed collaboratively with a team, effectively managing both frontend and backend integration and complex version control using Git subtree workflows.",
     image: leetcodeImg,
@@ -69,16 +71,16 @@ const projects: Project[] = [
       "User authentication and persistent session management",
     ],
     metrics: [
-      { label: "ARCHITECTURE", value: "GIT SUBTREE MONOREPO" },
-      { label: "AUTH ENGINE", value: "JWT & SESSION STORE" },
-      { label: "DATA PIPELINE", value: "RESTful CRUD & STATS" },
-      { label: "TEAM CAPACITY", value: "2-ENGINEER SQUAD" },
+      { label: "Architecture", value: "Git Subtree Monorepo" },
+      { label: "Auth Engine", value: "JWT & Session Store" },
+      { label: "Data Pipeline", value: "RESTful CRUD & Stats" },
+      { label: "Team Capacity", value: "2-Engineer Squad" },
     ],
     architectureFlow: [
-      { step: "01", title: "CLIENT REQUEST", detail: "React 19 single page application capturing solved problem telemetry and user session state." },
-      { step: "02", title: "AUTH & API GATEWAY", detail: "Express middleware verifying JWT headers and validating submission payloads." },
-      { step: "03", title: "ANALYTICS ENGINE", detail: "Service layer computing active streak windows, category distribution, and persistence." },
-      { step: "04", title: "SUBTREE SYNC", detail: "Automated git subtree scripts synchronizing client/server commits into independent branches." },
+      { step: "01", title: "Client Request", detail: "React 19 single page application capturing solved problem telemetry and user session state." },
+      { step: "02", title: "Auth & API Gateway", detail: "Express middleware verifying JWT headers and validating submission payloads." },
+      { step: "03", title: "Analytics Engine", detail: "Service layer computing active streak windows, category distribution, and persistence." },
+      { step: "04", title: "Subtree Sync", detail: "Automated git subtree scripts synchronizing client/server commits into independent branches." },
     ],
     tradeoffs: [
       {
@@ -100,12 +102,13 @@ const projects: Project[] = [
   },
   {
     slug: "mangoshare-clone",
-    category: "REAL-TIME",
-    title: "MANGOSHARE CLONE",
-    tagline: "PEER-TO-PEER DATA-CHANNEL FILE TRANSFER ENGINE POWERED BY WEBRTC",
+    category: "Real-Time",
+    title: "MangoShare Clone",
+    tagline: "Peer-to-peer file transfer engine powered by WebRTC DataChannel.",
     version: "v1.8",
     year: "2024",
     featured: true,
+    accentColor: "#1a3a2a",
     description:
       "A file-sharing application clone built from scratch, featuring real-time peer-to-peer communication capabilities with direct browser-to-browser data transfer.",
     image: mangoshareImg,
@@ -122,16 +125,16 @@ const projects: Project[] = [
       "Built from scratch to understand P2P communication fundamentals",
     ],
     metrics: [
-      { label: "PROTOCOL", value: "WEBRTC DATACHANNEL" },
-      { label: "RELAY", value: "ZERO SERVER BOTTLENECK" },
-      { label: "SIGNALING", value: "STUN / ICE EXCHANGE" },
-      { label: "LATENCY", value: "DIRECT PEER STREAM" },
+      { label: "Protocol", value: "WebRTC DataChannel" },
+      { label: "Relay", value: "Zero Server Bottleneck" },
+      { label: "Signaling", value: "STUN / ICE Exchange" },
+      { label: "Latency", value: "Direct Peer Stream" },
     ],
     architectureFlow: [
-      { step: "01", title: "PEER DISCOVERY", detail: "WebSocket signaling server exchanges SDP offers, answers, and ICE candidates between peers." },
-      { step: "02", title: "NAT TRAVERSAL", detail: "STUN server resolves public IP/ports for direct UDP socket connectivity." },
-      { step: "03", title: "CHUNK STREAMING", detail: "RTCDataChannel fragments file into 64KB binary chunks and transmits directly over UDP." },
-      { step: "04", title: "BLOB RECONSTRUCTION", detail: "Receiver buffers chunks into ArrayBuffer and triggers client-side file download." },
+      { step: "01", title: "Peer Discovery", detail: "WebSocket signaling server exchanges SDP offers, answers, and ICE candidates between peers." },
+      { step: "02", title: "NAT Traversal", detail: "STUN server resolves public IP/ports for direct UDP socket connectivity." },
+      { step: "03", title: "Chunk Streaming", detail: "RTCDataChannel fragments file into 64KB binary chunks and transmits directly over UDP." },
+      { step: "04", title: "Blob Reconstruction", detail: "Receiver buffers chunks into ArrayBuffer and triggers client-side file download." },
     ],
     tradeoffs: [
       {
@@ -153,12 +156,13 @@ const projects: Project[] = [
   },
   {
     slug: "system-health-dashboard",
-    category: "SYSTEMS",
-    title: "SYSTEM HEALTH DASHBOARD",
-    tagline: "LIGHTWEIGHT HARDWARE TELEMETRY & SYSTEM RESOURCE MONITOR",
+    category: "Systems",
+    title: "System Health Dashboard",
+    tagline: "Lightweight real-time hardware telemetry and system resource monitor.",
     version: "v3.0",
     year: "2024",
-    featured: true,
+    featured: false,
+    accentColor: "#3a1f1f",
     description:
       "A custom-built dashboard designed to accurately monitor local machine performance and resource utilization in real-time with zero external cloud dependencies.",
     image: dashboardImg,
@@ -175,16 +179,16 @@ const projects: Project[] = [
       "Lightweight agent for minimal system overhead",
     ],
     metrics: [
-      { label: "TELEMETRY", value: "CPU / RAM / DISK / NET" },
-      { label: "POLLING RATE", value: "1000ms TICK ENGINE" },
-      { label: "DEPENDENCIES", value: "ZERO CLOUD OVERHEAD" },
-      { label: "VISUALIZATION", value: "LIVE REAL-TIME CHARTS" },
+      { label: "Telemetry", value: "CPU / RAM / Disk / Net" },
+      { label: "Polling Rate", value: "1000ms Tick Engine" },
+      { label: "Dependencies", value: "Zero Cloud Overhead" },
+      { label: "Visualization", value: "Live Real-Time Charts" },
     ],
     architectureFlow: [
-      { step: "01", title: "OS TELEMETRY PROBE", detail: "Background daemon polls kernel OS APIs (/proc, sysinfo, os module) every 1000ms." },
-      { step: "02", title: "METRIC NORMALIZATION", detail: "Raw metrics normalized into compact JSON telemetry payloads." },
-      { step: "03", title: "WEBSOCKET BROADCAST", detail: "WebSocket connection pushes real-time telemetry stream to connected client cockpit." },
-      { step: "04", title: "TIME-SERIES VISUALIZER", detail: "React frontend renders live-updating time-series charts with zero page reloads." },
+      { step: "01", title: "OS Telemetry Probe", detail: "Background daemon polls kernel OS APIs (/proc, sysinfo, os module) every 1000ms." },
+      { step: "02", title: "Metric Normalization", detail: "Raw metrics normalized into compact JSON telemetry payloads." },
+      { step: "03", title: "WebSocket Broadcast", detail: "WebSocket connection pushes real-time telemetry stream to connected client cockpit." },
+      { step: "04", title: "Time-Series Visualizer", detail: "React frontend renders live-updating time-series charts with zero page reloads." },
     ],
     tradeoffs: [
       {
@@ -206,12 +210,13 @@ const projects: Project[] = [
   },
   {
     slug: "disease-prediction",
-    category: "MACHINE LEARNING",
-    title: "DISEASE PREDICTION",
-    tagline: "END-TO-END CLASSIFICATION PIPELINE FOR MULTI-SYMPTOM MEDICAL DIAGNOSTICS",
+    category: "Machine Learning",
+    title: "Disease Prediction",
+    tagline: "End-to-end ML classification pipeline for multi-symptom medical diagnostics.",
     version: "v1.2",
     year: "2023",
     featured: false,
+    accentColor: "#1f1a3a",
     description:
       "A comprehensive end-to-end Machine Learning project mapping user-inputted symptoms to potential disease predictions with cross-validated classification models.",
     image: diseaseImg,
@@ -228,16 +233,16 @@ const projects: Project[] = [
       "User-facing interface for non-technical interaction",
     ],
     metrics: [
-      { label: "PIPELINE", value: "SYMPTOM ENCODING" },
-      { label: "VALIDATION", value: "K-FOLD CROSS EVAL" },
-      { label: "ACCURACY", value: "OPTIMIZED FIT" },
-      { label: "DEPLOYMENT", value: "FLASK INFERENCE API" },
+      { label: "Pipeline", value: "Symptom Encoding" },
+      { label: "Validation", value: "K-Fold Cross Eval" },
+      { label: "Accuracy", value: "Optimized Fit" },
+      { label: "Deployment", value: "Flask Inference API" },
     ],
     architectureFlow: [
-      { step: "01", title: "SYMPTOM VECTORIZATION", detail: "Binary multi-hot encoding mapping user selected symptoms into 132-dimension feature vector." },
-      { step: "02", title: "CLASSIFICATION PIPELINE", detail: "Trained Random Forest & SVM ensemble processing feature space with cross-validated parameters." },
-      { step: "03", title: "PROBABILITY RANKING", detail: "Model predicts primary diagnosis with softmax probability distribution across classes." },
-      { step: "04", title: "REST INFERENCE SERVING", detail: "Flask microservice delivers JSON diagnosis response to client interface." },
+      { step: "01", title: "Symptom Vectorization", detail: "Binary multi-hot encoding mapping user selected symptoms into 132-dimension feature vector." },
+      { step: "02", title: "Classification Pipeline", detail: "Trained Random Forest & SVM ensemble processing feature space with cross-validated parameters." },
+      { step: "03", title: "Probability Ranking", detail: "Model predicts primary diagnosis with softmax probability distribution across classes." },
+      { step: "04", title: "REST Inference Serving", detail: "Flask microservice delivers JSON diagnosis response to client interface." },
     ],
     tradeoffs: [
       {
@@ -259,12 +264,13 @@ const projects: Project[] = [
   },
   {
     slug: "daily-quotes-app",
-    category: "MOBILE",
-    title: "DAILY QUOTES APP",
-    tagline: "CROSS-PLATFORM CONTENT DELIVERY CLIENT WITH CLEAN SEPARATED ARCHITECTURE",
+    category: "Mobile",
+    title: "Daily Quotes App",
+    tagline: "Cross-platform mobile app delivering daily inspirational quotes.",
     version: "v2.0",
     year: "2023",
     featured: false,
+    accentColor: "#1a2a3a",
     description:
       "A mobile application developed to deliver daily inspirational quotes to users, engineered with Flutter and Dart using clean decoupled layers.",
     image: quotesImg,
@@ -281,16 +287,16 @@ const projects: Project[] = [
       "Separation of data and presentation layers",
     ],
     metrics: [
-      { label: "FRAMEWORK", value: "FLUTTER & DART" },
-      { label: "TARGETS", value: "IOS & ANDROID" },
-      { label: "STATE", value: "CLEAN DECOUPLED" },
-      { label: "CADENCE", value: "DAILY SYNC ENGINE" },
+      { label: "Framework", value: "Flutter & Dart" },
+      { label: "Targets", value: "iOS & Android" },
+      { label: "State", value: "Clean Decoupled" },
+      { label: "Cadence", value: "Daily Sync Engine" },
     ],
     architectureFlow: [
-      { step: "01", title: "QUOTE REPOSITORY", detail: "Abstract data layer fetching daily curated quotes from local cache and remote sources." },
-      { step: "02", title: "STATE CONTROLLER", detail: "Provider viewmodel managing reactive quote state and persistence logic." },
-      { step: "03", title: "WIDGET COMPOSITION", detail: "Custom Flutter widget tree rendering typographic layout with fluid transition curves." },
-      { step: "04", title: "LOCAL PERSISTENCE", detail: "Offline-first caching storing favorite quotes in local device storage." },
+      { step: "01", title: "Quote Repository", detail: "Abstract data layer fetching daily curated quotes from local cache and remote sources." },
+      { step: "02", title: "State Controller", detail: "Provider viewmodel managing reactive quote state and persistence logic." },
+      { step: "03", title: "Widget Composition", detail: "Custom Flutter widget tree rendering typographic layout with fluid transition curves." },
+      { step: "04", title: "Local Persistence", detail: "Offline-first caching storing favorite quotes in local device storage." },
     ],
     tradeoffs: [
       {
@@ -313,4 +319,3 @@ const projects: Project[] = [
 ]
 
 export default projects
-

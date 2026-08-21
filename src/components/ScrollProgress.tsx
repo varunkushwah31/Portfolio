@@ -13,8 +13,7 @@ const ScrollProgress = () => {
       className="fixed top-0 left-0 right-0 h-[4px] z-[100] origin-left pointer-events-none"
       style={{
         scaleX,
-        background:
-          "linear-gradient(to right, var(--color-m-blue-light) 0%, var(--color-m-blue-light) 33.33%, var(--color-m-blue-dark) 33.33%, var(--color-m-blue-dark) 66.66%, var(--color-m-red) 66.66%, var(--color-m-red) 100%)",
+        background: "linear-gradient(to right, #7c3aed, #a78bfa)",
       }}
     />
   )
