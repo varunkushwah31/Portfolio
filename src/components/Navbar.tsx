@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { List, X, Moon, TerminalWindow } from '@phosphor-icons/react'
+import { ListIcon, XIcon ,MoonIcon, TerminalWindowIcon } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface NavbarProps {
@@ -105,7 +105,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
               aria-label="Dark mode"
               className="w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200 cursor-pointer"
             >
-              <Moon size={18} weight="regular" />
+              <MoonIcon size={18} weight="regular" />
             </motion.button>
 
             <motion.button
@@ -116,7 +116,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
               onClick={onOpenCommandPalette}
               className="w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200 cursor-pointer"
             >
-              <TerminalWindow size={18} weight="regular" />
+              <TerminalWindowIcon size={18} weight="regular" />
             </motion.button>
 
             <button
@@ -125,7 +125,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X size={18} weight="bold" /> : <List size={18} weight="bold" />}
+              {mobileOpen ? <XIcon size={18} weight="bold" /> : <ListIcon size={18} weight="bold" />}
             </button>
           </div>
         </nav>

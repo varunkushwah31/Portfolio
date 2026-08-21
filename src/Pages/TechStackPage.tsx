@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  ArrowSquareOut,
-  Sparkle,
-  Cpu,
-  Laptop,
-  Desktop,
-  Keyboard,
-  DeviceMobile,
+  ArrowSquareOutIcon,
+  SparkleIcon,
+  CpuIcon,
+  LaptopIcon,
+  DesktopIcon,
+  KeyboardIcon,
+  DeviceMobileIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -39,11 +39,11 @@ import {
 // 1. Workstation & Hardware Items (matching bonabrian Uses page)
 const workstationItems = [
   {
-    id: "laptop",
+    id: "laptopIcon",
     title: "Development Machine",
     subtitle: "High-Performance Workstation",
-    specs: "Core i7 CPU · 16GB RAM · 512GB Fast NVMe SSD",
-    icon: Laptop,
+    specs: "Core i7 CPUIcon · 16GB RAM · 512GB Fast NVMe SSD",
+    icon: LaptopIcon,
     badge: "Primary",
   },
   {
@@ -51,7 +51,7 @@ const workstationItems = [
     title: "External IPS Monitor",
     subtitle: "Productivity Display",
     specs: "24\" FHD 100Hz IPS Monitor with Wide Color Gamut",
-    icon: Desktop,
+    icon: DesktopIcon,
     badge: "Display",
   },
   {
@@ -59,7 +59,7 @@ const workstationItems = [
     title: "Mechanical Keyboard",
     subtitle: "Custom Tactile Switches",
     specs: "75% Layout with Sound Dampening & Custom Keycaps",
-    icon: Keyboard,
+    icon: KeyboardIcon,
     badge: "Peripheral",
   },
   {
@@ -67,7 +67,7 @@ const workstationItems = [
     title: "Mobile Test Bench",
     subtitle: "Real-Device Testing",
     specs: "Android & iOS Testbed for Flutter & WebRTC P2P Verification",
-    icon: DeviceMobile,
+    icon: DeviceMobileIcon,
     badge: "Testing",
   },
 ]
@@ -399,7 +399,7 @@ export default function TechStackPage() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
               <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-1">
-                <Sparkle size={14} weight="fill" />
+                <SparkleIcon size={14} weight="fill" />
                 <span>Technologies &amp; Frameworks</span>
               </div>
               <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -488,7 +488,7 @@ export default function TechStackPage() {
                         className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors"
                       >
                         <span>Official Documentation</span>
-                        <ArrowSquareOut size={13} />
+                        <ArrowSquareOutIcon size={13} />
                       </a>
                     </div>
                   </motion.div>
@@ -509,7 +509,7 @@ export default function TechStackPage() {
           className="rounded-2xl border border-zinc-700/60 bg-gradient-to-br from-[#1c1c22] via-[#141414] to-[#141414] p-6 sm:p-8 shadow-lg"
         >
           <div className="flex items-center gap-2.5 text-emerald-400 font-semibold text-sm mb-2">
-            <Cpu size={18} />
+            <CpuIcon size={18} />
             <span>Currently Exploring &amp; Deepening</span>
           </div>
           <h2 className="text-xl font-bold text-white mb-2">

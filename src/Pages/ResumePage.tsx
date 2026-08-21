@@ -1,12 +1,12 @@
 import React from "react"
 import { motion } from "framer-motion"
 import {
-  CheckCircle,
-  Code,
-  Globe,
-  DeviceMobile,
-  GraduationCap,
-  DownloadSimple,
+  CheckCircleIcon,
+  CodeIcon,
+  GlobeIcon,
+  DeviceMobileIcon,
+  GraduationCapIcon,
+  DownloadSimpleIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -46,7 +46,7 @@ const resumeEntries: ResumeEntry[] = [
     type: "Leadership · Mentorship",
     period: "Jan 2024 – Present · 1 yr+",
     location: "Campus · Hybrid",
-    icon: <CheckCircle size={18} weight="fill" className="text-emerald-400" />,
+    icon: <CheckCircleIcon size={18} weight="fill" className="text-emerald-400" />,
     iconBg: "bg-emerald-500/10 border-emerald-500/30",
     techIcons: [
       { name: "Java", icon: JavaIcon },
@@ -69,7 +69,7 @@ const resumeEntries: ResumeEntry[] = [
     type: "Distributed Systems · Project Lead",
     period: "Dec 2023 – Present · 1 yr 3 mos",
     location: "India · Remote",
-    icon: <Globe size={18} weight="bold" className="text-rose-400" />,
+    icon: <GlobeIcon size={18} weight="bold" className="text-rose-400" />,
     iconBg: "bg-rose-500/10 border-rose-500/30",
     techIcons: [
       { name: "React", icon: ReactIcon },
@@ -92,7 +92,7 @@ const resumeEntries: ResumeEntry[] = [
     type: "Developer Tooling · Open Source",
     period: "2024 · Full-Stack",
     location: "India · Remote",
-    icon: <Code size={18} weight="bold" className="text-sky-400" />,
+    icon: <CodeIcon size={18} weight="bold" className="text-sky-400" />,
     iconBg: "bg-sky-500/10 border-sky-500/30",
     techIcons: [
       { name: "TypeScript", icon: TypeScriptIcon },
@@ -116,7 +116,7 @@ const resumeEntries: ResumeEntry[] = [
     type: "Mobile Engineering · Machine Learning",
     period: "2023 – 2024 · 1 yr",
     location: "India · Remote",
-    icon: <DeviceMobile size={18} weight="bold" className="text-purple-400" />,
+    icon: <DeviceMobileIcon size={18} weight="bold" className="text-purple-400" />,
     iconBg: "bg-purple-500/10 border-purple-500/30",
     techIcons: [
       { name: "Flutter", icon: FlutterIcon },
@@ -137,7 +137,7 @@ const resumeEntries: ResumeEntry[] = [
     type: "Undergraduate Degree",
     period: "Aug 2023 – Expected May 2027 · 4 yrs",
     location: "India · On-Campus",
-    icon: <GraduationCap size={18} weight="bold" className="text-indigo-400" />,
+    icon: <GraduationCapIcon size={18} weight="bold" className="text-indigo-400" />,
     iconBg: "bg-indigo-500/10 border-indigo-500/30",
     techIcons: [
       { name: "Java", icon: JavaIcon },
@@ -179,7 +179,7 @@ export default function ResumePage() {
               href="mailto:varun.kush3@gmail.com?subject=Resume%20Request%20-%20Varun%20Kushwah"
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-xs sm:text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none whitespace-nowrap self-start sm:self-auto"
             >
-              <DownloadSimple size={15} weight="bold" />
+              <DownloadSimpleIcon size={15} weight="bold" />
               <span>Download resume</span>
             </a>
           </motion.div>

@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useRef } from "react"
-import { createPortal } from "react-dom"
 import { useNavigate } from "react-router-dom"
+import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  XIcon,
-  GithubLogoIcon,
-  LinkedinLogoIcon,
-  EnvelopeSimpleIcon,
-  ArrowRightIcon,
-  GitForkIcon,
+  MagnifyingGlassIcon,
   HouseIcon,
   UserIcon,
-  CodeIcon,
-  BriefcaseIcon,
-  MagnifyingGlassIcon,
   CpuIcon,
+  GitForkIcon,
+  BriefcaseIcon,
+  EnvelopeSimpleIcon,
+  GithubLogoIcon,
+  LinkedinLogoIcon,
+  ArrowRightIcon,
+  XIcon,
+  CodeIcon,
   ArrowSquareOutIcon,
 } from "@phosphor-icons/react"
 import projects from "@/data/projects"
@@ -34,29 +34,32 @@ interface CommandItem {
   action: () => void
 }
 
-const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpenResume }) => {
+export const CommandPalette: React.FC<CommandPaletteProps> = ({
+  isOpen,
+  onClose,
+  onOpenResume,
+}) => {
   const [query, setQuery] = useState("")
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [copied, setCopied] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
 
-  const handleClose = () => {
-    setQuery("")
-    setSelectedIndex(0)
-    setCopied(false)
-    onClose()
-  }
-
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden"
-      const timer = setTimeout(() => inputRef.current?.focus(), 50)
-      return () => clearTimeout(timer)
-    } else {
-      document.body.style.overflow = ""
+      setQuery("")
+      setSelectedIndex(0)
+      setCopied(false)
+      setTimeout(() => {
+        inputRef.current?.focus()
+      }, 50)
     }
   }, [isOpen])
+
+  const handleClose = () => {
+    setQuery("")
+    onClose()
+  }
 
   const goTo = (path: string) => {
     handleClose()
@@ -69,7 +72,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "Home",
       subtitle: "Go to the home page",
       category: "Navigation",
-      icon: <HouseIcon size={16} className="text-zinc-300" />,
+      icon: <HouseIcon size={18} className="text-zinc-300" />,
       action: () => goTo("/"),
     },
     {
@@ -77,15 +80,15 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "About",
       subtitle: "About Varun Kushwah & skills",
       category: "Navigation",
-      icon: <UserIcon size={16} className="text-zinc-300" />,
+      icon: <UserIcon size={18} className="text-zinc-300" />,
       action: () => goTo("/about"),
     },
     {
       id: "nav-tech-stack",
-      title: "Tech Stack",
-      subtitle: "Languages, frameworks & developer tools",
+      title: "Tech Stack & Uses",
+      subtitle: "Languages, frameworks, software & workstation tools",
       category: "Navigation",
-      icon: <CpuIcon size={16} className="text-zinc-300" />,
+      icon: <CpuIcon size={18} className="text-zinc-300" />,
       action: () => goTo("/tech-stack"),
     },
     {
@@ -93,7 +96,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "Projects",
       subtitle: "Browse all projects & repositories",
       category: "Navigation",
-      icon: <GitForkIcon size={16} className="text-zinc-300" />,
+      icon: <GitForkIcon size={18} className="text-zinc-300" />,
       action: () => goTo("/projects"),
     },
     {
@@ -101,7 +104,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "Resume",
       subtitle: "Education, experience & achievements",
       category: "Navigation",
-      icon: <BriefcaseIcon size={16} className="text-zinc-300" />,
+      icon: <BriefcaseIcon size={18} className="text-zinc-300" />,
       action: () => {
         if (onOpenResume) {
           handleClose()
@@ -118,7 +121,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "devup Club Website",
       subtitle: "devup.co.in · Technical club & workshops",
       category: "Actions",
-      icon: <ArrowSquareOutIcon size={16} className="text-emerald-400" />,
+      icon: <ArrowSquareOutIcon size={18} className="text-emerald-400" />,
       action: () => {
         window.open("https://devup.co.in/", "_blank", "noopener,noreferrer")
         handleClose()
@@ -129,7 +132,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "GitHub Profile",
       subtitle: "github.com/varunkushwah31",
       category: "Actions",
-      icon: <GithubLogoIcon size={16} className="text-zinc-300" />,
+      icon: <GithubLogoIcon size={18} className="text-zinc-300" />,
       action: () => {
         window.open("https://github.com/varunkushwah31", "_blank", "noopener,noreferrer")
         handleClose()
@@ -140,7 +143,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "LinkedIn Profile",
       subtitle: "linkedin.com/in/varun-kushwah",
       category: "Actions",
-      icon: <LinkedinLogoIcon size={16} className="text-blue-400" />,
+      icon: <LinkedinLogoIcon size={18} className="text-blue-400" />,
       action: () => {
         window.open("https://www.linkedin.com/in/varun-kushwah/", "_blank", "noopener,noreferrer")
         handleClose()
@@ -151,7 +154,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: "Copy Email Address",
       subtitle: "varun.kush3@gmail.com",
       category: "Actions",
-      icon: <EnvelopeSimpleIcon size={16} className="text-emerald-400" />,
+      icon: <EnvelopeSimpleIcon size={18} className="text-emerald-400" />,
       action: () => {
         navigator.clipboard.writeText("varun.kush3@gmail.com")
         setCopied(true)
@@ -165,7 +168,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
       title: p.title,
       subtitle: `${p.category} · ${p.tagline}`,
       category: "Projects" as const,
-      icon: <CodeIcon size={16} className="text-zinc-300" />,
+      icon: <CodeIcon size={18} className="text-zinc-300" />,
       action: () => {
         handleClose()
         navigate(`/project/${p.slug}`)
@@ -223,25 +226,24 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
           onClick={handleClose}
         >
           {/* Backdrop with dark blur */}
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-black/75 backdrop-blur-md" />
 
-          {/* Modal Centered in Viewport */}
+          {/* Modal Centered & Enlarged in Viewport */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: -10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="relative w-full max-w-xl my-auto rounded-xl border border-[#333333] bg-[#121212] shadow-2xl overflow-hidden z-10 flex flex-col"
+            className="relative w-full max-w-2xl my-auto rounded-2xl border border-[#333338] bg-[#121215] shadow-2xl overflow-hidden z-10 flex flex-col"
             style={{
-              maxHeight: "85vh",
-              minWidth: "300px",
-              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05)",
+              maxHeight: "88vh",
+              boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.08)",
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Search Input Box */}
-            <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#262626] bg-[#171717] w-full">
-              <MagnifyingGlassIcon size={18} className="text-zinc-400 flex-shrink-0" />
+            {/* Search Input Box - Spacious & Clear */}
+            <div className="flex items-center gap-3.5 px-5 py-4 sm:py-4.5 border-b border-[#26262a] bg-[#16161a] w-full">
+              <MagnifyingGlassIcon size={20} className="text-zinc-400 flex-shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -252,7 +254,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
                   setSelectedIndex(0)
                 }}
                 onKeyDown={handleKeyDown}
-                className="flex-1 min-w-0 bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 outline-none"
+                className="flex-1 min-w-0 bg-transparent text-base sm:text-[17px] text-zinc-100 placeholder:text-zinc-500 outline-none"
               />
               {query && (
                 <button
@@ -261,32 +263,32 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
                     setQuery("")
                     setSelectedIndex(0)
                   }}
-                  className="p-1 text-zinc-400 hover:text-zinc-100 transition-colors flex-shrink-0"
+                  className="p-1 text-zinc-400 hover:text-zinc-100 transition-colors flex-shrink-0 cursor-pointer"
                   aria-label="Clear query"
                 >
-                  <XIcon size={14} />
+                  <XIcon size={16} />
                 </button>
               )}
-              <kbd className="hidden sm:inline-flex text-[10px] font-mono text-zinc-400 border border-zinc-700 px-1.5 py-0.5 rounded bg-zinc-800 flex-shrink-0">
+              <kbd className="hidden sm:inline-flex text-xs font-mono text-zinc-400 border border-zinc-700/80 px-2 py-0.5 rounded-md bg-zinc-800/80 flex-shrink-0">
                 ESC
               </kbd>
             </div>
 
             {/* Copied Feedback Toast */}
             {copied && (
-              <div className="px-4 py-2 bg-emerald-500/10 border-b border-emerald-500/20 text-emerald-400 text-xs font-medium flex items-center gap-2">
+              <div className="px-5 py-2.5 bg-emerald-500/10 border-b border-emerald-500/20 text-emerald-400 text-xs sm:text-sm font-medium flex items-center gap-2">
                 <span>✓</span> Email copied to clipboard!
               </div>
             )}
 
-            {/* Command List */}
-            <div className="max-h-80 overflow-y-auto p-2 w-full">
+            {/* Command List - Expanded Height & Padding */}
+            <div className="max-h-[420px] sm:max-h-[480px] overflow-y-auto p-3 sm:p-3.5 w-full space-y-3">
               {Object.entries(grouped).map(([category, cmds]) => (
                 <div key={category} className="mb-2 last:mb-0">
-                  <div className="px-3 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
+                  <div className="px-3.5 py-1.5 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
                     {category}
                   </div>
-                  <div className="space-y-0.5">
+                  <div className="space-y-1 mt-1">
                     {cmds.map((cmd) => {
                       const globalIdx = flatList.indexOf(cmd)
                       const isSelected = globalIdx === selectedIndex
@@ -296,21 +298,29 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
                           key={cmd.id}
                           onClick={cmd.action}
                           onMouseEnter={() => setSelectedIndex(globalIdx)}
-                          className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-colors duration-100 ${
+                          className={`w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-left transition-all duration-150 cursor-pointer ${
                             isSelected
-                              ? "bg-white/10 text-white border border-white/20"
-                              : "text-zinc-300 hover:bg-[#1f1f1f] border border-transparent"
+                              ? "bg-white/10 text-white border border-white/20 shadow-sm"
+                              : "text-zinc-300 hover:bg-[#1a1a1f] border border-transparent"
                           }`}
                         >
-                          <span className="flex-shrink-0">{cmd.icon}</span>
+                          <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                            isSelected ? "bg-white/10 border border-white/20" : "bg-[#1a1a20] border border-[#27272f]"
+                          }`}>
+                            {cmd.icon}
+                          </div>
                           <div className="flex-1 min-w-0">
-                            <div className="text-sm font-medium truncate">{cmd.title}</div>
+                            <div className="text-[15px] font-semibold tracking-tight truncate text-white">
+                              {cmd.title}
+                            </div>
                             {cmd.subtitle && (
-                              <div className="text-xs text-zinc-400 truncate">{cmd.subtitle}</div>
+                              <div className="text-xs sm:text-[13px] text-zinc-400 truncate mt-0.5 font-normal">
+                                {cmd.subtitle}
+                              </div>
                             )}
                           </div>
                           {isSelected && (
-                            <ArrowRightIcon size={13} className="text-white flex-shrink-0" />
+                            <ArrowRightIcon size={16} className="text-white flex-shrink-0 ml-1" />
                           )}
                         </button>
                       )
@@ -320,26 +330,26 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpen
               ))}
 
               {filteredCommands.length === 0 && (
-                <div className="py-10 text-center text-zinc-500 text-sm">
-                  No matching commands found for <span className="text-zinc-300">"{query}"</span>
+                <div className="py-12 text-center text-zinc-500 text-sm">
+                  No matching commands found for <span className="text-zinc-300 font-medium">"{query}"</span>
                 </div>
               )}
             </div>
 
             {/* Footer Telemetry */}
-            <div className="px-4 py-2.5 border-t border-[#262626] bg-[#111111] flex items-center justify-between text-[11px] text-zinc-500 w-full">
-              <div className="flex items-center gap-3">
-                <span className="flex items-center gap-1">
-                  <kbd className="border border-zinc-700 px-1 py-0.5 rounded bg-zinc-800 font-mono text-[10px] text-zinc-400">↑</kbd>
-                  <kbd className="border border-zinc-700 px-1 py-0.5 rounded bg-zinc-800 font-mono text-[10px] text-zinc-400">↓</kbd>
+            <div className="px-5 py-3 border-t border-[#26262a] bg-[#101014] flex items-center justify-between text-xs text-zinc-400 w-full">
+              <div className="flex items-center gap-4">
+                <span className="flex items-center gap-1.5">
+                  <kbd className="border border-zinc-700 px-1.5 py-0.5 rounded bg-zinc-800/80 font-mono text-[11px] text-zinc-300">↑</kbd>
+                  <kbd className="border border-zinc-700 px-1.5 py-0.5 rounded bg-zinc-800/80 font-mono text-[11px] text-zinc-300">↓</kbd>
                   <span>navigate</span>
                 </span>
-                <span className="flex items-center gap-1">
-                  <kbd className="border border-zinc-700 px-1 py-0.5 rounded bg-zinc-800 font-mono text-[10px] text-zinc-400">↵</kbd>
+                <span className="flex items-center gap-1.5">
+                  <kbd className="border border-zinc-700 px-1.5 py-0.5 rounded bg-zinc-800/80 font-mono text-[11px] text-zinc-300">↵</kbd>
                   <span>select</span>
                 </span>
               </div>
-              <span className="text-zinc-600">Quick Navigation</span>
+              <span className="text-zinc-500 font-medium">Quick Navigation</span>
             </div>
           </motion.div>
         </motion.div>

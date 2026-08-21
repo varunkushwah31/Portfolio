@@ -1,11 +1,11 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import {
-  GithubLogo,
-  LinkedinLogo,
-  EnvelopeSimple,
-  FileText,
-  Sparkle,
+  GithubLogoIcon,
+  LinkedinLogoIcon,
+  EnvelopeSimpleIcon,
+  FileTextIcon,
+  SparkleIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -43,9 +43,9 @@ const techStack = [
 ]
 
 const socials = [
-  { label: "GitHub", href: "https://github.com/varunkushwah31", icon: GithubLogo },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/varun-kushwah/", icon: LinkedinLogo },
-  { label: "Email", href: "mailto:varun.kush3@gmail.com", icon: EnvelopeSimple },
+  { label: "GitHub", href: "https://github.com/varunkushwah31", icon: GithubLogoIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/varun-kushwah/", icon: LinkedinLogoIcon },
+  { label: "Email", href: "mailto:varun.kush3@gmail.com", icon: EnvelopeSimpleIcon },
 ]
 
 export default function About() {
@@ -182,7 +182,7 @@ export default function About() {
                 className="text-white font-semibold hover:text-emerald-300 underline underline-offset-4 decoration-zinc-600 hover:decoration-emerald-400 transition-colors inline-flex items-center gap-0.5"
               >
                 <span>devup</span>
-                <Sparkle size={12} className="inline text-emerald-400" />
+                <SparkleIcon size={12} className="inline text-emerald-400" />
               </a>
               , I take ownership of designing, developing, and maintaining software that meets high technical standards while delivering tangible value. I work closely with peers to mentor 100+ emerging developers in object-oriented architecture, Spring Boot services, and clean Git workflows.
             </p>
@@ -206,7 +206,7 @@ export default function About() {
                   to="/resume"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-xs sm:text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none"
                 >
-                  <FileText size={15} weight="bold" />
+                  <FileTextIcon size={15} weight="bold" />
                   <span>My Resume</span>
                 </Link>
               </motion.div>
