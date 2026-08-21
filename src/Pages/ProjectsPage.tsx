@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import { ArrowRight, ArrowSquareOut, GithubLogo } from "@phosphor-icons/react"
+import { ArrowRightIcon, ArrowSquareOutIcon, GithubLogoIcon } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 
 const categoryColors: Record<string, string> = {
@@ -76,7 +76,7 @@ export default function ProjectsPage() {
                   </div>
                   {/* Overlay arrow */}
                   <div className="absolute top-3 right-3 w-7 h-7 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ArrowRight size={14} className="text-white" />
+                    <ArrowRightIcon size={14} className="text-white" />
                   </div>
                 </div>
 
@@ -112,7 +112,7 @@ export default function ProjectsPage() {
                   {/* Links row */}
                   <div className="flex items-center gap-3 pt-3 border-t border-hairline">
                     <span className="text-xs text-accent-light font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
-                      View details <ArrowRight size={12} />
+                      View details <ArrowRightIcon size={12} />
                     </span>
                     {project.githubUrl && (
                       <a
@@ -123,7 +123,7 @@ export default function ProjectsPage() {
                         className="ml-auto text-muted hover:text-ink transition-colors"
                         title="GitHub"
                       >
-                        <GithubLogo size={15} />
+                        <GithubLogoIcon size={15} />
                       </a>
                     )}
                     {project.liveUrl && (
@@ -135,7 +135,7 @@ export default function ProjectsPage() {
                         className="text-muted hover:text-ink transition-colors"
                         title="Live Demo"
                       >
-                        <ArrowSquareOut size={15} />
+                        <ArrowSquareOutIcon size={15} />
                       </a>
                     )}
                   </div>

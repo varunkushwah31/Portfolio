@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import { CaretRight, Sparkle } from "@phosphor-icons/react"
+import { CaretRightIcon, SparkleIcon } from "@phosphor-icons/react"
 import TechStack from "./TechStack"
-
-interface HeroProps {
-  onOpenResume?: () => void
-}
 
 const container = {
   hidden: { opacity: 0 },
@@ -20,7 +16,7 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 }
 
-export default function Hero({ onOpenResume: _onOpenResume }: HeroProps) {
+export default function Hero() {
   return (
     <section className="max-w-4xl mx-auto px-6 pt-16 sm:pt-20 pb-12">
       <motion.div
@@ -69,9 +65,9 @@ export default function Hero({ onOpenResume: _onOpenResume }: HeroProps) {
             className="text-zinc-200 font-medium hover:text-violet-300 underline underline-offset-4 decoration-zinc-600 hover:decoration-violet-400 transition-colors inline-flex items-center gap-0.5"
           >
             <span>devup</span>
-            <Sparkle size={12} className="text-violet-400 inline" />
+            <SparkleIcon size={12} className="text-violet-400 inline" />
           </a>
-          , building resilient backend systems with Java &amp; Spring Boot, and exploring real-time WebRTC protocols.
+          {", building resilient backend systems with Java & Spring Boot, and exploring real-time WebRTC protocols."}
         </motion.p>
 
         {/* Discover more button */}
@@ -86,7 +82,7 @@ export default function Hero({ onOpenResume: _onOpenResume }: HeroProps) {
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-xs sm:text-sm font-medium transition-all duration-150 group shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none"
             >
               <span>Discover more</span>
-              <CaretRight size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
+              <CaretRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </motion.div>
         </motion.div>

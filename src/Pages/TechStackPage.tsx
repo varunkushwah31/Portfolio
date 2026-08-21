@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowSquareOut, Sparkle, Cpu } from "@phosphor-icons/react"
+import { ArrowSquareOutIcon, SparkleIcon, CpuIcon } from "@phosphor-icons/react"
 import {
   JavaIcon,
   SpringIcon,
@@ -227,7 +227,7 @@ export default function TechStackPage() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex items-center gap-2 text-violet-400 text-xs sm:text-sm font-semibold uppercase tracking-wider mb-2">
-            <Sparkle size={16} weight="fill" />
+            <SparkleIcon size={16} weight="fill" />
             <span>Architecture & Tools</span>
           </div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
@@ -244,6 +244,7 @@ export default function TechStackPage() {
             const isActive = selectedCategory === cat
             return (
               <button
+                type="button"
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all whitespace-nowrap cursor-pointer ${
@@ -320,7 +321,7 @@ export default function TechStackPage() {
                       className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-violet-300 transition-colors"
                     >
                       <span>Official Documentation</span>
-                      <ArrowSquareOut size={13} />
+                      <ArrowSquareOutIcon size={13} />
                     </a>
                   </div>
                 </motion.div>
@@ -338,7 +339,7 @@ export default function TechStackPage() {
           className="mt-12 rounded-2xl border border-violet-500/20 bg-gradient-to-br from-violet-950/20 via-[#141414] to-[#141414] p-6 sm:p-8"
         >
           <div className="flex items-center gap-2.5 text-violet-400 font-semibold text-sm mb-2">
-            <Cpu size={18} />
+            <CpuIcon size={18} />
             <span>Currently Exploring &amp; Deepening</span>
           </div>
           <h2 className="text-xl font-bold text-white mb-2">

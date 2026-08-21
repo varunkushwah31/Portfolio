@@ -1,13 +1,13 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import {
-  ArrowRight,
-  ArrowSquareOut,
-  GraduationCap,
-  Code,
-  Trophy,
-  CalendarBlank,
-  MapPin,
+  ArrowRightIcon,
+  ArrowSquareOutIcon,
+  GraduationCapIcon,
+  CodeIcon,
+  TrophyIcon,
+  CalendarBlankIcon,
+  MapPinIcon,
 } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 
@@ -28,7 +28,7 @@ const achievements = [
     period: "2024 – Present",
     description:
       "Elected as the Java Coordinator for devup, my college's technical club. Organizing monthly Java workshops, mentoring 100+ students in OOP fundamentals, Spring Boot, and clean Git workflows.",
-    icon: Code,
+    icon: CodeIcon,
     color: "#f97316",
     link: "https://devup.co.in/",
   },
@@ -37,7 +37,7 @@ const achievements = [
     period: "2023 – Present",
     description:
       "Built and shipped 5+ projects spanning full-stack web apps, real-time P2P systems, ML pipelines, and cross-platform mobile apps — always pushing to explore new domains.",
-    icon: Trophy,
+    icon: TrophyIcon,
     color: "#a78bfa",
   },
   {
@@ -45,7 +45,7 @@ const achievements = [
     period: "2024",
     description:
       "Successfully implemented a browser-to-browser peer-to-peer file sharing application using WebRTC DataChannels from scratch, demonstrating deep protocol-level understanding.",
-    icon: ArrowSquareOut,
+    icon: ArrowSquareOutIcon,
     color: "#22c55e",
   },
 ]
@@ -78,7 +78,7 @@ export default function ResumePage() {
             href="mailto:varun.kush3@gmail.com"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-hairline text-body-strong text-sm hover:border-accent/60 hover:text-ink transition-all duration-200 self-start sm:self-auto whitespace-nowrap"
           >
-            <ArrowSquareOut size={16} />
+            <ArrowSquareOutIcon size={16} />
             Download Resume
           </a>
         </motion.div>
@@ -94,7 +94,7 @@ export default function ResumePage() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex items-center gap-3 mb-8">
-            <GraduationCap size={22} className="text-accent-light" />
+            <GraduationCapIcon size={22} className="text-accent-light" />
             <h2 className="text-2xl font-bold text-ink">Education</h2>
           </div>
 
@@ -115,12 +115,12 @@ export default function ResumePage() {
                     <div className="text-accent-light font-medium text-sm mt-0.5">{edu.institution}</div>
                   </div>
                   <div className="flex items-center gap-1.5 text-xs text-muted bg-surface-elevated px-3 py-1 rounded-full self-start whitespace-nowrap">
-                    <CalendarBlank size={12} />
+                    <CalendarBlankIcon size={12} />
                     {edu.period}
                   </div>
                 </div>
                 <div className="flex items-center gap-1.5 text-xs text-muted mb-3">
-                  <MapPin size={12} />
+                  <MapPinIcon size={12} />
                   India · On-Site
                 </div>
                 <p className="text-body text-sm leading-relaxed mb-4">{edu.description}</p>
@@ -147,7 +147,7 @@ export default function ResumePage() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex items-center gap-3 mb-8">
-            <Code size={22} className="text-accent-light" />
+            <CodeIcon size={22} className="text-accent-light" />
             <h2 className="text-2xl font-bold text-ink">Projects</h2>
           </div>
 
@@ -202,7 +202,7 @@ export default function ResumePage() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-ink transition-colors"
                     >
-                      <ArrowSquareOut size={13} />
+                      <ArrowSquareOutIcon size={13} />
                       View on GitHub
                     </a>
                   </div>
@@ -217,7 +217,7 @@ export default function ResumePage() {
               className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-ink transition-colors"
             >
               See all projects
-              <ArrowRight size={14} />
+              <ArrowRightIcon size={14} />
             </Link>
           </div>
         </motion.section>
@@ -230,7 +230,7 @@ export default function ResumePage() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex items-center gap-3 mb-8">
-            <Trophy size={22} className="text-accent-light" />
+            <TrophyIcon size={22} className="text-accent-light" />
             <h2 className="text-2xl font-bold text-ink">Achievements & Leadership</h2>
           </div>
 

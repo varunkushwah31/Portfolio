@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
-import { CaretRight } from "@phosphor-icons/react"
+import { CaretRightIcon } from "@phosphor-icons/react"
 import {
   JavaIcon,
   SpringIcon,
@@ -62,7 +62,7 @@ export default function TechStack() {
           className="text-xs text-violet-400 hover:text-violet-300 font-medium inline-flex items-center gap-1 transition-colors group"
         >
           <span>View all</span>
-          <CaretRight size={12} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
+          <CaretRightIcon size={12} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
         </Link>
       </div>
       <motion.div

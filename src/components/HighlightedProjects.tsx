@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
-import { CaretRight } from "@phosphor-icons/react"
+import { CaretRightIcon } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 import LaptopMockup from "./LaptopMockup"
 import {
@@ -130,7 +130,7 @@ export default function HighlightedProjects() {
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#2e2e2e] bg-[#141414] hover:bg-[#1f1f1f] text-xs sm:text-sm font-medium text-zinc-300 hover:text-white transition-all duration-200 shadow-sm group"
           >
             <span>See all projects</span>
-            <CaretRight size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
+            <CaretRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </motion.div>
       </div>

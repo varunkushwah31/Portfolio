@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react"
 import {
-  GitBranch,
-  TerminalWindow,
-  Pulse,
-  Broadcast,
-  Cpu,
-  HardDrives,
-  Brain,
-  Stack,
-  DeviceMobile,
-  Lightning
+  GitBranchIcon,
+  TerminalWindowIcon,
+  PulseIcon,
+  BroadcastIcon,
+  CpuIcon,
+  HardDrivesIcon,
+  BrainIcon,
+  StackIcon,
+  DeviceMobileIcon,
+  LightningIcon,
 } from "@phosphor-icons/react"
 
 interface ProjectVisualProps {
@@ -25,9 +25,12 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
   const [solvedCount, setSolvedCount] = useState(482)
 
   useEffect(() => {
+    const cpuSteps = [34.2, 38.6, 31.8, 42.4, 29.5, 36.1, 40.8, 33.4]
+    let step = 0
     const timer = setInterval(() => {
       // Simulate live jitter for telemetry dashboards
-      setCpuVal(Number((28 + Math.random() * 16).toFixed(1)))
+      step = (step + 1) % cpuSteps.length
+      setCpuVal(cpuSteps[step])
       setTransferMb((prev) => (prev >= 160 ? 120 : Number((prev + 2.4).toFixed(1))))
       setSolvedCount((prev) => (prev >= 495 ? 482 : prev + 1))
     }, 1500)
@@ -48,11 +51,11 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               <span className="w-2.5 h-2.5 bg-hairline" style={{ borderRadius: "0px" }} />
               <span className="w-2.5 h-2.5 bg-hairline" style={{ borderRadius: "0px" }} />
               <span className="text-muted ml-2 text-[11px] font-sans font-bold uppercase tracking-wider">
-                WORKSPACE // GIT-SUBTREE
+                WORKSPACE {"//"} GIT-SUBTREE
               </span>
             </div>
             <div className="flex items-center gap-2 text-[10px] text-muted">
-              <GitBranch size={12} className="text-m-blue-light" />
+              <GitBranchIcon size={12} className="text-m-blue-light" />
               <span>main: HEAD</span>
             </div>
           </div>
@@ -60,7 +63,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Code & Telemetry Canvas */}
           <div className="p-4 space-y-3 text-xs leading-relaxed">
             <div className="flex items-center gap-2 text-[#888888] bg-[#111111] p-2 border border-hairline-strong text-[11px]">
-              <TerminalWindow size={12} className="text-m-blue-light shrink-0" />
+              <TerminalWindowIcon size={12} className="text-m-blue-light shrink-0" />
               <span className="text-body-strong">$ git subtree pull --prefix=client origin main</span>
             </div>
 
@@ -112,9 +115,9 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Header Bar */}
           <div className="bg-[#12141a] px-4 py-2.5 border-b border-hairline-strong flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <Broadcast size={13} className="text-m-blue-dark animate-pulse" />
+              <BroadcastIcon size={13} className="text-m-blue-dark animate-pulse" />
               <span className="text-body-strong text-[11px] font-sans font-bold uppercase tracking-wider">
-                WEBRTC DATA CHANNEL // P2P
+                WEBRTC DATA CHANNEL {"//"} P2P
               </span>
             </div>
             <span className="text-[10px] text-success font-mono bg-success/10 px-2 py-0.5 border border-success/30">
@@ -185,9 +188,9 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Header Bar */}
           <div className="bg-[#141414] px-4 py-2.5 border-b border-hairline-strong flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <Pulse size={13} className="text-m-red animate-pulse" />
+              <PulseIcon size={13} className="text-m-red animate-pulse" />
               <span className="text-body-strong text-[11px] font-sans font-bold uppercase tracking-wider">
-                HARDWARE TELEMETRY // REAL-TIME
+                HARDWARE TELEMETRY {"//"} REAL-TIME
               </span>
             </div>
             <span className="text-[10px] text-m-blue-light font-mono bg-m-blue-light/10 px-2 py-0.5 border border-m-blue-light/30">
@@ -202,7 +205,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               <div className="bg-[#121212] p-3 border border-hairline-strong space-y-1.5">
                 <div className="flex justify-between text-[10px]">
                   <span className="text-muted flex items-center gap-1">
-                    <Cpu size={11} className="text-m-blue-dark" /> CPU LOAD
+                    <CpuIcon size={11} className="text-m-blue-dark" /> CPU LOAD
                   </span>
                   <span className="text-ink font-bold font-mono">{cpuVal}%</span>
                 </div>
@@ -218,7 +221,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               <div className="bg-[#121212] p-3 border border-hairline-strong space-y-1.5">
                 <div className="flex justify-between text-[10px]">
                   <span className="text-muted flex items-center gap-1">
-                    <HardDrives size={11} className="text-m-red" /> MEMORY
+                    <HardDrivesIcon size={11} className="text-m-red" /> MEMORY
                   </span>
                   <span className="text-ink font-bold font-mono">6.4 / 16 GB</span>
                 </div>
@@ -232,7 +235,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
             {/* Network / Disk Stream Bar */}
             <div className="bg-[#121212] p-2.5 border border-hairline-strong flex items-center justify-between text-[10px]">
               <div className="flex items-center gap-2">
-                <Lightning size={12} className="text-warning" />
+                <LightningIcon size={12} className="text-warning" />
                 <span className="text-muted uppercase">DISK I/O:</span>
                 <span className="text-ink font-bold font-mono">48.2 MB/s R · 12.1 MB/s W</span>
               </div>
@@ -257,9 +260,9 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Header Bar */}
           <div className="bg-[#141414] px-4 py-2.5 border-b border-hairline-strong flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <Brain size={13} className="text-m-blue-light" />
+              <BrainIcon size={13} className="text-m-blue-light" />
               <span className="text-body-strong text-[11px] font-sans font-bold uppercase tracking-wider">
-                ML CLASSIFICATION PIPELINE // PYTHON
+                ML CLASSIFICATION PIPELINE {"//"} PYTHON
               </span>
             </div>
             <span className="text-[10px] text-ink font-mono bg-surface-elevated px-2 py-0.5 border border-hairline">
@@ -327,9 +330,9 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Header Bar */}
           <div className="bg-[#141414] px-4 py-2.5 border-b border-hairline-strong flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <DeviceMobile size={13} className="text-m-blue-dark" />
+              <DeviceMobileIcon size={13} className="text-m-blue-dark" />
               <span className="text-body-strong text-[11px] font-sans font-bold uppercase tracking-wider">
-                FLUTTER CLIENT // CROSS-PLATFORM
+                FLUTTER CLIENT {"//"} CROSS-PLATFORM
               </span>
             </div>
             <span className="text-[10px] text-muted font-mono bg-surface-elevated px-2 py-0.5 border border-hairline">
@@ -351,7 +354,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <div className="text-[10px] text-muted font-sans">— CURATED COLLECTION</div>
               </div>
               <div className="w-7 h-7 bg-surface-elevated border border-hairline flex items-center justify-center text-m-blue-light shrink-0">
-                <Lightning size={14} />
+                <LightningIcon size={14} />
               </div>
             </div>
 
@@ -380,7 +383,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
       return (
         <div className={`w-full h-full bg-[#0a0a0a] border-b border-hairline flex items-center justify-center p-8 text-center ${className}`}>
           <div className="space-y-2">
-            <Stack size={24} className="text-m-blue-light mx-auto" />
+            <StackIcon size={24} className="text-m-blue-light mx-auto" />
             <div className="text-ink font-bold text-sm uppercase">{title}</div>
             <div className="text-muted text-xs font-mono">ENGINEERING ARCHITECTURE</div>
           </div>

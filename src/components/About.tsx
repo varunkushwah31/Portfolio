@@ -143,14 +143,15 @@ const About = () => {
                 const isActive = activeMilestone === idx
 
                 return (
-                  <div
+                  <button
+                    type="button"
                     key={item.role}
                     onClick={() => {
                       sound.switchTab()
                       setActiveMilestone(idx)
                     }}
                     onMouseEnter={() => sound.hover()}
-                    className={`p-5 border cursor-pointer transition-all duration-200 relative ${
+                    className={`w-full text-left p-5 border cursor-pointer transition-all duration-200 relative block ${
                       isActive
                         ? "bg-surface-card border-m-blue-light/70 shadow-lg"
                         : "bg-canvas border-hairline-strong hover:border-hairline opacity-80 hover:opacity-100"
@@ -190,7 +191,7 @@ const About = () => {
                       <UsersIcon size={12} className="text-m-blue-light" />
                       <span>{item.metrics}</span>
                     </div>
-                  </div>
+                  </button>
                 )
               })}
             </div>

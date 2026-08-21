@@ -273,6 +273,7 @@ const Skills = () => {
             const isActive = activeCategory === cat
             return (
               <button
+                type="button"
                 key={cat}
                 onClick={() => {
                   sound.switchTab()
@@ -378,7 +379,7 @@ const Skills = () => {
                   <TerminalWindowIcon size={18} className="text-m-blue-light" />
                   <div>
                     <span className="label-uppercase text-ink font-bold text-sm tracking-[1.5px]">
-                      {selectedSkill.value} // CODE SPECIMEN
+                      {selectedSkill.value} {"//"} CODE SPECIMEN
                     </span>
                     <span className="text-hairline mx-2">|</span>
                     <span className="font-mono text-xs text-muted">

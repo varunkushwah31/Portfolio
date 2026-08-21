@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  X,
-  Printer,
-  Copy,
-  Check,
-  EnvelopeSimple,
-  Medal,
-  BookOpen,
-  GitFork,
-  Cpu
+  XIcon,
+  PrinterIcon,
+  CopyIcon,
+  CheckIcon,
+  EnvelopeSimpleIcon,
+  MedalIcon,
+  BookOpenIcon,
+  GitForkIcon,
+  CpuIcon,
 } from "@phosphor-icons/react"
 import { sound } from "@/lib/sound"
 
@@ -116,7 +116,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
             <div className="p-4 md:px-8 bg-surface-soft border-b border-hairline flex flex-wrap items-center justify-between gap-4 shrink-0">
               <div className="flex items-center gap-3">
                 <span className="label-uppercase text-m-blue-light text-xs tracking-[2px] font-bold">
-                  CURRICULUM VITAE // SPECIFICATION
+                  CURRICULUM VITAE {"//"} SPECIFICATION
                 </span>
                 <span className="text-hairline hidden sm:inline">|</span>
                 <span className="text-muted font-mono text-xs hidden sm:inline">
@@ -127,28 +127,31 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               {/* Action Buttons */}
               <div className="flex items-center gap-2">
                 <button
+                  type="button"
                   onClick={handlePrint}
                   onMouseEnter={() => sound.hover()}
                   className="btn-text px-3 py-2 bg-surface-card hover:bg-surface-elevated text-ink border border-hairline text-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                   style={{ borderRadius: "0px" }}
                   title="Print / Save PDF"
                 >
-                  <Printer size={14} />
+                  <PrinterIcon size={14} />
                   <span className="hidden sm:inline">PRINT / PDF</span>
                 </button>
 
                 <button
+                  type="button"
                   onClick={handleCopyText}
                   onMouseEnter={() => sound.hover()}
                   className="btn-text px-3 py-2 bg-surface-card hover:bg-surface-elevated text-ink border border-hairline text-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                   style={{ borderRadius: "0px" }}
                   title="Copy Plain Text"
                 >
-                  {copied ? <Check size={14} className="text-success" /> : <Copy size={14} />}
+                  {copied ? <CheckIcon size={14} className="text-success" /> : <CopyIcon size={14} />}
                   <span className="hidden sm:inline">{copied ? "COPIED" : "COPY TEXT"}</span>
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => {
                     sound.click()
                     onClose()
@@ -156,7 +159,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
                   className="w-9 h-9 bg-surface-card hover:bg-surface-elevated text-ink rounded-full flex items-center justify-center border border-hairline transition-colors cursor-pointer ml-2"
                   aria-label="Close Resume Modal"
                 >
-                  <X size={16} />
+                  <XIcon size={16} />
                 </button>
               </div>
             </div>
@@ -189,7 +192,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               {/* Technical Stack Grid */}
               <div>
                 <div className="label-uppercase text-muted text-xs mb-4 tracking-[2px] flex items-center gap-2">
-                  <Cpu size={14} className="text-m-blue-light" />
+                  <CpuIcon size={14} className="text-m-blue-light" />
                   TECHNICAL SKILLS & COMPETENCIES
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -223,7 +226,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               {/* Leadership & Experience */}
               <div>
                 <div className="label-uppercase text-muted text-xs mb-4 tracking-[2px] flex items-center gap-2">
-                  <Medal size={14} className="text-m-blue-dark" />
+                  <MedalIcon size={14} className="text-m-blue-dark" />
                   LEADERSHIP & EXPERIENCE
                 </div>
                 <div className="bg-surface-soft p-5 border border-hairline-strong space-y-2">
@@ -242,7 +245,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               {/* Featured Engineering Projects */}
               <div>
                 <div className="label-uppercase text-muted text-xs mb-4 tracking-[2px] flex items-center gap-2">
-                  <GitFork size={14} className="text-m-red" />
+                  <GitForkIcon size={14} className="text-m-red" />
                   FEATURED ENGINEERING PROJECTS
                 </div>
                 <div className="space-y-4">
@@ -287,7 +290,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               {/* Education */}
               <div>
                 <div className="label-uppercase text-muted text-xs mb-4 tracking-[2px] flex items-center gap-2">
-                  <BookOpen size={14} className="text-m-blue-light" />
+                  <BookOpenIcon size={14} className="text-m-blue-light" />
                   EDUCATION
                 </div>
                 <div className="bg-surface-soft p-5 border border-hairline-strong flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -313,7 +316,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
                 className="btn-text bg-ink text-canvas hover:bg-body-strong px-5 py-2.5 inline-flex items-center gap-2 text-xs transition-colors"
                 style={{ borderRadius: "0px" }}
               >
-                <EnvelopeSimple size={14} /> CONTACT DIRECTLY
+                <EnvelopeSimpleIcon size={14} /> CONTACT DIRECTLY
               </a>
             </div>
           </motion.div>

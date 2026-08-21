@@ -25,7 +25,7 @@ const LiveStatusBadge = ({
 
       <div className="flex items-center gap-2 text-[11px] font-bold tracking-[1.5px] uppercase">
         <span className="text-ink">{statusText}</span>
-        <span className="text-muted opacity-40">//</span>
+        <span className="text-muted opacity-40">{"//"}</span>
         <span className="text-body-strong font-light">{subText}</span>
       </div>
     </div>

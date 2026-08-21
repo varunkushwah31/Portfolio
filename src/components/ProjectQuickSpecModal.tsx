@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, ArrowRight, ArrowSquareOut, Check, Copy } from "@phosphor-icons/react"
+import {
+  XIcon,
+  ArrowRightIcon,
+  ArrowSquareOutIcon,
+  CheckIcon,
+  CopyIcon,
+} from "@phosphor-icons/react"
 import type { Project } from "@/data/projects"
 import ProjectVisual from "./ProjectVisual"
 import { sound } from "@/lib/sound"
@@ -87,6 +93,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
 
               {/* Close Button — 48x48 circular button per DESIGN.md */}
               <button
+                type="button"
                 onClick={() => {
                   sound.click()
                   onClose()
@@ -94,7 +101,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                 className="w-10 h-10 md:w-12 md:h-12 bg-surface-card hover:bg-surface-elevated text-ink rounded-full flex items-center justify-center border border-hairline transition-colors duration-200 cursor-pointer shrink-0"
                 aria-label="Close Specification Modal"
               >
-                <X size={18} />
+                <XIcon size={18} />
               </button>
             </div>
 
@@ -130,9 +137,9 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                   TELEMETRY SPECIFICATION MATRIX
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  {project.metrics.map((m, idx) => (
+                  {project.metrics.map((m) => (
                     <div
-                      key={idx}
+                      key={m.label}
                       className="bg-surface-soft p-4 border border-hairline-strong flex flex-col justify-between"
                       style={{ borderRadius: "0px" }}
                     >
@@ -165,7 +172,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                 <div className="space-y-3">
                   {project.highlights.map((h, idx) => (
                     <div
-                      key={idx}
+                      key={`highlight-${idx}-${h.slice(0, 20)}`}
                       className="bg-surface-soft p-4 border border-hairline-strong flex items-start gap-4"
                       style={{ borderRadius: "0px" }}
                     >
@@ -203,17 +210,18 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
             <div className="p-5 md:px-8 bg-surface-soft border-t border-hairline flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <button
+                  type="button"
                   onClick={handleCopyLink}
                   className="btn-text w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs bg-surface-card hover:bg-surface-elevated text-ink border border-hairline px-4 py-3 transition-colors duration-200 cursor-pointer"
                   style={{ borderRadius: "0px" }}
                 >
                   {copied ? (
                     <>
-                      <Check size={14} className="text-success" /> LINK COPIED
+                      <CheckIcon size={14} className="text-success" /> LINK COPIED
                     </>
                   ) : (
                     <>
-                      <Copy size={14} /> SHARE SPEC
+                      <CopyIcon size={14} /> SHARE SPEC
                     </>
                   )}
                 </button>
@@ -227,7 +235,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                     className="btn-text w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs bg-surface-card hover:bg-surface-elevated text-ink border border-hairline px-4 py-3 transition-colors duration-200"
                     style={{ borderRadius: "0px" }}
                   >
-                    <ArrowSquareOut size={14} /> GITHUB
+                    <ArrowSquareOutIcon size={14} /> GITHUB
                   </a>
                 )}
               </div>
@@ -242,7 +250,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                 style={{ borderRadius: "0px" }}
               >
                 OPEN FULL SPECIFICATION
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
+                <ArrowRightIcon size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
             </div>
           </motion.div>

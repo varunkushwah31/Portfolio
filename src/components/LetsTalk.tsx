@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { RocketLaunch, CaretRight } from "@phosphor-icons/react"
+import { RocketLaunchIcon, CaretRightIcon } from "@phosphor-icons/react"
 
 export default function LetsTalk() {
   return (
@@ -20,7 +20,7 @@ export default function LetsTalk() {
         {/* Header row with launching rocket */}
         <div className="flex items-center gap-3.5 relative z-10">
           <div className="w-11 h-11 rounded-full bg-[#353046] flex items-center justify-center text-[#c4b5fd] flex-shrink-0 shadow-inner group-hover:bg-[#433d59] transition-colors">
-            <RocketLaunch
+            <RocketLaunchIcon
               size={22}
               weight="bold"
               className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:rotate-6"
@@ -48,7 +48,7 @@ export default function LetsTalk() {
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none"
             >
               <span>Get in touch</span>
-              <CaretRight size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
+              <CaretRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
             </a>
           </motion.div>
         </div>

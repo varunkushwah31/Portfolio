@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { List, X, Moon, TerminalWindow } from '@phosphor-icons/react'
+import { ListIcon, XIcon, MoonIcon, TerminalWindowIcon } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void
+  onOpenResume?: () => void
 }
 
 const navLinks = [
@@ -25,10 +26,6 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  useEffect(() => {
-    setMobileOpen(false)
-  }, [location.pathname])
 
   const isActive = (href: string) => {
     if (href === '/') return location.pathname === '/'
@@ -98,16 +95,18 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
           {/* Right icons cluster */}
           <div className="flex items-center gap-1">
             <motion.button
+              type="button"
               whileHover={{ scale: 1.1, rotate: 15 }}
               whileTap={{ scale: 0.9 }}
               title="Dark mode"
               aria-label="Dark mode"
               className="w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200 cursor-pointer"
             >
-              <Moon size={18} weight="regular" />
+              <MoonIcon size={18} weight="regular" />
             </motion.button>
 
             <motion.button
+              type="button"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               title="Command palette (⌘K)"
@@ -115,16 +114,17 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
               onClick={onOpenCommandPalette}
               className="w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200 cursor-pointer"
             >
-              <TerminalWindow size={18} weight="regular" />
+              <TerminalWindowIcon size={18} weight="regular" />
             </motion.button>
 
             <button
-              className="md:hidden w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200"
+              type="button"
+              className="md:hidden w-9 h-9 flex items-center justify-center rounded-md text-[#71717a] hover:text-[#fafafa] hover:bg-[#171717] transition-colors duration-200 cursor-pointer"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
             >
-              {mobileOpen ? <X size={18} weight="bold" /> : <List size={18} weight="bold" />}
+              {mobileOpen ? <XIcon size={18} weight="bold" /> : <ListIcon size={18} weight="bold" />}
             </button>
           </div>
         </nav>
@@ -146,6 +146,7 @@ export default function Navbar({ onOpenCommandPalette }: NavbarProps) {
                 <Link
                   key={link.href}
                   to={link.href}
+                  onClick={() => setMobileOpen(false)}
                   className={[
                     'px-4 py-3 rounded-lg text-base transition-colors duration-200',
                     isActive(link.href)

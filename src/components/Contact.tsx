@@ -30,7 +30,7 @@ const Contact = () => {
     setTimeout(() => setCopied(false), 2500)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!formData.name || !formData.email || !formData.message) return
     sound.click()
@@ -97,6 +97,7 @@ const Contact = () => {
                 </div>
               </div>
               <button
+                type="button"
                 onClick={handleCopyEmail}
                 onMouseEnter={() => sound.hover()}
                 className="btn-text inline-flex items-center gap-2 text-ink bg-surface-card border border-hairline px-4 py-2.5 hover:bg-surface-elevated transition-colors text-xs shrink-0 cursor-pointer"
@@ -199,10 +200,11 @@ const Contact = () => {
               ) : (
                 <form key="form" onSubmit={handleSubmit} className="space-y-5">
                   <div>
-                    <label className="block label-uppercase text-muted text-xs mb-2">
+                    <label htmlFor="contact-name" className="block label-uppercase text-muted text-xs mb-2">
                       NAME / IDENTITY <span className="text-m-blue-light">*</span>
                     </label>
                     <input
+                      id="contact-name"
                       type="text"
                       required
                       placeholder="e.g. Alex Morgan"
@@ -214,10 +216,11 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block label-uppercase text-muted text-xs mb-2">
+                    <label htmlFor="contact-email" className="block label-uppercase text-muted text-xs mb-2">
                       EMAIL ADDRESS <span className="text-m-blue-light">*</span>
                     </label>
                     <input
+                      id="contact-email"
                       type="email"
                       required
                       placeholder="name@organization.com"
@@ -229,10 +232,11 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block label-uppercase text-muted text-xs mb-2">
+                    <label htmlFor="contact-message" className="block label-uppercase text-muted text-xs mb-2">
                       MESSAGE / PROJECT SPECIFICATION <span className="text-m-blue-light">*</span>
                     </label>
                     <textarea
+                      id="contact-message"
                       required
                       rows={4}
                       placeholder="Detail your inquiry, engineering requirement, or collaboration opportunity..."

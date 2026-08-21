@@ -1,22 +1,22 @@
 import { useState, useMemo } from "react"
 import { Link } from "react-router-dom"
 import {
-  ArrowRight,
-  MagnifyingGlass,
-  X,
-  SquaresFour,
-  Table,
-  Eye,
-  Cpu,
-  Sparkle,
-  SlidersHorizontal,
-  ArrowCounterClockwise,
-  TerminalWindow,
-  Pulse,
-  Broadcast,
-  Brain,
-  DeviceMobile,
-  Stack
+  ArrowRightIcon,
+  MagnifyingGlassIcon,
+  XIcon,
+  SquaresFourIcon,
+  TableIcon,
+  EyeIcon,
+  CpuIcon,
+  SparkleIcon,
+  SlidersHorizontalIcon,
+  ArrowCounterClockwiseIcon,
+  TerminalWindowIcon,
+  PulseIcon,
+  BroadcastIcon,
+  BrainIcon,
+  DeviceMobileIcon,
+  StackIcon,
 } from "@phosphor-icons/react"
 import { motion, AnimatePresence } from "framer-motion"
 import projects from "@/data/projects"
@@ -34,17 +34,17 @@ type SortMode = "default" | "featured" | "name"
 const getProjectIcon = (slug: string) => {
   switch (slug) {
     case "leetcode-tracker":
-      return <TerminalWindow size={14} className="text-m-blue-light" />
+      return <TerminalWindowIcon size={14} className="text-m-blue-light" />
     case "mangoshare-clone":
-      return <Broadcast size={14} className="text-m-blue-dark" />
+      return <BroadcastIcon size={14} className="text-m-blue-dark" />
     case "system-health-dashboard":
-      return <Pulse size={14} className="text-m-red" />
+      return <PulseIcon size={14} className="text-m-red" />
     case "disease-prediction":
-      return <Brain size={14} className="text-m-blue-light" />
+      return <BrainIcon size={14} className="text-m-blue-light" />
     case "daily-quotes-app":
-      return <DeviceMobile size={14} className="text-m-blue-dark" />
+      return <DeviceMobileIcon size={14} className="text-m-blue-dark" />
     default:
-      return <Stack size={14} className="text-muted" />
+      return <StackIcon size={14} className="text-muted" />
   }
 }
 
@@ -126,7 +126,7 @@ const Projects = () => {
             className="flex items-center gap-3"
           >
             <span className="label-uppercase text-muted tracking-[3px] text-xs">
-              [ SECTION // 03 ]
+              [ SECTION {"//"} 03 ]
             </span>
             <span className="text-hairline">|</span>
             <span className="label-uppercase text-m-blue-light tracking-[1.5px] text-xs font-bold">
@@ -177,7 +177,7 @@ const Projects = () => {
             {/* Search Input */}
             <div className="relative flex-1 max-w-2xl">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-muted">
-                <MagnifyingGlass size={16} />
+                <MagnifyingGlassIcon size={16} />
               </div>
               <input
                 type="text"
@@ -189,11 +189,12 @@ const Projects = () => {
               />
               {searchQuery && (
                 <button
+                  type="button"
                   onClick={() => setSearchQuery("")}
                   className="absolute inset-y-0 right-0 pr-4 flex items-center text-muted hover:text-ink transition-colors cursor-pointer"
                   aria-label="Clear search"
                 >
-                  <X size={16} />
+                  <XIcon size={16} />
                 </button>
               )}
             </div>
@@ -202,7 +203,7 @@ const Projects = () => {
             <div className="flex flex-wrap items-center gap-3">
               {/* Sort Selector */}
               <div className="flex items-center bg-surface-soft border border-hairline px-3 h-[48px]">
-                <SlidersHorizontal size={14} className="text-muted mr-2" />
+                <SlidersHorizontalIcon size={14} className="text-muted mr-2" />
                 <span className="label-uppercase text-muted text-[11px] mr-2">SORT:</span>
                 <select
                   value={sortMode}
@@ -221,6 +222,7 @@ const Projects = () => {
               {/* View Mode Toggle Switcher */}
               <div className="flex items-center bg-surface-soft border border-hairline p-1 h-[48px]">
                 <button
+                  type="button"
                   onClick={() => {
                     sound.click()
                     setViewMode("grid")
@@ -234,10 +236,11 @@ const Projects = () => {
                   style={{ borderRadius: "0px" }}
                   aria-label="Grid View"
                 >
-                  <SquaresFour size={14} />
+                  <SquaresFourIcon size={14} />
                   <span className="hidden sm:inline">GRID</span>
                 </button>
                 <button
+                  type="button"
                   onClick={() => {
                     sound.click()
                     setViewMode("matrix")
@@ -251,7 +254,7 @@ const Projects = () => {
                   style={{ borderRadius: "0px" }}
                   aria-label="Technical Matrix View"
                 >
-                  <Table size={14} />
+                  <TableIcon size={14} />
                   <span className="hidden sm:inline">SPEC MATRIX</span>
                 </button>
               </div>
@@ -265,6 +268,7 @@ const Projects = () => {
               const count = categoryCounts[cat] || 0
               return (
                 <button
+                  type="button"
                   key={cat}
                   onClick={() => {
                     sound.switchTab()
@@ -299,12 +303,13 @@ const Projects = () => {
           {/* Quick Subsystem Tech Filters */}
           <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-hairline-strong">
             <span className="label-uppercase text-muted text-[11px] mr-2 flex items-center gap-1.5">
-              <Cpu size={12} /> TECH FILTER:
+              <CpuIcon size={12} /> TECH FILTER:
             </span>
             {POPULAR_TECH.map((tech) => {
               const isActive = selectedTech === tech
               return (
                 <button
+                  type="button"
                   key={tech}
                   onClick={() => {
                     sound.click()
@@ -325,11 +330,12 @@ const Projects = () => {
 
             {isFiltered && (
               <button
+                type="button"
                 onClick={handleResetFilters}
                 onMouseEnter={() => sound.hover()}
                 className="ml-auto inline-flex items-center gap-1.5 text-xs text-m-blue-light hover:text-ink label-uppercase transition-colors cursor-pointer"
               >
-                <ArrowCounterClockwise size={12} /> RESET ALL
+                <ArrowCounterClockwiseIcon size={12} /> RESET ALL
               </button>
             )}
           </div>
@@ -343,7 +349,7 @@ const Projects = () => {
           </div>
           {isFiltered && (
             <div className="text-m-blue-light">
-              [ FILTER: {selectedCategory} // {selectedTech} ]
+              [ FILTER: {selectedCategory} {"//"} {selectedTech} ]
             </div>
           )}
         </div>
@@ -376,7 +382,7 @@ const Projects = () => {
                       <div className="absolute top-2.5 right-2.5 flex items-center gap-2 z-10">
                         {project.featured && (
                           <div className="bg-canvas/90 backdrop-blur-sm border border-m-blue-light px-2 py-0.5 text-[9px] font-bold label-uppercase text-m-blue-light flex items-center gap-1">
-                            <Sparkle size={9} /> FEATURED
+                            <SparkleIcon size={9} /> FEATURED
                           </div>
                         )}
                         <div className="bg-canvas/90 backdrop-blur-sm border border-hairline px-2 py-0.5 text-[9px] font-mono text-muted">
@@ -387,6 +393,7 @@ const Projects = () => {
                       {/* Hover Action Strip */}
                       <div className="absolute inset-0 bg-canvas/85 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-3 p-4 z-20">
                         <button
+                          type="button"
                           onClick={() => {
                             sound.openModal()
                             setQuickSpecProject(project)
@@ -394,7 +401,7 @@ const Projects = () => {
                           className="btn-text bg-canvas text-ink border border-ink px-4 py-2 text-xs hover:bg-ink hover:text-canvas transition-colors inline-flex items-center gap-2 cursor-pointer"
                           style={{ borderRadius: "0px" }}
                         >
-                          <Eye size={14} /> QUICK SPEC
+                          <EyeIcon size={14} /> QUICK SPEC
                         </button>
                         <Link
                           to={`/project/${project.slug}`}
@@ -402,7 +409,7 @@ const Projects = () => {
                           className="btn-text bg-ink text-canvas border border-ink px-4 py-2 text-xs hover:bg-body-strong transition-colors inline-flex items-center gap-2"
                           style={{ borderRadius: "0px" }}
                         >
-                          FULL SPEC <ArrowRight size={14} />
+                          FULL SPEC <ArrowRightIcon size={14} />
                         </Link>
                       </div>
                     </div>
@@ -449,8 +456,8 @@ const Projects = () => {
 
                       {/* Telemetry Mini-Spec Grid */}
                       <div className="grid grid-cols-2 gap-2 mb-6 bg-surface-soft p-3 border border-hairline-strong">
-                        {project.metrics.slice(0, 2).map((m, idx) => (
-                          <div key={idx} className="overflow-hidden">
+                        {project.metrics.slice(0, 2).map((m) => (
+                          <div key={m.label} className="overflow-hidden">
                             <div className="text-[10px] label-uppercase text-muted truncate">
                               {m.label}
                             </div>
@@ -485,6 +492,7 @@ const Projects = () => {
                       {/* Card Footer Actions */}
                       <div className="mt-auto pt-4 border-t border-hairline-strong flex items-center justify-between">
                         <button
+                          type="button"
                           onClick={() => {
                             sound.openModal()
                             setQuickSpecProject(project)
@@ -492,7 +500,7 @@ const Projects = () => {
                           onMouseEnter={() => sound.hover()}
                           className="label-uppercase text-muted text-xs hover:text-ink inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                         >
-                          <Eye size={13} /> QUICK SPEC
+                          <EyeIcon size={13} /> QUICK SPEC
                         </button>
 
                         <Link
@@ -502,7 +510,7 @@ const Projects = () => {
                           className="label-uppercase text-ink text-xs inline-flex items-center gap-2 group-hover:gap-3 group-hover:text-m-blue-light transition-all duration-200 font-bold"
                         >
                           EXPLORE SPEC
-                          <ArrowRight size={13} strokeWidth={2} className="group-hover:translate-x-1 transition-transform duration-200" />
+                          <ArrowRightIcon size={13} strokeWidth={2} className="group-hover:translate-x-1 transition-transform duration-200" />
                         </Link>
                       </div>
                     </div>
@@ -528,7 +536,7 @@ const Projects = () => {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-surface-soft border-b border-hairline text-muted font-mono text-xs label-uppercase">
-                    <th className="p-4 md:px-6">REPOSITORY // SYSTEM</th>
+                    <th className="p-4 md:px-6">REPOSITORY {"//"} SYSTEM</th>
                     <th className="p-4">CATEGORY</th>
                     <th className="p-4 hidden md:table-cell">TELEMETRY ARCHITECTURE</th>
                     <th className="p-4 hidden lg:table-cell">SUBSYSTEMS</th>
@@ -621,6 +629,7 @@ const Projects = () => {
                       <td className="p-4 text-right whitespace-nowrap">
                         <div className="flex items-center justify-end gap-2">
                           <button
+                            type="button"
                             onClick={() => {
                               sound.openModal()
                               setQuickSpecProject(project)
@@ -630,7 +639,7 @@ const Projects = () => {
                             title="Quick Spec HUD"
                             aria-label="Open Quick Spec"
                           >
-                            <Eye size={14} />
+                            <EyeIcon size={14} />
                           </button>
                           <Link
                             to={`/project/${project.slug}`}
@@ -639,7 +648,7 @@ const Projects = () => {
                             className="btn-text px-4 py-2 bg-ink text-canvas hover:bg-body-strong inline-flex items-center gap-1.5 text-xs transition-colors"
                             style={{ borderRadius: "0px" }}
                           >
-                            SPEC <ArrowRight size={13} />
+                            SPEC <ArrowRightIcon size={13} />
                           </Link>
                         </div>
                       </td>
@@ -660,7 +669,7 @@ const Projects = () => {
             style={{ borderRadius: "0px" }}
           >
             <div className="w-16 h-16 bg-surface-soft border border-hairline text-muted mx-auto flex items-center justify-center mb-6">
-              <MagnifyingGlass size={28} />
+              <MagnifyingGlassIcon size={28} />
             </div>
             <h3 className="text-ink text-xl font-bold uppercase mb-2">
               NO REPOSITORIES MATCH SPECIFIED CRITERIA
@@ -669,12 +678,13 @@ const Projects = () => {
               No technical projects matched the search term "{searchQuery}" under the selected category and tech filters.
             </p>
             <button
+              type="button"
               onClick={handleResetFilters}
               onMouseEnter={() => sound.hover()}
               className="btn-text bg-transparent text-ink border border-ink px-8 py-3 hover:bg-ink hover:text-canvas transition-colors duration-200 inline-flex items-center gap-2 cursor-pointer text-xs"
               style={{ borderRadius: "0px" }}
             >
-              <ArrowCounterClockwise size={14} /> RESET ALL FILTERS
+              <ArrowCounterClockwiseIcon size={14} /> RESET ALL FILTERS
             </button>
           </motion.div>
         )}

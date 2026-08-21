@@ -1,8 +1,7 @@
 const MStripe = () => {
   return (
-    <div
-      className="m-stripe"
-      role="separator"
+    <hr
+      className="m-stripe border-0"
       aria-hidden="true"
     />
   )

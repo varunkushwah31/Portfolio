@@ -1,5 +1,10 @@
 import { useParams, Link } from "react-router-dom"
-import { ArrowLeft, ArrowRight, ArrowSquareOut, GithubLogo } from "@phosphor-icons/react"
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowSquareOutIcon,
+  GithubLogoIcon,
+} from "@phosphor-icons/react"
 import { motion } from "framer-motion"
 import projects from "@/data/projects"
 import ProjectVisual from "@/components/ProjectVisual"
@@ -22,7 +27,7 @@ const ProjectDetail = () => {
             to="/projects"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-hairline text-body-strong text-sm hover:border-accent/60 hover:text-ink transition-all duration-200"
           >
-            <ArrowLeft size={14} />
+            <ArrowLeftIcon size={14} />
             Back to Projects
           </Link>
         </div>
@@ -53,7 +58,7 @@ const ProjectDetail = () => {
               to="/projects"
               className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors mb-6"
             >
-              <ArrowLeft size={14} />
+              <ArrowLeftIcon size={14} />
               All projects
             </Link>
           </motion.div>
@@ -110,9 +115,9 @@ const ProjectDetail = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-hairline text-body-strong text-sm hover:border-accent/60 hover:text-ink transition-all duration-200"
               >
-                <GithubLogo size={15} />
+                <GithubLogoIcon size={15} />
                 View on GitHub
-                <ArrowSquareOut size={13} />
+                <ArrowSquareOutIcon size={13} />
               </a>
             )}
           </div>
@@ -134,9 +139,9 @@ const ProjectDetail = () => {
       {/* Metrics Grid */}
       <div className="max-w-5xl mx-auto px-6 py-12 border-b border-hairline">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {project.metrics.map((m, idx) => (
+          {project.metrics.map((m) => (
             <div
-              key={idx}
+              key={m.label}
               className="p-5 rounded-xl border border-hairline bg-surface-card"
             >
               <div className="text-xs text-muted mb-2 font-medium uppercase tracking-wider">
@@ -166,7 +171,7 @@ const ProjectDetail = () => {
           </div>
           <div className="lg:col-span-8 space-y-5">
             {project.longDescription.map((paragraph, i) => (
-              <p key={i} className="text-body leading-relaxed">
+              <p key={`desc-${i}-${paragraph.slice(0, 20)}`} className="text-body leading-relaxed">
                 {paragraph}
               </p>
             ))}
@@ -212,7 +217,7 @@ const ProjectDetail = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {project.highlights.map((highlight, i) => (
             <motion.div
-              key={i}
+              key={`highlight-${i}-${highlight.slice(0, 20)}`}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -235,9 +240,9 @@ const ProjectDetail = () => {
           <h2 className="text-2xl font-bold text-ink mb-10">Engineering decisions & trade-offs</h2>
 
           <div className="space-y-5">
-            {project.tradeoffs.map((t, idx) => (
+            {project.tradeoffs.map((t) => (
               <motion.div
-                key={idx}
+                key={t.decision}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -284,7 +289,7 @@ const ProjectDetail = () => {
                 className="group block p-4 rounded-xl border border-hairline hover:border-accent/40 transition-all bg-surface-card"
               >
                 <div className="text-xs text-muted mb-2 flex items-center gap-1">
-                  <ArrowLeft size={12} />
+                  <ArrowLeftIcon size={12} />
                   Previous project
                 </div>
                 <div className="text-ink font-semibold group-hover:text-violet-400 transition-colors">
@@ -302,7 +307,7 @@ const ProjectDetail = () => {
               >
                 <div className="text-xs text-muted mb-2 flex items-center justify-end gap-1">
                   Next project
-                  <ArrowRight size={12} />
+                  <ArrowRightIcon size={12} />
                 </div>
                 <div className="text-ink font-semibold group-hover:text-violet-400 transition-colors">
                   {nextProject.title}
@@ -315,7 +320,7 @@ const ProjectDetail = () => {
               >
                 <div className="text-xs text-muted mb-2 flex items-center justify-end gap-1">
                   Back to
-                  <ArrowRight size={12} />
+                  <ArrowRightIcon size={12} />
                 </div>
                 <div className="text-ink font-semibold group-hover:text-violet-400 transition-colors">
                   All Projects

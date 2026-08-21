@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { GithubLogo, LinkedinLogo, EnvelopeSimple } from '@phosphor-icons/react'
+import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react'
 
 interface NavLinkItem {
   label: string
@@ -91,7 +91,7 @@ export default function Footer() {
               aria-label="GitHub"
               className="p-1 text-zinc-400 hover:text-white transition-colors"
             >
-              <GithubLogo size={16} />
+              <GithubLogoIcon size={16} />
             </a>
             <a
               href="https://www.linkedin.com/in/varun-kushwah/"
@@ -100,14 +100,14 @@ export default function Footer() {
               aria-label="LinkedIn"
               className="p-1 text-zinc-400 hover:text-white transition-colors"
             >
-              <LinkedinLogo size={16} />
+              <LinkedinLogoIcon size={16} />
             </a>
             <a
               href="mailto:varun.kush3@gmail.com"
               aria-label="Email"
               className="p-1 text-zinc-400 hover:text-white transition-colors"
             >
-              <EnvelopeSimple size={16} />
+              <EnvelopeSimpleIcon size={16} />
             </a>
           </div>
         </div>

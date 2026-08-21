@@ -1,13 +1,13 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import {
-  GithubLogo,
-  LinkedinLogo,
-  EnvelopeSimple,
-  FileText,
-  Users,
-  GraduationCap,
-  Trophy,
+  GithubLogoIcon,
+  LinkedinLogoIcon,
+  EnvelopeSimpleIcon,
+  FileTextIcon,
+  UsersIcon,
+  GraduationCapIcon,
+  TrophyIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -41,9 +41,9 @@ const techStack = [
 ]
 
 const socials = [
-  { label: "GitHub", href: "https://github.com/varunkushwah31", icon: GithubLogo },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/varun-kushwah/", icon: LinkedinLogo },
-  { label: "Email", href: "mailto:varun.kush3@gmail.com", icon: EnvelopeSimple },
+  { label: "GitHub", href: "https://github.com/varunkushwah31", icon: GithubLogoIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/varun-kushwah/", icon: LinkedinLogoIcon },
+  { label: "Email", href: "mailto:varun.kush3@gmail.com", icon: EnvelopeSimpleIcon },
 ]
 
 
@@ -82,7 +82,7 @@ export default function About() {
               <div className="text-sm text-body">Software Developer</div>
               <div className="mt-2 inline-flex items-center gap-1.5 text-xs px-3 py-1 rounded-full border border-success/40 text-success bg-success/10">
                 <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-                Open for opportunities
+                <span>Open for opportunities</span>
               </div>
             </div>
           </motion.div>
@@ -115,7 +115,7 @@ export default function About() {
               >
                 devup
               </a>
-              , my college's technical club, where I organize workshops, mentor peers in OOP fundamentals, and champion clean Git workflows across collaborative projects.
+              {", my college's technical club, where I organize workshops, mentor peers in OOP fundamentals, and champion clean Git workflows across collaborative projects."}
             </p>
 
             <p className="text-body leading-relaxed">
@@ -159,7 +159,7 @@ export default function About() {
                 to="/resume"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-hairline text-body-strong text-sm hover:border-accent/60 hover:text-ink transition-all duration-200"
               >
-                <FileText size={16} />
+                <FileTextIcon size={16} />
                 My Resume
               </Link>
             </div>
@@ -202,7 +202,7 @@ export default function About() {
           <h2 className="text-2xl font-bold text-ink mb-6">Highlights</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-5 rounded-xl border border-hairline bg-surface-card hover:border-violet-500/40 transition-colors">
-              <Users size={22} className="text-accent-light mb-3" />
+              <UsersIcon size={22} className="text-accent-light mb-3" />
               <div className="font-semibold text-ink mb-1 flex items-center justify-between">
                 <span>Java Coordinator @ devup</span>
                 <a
@@ -220,7 +220,7 @@ export default function About() {
               <div className="text-xs text-muted mt-2">2024 – Present</div>
             </div>
             <div className="p-5 rounded-xl border border-hairline bg-surface-card">
-              <GraduationCap size={22} className="text-accent-light mb-3" />
+              <GraduationCapIcon size={22} className="text-accent-light mb-3" />
               <div className="font-semibold text-ink mb-1">B.Tech Computer Science</div>
               <div className="text-sm text-body">
                 Focusing on DSA, Distributed Systems, DBMS, and Cloud/DevOps infrastructure.
@@ -228,7 +228,7 @@ export default function About() {
               <div className="text-xs text-muted mt-2">2023 – 2027</div>
             </div>
             <div className="p-5 rounded-xl border border-hairline bg-surface-card">
-              <Trophy size={22} className="text-accent-light mb-3" />
+              <TrophyIcon size={22} className="text-accent-light mb-3" />
               <div className="font-semibold text-ink mb-1">5+ Projects Built</div>
               <div className="text-sm text-body">
                 Full-stack, real-time P2P, ML, and mobile apps — always exploring new domains.

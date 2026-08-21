@@ -3,19 +3,19 @@ import { createPortal } from "react-dom"
 import { useNavigate } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  X,
-  GithubLogo,
-  LinkedinLogo,
-  EnvelopeSimple,
-  ArrowRight,
-  GitFork,
-  House,
-  User,
-  Code,
-  Briefcase,
-  MagnifyingGlass,
-  Cpu,
-  ArrowSquareOut,
+  XIcon,
+  GithubLogoIcon,
+  LinkedinLogoIcon,
+  EnvelopeSimpleIcon,
+  ArrowRightIcon,
+  GitForkIcon,
+  HouseIcon,
+  UserIcon,
+  CodeIcon,
+  BriefcaseIcon,
+  MagnifyingGlassIcon,
+  CpuIcon,
+  ArrowSquareOutIcon,
 } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 
@@ -34,17 +34,12 @@ interface CommandItem {
   action: () => void
 }
 
-const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
+const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose, onOpenResume }) => {
   const [query, setQuery] = useState("")
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [copied, setCopied] = useState(false)
-  const [mounted, setMounted] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   const handleClose = () => {
     setQuery("")
@@ -74,7 +69,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: "Home",
       subtitle: "Go to the home page",
       category: "Navigation",
-      icon: <House size={16} className="text-violet-400" />,
+      icon: <HouseIcon size={16} className="text-violet-400" />,
       action: () => goTo("/"),
     },
     {
@@ -82,7 +77,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: "About",
       subtitle: "About Varun Kushwah & skills",
       category: "Navigation",
-      icon: <User size={16} className="text-violet-400" />,
+      icon: <UserIcon size={16} className="text-violet-400" />,
       action: () => goTo("/about"),
     },
     {
@@ -90,7 +85,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: "Tech Stack",
       subtitle: "Languages, frameworks & developer tools",
       category: "Navigation",
-      icon: <Cpu size={16} className="text-violet-400" />,
+      icon: <CpuIcon size={16} className="text-violet-400" />,
       action: () => goTo("/tech-stack"),
     },
     {
@@ -98,7 +93,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: "Projects",
       subtitle: "Browse all projects & repositories",
       category: "Navigation",
-      icon: <GitFork size={16} className="text-violet-400" />,
+      icon: <GitForkIcon size={16} className="text-violet-400" />,
       action: () => goTo("/projects"),
     },
     {
@@ -106,8 +101,15 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: "Resume",
       subtitle: "Education, experience & achievements",
       category: "Navigation",
-      icon: <Briefcase size={16} className="text-violet-400" />,
-      action: () => goTo("/resume"),
+      icon: <BriefcaseIcon size={16} className="text-violet-400" />,
+      action: () => {
+        if (onOpenResume) {
+          handleClose()
+          onOpenResume()
+        } else {
+          goTo("/resume")
+        }
+      },
     },
 
     // Actions
@@ -116,9 +118,9 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: "devup Club Website",
       subtitle: "devup.co.in · Technical club & workshops",
       category: "Actions",
-      icon: <ArrowSquareOut size={16} className="text-violet-400" />,
+      icon: <ArrowSquareOutIcon size={16} className="text-violet-400" />,
       action: () => {
-        window.open("https://devup.co.in/", "_blank")
+        window.open("https://devup.co.in/", "_blank", "noopener,noreferrer")
         handleClose()
       },
     },
@@ -127,9 +129,9 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: "GitHub Profile",
       subtitle: "github.com/varunkushwah31",
       category: "Actions",
-      icon: <GithubLogo size={16} className="text-zinc-300" />,
+      icon: <GithubLogoIcon size={16} className="text-zinc-300" />,
       action: () => {
-        window.open("https://github.com/varunkushwah31", "_blank")
+        window.open("https://github.com/varunkushwah31", "_blank", "noopener,noreferrer")
         handleClose()
       },
     },
@@ -138,9 +140,9 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: "LinkedIn Profile",
       subtitle: "linkedin.com/in/varun-kushwah",
       category: "Actions",
-      icon: <LinkedinLogo size={16} className="text-blue-400" />,
+      icon: <LinkedinLogoIcon size={16} className="text-blue-400" />,
       action: () => {
-        window.open("https://www.linkedin.com/in/varun-kushwah/", "_blank")
+        window.open("https://www.linkedin.com/in/varun-kushwah/", "_blank", "noopener,noreferrer")
         handleClose()
       },
     },
@@ -149,7 +151,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: "Copy Email Address",
       subtitle: "varun.kush3@gmail.com",
       category: "Actions",
-      icon: <EnvelopeSimple size={16} className="text-emerald-400" />,
+      icon: <EnvelopeSimpleIcon size={16} className="text-emerald-400" />,
       action: () => {
         navigator.clipboard.writeText("varun.kush3@gmail.com")
         setCopied(true)
@@ -163,7 +165,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
       title: p.title,
       subtitle: `${p.category} · ${p.tagline}`,
       category: "Projects" as const,
-      icon: <Code size={16} className="text-violet-400" />,
+      icon: <CodeIcon size={16} className="text-violet-400" />,
       action: () => {
         handleClose()
         navigate(`/project/${p.slug}`)
@@ -207,12 +209,6 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
     }
   }
 
-  useEffect(() => {
-    setSelectedIndex(0)
-  }, [query])
-
-  if (!mounted) return null
-
   return createPortal(
     <AnimatePresence>
       {isOpen && (
@@ -248,23 +244,30 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
           >
             {/* Search Input Box */}
             <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#262626] bg-[#171717] w-full">
-              <MagnifyingGlass size={18} className="text-zinc-400 flex-shrink-0" />
+              <MagnifyingGlassIcon size={18} className="text-zinc-400 flex-shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
                 placeholder="Type a command or search..."
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value)
+                  setSelectedIndex(0)
+                }}
                 onKeyDown={handleKeyDown}
                 className="flex-1 min-w-0 bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 outline-none"
               />
               {query && (
                 <button
-                  onClick={() => setQuery("")}
+                  type="button"
+                  onClick={() => {
+                    setQuery("")
+                    setSelectedIndex(0)
+                  }}
                   className="p-1 text-zinc-400 hover:text-zinc-100 transition-colors flex-shrink-0"
                   aria-label="Clear query"
                 >
-                  <X size={14} />
+                  <XIcon size={14} />
                 </button>
               )}
               <kbd className="hidden sm:inline-flex text-[10px] font-mono text-zinc-400 border border-zinc-700 px-1.5 py-0.5 rounded bg-zinc-800 flex-shrink-0">
@@ -292,6 +295,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
                       const isSelected = globalIdx === selectedIndex
                       return (
                         <button
+                          type="button"
                           key={cmd.id}
                           onClick={cmd.action}
                           onMouseEnter={() => setSelectedIndex(globalIdx)}
@@ -309,7 +313,7 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
                             )}
                           </div>
                           {isSelected && (
-                            <ArrowRight size={13} className="text-violet-400 flex-shrink-0" />
+                            <ArrowRightIcon size={13} className="text-violet-400 flex-shrink-0" />
                           )}
                         </button>
                       )
@@ -331,11 +335,11 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
                 <span className="flex items-center gap-1">
                   <kbd className="border border-zinc-700 px-1 py-0.5 rounded bg-zinc-800 font-mono text-[10px] text-zinc-400">↑</kbd>
                   <kbd className="border border-zinc-700 px-1 py-0.5 rounded bg-zinc-800 font-mono text-[10px] text-zinc-400">↓</kbd>
-                  navigate
+                  <span>navigate</span>
                 </span>
                 <span className="flex items-center gap-1">
                   <kbd className="border border-zinc-700 px-1 py-0.5 rounded bg-zinc-800 font-mono text-[10px] text-zinc-400">↵</kbd>
-                  select
+                  <span>select</span>
                 </span>
               </div>
               <span className="text-zinc-600">Quick Navigation</span>
