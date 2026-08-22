@@ -25,7 +25,6 @@ const footerNav: NavColumn[] = [
   {
     title: 'Content',
     links: [
-      { label: 'Writing', href: '/#writing' },
       { label: 'Repositories', href: '/projects' },
       { label: 'Devup Club', href: 'https://devup.co.in/', external: true },
       { label: 'Tech Stack', href: '/tech-stack' },
@@ -81,7 +80,7 @@ export default function Footer() {
       {/* Bottom Bar with Copyright & Socials */}
       <div className="border-t border-[#1f1f23]">
         <div className="max-w-4xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
-          <p>© 2025 Varun Kushwah — India</p>
+          <p>© 2026 Varun Kushwah — India</p>
 
           <div className="flex items-center gap-3">
             <a

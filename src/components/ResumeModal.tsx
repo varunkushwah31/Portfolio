@@ -38,9 +38,13 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
     }
   }, [isOpen, onClose])
 
-  const handlePrint = () => {
+  const handleDownloadPDF = () => {
     sound.click()
-    window.print()
+    const link = document.createElement("a")
+    link.href = "/Varun_Kushwah_Resume.pdf"
+    link.download = "Varun_Kushwah_Resume.pdf"
+    link.target = "_blank"
+    link.click()
   }
 
   const rawResumeText = `VARUN KUSHWAH
@@ -128,14 +132,14 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={handlePrint}
+                  onClick={handleDownloadPDF}
                   onMouseEnter={() => sound.hover()}
                   className="btn-text px-3 py-2 bg-surface-card hover:bg-surface-elevated text-ink border border-hairline text-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                   style={{ borderRadius: "0px" }}
-                  title="Print / Save PDF"
+                  title="Download Resume PDF"
                 >
                   <PrinterIcon size={14} />
-                  <span className="hidden sm:inline">PRINT / PDF</span>
+                  <span className="hidden sm:inline">DOWNLOAD PDF</span>
                 </button>
 
                 <button

@@ -4,23 +4,22 @@ import {
   CheckCircleIcon,
   CodeIcon,
   GlobeIcon,
-  DeviceMobileIcon,
   GraduationCapIcon,
   DownloadSimpleIcon,
+  TrophyIcon,
+  BriefcaseIcon,
+  FolderIcon,
 } from "@phosphor-icons/react"
 
 import {
   JavaIcon,
   SpringIcon,
   ReactIcon,
-  FlutterIcon,
   PythonIcon,
   TypeScriptIcon,
-  NodeIcon,
   DockerIcon,
   GitIcon,
   WebRTCIcon,
-  TailwindIcon,
   PostgresIcon,
   LinuxIcon,
 } from "@/components/TechIcons"
@@ -31,22 +30,22 @@ interface ResumeEntry {
   organization: string
   type: string
   period: string
-  location: string
+  location?: string
   icon: React.ReactNode
   iconBg: string
-  techIcons: Array<{ name: string; icon: React.FC<{ size?: number; className?: string }> }>
+  techIcons?: Array<{ name: string; icon: React.FC<{ size?: number; className?: string }> }>
   bullets: string[]
 }
 
-const resumeEntries: ResumeEntry[] = [
+const experiences: ResumeEntry[] = [
   {
-    id: "devup-lead",
-    role: "Java Coordinator & Lead Mentor",
-    organization: "devup Technical Club",
-    type: "Leadership · Mentorship",
-    period: "Jan 2024 – Present · 1 yr+",
+    id: "devup-coordinator",
+    role: "Java & DSA Coordinator",
+    organization: "Devup - College Tech Club",
+    type: "Leadership & Mentorship",
+    period: "2024 – Present",
     location: "Campus · Hybrid",
-    icon: <CheckCircleIcon size={18} weight="fill" className="text-emerald-400" />,
+    icon: <CheckCircleIcon size={20} weight="fill" className="text-emerald-400" />,
     iconBg: "bg-emerald-500/10 border-emerald-500/30",
     techIcons: [
       { name: "Java", icon: JavaIcon },
@@ -56,88 +55,86 @@ const resumeEntries: ResumeEntry[] = [
       { name: "PostgreSQL", icon: PostgresIcon },
     ],
     bullets: [
-      "Elected as Java Coordinator to spearhead technical workshops and organize university-wide competitive programming and architecture hackathons.",
-      "Mentoring 100+ students in core Java fundamentals, object-oriented design patterns, Spring Boot microservices, and clean Git branching workflows.",
-      "Architected modular code repositories and guided student contributors on pull requests, code reviews, and test-driven development.",
-      "Authored comprehensive workshop modules and starter boilerplates for enterprise Java development.",
+      "Spearhead Java-focused learning initiatives for 20+ club members, accelerating peer readiness for technical interviews.",
+      "Guide peers in algorithmic problem-solving; improved mentee problem-solving speed by 30%.",
+      "Run weekly DSA sessions on trees, graphs, and dynamic programming.",
     ],
   },
-  {
-    id: "mangoshare",
-    role: "Backend & Real-Time Engineer",
-    organization: "MangoShare P2P Protocol",
-    type: "Distributed Systems · Project Lead",
-    period: "Dec 2023 – Present · 1 yr 3 mos",
-    location: "India · Remote",
-    icon: <GlobeIcon size={18} weight="bold" className="text-rose-400" />,
-    iconBg: "bg-rose-500/10 border-rose-500/30",
-    techIcons: [
-      { name: "React", icon: ReactIcon },
-      { name: "WebRTC", icon: WebRTCIcon },
-      { name: "TypeScript", icon: TypeScriptIcon },
-      { name: "Node.js", icon: NodeIcon },
-      { name: "Tailwind CSS", icon: TailwindIcon },
-    ],
-    bullets: [
-      "Designed and implemented a decentralized browser-to-browser P2P file-sharing application using WebRTC DataChannels with zero intermediate server payload routing.",
-      "Engineered WebSocket signaling servers for SDP handshake negotiation, STUN/TURN ICE candidate gathering, and real-time room discovery.",
-      "Handled binary file chunking, ArrayBuffer serialization, backpressure flow control, and end-to-end checksum verification for fast transfers.",
-      "Built responsive modern frontend with React and TypeScript, providing live progress meters, transfer speed gauges, and automatic peer reconnects.",
-    ],
-  },
+]
+
+const projects: ResumeEntry[] = [
   {
     id: "leetcode-tracker",
-    role: "Full-Stack Developer",
-    organization: "LeetCode Tracker & Monorepo",
-    type: "Developer Tooling · Open Source",
-    period: "2024 · Full-Stack",
-    location: "India · Remote",
-    icon: <CodeIcon size={18} weight="bold" className="text-sky-400" />,
+    role: "LeetcodeTracker",
+    organization: "Full-Stack Coding Progress Tracker",
+    type: "Personal Project",
+    period: "04/2026",
+    icon: <CodeIcon size={20} weight="bold" className="text-sky-400" />,
     iconBg: "bg-sky-500/10 border-sky-500/30",
     techIcons: [
-      { name: "TypeScript", icon: TypeScriptIcon },
+      { name: "Java", icon: JavaIcon },
+      { name: "Spring Boot", icon: SpringIcon },
       { name: "React", icon: ReactIcon },
-      { name: "Node.js", icon: NodeIcon },
       { name: "Docker", icon: DockerIcon },
-      { name: "Git", icon: GitIcon },
-      { name: "Tailwind CSS", icon: TailwindIcon },
     ],
     bullets: [
-      "Developed full-stack algorithmic progress dashboard with automated problem tracking, tagging, revision schedules, and custom analytical metrics.",
-      "Integrated responsive modern UI with Tailwind CSS v4, dark-mode first design tokens, and smooth Framer Motion animations.",
-      "Configured Git subtrees and modular architecture for coordinated deployment and clean code reusability across full-stack applications.",
-      "Implemented Docker containerization and automated test suites for reproducible local development and build verification.",
+      "Built a full-stack coding-progress tracker with real-time metrics across 100+ tracked submissions.",
+      "Tech Stack: Java, Spring Boot, React, MongoDB, Docker.",
     ],
   },
   {
-    id: "mobile-ml",
-    role: "Mobile App & ML Developer",
-    organization: "Daily Quotes App & ML Classifier",
-    type: "Mobile Engineering · Machine Learning",
-    period: "2023 – 2024 · 1 yr",
-    location: "India · Remote",
-    icon: <DeviceMobileIcon size={18} weight="bold" className="text-purple-400" />,
-    iconBg: "bg-purple-500/10 border-purple-500/30",
+    id: "w2w-share",
+    role: "W2W Share",
+    organization: "Enterprise Offline Encrypted P2P File Sharing",
+    type: "Distributed Systems Project",
+    period: "2024 – Present",
+    icon: <GlobeIcon size={20} weight="bold" className="text-rose-400" />,
+    iconBg: "bg-rose-500/10 border-rose-500/30",
     techIcons: [
-      { name: "Flutter", icon: FlutterIcon },
-      { name: "Python", icon: PythonIcon },
+      { name: "Java", icon: JavaIcon },
+      { name: "Spring Boot", icon: SpringIcon },
+      { name: "WebRTC", icon: WebRTCIcon },
+      { name: "React", icon: ReactIcon },
       { name: "Docker", icon: DockerIcon },
-      { name: "PostgreSQL", icon: PostgresIcon },
     ],
     bullets: [
-      "Engineered cross-platform Daily Quotes mobile application using Flutter & Dart with clean state management, local SQLite caching, and fluid animations.",
-      "Built automated ML classification pipelines in Python for agricultural disease diagnosis with high precision and recall benchmarks.",
-      "Containerized Python inference scripts with Docker and structured REST endpoints for seamless frontend and mobile consumption.",
+      "Architected a 100% offline peer-to-peer file transfer platform using WebRTC DataChannels with AES-256-GCM end-to-end encryption.",
+      "Optimized for 10GB+ transfers with near-zero memory footprint; added Prometheus/Grafana observability via Docker.",
+      "Tech Stack: Java 25, Spring Boot 4.x, WebRTC, WebSocket, React 19, Docker, Prometheus, Grafana.",
     ],
   },
   {
-    id: "education",
-    role: "B.Tech in Computer Science & Engineering",
-    organization: "Engineering College",
+    id: "page-pulse",
+    role: "Page Pulse",
+    organization: "Full-Stack Web Auditing & SEO Analytics Platform",
+    type: "Web Auditing Architecture",
+    period: "2025 – Present",
+    icon: <GlobeIcon size={20} weight="bold" className="text-emerald-400" />,
+    iconBg: "bg-emerald-500/10 border-emerald-500/30",
+    techIcons: [
+      { name: "Java", icon: JavaIcon },
+      { name: "Spring Boot", icon: SpringIcon },
+      { name: "React", icon: ReactIcon },
+      { name: "TypeScript", icon: TypeScriptIcon },
+      { name: "Docker", icon: DockerIcon },
+    ],
+    bullets: [
+      "Built a full-stack auditing platform delivering real-time SEO, accessibility, performance, and security metrics for any URL.",
+      "Designed a dual-database architecture (H2 + MongoDB) with a Jsoup/Playwright scraping engine and WebSocket live progress streaming.",
+      "Tech Stack: Java 25, Spring Boot, React 19, TypeScript, MongoDB, Redis, Playwright, Docker.",
+    ],
+  },
+]
+
+const education: ResumeEntry[] = [
+  {
+    id: "kiet-btech",
+    role: "B.Tech, Computer Science",
+    organization: "KIET Group of Institutions",
     type: "Undergraduate Degree",
-    period: "Aug 2023 – Expected May 2027 · 4 yrs",
-    location: "India · On-Campus",
-    icon: <GraduationCapIcon size={18} weight="bold" className="text-indigo-400" />,
+    period: "2024 – Present",
+    location: "CGPA: 8.27 / 10.00",
+    icon: <GraduationCapIcon size={20} weight="bold" className="text-indigo-400" />,
     iconBg: "bg-indigo-500/10 border-indigo-500/30",
     techIcons: [
       { name: "Java", icon: JavaIcon },
@@ -146,11 +143,35 @@ const resumeEntries: ResumeEntry[] = [
       { name: "PostgreSQL", icon: PostgresIcon },
     ],
     bullets: [
-      "Core Coursework: Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems (DBMS), Operating Systems, Computer Networks.",
-      "Active Java Coordinator at devup technical club, organizing campus-wide student mentoring and developer workshops.",
-      "Consistently maintaining strong academic standing while building production-grade software projects.",
+      "Specializing in Computer Science & Engineering with core emphasis on Java, Spring Boot, and Distributed Architectures.",
+      "Current Academic Standing: CGPA 8.27 / 10.00.",
     ],
   },
+]
+
+const achievements = [
+  "500+ DSA problems solved on LeetCode",
+  "Top 105 nationally - Google Solution Challenge 2025",
+]
+
+const skillsList = [
+  "Java",
+  "Spring",
+  "Spring Boot",
+  "Spring Security",
+  "React",
+  "Next.js",
+  "Node.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "MySQL",
+  "MongoDB",
+  "PostgreSQL",
+  "REST APIs",
+  "Git",
+  "Docker",
+  "Data Structures",
+  "Algorithms",
 ]
 
 export default function ResumePage() {
@@ -159,107 +180,256 @@ export default function ResumePage() {
       {/* Page Header */}
       <div className="max-w-4xl mx-auto px-6 pt-16 pb-8">
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-b border-[#27272a] pb-8"
         >
-          <div>
+          <div className="flex-1 min-w-0">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-2">
               Resume
             </h1>
-            <p className="text-zinc-400 text-base sm:text-lg font-normal">
+            <p className="text-zinc-400 text-base sm:text-lg font-normal leading-relaxed">
               A brief overview of my professional journey and career milestones.
             </p>
           </div>
 
           {/* Top-Right Download Resume Button */}
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="shrink-0">
             <a
-              href="mailto:varun.kush3@gmail.com?subject=Resume%20Request%20-%20Varun%20Kushwah"
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-xs sm:text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none whitespace-nowrap self-start sm:self-auto"
+              href="/Varun_Kushwah_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download="Varun_Kushwah_Resume.pdf"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] hover:bg-[#18181b] text-white text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none whitespace-nowrap"
             >
-              <DownloadSimpleIcon size={15} weight="bold" />
+              <DownloadSimpleIcon size={16} weight="bold" />
               <span>Download resume</span>
             </a>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Experience Stream Container matching Image 2 */}
-      <div className="max-w-4xl mx-auto px-6 pb-24">
-        <div className="space-y-12 mt-4">
-          {resumeEntries.map((entry, index) => (
-            <motion.div
-              key={entry.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.08, ease: "easeOut" }}
-              className="flex items-start gap-4 sm:gap-5"
-            >
-              {/* Left Column: Avatar Icon matching bonabrian */}
+      {/* Main Content Sections */}
+      <div className="max-w-4xl mx-auto px-6 pb-24 space-y-14">
+        {/* Experience Section */}
+        <section>
+          <div className="flex items-center gap-2.5 mb-6 text-emerald-400">
+            <BriefcaseIcon size={20} weight="bold" />
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Experience & Leadership
+            </h2>
+          </div>
+
+          <div className="space-y-8">
+            {experiences.map((entry) => (
+              <div key={entry.id} className="flex items-start gap-4 sm:gap-5">
+                <div
+                  className={`w-10 h-10 rounded-full border ${entry.iconBg} flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm`}
+                >
+                  {entry.icon}
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                    <h3 className="font-bold text-white text-base sm:text-lg tracking-tight">
+                      {entry.role}
+                    </h3>
+                    <span className="text-xs font-mono text-zinc-400 shrink-0">
+                      {entry.period}
+                    </span>
+                  </div>
+
+                  <div className="text-sm text-zinc-300 font-medium mt-0.5">
+                    {entry.organization} <span className="text-zinc-500 font-normal">· {entry.type}</span>
+                  </div>
+
+                  {entry.techIcons && (
+                    <div className="flex items-center gap-1.5 mt-2.5 mb-3 flex-wrap">
+                      {entry.techIcons.map((tech) => {
+                        const TechSvg = tech.icon
+                        return (
+                          <div
+                            key={tech.name}
+                            className="w-6 h-6 rounded-md bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-300 shadow-sm"
+                            title={tech.name}
+                          >
+                            <TechSvg size={13} className="w-3.5 h-3.5" />
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+
+                  <ul className="space-y-2 text-sm text-zinc-300 font-normal leading-relaxed mt-2">
+                    {entry.bullets.map((bullet, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="text-emerald-400 mt-1.5 flex-shrink-0 text-xs">•</span>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Featured Projects Section */}
+        <section>
+          <div className="flex items-center gap-2.5 mb-6 text-sky-400">
+            <FolderIcon size={20} weight="bold" />
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Featured Projects
+            </h2>
+          </div>
+
+          <div className="space-y-10">
+            {projects.map((entry) => (
+              <div key={entry.id} className="flex items-start gap-4 sm:gap-5">
+                <div
+                  className={`w-10 h-10 rounded-full border ${entry.iconBg} flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm`}
+                >
+                  {entry.icon}
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                    <h3 className="font-bold text-white text-base sm:text-lg tracking-tight">
+                      {entry.role}
+                    </h3>
+                    <span className="text-xs font-mono text-zinc-400 shrink-0">
+                      {entry.period}
+                    </span>
+                  </div>
+
+                  <div className="text-sm text-zinc-300 font-medium mt-0.5">
+                    {entry.organization} <span className="text-zinc-500 font-normal">· {entry.type}</span>
+                  </div>
+
+                  {entry.techIcons && (
+                    <div className="flex items-center gap-1.5 mt-2.5 mb-3 flex-wrap">
+                      {entry.techIcons.map((tech) => {
+                        const TechSvg = tech.icon
+                        return (
+                          <div
+                            key={tech.name}
+                            className="w-6 h-6 rounded-md bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-300 shadow-sm"
+                            title={tech.name}
+                          >
+                            <TechSvg size={13} className="w-3.5 h-3.5" />
+                          </div>
+                        )
+                      })}
+                    </div>
+                  )}
+
+                  <ul className="space-y-2 text-sm text-zinc-300 font-normal leading-relaxed mt-2">
+                    {entry.bullets.map((bullet, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="text-sky-400 mt-1.5 flex-shrink-0 text-xs">•</span>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Education Section */}
+        <section>
+          <div className="flex items-center gap-2.5 mb-6 text-indigo-400">
+            <GraduationCapIcon size={20} weight="bold" />
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Education
+            </h2>
+          </div>
+
+          <div className="space-y-8">
+            {education.map((entry) => (
+              <div key={entry.id} className="flex items-start gap-4 sm:gap-5">
+                <div
+                  className={`w-10 h-10 rounded-full border ${entry.iconBg} flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm`}
+                >
+                  {entry.icon}
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                    <h3 className="font-bold text-white text-base sm:text-lg tracking-tight">
+                      {entry.role}
+                    </h3>
+                    <span className="text-xs font-mono text-zinc-400 shrink-0">
+                      {entry.period}
+                    </span>
+                  </div>
+
+                  <div className="text-sm text-zinc-300 font-medium mt-0.5">
+                    {entry.organization} {entry.location && <span className="text-emerald-400 font-mono text-xs ml-2 font-medium">[{entry.location}]</span>}
+                  </div>
+
+                  <ul className="space-y-2 text-sm text-zinc-300 font-normal leading-relaxed mt-3">
+                    {entry.bullets.map((bullet, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <span className="text-indigo-400 mt-1.5 flex-shrink-0 text-xs">•</span>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Key Achievements Section */}
+        <section>
+          <div className="flex items-center gap-2.5 mb-4 text-amber-400">
+            <TrophyIcon size={20} weight="bold" />
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Key Achievements
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            {achievements.map((item, idx) => (
               <div
-                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full border ${entry.iconBg} flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm`}
+                key={idx}
+                className="p-4 rounded-xl bg-[#141414] border border-[#27272a] text-sm text-zinc-200 font-medium flex items-center gap-3 shadow-sm"
               >
-                {entry.icon}
+                <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" />
+                <span>{item}</span>
               </div>
+            ))}
+          </div>
+        </section>
 
-              {/* Right Column: Detailed Experience Entry */}
-              <div className="flex-1 min-w-0">
-                {/* Role Title */}
-                <h3 className="font-bold text-white text-base sm:text-lg tracking-tight">
-                  {entry.role}
-                </h3>
+        {/* Skills Section */}
+        <section>
+          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-4">
+            Technical Skills
+          </h2>
 
-                {/* Organization & Type */}
-                <div className="text-sm text-zinc-300 font-medium mt-0.5">
-                  {entry.organization} <span className="text-zinc-500 font-normal">· {entry.type}</span>
-                </div>
+          <div className="flex flex-wrap gap-2">
+            {skillsList.map((skill) => (
+              <span
+                key={skill}
+                className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#18181b] border border-[#27272a] text-zinc-300 hover:text-white hover:border-zinc-500 transition-colors"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </section>
 
-                {/* Period & Location */}
-                <div className="text-xs text-zinc-500 mt-1 font-normal">
-                  {entry.period}
-                </div>
-                <div className="text-xs text-zinc-500 font-normal">
-                  {entry.location}
-                </div>
-
-                {/* Mini Tech Stack Icon Row under header */}
-                <div className="flex items-center gap-1.5 mt-3 mb-3.5 flex-wrap">
-                  {entry.techIcons.map((tech) => {
-                    const TechSvg = tech.icon
-                    return (
-                      <div
-                        key={tech.name}
-                        className="w-6 h-6 rounded-md bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-300 shadow-sm"
-                        title={tech.name}
-                      >
-                        <TechSvg size={13} className="w-3.5 h-3.5" />
-                      </div>
-                    )
-                  })}
-                </div>
-
-                {/* Bullet Points */}
-                <ul className="space-y-2 text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed">
-                  {entry.bullets.map((bullet, bIndex) => (
-                    <li key={bIndex} className="flex items-start gap-2.5">
-                      <span className="text-zinc-600 mt-1.5 flex-shrink-0">•</span>
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Footer Timestamp matching reference image */}
-        <div className="mt-16 pt-8 border-t border-[#1f1f23] text-xs text-zinc-500 font-normal">
+        {/* Footer Timestamp */}
+        <div className="pt-8 border-t border-[#1f1f23] text-xs text-zinc-500 font-normal">
           Last updated at <span className="text-zinc-400 font-medium">August, 2026</span>
         </div>
       </div>
     </div>
   )
 }
+

@@ -12,10 +12,11 @@ import {
   EnvelopeSimpleIcon,
   GithubLogoIcon,
   LinkedinLogoIcon,
-  ArrowRightIcon,
+  CaretRightIcon,
   XIcon,
   CodeIcon,
   ArrowSquareOutIcon,
+  DownloadSimpleIcon,
 } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 
@@ -116,6 +117,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     },
 
     // Actions
+    {
+      id: "action-resume-pdf",
+      title: "Download Resume (PDF)",
+      subtitle: "Varun_Kushwah_Resume.pdf · Direct PDF download",
+      category: "Actions",
+      icon: <DownloadSimpleIcon size={18} className="text-emerald-400" />,
+      action: () => {
+        window.open("/Varun_Kushwah_Resume.pdf", "_blank", "noopener,noreferrer")
+        handleClose()
+      },
+    },
     {
       id: "action-devup",
       title: "devup Club Website",
@@ -226,24 +238,24 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           onClick={handleClose}
         >
           {/* Backdrop with dark blur */}
-          <div className="absolute inset-0 bg-black/75 backdrop-blur-md" />
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
 
-          {/* Modal Centered & Enlarged in Viewport */}
+          {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -10 }}
+            initial={{ opacity: 0, scale: 0.97, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -10 }}
+            exit={{ opacity: 0, scale: 0.97, y: -8 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="relative w-full max-w-2xl my-auto rounded-2xl border border-[#333338] bg-[#121215] shadow-2xl overflow-hidden z-10 flex flex-col"
+            className="relative w-full max-w-2xl my-auto rounded-2xl border border-[#27272a] bg-[#0a0a0a] shadow-2xl overflow-hidden z-10 flex flex-col"
             style={{
               maxHeight: "88vh",
-              boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.08)",
+              boxShadow: "0 25px 60px -15px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.05)",
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Search Input Box - Spacious & Clear */}
-            <div className="flex items-center gap-3.5 px-5 py-4 sm:py-4.5 border-b border-[#26262a] bg-[#16161a] w-full">
-              <MagnifyingGlassIcon size={20} className="text-zinc-400 flex-shrink-0" />
+            {/* Search Input Box */}
+            <div className="flex items-center gap-3.5 px-5 py-4 border-b border-[#27272a] bg-[#0e0e10] w-full">
+              <MagnifyingGlassIcon size={18} className="text-zinc-400 flex-shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -254,7 +266,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   setSelectedIndex(0)
                 }}
                 onKeyDown={handleKeyDown}
-                className="flex-1 min-w-0 bg-transparent text-base sm:text-[17px] text-zinc-100 placeholder:text-zinc-500 outline-none"
+                className="flex-1 min-w-0 bg-transparent text-sm sm:text-base text-white placeholder:text-zinc-500 outline-none"
               />
               {query && (
                 <button
@@ -263,13 +275,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     setQuery("")
                     setSelectedIndex(0)
                   }}
-                  className="p-1 text-zinc-400 hover:text-zinc-100 transition-colors flex-shrink-0 cursor-pointer"
+                  className="p-1 text-zinc-400 hover:text-white transition-colors flex-shrink-0 cursor-pointer"
                   aria-label="Clear query"
                 >
-                  <XIcon size={16} />
+                  <XIcon size={15} />
                 </button>
               )}
-              <kbd className="hidden sm:inline-flex text-xs font-mono text-zinc-400 border border-zinc-700/80 px-2 py-0.5 rounded-md bg-zinc-800/80 flex-shrink-0">
+              <kbd className="hidden sm:inline-flex text-[11px] font-mono text-zinc-400 border border-[#27272a] px-2 py-0.5 rounded-md bg-[#18181b] flex-shrink-0">
                 ESC
               </kbd>
             </div>
@@ -281,11 +293,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               </div>
             )}
 
-            {/* Command List - Expanded Height & Padding */}
-            <div className="max-h-[420px] sm:max-h-[480px] overflow-y-auto p-3 sm:p-3.5 w-full space-y-3">
+            {/* Command List */}
+            <div className="max-h-[420px] sm:max-h-[480px] overflow-y-auto p-3 sm:p-3.5 w-full space-y-3 bg-[#0a0a0a]">
               {Object.entries(grouped).map(([category, cmds]) => (
                 <div key={category} className="mb-2 last:mb-0">
-                  <div className="px-3.5 py-1.5 text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+                  <div className="px-3.5 py-1 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
                     {category}
                   </div>
                   <div className="space-y-1 mt-1">
@@ -298,29 +310,29 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                           key={cmd.id}
                           onClick={cmd.action}
                           onMouseEnter={() => setSelectedIndex(globalIdx)}
-                          className={`w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-left transition-all duration-150 cursor-pointer ${
+                          className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-left transition-all duration-150 cursor-pointer ${
                             isSelected
-                              ? "bg-white/10 text-white border border-white/20 shadow-sm"
-                              : "text-zinc-300 hover:bg-[#1a1a1f] border border-transparent"
+                              ? "bg-[#18181b] text-white border border-[#3f3f46]"
+                              : "text-zinc-300 hover:bg-[#141414] hover:text-white border border-transparent"
                           }`}
                         >
-                          <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                            isSelected ? "bg-white/10 border border-white/20" : "bg-[#1a1a20] border border-[#27272f]"
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                            isSelected ? "bg-[#27272a] border border-[#3f3f46] text-white" : "bg-[#141414] border border-[#27272a] text-zinc-400"
                           }`}>
                             {cmd.icon}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="text-[15px] font-semibold tracking-tight truncate text-white">
+                            <div className="text-sm font-medium tracking-tight truncate text-white">
                               {cmd.title}
                             </div>
                             {cmd.subtitle && (
-                              <div className="text-xs sm:text-[13px] text-zinc-400 truncate mt-0.5 font-normal">
+                              <div className="text-xs text-zinc-400 truncate mt-0.5 font-normal">
                                 {cmd.subtitle}
                               </div>
                             )}
                           </div>
                           {isSelected && (
-                            <ArrowRightIcon size={16} className="text-white flex-shrink-0 ml-1" />
+                            <CaretRightIcon size={14} weight="bold" className="text-zinc-400 flex-shrink-0 ml-1" />
                           )}
                         </button>
                       )
@@ -337,15 +349,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             </div>
 
             {/* Footer Telemetry */}
-            <div className="px-5 py-3 border-t border-[#26262a] bg-[#101014] flex items-center justify-between text-xs text-zinc-400 w-full">
+            <div className="px-5 py-3 border-t border-[#27272a] bg-[#0a0a0a] flex items-center justify-between text-xs text-zinc-500 w-full">
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1.5">
-                  <kbd className="border border-zinc-700 px-1.5 py-0.5 rounded bg-zinc-800/80 font-mono text-[11px] text-zinc-300">↑</kbd>
-                  <kbd className="border border-zinc-700 px-1.5 py-0.5 rounded bg-zinc-800/80 font-mono text-[11px] text-zinc-300">↓</kbd>
+                  <kbd className="border border-[#27272a] px-1.5 py-0.5 rounded bg-[#18181b] font-mono text-[11px] text-zinc-400">↑</kbd>
+                  <kbd className="border border-[#27272a] px-1.5 py-0.5 rounded bg-[#18181b] font-mono text-[11px] text-zinc-400">↓</kbd>
                   <span>navigate</span>
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <kbd className="border border-zinc-700 px-1.5 py-0.5 rounded bg-zinc-800/80 font-mono text-[11px] text-zinc-300">↵</kbd>
+                  <kbd className="border border-[#27272a] px-1.5 py-0.5 rounded bg-[#18181b] font-mono text-[11px] text-zinc-400">↵</kbd>
                   <span>select</span>
                 </span>
               </div>

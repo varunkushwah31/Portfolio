@@ -1,7 +1,19 @@
+import { useState } from "react"
 import { motion } from "framer-motion"
-import { RocketLaunchIcon, CaretRightIcon } from "@phosphor-icons/react"
+import { RocketLaunchIcon, CaretRightIcon, EnvelopeSimpleIcon, CopyIcon, CheckIcon } from "@phosphor-icons/react"
 
 export default function LetsTalk() {
+  const [copied, setCopied] = useState(false)
+  const email = "varun.kush3@gmail.com"
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    navigator.clipboard.writeText(email)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2200)
+  }
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 20 }}
@@ -26,31 +38,56 @@ export default function LetsTalk() {
               className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:rotate-6"
             />
           </div>
-          <h3 className="font-bold text-white text-lg sm:text-xl tracking-tight group-hover:text-zinc-100 transition-colors">
-            Let's work together
-          </h3>
+          <div>
+            <h3 className="font-bold text-white text-lg sm:text-xl tracking-tight group-hover:text-zinc-100 transition-colors">
+              Let's work together
+            </h3>
+            <span className="text-xs text-emerald-400 font-medium">Available for new opportunities</span>
+          </div>
         </div>
 
         {/* Body paragraph */}
         <p className="text-[#9ca3af] text-sm sm:text-[15px] leading-relaxed mt-4 mb-6 max-w-2xl font-normal relative z-10">
-          I'm available for freelance projects and would love to explore potential collaborations. Feel free to email me, and let's discuss how we can work together!
+          I'm open for software developer roles, internships, and high-impact engineering collaborations. Feel free to reach out directly, and let's discuss how we can build something amazing together!
         </p>
 
-        {/* CTA Button with Spring Hover */}
-        <div className="relative z-10">
+        {/* CTA Buttons with Spring Hover */}
+        <div className="flex flex-wrap items-center gap-3 relative z-10">
           <motion.div
             whileHover={{ scale: 1.04, x: 2 }}
             whileTap={{ scale: 0.96 }}
             className="inline-block"
           >
             <a
-              href="mailto:varun.kush3@gmail.com"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none"
+              href={`mailto:${email}?subject=Project%20Inquiry%20%2F%20Collaboration%20-%20Varun%20Kushwah&body=Hi%20Varun%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20connect%20regarding...`}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] hover:bg-[#121215] text-white text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none"
             >
+              <EnvelopeSimpleIcon size={16} weight="bold" />
               <span>Get in touch</span>
               <CaretRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
             </a>
           </motion.div>
+
+          <motion.button
+            type="button"
+            onClick={handleCopy}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg border border-[#27272a] hover:border-zinc-500 bg-[#141414] text-zinc-300 hover:text-white text-xs sm:text-sm font-medium transition-colors cursor-pointer"
+            title="Copy email to clipboard"
+          >
+            {copied ? (
+              <>
+                <CheckIcon size={15} weight="bold" className="text-emerald-400" />
+                <span className="text-emerald-400">Copied {email}</span>
+              </>
+            ) : (
+              <>
+                <CopyIcon size={15} />
+                <span>Copy Email</span>
+              </>
+            )}
+          </motion.button>
         </div>
       </motion.div>
     </motion.section>

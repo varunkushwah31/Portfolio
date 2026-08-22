@@ -78,28 +78,13 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
             className="w-full md:w-56 flex-shrink-0 flex flex-col items-center md:items-start"
           >
-            {/* Styled Portrait Avatar Frame matching bonabrian */}
-            <div className="w-48 sm:w-52 md:w-56 h-60 sm:h-64 rounded-2xl bg-gradient-to-br from-[#27272a] via-[#18181b] to-[#121215] border border-[#3f3f46] flex flex-col items-center justify-center p-4 shadow-2xl relative overflow-hidden group">
-              {/* Subtle background overlay */}
-              <div className="absolute inset-0 bg-radial from-white/5 via-transparent to-transparent opacity-60" />
-
-              {/* Developer Avatar Badge with 3-bar signature */}
-              <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-[#27272a] to-[#18181b] flex flex-col items-center justify-center border border-zinc-500/40 shadow-xl group-hover:scale-105 transition-transform duration-300 relative z-10">
-                <div className="flex items-center gap-[4px] mb-1">
-                  <span className="w-1 h-3.5 bg-zinc-400 rounded-full" />
-                  <span className="w-1 h-6 bg-white rounded-full" />
-                  <span className="w-1 h-4 bg-zinc-400 rounded-full" />
-                </div>
-                <span className="text-xs font-bold text-zinc-300 font-mono tracking-wider">
-                  VK
-                </span>
-              </div>
-
-              <div className="mt-4 text-center relative z-10">
-                <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest block">
-                  CS Engineering
-                </span>
-              </div>
+            {/* Clean Borderless Portrait */}
+            <div className="w-48 sm:w-52 md:w-56 h-60 sm:h-68 rounded-2xl overflow-hidden shadow-2xl relative group bg-black">
+              <img
+                src="/profile.jpg"
+                alt="Varun Kushwah"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              />
             </div>
 
             {/* Profile Info Underneath */}

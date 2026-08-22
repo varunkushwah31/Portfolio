@@ -28,13 +28,21 @@ export default function Hero({ onOpenResume: _onOpenResume }: HeroProps) {
         initial="hidden"
         animate="visible"
       >
-        {/* Live Status Badge */}
-        <motion.div variants={item} className="mb-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#27272a] bg-[#141414]/90 backdrop-blur-sm text-xs text-zinc-300 shadow-sm">
-            <span className="relative flex h-2 w-2">
+        {/* Profile Avatar & Live Status Badge */}
+        <motion.div variants={item} className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
+          <div className="relative w-fit">
+            <img
+              src="/profile.jpg"
+              alt="Varun Kushwah"
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover object-center shadow-xl shadow-pink-500/10 hover:scale-105 transition-transform duration-300 bg-black"
+            />
+            <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-[#0a0a0a]" />
             </span>
+          </div>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27272a] bg-[#141414]/90 backdrop-blur-sm text-xs text-zinc-300 shadow-sm w-fit">
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
             <span>Available for internships &amp; new opportunities</span>
           </div>
         </motion.div>

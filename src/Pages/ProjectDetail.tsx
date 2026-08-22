@@ -4,8 +4,6 @@ import { ArrowLeftIcon, ArrowRightIcon, ArrowSquareOutIcon } from "@phosphor-ico
 import { motion } from "framer-motion"
 import projects from "@/data/projects"
 import MStripe from "@/components/MStripe"
-import Navbar from "@/components/Navbar"
-import Footer from "@/components/Footer"
 import ProjectVisual from "@/components/ProjectVisual"
 import CommandPalette from "@/components/CommandPalette"
 import ResumeModal from "@/components/ResumeModal"
@@ -27,10 +25,6 @@ const ProjectDetail = () => {
   if (!project) {
     return (
       <>
-        <Navbar
-          onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-          onOpenResume={() => setResumeModalOpen(true)}
-        />
         <main
           className="w-full bg-canvas flex items-center justify-center"
           style={{ minHeight: "60vh", paddingTop: "96px", paddingBottom: "96px" }}
@@ -51,7 +45,6 @@ const ProjectDetail = () => {
             </Link>
           </div>
         </main>
-        <Footer />
         <CommandPalette
           isOpen={commandPaletteOpen}
           onClose={() => setCommandPaletteOpen(false)}
@@ -71,10 +64,6 @@ const ProjectDetail = () => {
 
   return (
     <>
-      <Navbar
-        onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-        onOpenResume={() => setResumeModalOpen(true)}
-      />
       <main className="bg-canvas text-ink overflow-hidden">
         {/* Hero band */}
         <section
@@ -485,7 +474,6 @@ const ProjectDetail = () => {
           </div>
         </section>
       </main>
-      <Footer />
 
       {/* Global Engineering Modals */}
       <CommandPalette
