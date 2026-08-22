@@ -77,7 +77,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar with Copyright & Socials */}
+      {/* Bottom Bar with Copyright & Socials*/}
       <div className="border-t border-[#1f1f23]">
         <div className="max-w-4xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
           <p>© 2026 Varun Kushwah — India</p>
