@@ -13,6 +13,7 @@ import {
   TailwindIcon,
 } from "./TechIcons"
 
+
 const featuredProjects = projects.filter((p) => p.featured)
 
 const projectBadges: Record<string, Array<{ name: string; icon: React.FC<{ size?: number; className?: string }> }>> = {
