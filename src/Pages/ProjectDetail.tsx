@@ -13,8 +13,12 @@ const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>()
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
   const [resumeModalOpen, setResumeModalOpen] = useState(false)
-  const project = projects.find((p) => p.slug === slug)
-  const projectIndex = projects.findIndex((p) => p.slug === slug)
+  const projectIndex = projects.findIndex(
+    (p) =>
+      p.slug === slug ||
+      (p.slug === "w2wshare" && (slug === "w2w-share" || slug === "mangoshare-clone"))
+  )
+  const project = projectIndex !== -1 ? projects[projectIndex] : undefined
 
   useEffect(() => {
     const handleOpenPalette = () => setCommandPaletteOpen(true)

@@ -106,6 +106,8 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
         </div>
       )
 
+    case "w2wshare":
+    case "w2w-share":
     case "mangoshare-clone":
       return (
         <div
@@ -117,11 +119,11 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
             <div className="flex items-center gap-2">
               <BroadcastIcon size={13} className="text-m-blue-dark animate-pulse" />
               <span className="text-body-strong text-[11px] font-sans font-bold uppercase tracking-wider">
-                WEBRTC DATA CHANNEL {"//"} P2P
+                WEBRTC DATA CHANNEL {"//"} W2W SHARE
               </span>
             </div>
             <span className="text-[10px] text-success font-mono bg-success/10 px-2 py-0.5 border border-success/30">
-              DIRECT STREAM
+              AES-256-GCM DIRECT
             </span>
           </div>
 
@@ -133,7 +135,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <div className="w-8 h-8 bg-surface-elevated border border-hairline flex items-center justify-center text-ink font-bold text-[10px]">
                   PEER A
                 </div>
-                <span className="text-[9px] text-muted mt-1">BROWSER</span>
+                <span className="text-[9px] text-muted mt-1">SENDER</span>
               </div>
 
               {/* Data Flow Channel with Animated Line */}
@@ -145,21 +147,21 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <div className="w-full h-[2px] bg-hairline relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-m-blue-light via-m-blue-dark to-m-red animate-pulse" />
                 </div>
-                <span className="text-[9px] text-muted mt-1">ZERO RELAY / STUN DIRECT</span>
+                <span className="text-[9px] text-muted mt-1">OFFLINE P2P / ZERO RELAY</span>
               </div>
 
               <div className="flex flex-col items-center">
                 <div className="w-8 h-8 bg-surface-elevated border border-hairline flex items-center justify-center text-ink font-bold text-[10px]">
                   PEER B
                 </div>
-                <span className="text-[9px] text-muted mt-1">REMOTE</span>
+                <span className="text-[9px] text-muted mt-1">RECEIVER</span>
               </div>
             </div>
 
             {/* Transfer Metrics Gauge */}
             <div className="space-y-1.5 bg-[#10131a] p-2.5 border border-hairline-strong">
               <div className="flex justify-between text-[10px]">
-                <span className="text-muted uppercase">CHUNK TRANSMISSION</span>
+                <span className="text-muted uppercase">ENCRYPTED CHUNK TRANSMISSION</span>
                 <span className="text-ink font-bold font-mono">{transferMb} MB / 160.0 MB</span>
               </div>
               <div className="w-full h-1.5 bg-[#222222] overflow-hidden">
@@ -174,7 +176,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Bottom Strip */}
           <div className="bg-[#11141d] px-4 py-1.5 border-t border-hairline-strong flex justify-between text-[10px] text-muted">
             <span className="text-m-blue-light font-bold">ICE NEGOTIATION: COMPLETED</span>
-            <span>NAT TRAVERSAL: DIRECT</span>
+            <span>ZERO MEMORY FOOTPRINT · STREAMING</span>
           </div>
         </div>
       )

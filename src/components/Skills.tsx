@@ -94,7 +94,7 @@ dataChannel.onmessage = (event: MessageEvent<ArrayBuffer>) => {
   chunkAssembler.appendChunk(event.data);
   updateTransferProgress(chunkAssembler.getPercentComplete());
 };`,
-      linkedProject: "mangoshare-clone",
+      linkedProject: "w2wshare",
     },
   },
   {
@@ -231,7 +231,7 @@ const Skills = () => {
       className="w-full bg-surface-soft relative border-b border-hairline-strong"
       style={{ paddingTop: "96px", paddingBottom: "96px" }}
     >
-      <div className="max-w-[1440px] mx-auto px-6">
+      <div className="max-w-360 mx-auto px-6">
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -289,7 +289,7 @@ const Skills = () => {
                 {isActive && (
                   <motion.span
                     layoutId="activeCategoryLine"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-m-blue-light via-m-blue-dark to-m-red"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-m-blue-light via-m-blue-dark to-m-red"
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
@@ -326,7 +326,7 @@ const Skills = () => {
                 >
                   {/* Selected Indicator Bar */}
                   {isSelected && (
-                    <span className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-m-blue-light via-m-blue-dark to-m-red" />
+                    <span className="absolute left-0 top-0 bottom-0 w-0.75 bg-linear-to-b from-m-blue-light via-m-blue-dark to-m-red" />
                   )}
 
                   {skill.highlight && !isSelected && (
@@ -371,7 +371,7 @@ const Skills = () => {
               style={{ borderRadius: "0px" }}
             >
               {/* Top M-Stripe */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-m-blue-light via-m-blue-dark to-m-red" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-linear-to-r from-m-blue-light via-m-blue-dark to-m-red" />
 
               {/* Workbench Header */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-hairline-strong mb-6">

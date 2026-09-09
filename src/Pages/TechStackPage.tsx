@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   ArrowSquareOutIcon,
@@ -196,7 +196,7 @@ const techDetails: TechDetail[] = [
     icon: WebRTCIcon,
     status: "Core Stack",
     description: "Open protocol enabling real-time audio, video, and arbitrary peer-to-peer data transmission directly between browsers.",
-    useCase: "Engineered MangoShare Clone zero-server file sharing with RTCDataChannels.",
+    useCase: "Engineered W2W Share offline P2P file sharing with WebRTC DataChannels and AES-256-GCM encryption.",
     link: "https://webrtc.org/",
   },
   {
@@ -321,7 +321,7 @@ export default function TechStackPage() {
                   whileHover={{ y: -3, transition: { type: "spring", stiffness: 350, damping: 20 } }}
                   className="rounded-2xl border border-[#27272a] bg-[#141414] hover:border-zinc-500 p-5 transition-all duration-200 shadow-md flex items-center gap-4 group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#1c1c20] border border-[#2e2e34] flex items-center justify-center text-zinc-300 group-hover:text-white group-hover:scale-105 transition-transform flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-[#1c1c20] border border-[#2e2e34] flex items-center justify-center text-zinc-300 group-hover:text-white group-hover:scale-105 transition-transform shrink-0">
                     <ItemIcon size={24} weight="duotone" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -441,7 +441,7 @@ export default function TechStackPage() {
                       {/* Top Row: Icon + Name + Status */}
                       <div className="flex items-start justify-between gap-3 mb-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-[#1c1c20] border border-[#2e2e34] flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                          <div className="w-10 h-10 rounded-xl bg-[#1c1c20] border border-[#2e2e34] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                             <Icon size={22} className="w-5 h-5" />
                           </div>
                           <div>
@@ -500,7 +500,7 @@ export default function TechStackPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45, ease: "easeOut" }}
-          className="rounded-2xl border border-zinc-700/60 bg-gradient-to-br from-[#1c1c22] via-[#141414] to-[#141414] p-6 sm:p-8 shadow-lg"
+          className="rounded-2xl border border-zinc-700/60 bg-linear-to-br from-[#1c1c22] via-[#141414] to-[#141414] p-6 sm:p-8 shadow-lg"
         >
           <div className="flex items-center gap-2.5 text-emerald-400 font-semibold text-sm mb-2">
             <CpuIcon size={18} />

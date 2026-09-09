@@ -69,8 +69,8 @@ Java Coordinator — devup College Club (2024 – Present)
 FEATURED PROJECTS
 1. LeetcodeTracker (Full-Stack / Git Subtree Monorepo)
 - Full-stack progress tracker with Git Subtree repository architecture and JWT authentication.
-2. MangoShare Clone (Real-Time P2P / WebRTC)
-- Direct browser-to-browser file transfer engine utilizing WebRTC DataChannels with zero server relay.
+2. W2W Share (Enterprise Offline P2P / WebRTC)
+- 100% offline peer-to-peer file transfer platform using WebRTC DataChannels with AES-256-GCM encryption.
 3. System Health Dashboard (Systems / Telemetry)
 - Real-time local hardware performance monitor using OS APIs with continuous live chart streams.
 4. Disease Prediction (Machine Learning)
@@ -91,7 +91,7 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[220] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div className="fixed inset-0 z-220 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -268,12 +268,12 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
                   <div className="bg-surface-soft p-5 border border-hairline-strong space-y-2">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                       <div className="text-ink font-bold text-sm uppercase text-m-blue-light">
-                        MANGOSHARE CLONE · REAL-TIME P2P PROTOCOL
+                        W2W SHARE · OFFLINE P2P & AES-256-GCM
                       </div>
-                      <span className="font-mono text-[11px] text-muted">REACT · WEBRTC · DATACHANNELS</span>
+                      <span className="font-mono text-[11px] text-muted">JAVA · SPRING BOOT · WEBRTC · DOCKER</span>
                     </div>
                     <p className="body-light text-xs text-body leading-relaxed">
-                      Direct browser-to-browser file transfer platform with WebRTC ICE candidate signaling, achieving zero server relay bottleneck.
+                      Architected a 100% offline peer-to-peer file transfer platform using WebRTC DataChannels with AES-256-GCM end-to-end encryption, optimized for 10GB+ transfers with near-zero memory footprint.
                     </p>
                   </div>
 

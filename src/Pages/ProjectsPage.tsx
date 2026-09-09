@@ -5,6 +5,7 @@ import LaptopMockup from "@/components/LaptopMockup"
 import MobileMockup from "@/components/MobileMockup"
 import {
   JavaIcon,
+  SpringIcon,
   ReactIcon,
   FlutterIcon,
   PythonIcon,
@@ -29,12 +30,19 @@ const projectBadges: Record<
     { name: "Git", icon: GitIcon },
     { name: "Tailwind", icon: TailwindIcon },
   ],
-  "mangoshare-clone": [
-    { name: "React", icon: ReactIcon },
-    { name: "WebRTC", icon: WebRTCIcon },
-    { name: "TypeScript", icon: TypeScriptIcon },
-    { name: "Node.js", icon: NodeIcon },
+  "w2wshare": [
     { name: "Java", icon: JavaIcon },
+    { name: "Spring Boot", icon: SpringIcon },
+    { name: "WebRTC", icon: WebRTCIcon },
+    { name: "React", icon: ReactIcon },
+    { name: "Docker", icon: DockerIcon },
+  ],
+  "mangoshare-clone": [
+    { name: "Java", icon: JavaIcon },
+    { name: "Spring Boot", icon: SpringIcon },
+    { name: "WebRTC", icon: WebRTCIcon },
+    { name: "React", icon: ReactIcon },
+    { name: "Docker", icon: DockerIcon },
   ],
   "system-health-dashboard": [
     { name: "React", icon: ReactIcon },
@@ -60,6 +68,9 @@ const projectBadges: Record<
 const cardThemes: Record<string, { bg: string; isMobile?: boolean }> = {
   "leetcode-tracker": {
     bg: "linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%)",
+  },
+  "w2wshare": {
+    bg: "linear-gradient(135deg, #a78bfa 0%, #818cf8 100%)",
   },
   "mangoshare-clone": {
     bg: "linear-gradient(135deg, #a78bfa 0%, #818cf8 100%)",

@@ -35,6 +35,8 @@ const getProjectIcon = (slug: string) => {
   switch (slug) {
     case "leetcode-tracker":
       return <TerminalWindowIcon size={14} className="text-m-blue-light" />
+    case "w2wshare":
+    case "w2w-share":
     case "mangoshare-clone":
       return <BroadcastIcon size={14} className="text-m-blue-dark" />
     case "system-health-dashboard":
