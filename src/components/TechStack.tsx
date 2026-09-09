@@ -59,7 +59,7 @@ export default function TechStack() {
         </motion.p>
         <Link
           to="/tech-stack"
-          className="text-xs text-zinc-400 hover:text-white font-medium inline-flex items-center gap-1 transition-colors group"
+          className="text-xs text-muted hover:text-ink font-medium inline-flex items-center gap-1 transition-colors group"
         >
           <span>View all</span>
           <CaretRightIcon size={12} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
@@ -79,7 +79,7 @@ export default function TechStack() {
               variants={itemVariant}
               whileHover={{ scale: 1.08, y: -3, transition: { type: "spring", stiffness: 400, damping: 17 } }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-hairline bg-[#141414] hover:bg-[#1a1a1a] text-xs sm:text-sm text-body-strong hover:border-zinc-500 hover:text-white transition-colors duration-150 cursor-pointer shadow-sm hover:shadow-[0_4px_12px_rgba(255,255,255,0.06)]"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-hairline bg-surface-card hover:bg-surface-elevated text-xs sm:text-sm text-body-strong hover:border-muted hover:text-ink transition-colors duration-150 cursor-pointer shadow-xs hover:shadow-sm"
             >
               <Icon size={16} className="w-4 h-4 flex-shrink-0" />
               <span>{tech.name}</span>

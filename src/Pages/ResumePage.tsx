@@ -183,13 +183,13 @@ export default function ResumePage() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-b border-[#27272a] pb-8"
+          className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border-b border-hairline pb-8"
         >
           <div className="flex-1 min-w-0">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-2">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight mb-2">
               Resume
             </h1>
-            <p className="text-zinc-400 text-base sm:text-lg font-normal leading-relaxed">
+            <p className="text-muted text-base sm:text-lg font-normal leading-relaxed">
               A brief overview of my professional journey and career milestones.
             </p>
           </div>
@@ -201,7 +201,7 @@ export default function ResumePage() {
               target="_blank"
               rel="noopener noreferrer"
               download="Varun_Kushwah_Resume.pdf"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] hover:bg-[#18181b] text-white text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-ink text-sm font-medium transition-all duration-150 shadow-xs hover:shadow-sm whitespace-nowrap"
             >
               <DownloadSimpleIcon size={16} weight="bold" />
               <span>Download resume</span>
@@ -216,7 +216,7 @@ export default function ResumePage() {
         <section>
           <div className="flex items-center gap-2.5 mb-6 text-emerald-400">
             <BriefcaseIcon size={20} weight="bold" />
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
               Experience & Leadership
             </h2>
           </div>
@@ -232,16 +232,16 @@ export default function ResumePage() {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                    <h3 className="font-bold text-white text-base sm:text-lg tracking-tight">
+                    <h3 className="font-bold text-ink text-base sm:text-lg tracking-tight">
                       {entry.role}
                     </h3>
-                    <span className="text-xs font-mono text-zinc-400 shrink-0">
+                    <span className="text-xs font-mono text-muted shrink-0">
                       {entry.period}
                     </span>
                   </div>
 
-                  <div className="text-sm text-zinc-300 font-medium mt-0.5">
-                    {entry.organization} <span className="text-zinc-500 font-normal">· {entry.type}</span>
+                  <div className="text-sm text-body-strong font-medium mt-0.5">
+                    {entry.organization} <span className="text-muted font-normal">· {entry.type}</span>
                   </div>
 
                   {entry.techIcons && (
@@ -251,7 +251,7 @@ export default function ResumePage() {
                         return (
                           <div
                             key={tech.name}
-                            className="w-6 h-6 rounded-md bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-300 shadow-sm"
+                            className="w-6 h-6 rounded-md bg-surface-elevated border border-hairline flex items-center justify-center text-body-strong shadow-xs"
                             title={tech.name}
                           >
                             <TechSvg size={13} className="w-3.5 h-3.5" />
@@ -261,7 +261,7 @@ export default function ResumePage() {
                     </div>
                   )}
 
-                  <ul className="space-y-2 text-sm text-zinc-300 font-normal leading-relaxed mt-2">
+                  <ul className="space-y-2 text-sm text-body font-normal leading-relaxed mt-2">
                     {entry.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
                         <span className="text-emerald-400 mt-1.5 flex-shrink-0 text-xs">•</span>
@@ -279,7 +279,7 @@ export default function ResumePage() {
         <section>
           <div className="flex items-center gap-2.5 mb-6 text-sky-400">
             <FolderIcon size={20} weight="bold" />
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
               Featured Projects
             </h2>
           </div>
@@ -295,16 +295,16 @@ export default function ResumePage() {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                    <h3 className="font-bold text-white text-base sm:text-lg tracking-tight">
+                    <h3 className="font-bold text-ink text-base sm:text-lg tracking-tight">
                       {entry.role}
                     </h3>
-                    <span className="text-xs font-mono text-zinc-400 shrink-0">
+                    <span className="text-xs font-mono text-muted shrink-0">
                       {entry.period}
                     </span>
                   </div>
 
-                  <div className="text-sm text-zinc-300 font-medium mt-0.5">
-                    {entry.organization} <span className="text-zinc-500 font-normal">· {entry.type}</span>
+                  <div className="text-sm text-body-strong font-medium mt-0.5">
+                    {entry.organization} <span className="text-muted font-normal">· {entry.type}</span>
                   </div>
 
                   {entry.techIcons && (
@@ -314,7 +314,7 @@ export default function ResumePage() {
                         return (
                           <div
                             key={tech.name}
-                            className="w-6 h-6 rounded-md bg-[#18181b] border border-[#27272a] flex items-center justify-center text-zinc-300 shadow-sm"
+                            className="w-6 h-6 rounded-md bg-surface-elevated border border-hairline flex items-center justify-center text-body-strong shadow-xs"
                             title={tech.name}
                           >
                             <TechSvg size={13} className="w-3.5 h-3.5" />
@@ -324,7 +324,7 @@ export default function ResumePage() {
                     </div>
                   )}
 
-                  <ul className="space-y-2 text-sm text-zinc-300 font-normal leading-relaxed mt-2">
+                  <ul className="space-y-2 text-sm text-body font-normal leading-relaxed mt-2">
                     {entry.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
                         <span className="text-sky-400 mt-1.5 flex-shrink-0 text-xs">•</span>
@@ -342,7 +342,7 @@ export default function ResumePage() {
         <section>
           <div className="flex items-center gap-2.5 mb-6 text-indigo-400">
             <GraduationCapIcon size={20} weight="bold" />
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
               Education
             </h2>
           </div>
@@ -358,19 +358,19 @@ export default function ResumePage() {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                    <h3 className="font-bold text-white text-base sm:text-lg tracking-tight">
+                    <h3 className="font-bold text-ink text-base sm:text-lg tracking-tight">
                       {entry.role}
                     </h3>
-                    <span className="text-xs font-mono text-zinc-400 shrink-0">
+                    <span className="text-xs font-mono text-muted shrink-0">
                       {entry.period}
                     </span>
                   </div>
 
-                  <div className="text-sm text-zinc-300 font-medium mt-0.5">
-                    {entry.organization} {entry.location && <span className="text-emerald-400 font-mono text-xs ml-2 font-medium">[{entry.location}]</span>}
+                  <div className="text-sm text-body-strong font-medium mt-0.5">
+                    {entry.organization} {entry.location && <span className="text-emerald-500 dark:text-emerald-400 font-mono text-xs ml-2 font-medium">[{entry.location}]</span>}
                   </div>
 
-                  <ul className="space-y-2 text-sm text-zinc-300 font-normal leading-relaxed mt-3">
+                  <ul className="space-y-2 text-sm text-body font-normal leading-relaxed mt-3">
                     {entry.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
                         <span className="text-indigo-400 mt-1.5 flex-shrink-0 text-xs">•</span>
@@ -388,7 +388,7 @@ export default function ResumePage() {
         <section>
           <div className="flex items-center gap-2.5 mb-4 text-amber-400">
             <TrophyIcon size={20} weight="bold" />
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
               Key Achievements
             </h2>
           </div>
@@ -397,7 +397,7 @@ export default function ResumePage() {
             {achievements.map((item, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-xl bg-[#141414] border border-[#27272a] text-sm text-zinc-200 font-medium flex items-center gap-3 shadow-sm"
+                className="p-4 rounded-xl bg-surface-card border border-hairline text-sm text-body-strong font-medium flex items-center gap-3 shadow-xs"
               >
                 <span className="w-2 h-2 rounded-full bg-amber-400 flex-shrink-0" />
                 <span>{item}</span>
@@ -408,7 +408,7 @@ export default function ResumePage() {
 
         {/* Skills Section */}
         <section>
-          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight mb-4">
             Technical Skills
           </h2>
 
@@ -416,7 +416,7 @@ export default function ResumePage() {
             {skillsList.map((skill) => (
               <span
                 key={skill}
-                className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-[#18181b] border border-[#27272a] text-zinc-300 hover:text-white hover:border-zinc-500 transition-colors"
+                className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-surface-card border border-hairline text-body-strong hover:text-ink hover:bg-surface-elevated transition-colors shadow-xs"
               >
                 {skill}
               </span>
@@ -425,8 +425,8 @@ export default function ResumePage() {
         </section>
 
         {/* Footer Timestamp */}
-        <div className="pt-8 border-t border-[#1f1f23] text-xs text-zinc-500 font-normal">
-          Last updated at <span className="text-zinc-400 font-medium">August, 2026</span>
+        <div className="pt-8 border-t border-hairline text-xs text-muted font-normal">
+          Last updated at <span className="text-body-strong font-medium">August, 2026</span>
         </div>
       </div>
     </div>

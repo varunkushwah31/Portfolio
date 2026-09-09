@@ -97,10 +97,10 @@ export default function ProjectsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-2">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight mb-2">
             Projects
           </h1>
-          <p className="text-zinc-400 text-base sm:text-lg font-normal">
+          <p className="text-muted text-base sm:text-lg font-normal">
             A collection of finest projects that I have built. ❤️
           </p>
         </motion.div>
@@ -124,7 +124,7 @@ export default function ProjectsPage() {
               >
                 <Link
                   to={`/project/${project.slug}`}
-                  className="group block rounded-2xl border border-[#27272a] bg-[#141414] hover:border-zinc-500 hover:shadow-[0_15px_35px_-10px_rgba(255,255,255,0.06)] transition-all duration-300 overflow-hidden shadow-xl"
+                  className="group block rounded-2xl border border-hairline bg-surface-card hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-lg transition-all duration-300 overflow-hidden shadow-xs"
                 >
                   {/* Top Colorful Banner with Device Mockup */}
                   <div
@@ -143,14 +143,14 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Bottom Card Content */}
-                  <div className="p-5 sm:p-6 bg-[#141414]">
+                  <div className="p-5 sm:p-6 bg-surface-card">
                     {/* Project Title */}
-                    <h3 className="font-bold text-white text-base sm:text-lg group-hover:text-white transition-colors tracking-tight">
+                    <h3 className="font-bold text-ink text-base sm:text-lg transition-colors tracking-tight">
                       {project.slug}
                     </h3>
 
                     {/* Tagline / Excerpt */}
-                    <p className="text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed line-clamp-2 mt-1 mb-4">
+                    <p className="text-xs sm:text-sm text-muted font-normal leading-relaxed line-clamp-2 mt-1 mb-4">
                       {project.tagline}
                     </p>
 
@@ -161,7 +161,7 @@ export default function ProjectsPage() {
                         return (
                           <div
                             key={b.name}
-                            className="w-7 h-7 rounded-md bg-[#1f1f23] border border-[#2e2e33] flex items-center justify-center text-zinc-300 shadow-sm"
+                            className="w-7 h-7 rounded-md bg-surface-elevated border border-hairline flex items-center justify-center text-body-strong shadow-xs"
                             title={b.name}
                           >
                             <Icon size={14} className="w-3.5 h-3.5" />

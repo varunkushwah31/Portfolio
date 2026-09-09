@@ -58,10 +58,10 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-2">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight mb-2">
             About
           </h1>
-          <p className="text-zinc-400 text-base sm:text-lg font-normal">
+          <p className="text-muted text-base sm:text-lg font-normal">
             A short story of me.
           </p>
         </motion.div>
@@ -79,7 +79,7 @@ export default function About() {
             className="w-full md:w-56 flex-shrink-0 flex flex-col items-center md:items-start"
           >
             {/* Clean Borderless Portrait */}
-            <div className="w-48 sm:w-52 md:w-56 h-60 sm:h-68 rounded-2xl overflow-hidden shadow-2xl relative group bg-black">
+            <div className="w-48 sm:w-52 md:w-56 h-60 sm:h-68 rounded-2xl overflow-hidden shadow-2xl relative group bg-surface-elevated">
               <img
                 src="/profile.jpg"
                 alt="Varun Kushwah"
@@ -89,11 +89,11 @@ export default function About() {
 
             {/* Profile Info Underneath */}
             <div className="mt-3.5 text-center md:text-left w-full">
-              <h2 className="text-base font-bold text-white">Varun Kushwah</h2>
-              <p className="text-xs text-zinc-400 mt-0.5 font-normal">Software Developer</p>
+              <h2 className="text-base font-bold text-ink">Varun Kushwah</h2>
+              <p className="text-xs text-muted mt-0.5 font-normal">Software Developer</p>
 
-              <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/30 bg-[#121217] text-[11px] text-zinc-300 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/30 bg-surface-card text-[11px] text-body-strong shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Open for hire</span>
               </div>
             </div>
@@ -104,14 +104,14 @@ export default function About() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
-            className="flex-1 space-y-4 text-sm sm:text-[15px] text-zinc-300 leading-relaxed font-normal"
+            className="flex-1 space-y-4 text-sm sm:text-[15px] text-body leading-relaxed font-normal"
           >
             <p>
               Hi there! Thanks for visiting my digital home on the internet.
             </p>
 
             <p>
-              I'm <strong className="text-white font-semibold">Varun Kushwah</strong>, a Software Developer passionate about building innovative digital solutions that drive real technical and business impact. I specialize in backend architecture and scalable distributed services—the robust processes powering applications behind the scenes—as well as crafting clean, responsive client experiences.
+              I'm <strong className="text-ink font-semibold">Varun Kushwah</strong>, a Software Developer passionate about building innovative digital solutions that drive real technical and business impact. I specialize in backend architecture and scalable distributed services—the robust processes powering applications behind the scenes—as well as crafting clean, responsive client experiences.
             </p>
 
             <p>
@@ -121,53 +121,53 @@ export default function About() {
             {/* Structured Bullet List matching reference image */}
             <ul className="space-y-2 py-1 pl-1 text-sm sm:text-[14px]">
               <li className="flex items-start gap-2">
-                <span className="text-zinc-500 mt-0.5">•</span>
+                <span className="text-muted mt-0.5">•</span>
                 <span>
-                  <strong className="text-white font-medium">Languages: </strong>
-                  <span className="text-zinc-200 font-medium">Java 21</span>,{" "}
-                  <span className="text-zinc-200 font-medium">Python</span>,{" "}
-                  <span className="text-zinc-200 font-medium">TypeScript</span>,{" "}
-                  <span className="text-zinc-200 font-medium">Dart</span>, SQL
+                  <strong className="text-ink font-medium">Languages: </strong>
+                  <span className="text-body-strong font-medium">Java 21</span>,{" "}
+                  <span className="text-body-strong font-medium">Python</span>,{" "}
+                  <span className="text-body-strong font-medium">TypeScript</span>,{" "}
+                  <span className="text-body-strong font-medium">Dart</span>, SQL
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-zinc-500 mt-0.5">•</span>
+                <span className="text-muted mt-0.5">•</span>
                 <span>
-                  <strong className="text-white font-medium">Frontend &amp; Mobile: </strong>
-                  <span className="text-zinc-200 font-medium">React 19</span>,{" "}
-                  <span className="text-zinc-200 font-medium">Flutter</span>,{" "}
-                  <span className="text-zinc-200 font-medium">Tailwind CSS</span>, Vite
+                  <strong className="text-ink font-medium">Frontend &amp; Mobile: </strong>
+                  <span className="text-body-strong font-medium">React 19</span>,{" "}
+                  <span className="text-body-strong font-medium">Flutter</span>,{" "}
+                  <span className="text-body-strong font-medium">Tailwind CSS</span>, Vite
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-zinc-500 mt-0.5">•</span>
+                <span className="text-muted mt-0.5">•</span>
                 <span>
-                  <strong className="text-white font-medium">Backend &amp; Real-Time: </strong>
-                  <span className="text-zinc-200 font-medium">Spring Boot 3.x</span>,{" "}
-                  <span className="text-zinc-200 font-medium">WebRTC</span>,{" "}
-                  <span className="text-zinc-200 font-medium">Node.js</span>, WebSockets
+                  <strong className="text-ink font-medium">Backend &amp; Real-Time: </strong>
+                  <span className="text-body-strong font-medium">Spring Boot 3.x</span>,{" "}
+                  <span className="text-body-strong font-medium">WebRTC</span>,{" "}
+                  <span className="text-body-strong font-medium">Node.js</span>, WebSockets
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-zinc-500 mt-0.5">•</span>
+                <span className="text-muted mt-0.5">•</span>
                 <span>
-                  <strong className="text-white font-medium">Database &amp; DevOps: </strong>
-                  <span className="text-zinc-200 font-medium">PostgreSQL</span>,{" "}
-                  <span className="text-zinc-200 font-medium">Docker</span>, Git Subtrees, Linux
+                  <strong className="text-ink font-medium">Database &amp; DevOps: </strong>
+                  <span className="text-body-strong font-medium">PostgreSQL</span>,{" "}
+                  <span className="text-body-strong font-medium">Docker</span>, Git Subtrees, Linux
                 </span>
               </li>
             </ul>
 
             <p>
-              As a Software Developer and <strong className="text-white font-medium">Java Coordinator at </strong>
+              As a Software Developer and <strong className="text-ink font-medium">Java Coordinator at </strong>
               <a
                 href="https://devup.co.in/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white font-semibold hover:text-emerald-300 underline underline-offset-4 decoration-zinc-600 hover:decoration-emerald-400 transition-colors inline-flex items-center gap-0.5"
+                className="text-ink font-semibold hover:text-emerald-500 dark:hover:text-emerald-300 underline underline-offset-4 decoration-hairline hover:decoration-emerald-500 dark:hover:decoration-emerald-400 transition-colors inline-flex items-center gap-0.5"
               >
                 <span>devup</span>
-                <SparkleIcon size={12} className="inline text-emerald-400" />
+                <SparkleIcon size={12} className="inline text-emerald-500 dark:text-emerald-400" />
               </a>
               , I take ownership of designing, developing, and maintaining software that meets high technical standards while delivering tangible value. I work closely with peers to mentor 100+ emerging developers in object-oriented architecture, Spring Boot services, and clean Git workflows.
             </p>
@@ -184,12 +184,12 @@ export default function About() {
               If you'd like to learn more about my professional background and qualifications, feel free to explore my resume.
             </p>
 
-            {/* My Resume Button matching bonabrian */}
+            {/* My Resume Button */}
             <div className="pt-3">
               <motion.div whileHover={{ scale: 1.03, x: 2 }} whileTap={{ scale: 0.97 }} className="inline-block">
                 <Link
                   to="/resume"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-xs sm:text-sm font-medium transition-all duration-150 shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-ink text-xs sm:text-sm font-medium transition-all duration-150 shadow-xs hover:shadow-sm"
                 >
                   <FileTextIcon size={15} weight="bold" />
                   <span>My Resume</span>
@@ -208,12 +208,12 @@ export default function About() {
           className="mb-16"
         >
           <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
               Tech Stack
             </h2>
             <Link
               to="/tech-stack"
-              className="text-xs text-zinc-400 hover:text-white font-medium transition-colors"
+              className="text-xs text-muted hover:text-ink font-medium transition-colors"
             >
               Explore all stack →
             </Link>
@@ -226,7 +226,7 @@ export default function About() {
                 <motion.div
                   key={tech.name}
                   whileHover={{ scale: 1.06, y: -2 }}
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27272a] bg-[#141414] hover:bg-[#1a1a1a] text-xs sm:text-sm text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors duration-150 cursor-default shadow-sm"
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-surface-card hover:bg-surface-elevated text-xs sm:text-sm text-body-strong hover:text-ink transition-colors duration-150 cursor-default shadow-xs"
                 >
                   <Icon size={16} className="w-4 h-4 flex-shrink-0" />
                   <span>{tech.name}</span>
@@ -243,14 +243,14 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2.5 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-ink mb-2.5 tracking-tight">
             Let's Connect
           </h2>
-          <p className="text-sm sm:text-[15px] text-zinc-400 leading-relaxed mb-5 font-normal max-w-2xl">
+          <p className="text-sm sm:text-[15px] text-muted leading-relaxed mb-5 font-normal max-w-2xl">
             Questions or collaborations? Reach out to me at{" "}
             <a
               href="mailto:varun.kush3@gmail.com"
-              className="text-white hover:text-emerald-300 underline underline-offset-4 decoration-zinc-600 hover:decoration-emerald-400 font-medium transition-colors"
+              className="text-ink hover:text-emerald-500 dark:hover:text-emerald-300 underline underline-offset-4 decoration-hairline hover:decoration-emerald-500 dark:hover:decoration-emerald-400 font-medium transition-colors"
             >
               varun.kush3@gmail.com
             </a>{" "}
@@ -269,7 +269,7 @@ export default function About() {
                   title={s.label}
                   whileHover={{ scale: 1.12, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-9 h-9 rounded-lg border border-[#27272a] bg-[#141414] text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors flex items-center justify-center shadow-sm"
+                  className="w-9 h-9 rounded-lg border border-hairline bg-surface-card text-muted hover:text-ink hover:bg-surface-elevated transition-colors flex items-center justify-center shadow-xs"
                 >
                   <Icon size={18} />
                 </motion.a>

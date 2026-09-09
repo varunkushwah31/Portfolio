@@ -20,7 +20,7 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 }
 
-export default function Hero(_props: HeroProps) {
+export default function Hero(_props: Readonly<HeroProps>) {
   return (
     <section className="max-w-4xl mx-auto px-6 pt-16 sm:pt-20 pb-12">
       <motion.div
@@ -38,10 +38,10 @@ export default function Hero(_props: HeroProps) {
             />
             <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-[#0a0a0a]" />
+              <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-canvas" />
             </span>
           </div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#27272a] bg-[#141414]/90 backdrop-blur-sm text-xs text-zinc-300 shadow-sm w-fit">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-surface-card/90 backdrop-blur-sm text-xs text-body-strong shadow-sm w-fit">
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
             <span>Available for internships &amp; new opportunities</span>
           </div>
@@ -49,13 +49,13 @@ export default function Hero(_props: HeroProps) {
 
         {/* Main 2-line Heading */}
         <motion.div variants={item} className="mb-6">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.15]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight leading-[1.15]">
             Hi, I'm{" "}
-            <span className="text-white inline-block">
+            <span className="text-ink inline-block">
               Varun Kushwah
             </span>
           </h1>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-300 tracking-tight mt-1">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-body-strong tracking-tight mt-1">
             Software Developer
           </h2>
         </motion.div>
@@ -63,10 +63,10 @@ export default function Hero(_props: HeroProps) {
         {/* Bio sentence with highlighted accent word */}
         <motion.p
           variants={item}
-          className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-2xl mb-8 font-normal"
+          className="text-body text-base sm:text-lg leading-relaxed max-w-2xl mb-8 font-normal"
         >
           I craft{" "}
-          <span className="text-emerald-300 font-medium underline decoration-emerald-500/70 decoration-wavy decoration-1 underline-offset-4 hover:text-emerald-200 transition-colors cursor-default">
+          <span className="text-emerald-500 dark:text-emerald-300 font-medium underline decoration-emerald-500/70 decoration-wavy decoration-1 underline-offset-4 hover:text-emerald-600 dark:hover:text-emerald-200 transition-colors cursor-default">
             scalable
           </span>{" "}
           things with code. Java Coordinator at{" "}
@@ -74,7 +74,7 @@ export default function Hero(_props: HeroProps) {
             href="https://devup.co.in/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-200 font-medium hover:text-emerald-300 underline underline-offset-4 decoration-zinc-600 hover:decoration-emerald-400 transition-colors inline-flex items-center gap-0.5"
+            className="text-ink font-medium hover:text-accent underline underline-offset-4 decoration-zinc-400 dark:decoration-zinc-600 hover:decoration-emerald-500 transition-colors inline-flex items-center gap-0.5"
           >
             <span>devup</span>
             <SparkleIcon size={12} className="text-emerald-400 inline" />
@@ -91,7 +91,7 @@ export default function Hero(_props: HeroProps) {
           >
             <Link
               to="/projects"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#3f3f46] hover:border-[#71717a] bg-[#09090b] text-white text-xs sm:text-sm font-medium transition-all duration-150 group shadow-[0_2px_0_0_rgba(255,255,255,0.15)] hover:shadow-none"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-hairline hover:border-muted bg-surface-card text-ink text-xs sm:text-sm font-medium transition-all duration-150 group shadow-xs hover:shadow-sm"
             >
               <span>Discover more</span>
               <CaretRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />

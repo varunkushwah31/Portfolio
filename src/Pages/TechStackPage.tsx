@@ -289,10 +289,10 @@ export default function TechStackPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-2">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight mb-2">
             Uses
           </h1>
-          <p className="text-zinc-400 text-base sm:text-lg font-normal">
+          <p className="text-body text-base sm:text-lg font-normal">
             A list of the tools, apps, technologies, and hardware I use on a regular basis.
           </p>
         </motion.div>
@@ -308,7 +308,7 @@ export default function TechStackPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <h2 className="text-lg sm:text-xl font-bold text-white mb-4 tracking-tight">
+          <h2 className="text-lg sm:text-xl font-bold text-ink mb-4 tracking-tight">
             Workstation
           </h2>
 
@@ -319,21 +319,21 @@ export default function TechStackPage() {
                 <motion.div
                   key={item.id}
                   whileHover={{ y: -3, transition: { type: "spring", stiffness: 350, damping: 20 } }}
-                  className="rounded-2xl border border-[#27272a] bg-[#141414] hover:border-zinc-500 p-5 transition-all duration-200 shadow-md flex items-center gap-4 group"
+                  className="rounded-2xl border border-hairline bg-surface-card hover:border-muted p-5 transition-all duration-200 shadow-xs flex items-center gap-4 group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-[#1c1c20] border border-[#2e2e34] flex items-center justify-center text-zinc-300 group-hover:text-white group-hover:scale-105 transition-transform shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-surface-elevated border border-hairline flex items-center justify-center text-body-strong group-hover:text-ink group-hover:scale-105 transition-transform shrink-0">
                     <ItemIcon size={24} weight="duotone" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between gap-2">
-                      <h3 className="font-semibold text-white text-sm sm:text-base group-hover:text-zinc-200 transition-colors truncate">
+                      <h3 className="font-semibold text-ink text-sm sm:text-base group-hover:text-accent transition-colors truncate">
                         {item.title}
                       </h3>
-                      <span className="text-[10px] px-2 py-0.5 rounded-full border border-zinc-700 bg-zinc-800/60 text-zinc-400 font-mono">
+                      <span className="text-[10px] px-2 py-0.5 rounded-full border border-hairline bg-surface-elevated text-muted font-mono">
                         {item.badge}
                       </span>
                     </div>
-                    <p className="text-xs text-zinc-400 mt-1 line-clamp-2 font-normal leading-relaxed">
+                    <p className="text-xs text-body mt-1 line-clamp-2 font-normal leading-relaxed">
                       {item.specs}
                     </p>
                   </div>
@@ -352,11 +352,11 @@ export default function TechStackPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <h2 className="text-lg sm:text-xl font-bold text-white mb-4 tracking-tight">
+          <h2 className="text-lg sm:text-xl font-bold text-ink mb-4 tracking-tight">
             Software
           </h2>
 
-          <div className="rounded-2xl border border-dashed border-[#2e2e34] bg-[#101014]/60 p-6 sm:p-8 shadow-inner">
+          <div className="rounded-2xl border border-dashed border-hairline bg-surface-soft/60 p-6 sm:p-8 shadow-inner">
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 sm:gap-7">
               {softwareApps.map((app) => (
                 <motion.div
@@ -365,14 +365,14 @@ export default function TechStackPage() {
                   whileTap={{ scale: 0.95 }}
                   className="flex flex-col items-center gap-2.5 text-center cursor-pointer group select-none"
                 >
-                  <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-[#18181c] border border-[#2b2b32] group-hover:border-zinc-500 group-hover:shadow-[0_8px_20px_rgba(255,255,255,0.08)] flex items-center justify-center p-3 transition-all duration-200 shadow-md">
+                  <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-surface-card border border-hairline group-hover:border-muted group-hover:shadow-[0_8px_20px_rgba(0,0,0,0.06)] dark:group-hover:shadow-[0_8px_20px_rgba(255,255,255,0.08)] flex items-center justify-center p-3 transition-all duration-200 shadow-xs">
                     <i
                       className={`devicons ${app.icon} text-[26px] sm:text-[28px] transition-transform duration-200 group-hover:scale-110`}
                       style={{ color: app.color }}
                       aria-label={app.name}
                     />
                   </div>
-                  <span className="text-xs font-medium text-zinc-300 group-hover:text-white transition-colors tracking-tight">
+                  <span className="text-xs font-medium text-body-strong group-hover:text-ink transition-colors tracking-tight">
                     {app.name}
                   </span>
                 </motion.div>
@@ -396,7 +396,7 @@ export default function TechStackPage() {
                 <SparkleIcon size={14} weight="fill" />
                 <span>Technologies &amp; Frameworks</span>
               </div>
-              <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+              <h2 className="text-lg sm:text-xl font-bold text-ink tracking-tight">
                 Tech Stack Overview
               </h2>
             </div>
@@ -411,8 +411,8 @@ export default function TechStackPage() {
                     onClick={() => setSelectedCategory(cat)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap cursor-pointer ${
                       isActive
-                        ? "bg-white/10 text-white border border-white/30 shadow-sm"
-                        : "bg-[#141414] text-zinc-400 hover:text-white border border-[#27272a] hover:border-zinc-600"
+                        ? "bg-ink text-canvas border border-ink shadow-xs"
+                        : "bg-surface-card text-muted hover:text-ink border border-hairline hover:border-muted"
                     }`}
                   >
                     {cat}
@@ -435,26 +435,26 @@ export default function TechStackPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.25 }}
-                    className="rounded-2xl border border-[#27272a] bg-[#141414] hover:border-zinc-500 p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between group shadow-lg"
+                    className="rounded-2xl border border-hairline bg-surface-card hover:border-muted p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between group shadow-sm hover:shadow-md"
                   >
                     <div>
                       {/* Top Row: Icon + Name + Status */}
                       <div className="flex items-start justify-between gap-3 mb-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-[#1c1c20] border border-[#2e2e34] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                          <div className="w-10 h-10 rounded-xl bg-surface-elevated border border-hairline flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                             <Icon size={22} className="w-5 h-5" />
                           </div>
                           <div>
-                            <h3 className="font-bold text-white text-base sm:text-lg group-hover:text-white transition-colors">
+                            <h3 className="font-bold text-ink text-base sm:text-lg group-hover:text-accent transition-colors">
                               {tech.name}
                             </h3>
-                            <span className="text-xs text-zinc-500">{tech.category}</span>
+                            <span className="text-xs text-muted">{tech.category}</span>
                           </div>
                         </div>
 
                         <span
                           className={`text-[11px] px-2.5 py-1 rounded-full border font-medium ${
-                            statusColors[tech.status] || "bg-zinc-800 text-zinc-300 border-zinc-700"
+                            statusColors[tech.status] || "bg-surface-elevated text-body-strong border-hairline"
                           }`}
                         >
                           {tech.status}
@@ -462,24 +462,24 @@ export default function TechStackPage() {
                       </div>
 
                       {/* Description */}
-                      <p className="text-sm text-zinc-400 leading-relaxed mb-3 font-normal">
+                      <p className="text-sm text-body leading-relaxed mb-3 font-normal">
                         {tech.description}
                       </p>
 
                       {/* Application Context */}
-                      <div className="text-xs text-zinc-500 bg-[#19191d] border border-[#26262a] rounded-lg p-3 mb-4">
-                        <strong className="text-zinc-300 font-medium">Application: </strong>
+                      <div className="text-xs text-muted bg-surface-soft border border-hairline rounded-lg p-3 mb-4">
+                        <strong className="text-body-strong font-medium">Application: </strong>
                         {tech.useCase}
                       </div>
                     </div>
 
                     {/* External Documentation Link */}
-                    <div className="pt-2 border-t border-[#1f1f23] flex justify-end">
+                    <div className="pt-2 border-t border-hairline flex justify-end">
                       <a
                         href={tech.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs text-muted hover:text-ink transition-colors"
                       >
                         <span>Official Documentation</span>
                         <ArrowSquareOutIcon size={13} />
@@ -500,16 +500,16 @@ export default function TechStackPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45, ease: "easeOut" }}
-          className="rounded-2xl border border-zinc-700/60 bg-linear-to-br from-[#1c1c22] via-[#141414] to-[#141414] p-6 sm:p-8 shadow-lg"
+          className="rounded-2xl border border-hairline bg-surface-card p-6 sm:p-8 shadow-sm hover:shadow-md transition-all"
         >
-          <div className="flex items-center gap-2.5 text-emerald-400 font-semibold text-sm mb-2">
+          <div className="flex items-center gap-2.5 text-emerald-500 dark:text-emerald-400 font-semibold text-sm mb-2">
             <CpuIcon size={18} />
             <span>Currently Exploring &amp; Deepening</span>
           </div>
-          <h2 className="text-xl font-bold text-white mb-2">
+          <h2 className="text-xl font-bold text-ink mb-2">
             Distributed Systems &amp; Cloud Infrastructure
           </h2>
-          <p className="text-sm text-zinc-400 leading-relaxed mb-4 max-w-2xl font-normal">
+          <p className="text-sm text-body leading-relaxed mb-4 max-w-2xl font-normal">
             Actively expanding into distributed consensus architectures, Apache Kafka event streaming, Kubernetes orchestration, and enterprise CI/CD automation pipelines.
           </p>
           <div className="flex flex-wrap gap-2">
@@ -522,7 +522,7 @@ export default function TechStackPage() {
             ].map((item) => (
               <span
                 key={item}
-                className="text-xs px-3 py-1 rounded-full border border-zinc-700 bg-zinc-800/80 text-zinc-300 font-medium"
+                className="text-xs px-3 py-1 rounded-full border border-hairline bg-surface-elevated text-body-strong font-medium"
               >
                 {item}
               </span>

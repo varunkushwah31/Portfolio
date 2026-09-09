@@ -69,7 +69,7 @@ function AppContent() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-ink flex flex-col justify-between relative">
+    <div className="min-h-screen bg-canvas text-ink flex flex-col justify-between relative transition-colors duration-200">
       {/* Subtle & blurry background grid overlay */}
       <div className="fixed -inset-2 pointer-events-none z-0 bg-grid-fade" />
 

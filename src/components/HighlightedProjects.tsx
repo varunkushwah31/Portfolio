@@ -62,7 +62,7 @@ export default function HighlightedProjects() {
       <p className="text-xs sm:text-sm font-semibold text-emerald-400 mb-1">
         Highlighted projects
       </p>
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-8 tracking-tight">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-ink mb-8 tracking-tight">
         What I've been working on
       </h2>
 
@@ -83,7 +83,7 @@ export default function HighlightedProjects() {
             >
               <Link
                 to={`/project/${project.slug}`}
-                className="group block rounded-2xl border border-[#27272a] bg-[#141414] hover:border-zinc-500 hover:shadow-[0_12px_30px_-10px_rgba(255,255,255,0.06)] transition-all duration-300 overflow-hidden shadow-xl"
+                className="group block rounded-2xl border border-hairline bg-surface-card hover:border-muted hover:shadow-lg transition-all duration-300 overflow-hidden shadow-sm"
               >
                 {/* Top Colorful Display Banner with Laptop Mockup */}
                 <div
@@ -96,17 +96,17 @@ export default function HighlightedProjects() {
                 </div>
 
                 {/* Bottom Content Area */}
-                <div className="p-5 sm:p-6 bg-[#141414]">
+                <div className="p-5 sm:p-6 bg-surface-card">
                   <div className="flex items-center justify-between gap-2 mb-1">
-                    <h3 className="font-bold text-white text-lg group-hover:text-white transition-colors">
+                    <h3 className="font-bold text-ink text-lg group-hover:text-accent transition-colors">
                       {project.title}
                     </h3>
-                    <span className="text-zinc-500 text-xs font-mono group-hover:translate-x-1 transition-transform">
+                    <span className="text-muted text-xs font-mono group-hover:translate-x-1 transition-transform">
                       →
                     </span>
                   </div>
 
-                  <p className="text-sm text-zinc-400 leading-relaxed line-clamp-2 mb-4 font-normal">
+                  <p className="text-sm text-body leading-relaxed line-clamp-2 mb-4 font-normal">
                     {project.tagline}
                   </p>
 
@@ -118,7 +118,7 @@ export default function HighlightedProjects() {
                         <motion.div
                           key={b.name}
                           whileHover={{ scale: 1.2, y: -2 }}
-                          className="w-7 h-7 rounded-md bg-[#1f1f23] border border-[#2e2e33] flex items-center justify-center text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors shadow-sm cursor-default"
+                          className="w-7 h-7 rounded-md bg-surface-elevated border border-hairline flex items-center justify-center text-body-strong hover:border-muted hover:text-ink transition-colors shadow-xs cursor-default"
                           title={b.name}
                         >
                           <Icon size={14} className="w-3.5 h-3.5" />
@@ -138,7 +138,7 @@ export default function HighlightedProjects() {
         <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
           <Link
             to="/projects"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#2e2e2e] bg-[#141414] hover:bg-[#1f1f1f] text-xs sm:text-sm font-medium text-zinc-300 hover:text-white transition-all duration-200 shadow-sm group"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-xs sm:text-sm font-medium text-body-strong hover:text-ink transition-all duration-200 shadow-xs group"
           >
             <span>See all projects</span>
             <CaretRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
