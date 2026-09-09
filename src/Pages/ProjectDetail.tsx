@@ -64,10 +64,10 @@ const ProjectDetail = () => {
 
   return (
     <>
-      <main className="bg-canvas text-ink overflow-hidden">
+      <main className="bg-transparent text-ink overflow-hidden">
         {/* Hero band */}
         <section
-          className="w-full bg-canvas flex items-center relative overflow-hidden"
+          className="w-full bg-transparent flex items-center relative overflow-hidden"
           style={{
             paddingTop: "64px",
             paddingBottom: "64px",

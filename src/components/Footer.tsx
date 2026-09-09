@@ -42,7 +42,7 @@ const footerNav: NavColumn[] = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[#27272a] bg-[#0a0a0a] text-zinc-400">
+    <footer className="border-t border-[#27272a] bg-transparent text-zinc-400">
       {/* 3-Column Navigation Grid */}
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
