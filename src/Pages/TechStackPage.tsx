@@ -25,13 +25,6 @@ import {
   PostgresIcon,
   LinuxIcon,
   PostmanIcon,
-  IntelliJIcon,
-  VSCodeIcon,
-  WarpIcon,
-  ObsidianIcon,
-  SpotifyIcon,
-  CloudflareIcon,
-  FigmaIcon,
   ViteIcon,
   WebSocketIcon,
 } from "@/components/TechIcons"
@@ -72,20 +65,20 @@ const workstationItems = [
   },
 ]
 
-// 2. Software & Daily Driver Apps (matching bonabrian dashed app grid)
+// 2. Software & Daily Driver Apps (Devicons)
 const softwareApps = [
-  { name: "IntelliJ IDEA", category: "Java & Spring IDE", icon: IntelliJIcon, bg: "bg-[#000000]" },
-  { name: "VS Code", category: "Web & TS Editor", icon: VSCodeIcon, bg: "bg-[#007ACC]/10" },
-  { name: "Postman", category: "API Testing & Mocks", icon: PostmanIcon, bg: "bg-[#FF6C37]/10" },
-  { name: "Docker", category: "Containerization", icon: DockerIcon, bg: "bg-[#2496ED]/10" },
-  { name: "Warp", category: "Modern Terminal", icon: WarpIcon, bg: "bg-[#010409]" },
-  { name: "Git", category: "Version Control", icon: GitIcon, bg: "bg-[#F05032]/10" },
-  { name: "PostgreSQL", category: "Relational DBMS", icon: PostgresIcon, bg: "bg-[#336791]/10" },
-  { name: "Obsidian", category: "Knowledge & Notes", icon: ObsidianIcon, bg: "bg-[#7C3AED]/10" },
-  { name: "Figma", category: "UI & Prototype", icon: FigmaIcon, bg: "bg-[#F24E1E]/10" },
-  { name: "Spotify", category: "Music & Focus", icon: SpotifyIcon, bg: "bg-[#1DB954]/10" },
-  { name: "Cloudflare", category: "DNS & Edge CDN", icon: CloudflareIcon, bg: "bg-[#F38020]/10" },
-  { name: "Linux", category: "POSIX & Shell", icon: LinuxIcon, bg: "bg-[#FCC624]/10" },
+  { name: "IntelliJ IDEA", category: "Java & Spring IDE", icon: "devicons-intellij-idea", color: "#FE2857" },
+  { name: "VS Code", category: "Web & TS Editor", icon: "devicons-visual-studio-code", color: "#007ACC" },
+  { name: "Postman", category: "API Testing & Mocks", icon: "devicons-postman-icon", color: "#FF6C37" },
+  { name: "Docker", category: "Containerization", icon: "devicons-docker-icon", color: "#2496ED" },
+  { name: "Warp", category: "Modern Terminal", icon: "devicons-terminal", color: "#29D2BF" },
+  { name: "Git", category: "Version Control", icon: "devicons-git-icon", color: "#F05032" },
+  { name: "PostgreSQL", category: "Relational DBMS", icon: "devicons-postgresql", color: "#336791" },
+  { name: "Obsidian", category: "Knowledge & Notes", icon: "devicons-obsidian-icon", color: "#7C3AED" },
+  { name: "Figma", category: "UI & Prototype", icon: "devicons-figma", color: "#F24E1E" },
+  { name: "Spotify", category: "Music & Focus", icon: "devicons-spotify-icon", color: "#1DB954" },
+  { name: "Cloudflare", category: "DNS & Edge CDN", icon: "devicons-cloudflare-icon", color: "#F38020" },
+  { name: "Linux", category: "POSIX & Shell", icon: "devicons-linux-tux", color: "#FCC624" },
 ]
 
 // 3. Technologies & Frameworks
@@ -365,24 +358,25 @@ export default function TechStackPage() {
 
           <div className="rounded-2xl border border-dashed border-[#2e2e34] bg-[#101014]/60 p-6 sm:p-8 shadow-inner">
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 sm:gap-7">
-              {softwareApps.map((app) => {
-                const AppSvg = app.icon
-                return (
-                  <motion.div
-                    key={app.name}
-                    whileHover={{ scale: 1.12, y: -4, transition: { type: "spring", stiffness: 400, damping: 18 } }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex flex-col items-center gap-2.5 text-center cursor-pointer group select-none"
-                  >
-                    <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-[#18181c] border border-[#2b2b32] group-hover:border-zinc-500 group-hover:shadow-[0_8px_20px_rgba(255,255,255,0.08)] flex items-center justify-center p-3 transition-all duration-200 shadow-md">
-                      <AppSvg size={28} className="w-7 h-7" />
-                    </div>
-                    <span className="text-xs font-medium text-zinc-300 group-hover:text-white transition-colors tracking-tight">
-                      {app.name}
-                    </span>
-                  </motion.div>
-                )
-              })}
+              {softwareApps.map((app) => (
+                <motion.div
+                  key={app.name}
+                  whileHover={{ scale: 1.12, y: -4, transition: { type: "spring", stiffness: 400, damping: 18 } }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex flex-col items-center gap-2.5 text-center cursor-pointer group select-none"
+                >
+                  <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-[#18181c] border border-[#2b2b32] group-hover:border-zinc-500 group-hover:shadow-[0_8px_20px_rgba(255,255,255,0.08)] flex items-center justify-center p-3 transition-all duration-200 shadow-md">
+                    <i
+                      className={`devicons ${app.icon} text-[26px] sm:text-[28px] transition-transform duration-200 group-hover:scale-110`}
+                      style={{ color: app.color }}
+                      aria-label={app.name}
+                    />
+                  </div>
+                  <span className="text-xs font-medium text-zinc-300 group-hover:text-white transition-colors tracking-tight">
+                    {app.name}
+                  </span>
+                </motion.div>
+              ))}
             </div>
           </div>
         </motion.section>

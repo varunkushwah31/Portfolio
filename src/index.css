@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "devicons/css";
 
 /* ============================================================
    Portfolio Design System — Clean Minimal Developer Aesthetic
@@ -140,7 +141,7 @@
   }
 
   body {
-    font-family: var(--font-sans);
+    font-family: var(--font-sans), system-ui;
     font-weight: 400;
     font-size: var(--font-size-body-md);
     line-height: 1.6;
@@ -241,6 +242,15 @@
 .tech-pill:hover {
   border-color: var(--color-accent);
   color: var(--color-ink);
+}
+
+/* Devicons icon font normalization */
+.devicons {
+  font-family: "Devicons", "devicons", sans-serif !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 /* Background grid with smooth fade at top & bottom */
