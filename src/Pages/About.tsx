@@ -25,7 +25,6 @@ import {
   PostmanIcon,
 } from "@/components/TechIcons"
 
-
 const techStack = [
   { name: "Java 21", icon: JavaIcon },
   { name: "Spring Boot", icon: SpringIcon },
