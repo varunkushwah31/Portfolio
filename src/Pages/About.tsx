@@ -25,6 +25,7 @@ import {
   PostmanIcon,
 } from "@/components/TechIcons"
 
+
 const techStack = [
   { name: "Java 21", icon: JavaIcon },
   { name: "Spring Boot", icon: SpringIcon },
@@ -76,7 +77,7 @@ export default function About() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-            className="w-full md:w-56 flex-shrink-0 flex flex-col items-center md:items-start"
+            className="w-full md:w-56 shrink-0 flex flex-col items-center md:items-start"
           >
             {/* Clean Borderless Portrait */}
             <div className="w-48 sm:w-52 md:w-56 h-60 sm:h-68 rounded-2xl overflow-hidden shadow-2xl relative group bg-surface-elevated">
@@ -228,7 +229,7 @@ export default function About() {
                   whileHover={{ scale: 1.06, y: -2 }}
                   className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-surface-card hover:bg-surface-elevated text-xs sm:text-sm text-body-strong hover:text-ink transition-colors duration-150 cursor-default shadow-xs"
                 >
-                  <Icon size={16} className="w-4 h-4 flex-shrink-0" />
+                  <Icon size={16} className="w-4 h-4 shrink-0" />
                   <span>{tech.name}</span>
                 </motion.div>
               )
