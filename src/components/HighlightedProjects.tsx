@@ -59,7 +59,7 @@ export default function HighlightedProjects() {
       className="py-12"
     >
       {/* Section Header */}
-      <p className="text-xs sm:text-sm font-semibold text-emerald-400 mb-1">
+      <p className="text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-1">
         Highlighted projects
       </p>
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-ink mb-8 tracking-tight">

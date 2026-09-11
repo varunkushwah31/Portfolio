@@ -394,7 +394,7 @@ export default function TechStackPage() {
         >
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
-              <div className="flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-1">
+              <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-1">
                 <SparkleIcon size={14} weight="fill" />
                 <span>Technologies &amp; Frameworks</span>
               </div>

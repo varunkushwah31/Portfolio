@@ -67,7 +67,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               </span>
             </div>
             <div className="flex items-center gap-1.5 text-[11px] text-muted">
-              <GitBranchIcon size={13} className="text-emerald-400" />
+              <GitBranchIcon size={13} className="text-emerald-600 dark:text-emerald-400" />
               <span>main: HEAD</span>
             </div>
           </div>
@@ -75,7 +75,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Code & Telemetry Canvas */}
           <div className="p-4 sm:p-5 space-y-3.5 text-xs leading-relaxed">
             <div className="flex items-center gap-2 text-body bg-surface-soft p-2.5 rounded-lg border border-hairline text-[11px]">
-              <TerminalWindowIcon size={14} className="text-emerald-400 shrink-0" />
+              <TerminalWindowIcon size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span className="text-body-strong font-mono">$ git subtree pull --prefix=client origin main</span>
             </div>
 
@@ -105,14 +105,14 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               </div>
               <div className="bg-surface-soft p-2.5 rounded-lg border border-hairline text-center">
                 <div className="text-muted text-[10px]">SYNC</div>
-                <div className="text-emerald-400 font-bold mt-0.5">ACTIVE</div>
+                <div className="text-emerald-600 dark:text-emerald-400 font-bold mt-0.5">ACTIVE</div>
               </div>
             </div>
           </div>
 
           {/* Bottom Strip */}
           <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-emerald-400 font-semibold font-sans">LeetcodeTracker Core</span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold font-sans">LeetcodeTracker Core</span>
             <span>REST API · JWT AUTH</span>
           </div>
         </div>
@@ -139,19 +139,19 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
               </div>
               <div className="flex items-center gap-2 ml-1.5">
-                <BroadcastIcon size={15} className="text-emerald-400 animate-pulse" />
+                <BroadcastIcon size={15} className="text-emerald-600 dark:text-emerald-400 animate-pulse" />
                 <span className="text-body-strong text-xs font-sans font-semibold tracking-wider">
                   WEBRTC DATA CHANNEL // P2P ZERO-RELAY PIPELINE
                 </span>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
+              <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
                 <LockKeyIcon size={12} weight="bold" />
                 AES-256-GCM
               </span>
-              <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-mono bg-surface-card px-2.5 py-0.5 rounded-full border border-hairline font-medium">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-surface-card px-2.5 py-0.5 rounded-full border border-hairline font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 ICE: DIRECT HOST
               </span>
             </div>
@@ -169,7 +169,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <div className="w-full md:w-48 bg-surface-card p-3 rounded-xl border border-hairline/80 shadow-xs flex flex-col justify-between">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                      <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                         <DesktopIcon size={15} weight="bold" />
                       </div>
                       <div>
@@ -177,7 +177,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                         <div className="text-[10px] text-muted font-sans uppercase">SENDER</div>
                       </div>
                     </div>
-                    <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
                       HOST
                     </span>
                   </div>
@@ -192,7 +192,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                     </div>
                     <div className="flex justify-between">
                       <span>STREAM:</span>
-                      <span className="text-emerald-400 font-semibold">ACTIVE SINK</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">ACTIVE SINK</span>
                     </div>
                   </div>
                 </div>
@@ -201,13 +201,13 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <div className="flex-1 w-full px-2 sm:px-4 py-2 flex flex-col items-center justify-center">
                   {/* Highway Labels */}
                   <div className="flex items-center justify-between w-full text-[11px] mb-2 font-sans">
-                    <div className="flex items-center gap-1.5 text-emerald-400 font-mono font-medium">
+                    <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-mono font-medium">
                       <ArrowsLeftRightIcon size={13} />
                       <span>RTCDataChannel</span>
                       <span className="text-muted text-[10px] hidden sm:inline">(SCTP reliable)</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-emerald-400 text-xs sm:text-sm">
+                      <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm">
                         {speedVal.toFixed(1)} MB/s
                       </span>
                       <span className="text-[10px] text-muted font-mono">({rttVal.toFixed(1)}ms RTT)</span>
@@ -237,7 +237,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
 
                   {/* Highway Sub-badges */}
                   <div className="flex items-center justify-between w-full text-[10px] text-muted mt-2 font-sans">
-                    <span className="flex items-center gap-1 text-emerald-400/90 font-mono">
+                    <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400/90 font-mono">
                       <CheckCircleIcon size={12} weight="fill" />
                       ZERO TURN RELAY · DIRECT P2P
                     </span>
@@ -249,7 +249,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <div className="w-full md:w-48 bg-surface-card p-3 rounded-xl border border-hairline/80 shadow-xs flex flex-col justify-between">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
+                      <div className="w-7 h-7 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-600 dark:text-sky-400">
                         <DesktopIcon size={15} weight="bold" />
                       </div>
                       <div>
@@ -257,7 +257,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                         <div className="text-[10px] text-muted font-sans uppercase">RECEIVER</div>
                       </div>
                     </div>
-                    <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                    <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-700 dark:text-sky-400 border border-sky-500/20">
                       TARGET
                     </span>
                   </div>
@@ -272,7 +272,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                     </div>
                     <div className="flex justify-between">
                       <span>DISK IO:</span>
-                      <span className="text-sky-400 font-semibold">0-COPY FLUSH</span>
+                      <span className="text-sky-600 dark:text-sky-400 font-semibold">0-COPY FLUSH</span>
                     </div>
                   </div>
                 </div>
@@ -283,7 +283,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
             <div className="bg-surface-soft p-4 rounded-xl border border-hairline space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-surface-card border border-hairline flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
+                  <div className="w-8 h-8 rounded-lg bg-surface-card border border-hairline flex items-center justify-center text-amber-600 dark:text-amber-400 shrink-0 shadow-xs">
                     <FileArchiveIcon size={18} weight="bold" />
                   </div>
                   <div>
@@ -298,7 +298,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
 
                 <div className="text-right">
                   <div className="text-xs font-mono font-bold text-ink">
-                    <span className="text-emerald-400">{transferMb.toFixed(1)} MB</span> / 160.0 MB
+                    <span className="text-emerald-600 dark:text-emerald-400">{transferMb.toFixed(1)} MB</span> / 160.0 MB
                   </div>
                   <div className="text-[10px] text-muted font-mono font-medium">
                     {progressPercent}% COMPLETE · ~0.8s REMAINING
@@ -351,7 +351,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
               <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
                 <span className="text-[10px] text-muted font-sans font-medium uppercase">THROUGHPUT</span>
-                <span className="text-emerald-400 font-bold font-mono text-sm mt-1">
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-sm mt-1">
                   {speedVal.toFixed(1)} MB/s
                 </span>
                 <span className="text-[9px] text-muted mt-0.5">Peak: 34.8 MB/s</span>
@@ -362,7 +362,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <span className="text-ink font-bold font-mono text-sm mt-1">
                   {rttVal.toFixed(1)} ms
                 </span>
-                <span className="text-[9px] text-emerald-400 mt-0.5">0 Relay Hops</span>
+                <span className="text-[9px] text-emerald-600 dark:text-emerald-400 mt-0.5">0 Relay Hops</span>
               </div>
 
               <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
@@ -373,7 +373,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
 
               <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
                 <span className="text-[10px] text-muted font-sans font-medium uppercase">PACKET LOSS</span>
-                <span className="text-emerald-400 font-bold font-mono text-sm mt-1">0.00%</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-sm mt-1">0.00%</span>
                 <span className="text-[9px] text-muted mt-0.5">SCTP Guaranteed</span>
               </div>
             </div>
@@ -381,7 +381,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
 
           {/* Bottom Strip */}
           <div className="bg-surface-elevated px-4 py-2.5 border-t border-hairline flex flex-wrap justify-between items-center gap-2 text-[11px] text-muted">
-            <div className="flex items-center gap-1.5 text-emerald-400">
+            <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
               <CheckCircleIcon size={13} weight="fill" />
               <span className="font-semibold font-sans">STUN NAT Traversal: Host Candidate (LAN Direct)</span>
             </div>
@@ -400,12 +400,12 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Header Bar */}
           <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <PulseIcon size={14} className="text-emerald-400 animate-pulse" />
+              <PulseIcon size={14} className="text-emerald-600 dark:text-emerald-400 animate-pulse" />
               <span className="text-body-strong text-[11px] font-sans font-semibold tracking-wider">
                 HARDWARE TELEMETRY // REAL-TIME
               </span>
             </div>
-            <span className="text-[10px] text-sky-400 font-mono bg-sky-500/10 px-2.5 py-0.5 rounded-full border border-sky-500/20 font-medium">
+            <span className="text-[10px] text-sky-700 dark:text-sky-400 font-mono bg-sky-500/10 px-2.5 py-0.5 rounded-full border border-sky-500/20 font-medium">
               1000ms TICK
             </span>
           </div>
@@ -417,13 +417,13 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               <div className="bg-surface-soft p-3 rounded-xl border border-hairline space-y-2">
                 <div className="flex justify-between text-[11px]">
                   <span className="text-muted flex items-center gap-1.5 font-sans">
-                    <CpuIcon size={13} className="text-emerald-400" /> CPU
+                    <CpuIcon size={13} className="text-emerald-600 dark:text-emerald-400" /> CPU
                   </span>
                   <span className="text-ink font-bold font-mono">{cpuVal}%</span>
                 </div>
                 <div className="w-full h-2 bg-surface-elevated rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-emerald-400 transition-all duration-300 rounded-full"
+                    className="h-full bg-emerald-500 transition-all duration-300 rounded-full"
                     style={{ width: `${cpuVal}%` }}
                   />
                 </div>
@@ -433,12 +433,12 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               <div className="bg-surface-soft p-3 rounded-xl border border-hairline space-y-2">
                 <div className="flex justify-between text-[11px]">
                   <span className="text-muted flex items-center gap-1.5 font-sans">
-                    <HardDrivesIcon size={13} className="text-sky-400" /> Memory
+                    <HardDrivesIcon size={13} className="text-sky-600 dark:text-sky-400" /> Memory
                   </span>
                   <span className="text-ink font-bold font-mono">6.4 / 16 GB</span>
                 </div>
                 <div className="w-full h-2 bg-surface-elevated rounded-full overflow-hidden">
-                  <div className="h-full bg-sky-400 w-[40%] rounded-full" />
+                  <div className="h-full bg-sky-500 w-[40%] rounded-full" />
                 </div>
                 <div className="text-[10px] text-muted font-sans">DDR4 Dual Channel</div>
               </div>
@@ -447,17 +447,17 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
             {/* Network / Disk Stream Bar */}
             <div className="bg-surface-soft p-3 rounded-xl border border-hairline flex items-center justify-between text-[11px]">
               <div className="flex items-center gap-2">
-                <LightningIcon size={14} className="text-amber-400" />
+                <LightningIcon size={14} className="text-amber-600 dark:text-amber-400" />
                 <span className="text-muted font-sans">Disk I/O:</span>
                 <span className="text-ink font-bold font-mono">48.2 MB/s R · 12.1 MB/s W</span>
               </div>
-              <span className="text-emerald-400 font-bold font-mono">100% OK</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono">100% OK</span>
             </div>
           </div>
 
           {/* Bottom Strip */}
           <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-emerald-400 font-semibold font-sans">Self-Hosted Daemon</span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold font-sans">Self-Hosted Daemon</span>
             <span>OS APIs · Zero Cloud Overhead</span>
           </div>
         </div>
@@ -472,12 +472,12 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Header Bar */}
           <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <BrainIcon size={14} className="text-emerald-400" />
+              <BrainIcon size={14} className="text-emerald-600 dark:text-emerald-400" />
               <span className="text-body-strong text-[11px] font-sans font-semibold tracking-wider">
                 ML CLASSIFICATION // PYTHON
               </span>
             </div>
-            <span className="text-[10px] text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
+            <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
               CROSS-VAL: 96.2%
             </span>
           </div>
@@ -491,12 +491,12 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <div className="text-ink font-bold mt-0.5">SYMPTOMS [132]</div>
               </div>
               <div className="bg-surface-soft p-2.5 rounded-xl border border-emerald-500/30">
-                <div className="text-emerald-400 text-[10px] font-sans font-semibold">MODEL</div>
+                <div className="text-emerald-600 dark:text-emerald-400 text-[10px] font-sans font-semibold">MODEL</div>
                 <div className="text-ink font-bold mt-0.5">RANDOM FOREST</div>
               </div>
               <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline">
                 <div className="text-muted text-[10px] font-sans">OUTPUT</div>
-                <div className="text-emerald-400 font-bold mt-0.5">DIAGNOSIS</div>
+                <div className="text-emerald-600 dark:text-emerald-400 font-bold mt-0.5">DIAGNOSIS</div>
               </div>
             </div>
 
@@ -504,13 +504,13 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
             <div className="bg-surface-soft p-3 rounded-xl border border-hairline space-y-2">
               <div className="flex justify-between text-[11px]">
                 <span className="text-muted font-sans text-[10px] uppercase tracking-wider">Prediction Confidence</span>
-                <span className="text-emerald-400 font-bold font-mono">0.964 PROB</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono">0.964 PROB</span>
               </div>
               <div className="space-y-1.5">
                 <div className="flex items-center gap-2 text-[10px] font-sans">
                   <span className="w-24 text-muted truncate">Primary Diagnosis:</span>
                   <div className="flex-1 h-2 bg-surface-elevated rounded-full overflow-hidden">
-                    <div className="h-full bg-emerald-400 w-[96.4%] rounded-full" />
+                    <div className="h-full bg-emerald-500 w-[96.4%] rounded-full" />
                   </div>
                   <span className="font-mono text-ink text-[10px] font-semibold">96.4%</span>
                 </div>
@@ -527,7 +527,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
 
           {/* Bottom Strip */}
           <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-emerald-400 font-semibold font-sans">Scikit-Learn · Pandas</span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-semibold font-sans">Scikit-Learn · Pandas</span>
             <span>REST Inference Serving</span>
           </div>
         </div>
@@ -542,7 +542,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           {/* Header Bar */}
           <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <DeviceMobileIcon size={14} className="text-sky-400" />
+              <DeviceMobileIcon size={14} className="text-sky-600 dark:text-sky-400" />
               <span className="text-body-strong text-[11px] font-sans font-semibold tracking-wider">
                 FLUTTER CLIENT // MOBILE UI
               </span>
@@ -557,7 +557,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
             {/* Card Mockup */}
             <div className="bg-surface-soft p-3.5 rounded-xl border border-hairline flex items-start justify-between gap-3">
               <div className="space-y-1 font-sans">
-                <div className="text-[10px] font-semibold text-sky-400 uppercase tracking-wider">
+                <div className="text-[10px] font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wider">
                   Quote of the Day
                 </div>
                 <div className="text-ink font-semibold text-xs sm:text-sm leading-snug">
@@ -565,7 +565,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 </div>
                 <div className="text-[10px] text-muted">— Curated Daily Collection</div>
               </div>
-              <div className="w-8 h-8 rounded-lg bg-surface-card border border-hairline flex items-center justify-center text-sky-400 shrink-0 shadow-xs">
+              <div className="w-8 h-8 rounded-lg bg-surface-card border border-hairline flex items-center justify-center text-sky-600 dark:text-sky-400 shrink-0 shadow-xs">
                 <LightningIcon size={15} />
               </div>
             </div>
@@ -585,7 +585,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
 
           {/* Bottom Strip */}
           <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-sky-400 font-semibold font-sans">Dart / Flutter Runtime</span>
+            <span className="text-sky-600 dark:text-sky-400 font-semibold font-sans">Dart / Flutter Runtime</span>
             <span>Decoupled Repository Pattern</span>
           </div>
         </div>
@@ -595,78 +595,140 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
       return (
         <div
           className={`w-full h-full bg-surface-card border border-hairline rounded-2xl flex flex-col justify-between font-mono select-none overflow-hidden relative shadow-sm ${className}`}
-          style={{ minHeight: "220px" }}
+          style={{ minHeight: "380px" }}
         >
           {/* Header Bar */}
-          <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-              <span className="text-muted ml-2 text-[11px] font-sans font-semibold tracking-wider">
-                AUDIT ENGINE // REAL-TIME COCKPIT
-              </span>
+          <div className="bg-surface-elevated px-4 py-3 border-b border-hairline flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+              </div>
+              <div className="flex items-center gap-2 ml-1.5">
+                <PulseIcon size={15} className="text-emerald-600 dark:text-emerald-400 animate-pulse" />
+                <span className="text-body-strong text-xs font-sans font-semibold tracking-wider">
+                  SPRING BOOT 4.1 // JAVA 25 VIRTUAL THREADS ENGINE
+                </span>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 text-[11px] text-muted">
-              <PulseIcon size={14} className="text-emerald-400 animate-pulse" />
-              <span className="text-emerald-400">READY</span>
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
+                <CheckCircleIcon size={12} weight="bold" />
+                CIRCUIT BREAKER: CLOSED
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-surface-card px-2.5 py-0.5 rounded-full border border-hairline font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                LOOM: 1,000+ VTHREADS
+              </span>
             </div>
           </div>
 
-          {/* Audit Metrics & Cockpit View */}
-          <div className="p-4 sm:p-5 space-y-3.5 text-xs">
-            {/* Terminal Command Simulation */}
-            <div className="flex items-center justify-between text-body bg-surface-soft p-2.5 rounded-lg border border-hairline text-[11px]">
-              <div className="flex items-center gap-2 truncate">
-                <TerminalWindowIcon size={14} className="text-teal-400 shrink-0" />
+          {/* Main Inspection Canvas */}
+          <div className="p-4 sm:p-5 space-y-4 text-xs">
+            {/* 1. Terminal / Engine Command Dispatcher */}
+            <div className="flex items-center justify-between text-body bg-surface-soft p-3 rounded-xl border border-hairline text-[11px]">
+              <div className="flex items-center gap-2.5 truncate">
+                <TerminalWindowIcon size={15} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span className="text-body-strong font-mono truncate">
-                  $ sitelook audit --target=site-look.vercel.app
+                  $ java --enable-preview -jar site-look.jar --engine=dual(jsoup+playwright)
                 </span>
               </div>
-              <span className="text-[10px] text-emerald-400 font-mono shrink-0 ml-2">200 OK</span>
+              <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold shrink-0 ml-2 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                200 OK · 18ms
+              </span>
             </div>
 
-            {/* Score Badges Grid */}
-            <div className="grid grid-cols-4 gap-2 text-center">
-              <div className="bg-surface-soft p-2 rounded-xl border border-hairline">
-                <div className="text-[10px] text-muted font-sans font-medium">PERF</div>
-                <div className="text-emerald-400 font-bold text-sm sm:text-base font-mono mt-0.5">98</div>
+            {/* 2. Dual Scraping & Pipeline Architecture */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              {/* Jsoup L1 Static */}
+              <div className="bg-surface-soft p-3 rounded-xl border border-hairline space-y-1.5">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-muted font-sans font-medium uppercase text-[10px]">L1 STATIC SCANNER</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono">12ms</span>
+                </div>
+                <div className="text-ink font-bold text-xs">Jsoup DOM Parser</div>
+                <p className="text-[10px] text-muted leading-tight font-sans">
+                  Raw HTML, OpenGraph tags, semantic headers &amp; schema microdata.
+                </p>
+                <div className="pt-1 flex items-center gap-1.5 text-[9px] font-mono text-emerald-600 dark:text-emerald-400">
+                  <CheckCircleIcon size={11} weight="bold" />
+                  <span>STREAMING PASS</span>
+                </div>
               </div>
-              <div className="bg-surface-soft p-2 rounded-xl border border-hairline">
-                <div className="text-[10px] text-muted font-sans font-medium">SEO</div>
-                <div className="text-emerald-400 font-bold text-sm sm:text-base font-mono mt-0.5">100</div>
+
+              {/* Playwright L2 Headless */}
+              <div className="bg-surface-soft p-3 rounded-xl border border-emerald-500/30 space-y-1.5 shadow-xs">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-emerald-600 dark:text-emerald-400 font-sans font-semibold uppercase text-[10px]">L2 DYNAMIC SCANNER</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono">310ms</span>
+                </div>
+                <div className="text-ink font-bold text-xs">Headless Chromium SPA</div>
+                <p className="text-[10px] text-muted leading-tight font-sans">
+                  Hydrated DOM, client bundle footprint, dynamic layout shifts &amp; console traps.
+                </p>
+                <div className="pt-1 flex items-center gap-1.5 text-[9px] font-mono text-emerald-600 dark:text-emerald-400">
+                  <CheckCircleIcon size={11} weight="bold" />
+                  <span>PLAYWRIGHT 1.52</span>
+                </div>
               </div>
-              <div className="bg-surface-soft p-2 rounded-xl border border-hairline">
-                <div className="text-[10px] text-muted font-sans font-medium">A11Y</div>
-                <div className="text-emerald-400 font-bold text-sm sm:text-base font-mono mt-0.5">96</div>
-              </div>
-              <div className="bg-surface-soft p-2 rounded-xl border border-hairline">
-                <div className="text-[10px] text-muted font-sans font-medium">VITAL</div>
-                <div className="text-teal-400 font-bold text-sm sm:text-base font-mono mt-0.5">100</div>
+
+              {/* PDF & Export Pipeline */}
+              <div className="bg-surface-soft p-3 rounded-xl border border-hairline space-y-1.5">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="text-muted font-sans font-medium uppercase text-[10px]">REPORT SYNTHESIS</span>
+                  <span className="text-sky-600 dark:text-sky-400 font-bold font-mono">45ms</span>
+                </div>
+                <div className="text-ink font-bold text-xs">OpenPDF Generator</div>
+                <p className="text-[10px] text-muted leading-tight font-sans">
+                  Audit summary, WCAG accessibility violations &amp; executive vector charts.
+                </p>
+                <div className="pt-1 flex items-center gap-1.5 text-[9px] font-mono text-sky-600 dark:text-sky-400">
+                  <CheckCircleIcon size={11} weight="bold" />
+                  <span>VECTOR READY</span>
+                </div>
               </div>
             </div>
 
-            {/* Core Web Vitals Row */}
-            <div className="grid grid-cols-3 gap-2 text-[11px]">
-              <div className="bg-surface-soft p-2 rounded-xl border border-hairline flex items-center justify-between">
-                <span className="text-muted font-sans">LCP</span>
-                <span className="text-ink font-bold font-mono">0.8s</span>
+            {/* 3. Live Audited Metrics Bar */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
+                <span className="text-[10px] text-muted font-sans font-medium uppercase">CONCURRENCY</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-sm mt-1">
+                  1,000+ VThreads
+                </span>
+                <span className="text-[9px] text-muted mt-0.5">Zero Thread Starvation</span>
               </div>
-              <div className="bg-surface-soft p-2 rounded-xl border border-hairline flex items-center justify-between">
-                <span className="text-muted font-sans">FID</span>
-                <span className="text-ink font-bold font-mono">12ms</span>
+
+              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
+                <span className="text-[10px] text-muted font-sans font-medium uppercase">REDIS CACHE</span>
+                <span className="text-ink font-bold font-mono text-sm mt-1">CACHE HIT</span>
+                <span className="text-[9px] text-emerald-600 dark:text-emerald-400 mt-0.5">TTL: 24h Expire</span>
               </div>
-              <div className="bg-surface-soft p-2 rounded-xl border border-hairline flex items-center justify-between">
-                <span className="text-muted font-sans">CLS</span>
-                <span className="text-ink font-bold font-mono">0.001</span>
+
+              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
+                <span className="text-[10px] text-muted font-sans font-medium uppercase">MONGO ATLAS</span>
+                <span className="text-ink font-bold font-mono text-sm mt-1">STORED</span>
+                <span className="text-[9px] text-muted mt-0.5">Time-Series Audit Log</span>
+              </div>
+
+              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
+                <span className="text-[10px] text-muted font-sans font-medium uppercase">RESILIENCE4J</span>
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono text-sm mt-1">
+                  PROTECTED
+                </span>
+                <span className="text-[9px] text-muted mt-0.5">Token Bucket Rate Limiter</span>
               </div>
             </div>
           </div>
 
           {/* Bottom Strip */}
-          <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-teal-400 font-semibold font-sans">WCAG 2.1 Compliance</span>
-            <span>Executive PDF Export Ready</span>
+          <div className="bg-surface-elevated px-4 py-2.5 border-t border-hairline flex flex-wrap justify-between items-center gap-2 text-[11px] text-muted">
+            <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+              <CheckCircleIcon size={13} weight="fill" />
+              <span className="font-semibold font-sans">OpenTelemetry &amp; Micrometer Tracing Active</span>
+            </div>
+            <span className="font-mono">Java 25 (OpenJDK 64-Bit Server VM) · Spring Boot 4.1.0</span>
           </div>
         </div>
       )
@@ -675,7 +737,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
       return (
         <div className={`w-full h-full bg-surface-card border border-hairline rounded-2xl flex items-center justify-center p-8 text-center ${className}`}>
           <div className="space-y-2">
-            <StackIcon size={28} className="text-emerald-400 mx-auto" />
+            <StackIcon size={28} className="text-emerald-600 dark:text-emerald-400 mx-auto" />
             <div className="text-ink font-bold text-base">{title}</div>
             <div className="text-muted text-xs font-mono">System Architecture Specification</div>
           </div>

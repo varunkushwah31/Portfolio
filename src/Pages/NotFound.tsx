@@ -16,7 +16,7 @@ export default function NotFound() {
       >
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-surface-card text-xs text-muted font-mono mb-6 shadow-xs">
-          <span className="w-2 h-2 rounded-full bg-amber-400" />
+          <span className="w-2 h-2 rounded-full bg-amber-500" />
           <span>404 · Error</span>
         </div>
 

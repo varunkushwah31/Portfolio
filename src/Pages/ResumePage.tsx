@@ -46,7 +46,7 @@ const experiences: ResumeEntry[] = [
     type: "Leadership & Mentorship",
     period: "2024 – Present",
     location: "Campus · Hybrid",
-    icon: <CheckCircleIcon size={20} weight="fill" className="text-emerald-400" />,
+    icon: <CheckCircleIcon size={20} weight="fill" className="text-emerald-600 dark:text-emerald-400" />,
     iconBg: "bg-emerald-500/10 border-emerald-500/30",
     techIcons: [
       { name: "Java", icon: JavaIcon },
@@ -70,7 +70,7 @@ const projects: ResumeEntry[] = [
     organization: "Full-Stack Coding Progress Tracker",
     type: "Personal Project",
     period: "2024",
-    icon: <CodeIcon size={20} weight="bold" className="text-sky-400" />,
+    icon: <CodeIcon size={20} weight="bold" className="text-sky-600 dark:text-sky-400" />,
     iconBg: "bg-sky-500/10 border-sky-500/30",
     techIcons: [
       { name: "Java", icon: JavaIcon },
@@ -89,7 +89,7 @@ const projects: ResumeEntry[] = [
     organization: "Enterprise Offline Encrypted P2P File Sharing",
     type: "Distributed Systems Project",
     period: "2024 – Present",
-    icon: <GlobeIcon size={20} weight="bold" className="text-rose-400" />,
+    icon: <GlobeIcon size={20} weight="bold" className="text-rose-600 dark:text-rose-400" />,
     iconBg: "bg-rose-500/10 border-rose-500/30",
     techIcons: [
       { name: "Java", icon: JavaIcon },
@@ -110,7 +110,7 @@ const projects: ResumeEntry[] = [
     organization: "Full-Stack Web Auditing & SEO Analytics Platform",
     type: "Web Auditing Architecture",
     period: "2025 – Present",
-    icon: <GlobeIcon size={20} weight="bold" className="text-emerald-400" />,
+    icon: <GlobeIcon size={20} weight="bold" className="text-emerald-600 dark:text-emerald-400" />,
     iconBg: "bg-emerald-500/10 border-emerald-500/30",
     techIcons: [
       { name: "Java", icon: JavaIcon },
@@ -216,7 +216,7 @@ export default function ResumePage() {
       <div className="max-w-4xl mx-auto px-6 pb-24 space-y-14">
         {/* Experience Section */}
         <section>
-          <div className="flex items-center gap-2.5 mb-6 text-emerald-400">
+          <div className="flex items-center gap-2.5 mb-6 text-emerald-600 dark:text-emerald-400">
             <BriefcaseIcon size={20} weight="bold" />
             <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
               Experience & Leadership
@@ -266,7 +266,7 @@ export default function ResumePage() {
                   <ul className="space-y-2 text-sm text-body font-normal leading-relaxed mt-2">
                     {entry.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
-                        <span className="text-emerald-400 mt-1.5 shrink-0 text-xs">•</span>
+                        <span className="text-emerald-600 dark:text-emerald-400 mt-1.5 shrink-0 text-xs">•</span>
                         <span>{bullet}</span>
                       </li>
                     ))}
@@ -279,7 +279,7 @@ export default function ResumePage() {
 
         {/* Featured Projects Section */}
         <section>
-          <div className="flex items-center gap-2.5 mb-6 text-sky-400">
+          <div className="flex items-center gap-2.5 mb-6 text-sky-600 dark:text-sky-400">
             <FolderIcon size={20} weight="bold" />
             <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
               Featured Projects
@@ -329,7 +329,7 @@ export default function ResumePage() {
                   <ul className="space-y-2 text-sm text-body font-normal leading-relaxed mt-2">
                     {entry.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
-                        <span className="text-sky-400 mt-1.5 shrink-0 text-xs">•</span>
+                        <span className="text-sky-600 dark:text-sky-400 mt-1.5 shrink-0 text-xs">•</span>
                         <span>{bullet}</span>
                       </li>
                     ))}
@@ -342,7 +342,7 @@ export default function ResumePage() {
 
         {/* Education Section */}
         <section>
-          <div className="flex items-center gap-2.5 mb-6 text-indigo-400">
+          <div className="flex items-center gap-2.5 mb-6 text-indigo-600 dark:text-indigo-400">
             <GraduationCapIcon size={20} weight="bold" />
             <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
               Education
@@ -375,7 +375,7 @@ export default function ResumePage() {
                   <ul className="space-y-2 text-sm text-body font-normal leading-relaxed mt-3">
                     {entry.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
-                        <span className="text-indigo-400 mt-1.5 shrink-0 text-xs">•</span>
+                        <span className="text-indigo-600 dark:text-indigo-400 mt-1.5 shrink-0 text-xs">•</span>
                         <span>{bullet}</span>
                       </li>
                     ))}
@@ -388,7 +388,7 @@ export default function ResumePage() {
 
         {/* Key Achievements Section */}
         <section>
-          <div className="flex items-center gap-2.5 mb-4 text-amber-400">
+          <div className="flex items-center gap-2.5 mb-4 text-amber-600 dark:text-amber-400">
             <TrophyIcon size={20} weight="bold" />
             <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
               Key Achievements
@@ -401,7 +401,7 @@ export default function ResumePage() {
                 key={idx}
                 className="p-4 rounded-xl bg-surface-card border border-hairline text-sm text-body-strong font-medium flex items-center gap-3 shadow-xs"
               >
-                <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
+                <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
                 <span>{item}</span>
               </div>
             ))}

@@ -186,7 +186,7 @@ export default function ProjectDetail() {
             transition={{ duration: 0.45 }}
           >
             <div className="mb-4">
-              <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
                 Specifications
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
@@ -202,7 +202,7 @@ export default function ProjectDetail() {
                   className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-xs flex flex-col justify-between"
                 >
                   <span className="text-xs text-muted font-medium mb-2">{m.label}</span>
-                  <span className="text-sm sm:text-base font-bold font-mono text-emerald-500 dark:text-emerald-400 tracking-tight">
+                  <span className="text-sm sm:text-base font-bold font-mono text-emerald-600 dark:text-emerald-400 tracking-tight">
                     {m.value}
                   </span>
                 </motion.div>
@@ -221,7 +221,7 @@ export default function ProjectDetail() {
           transition={{ duration: 0.45 }}
         >
           <div className="mb-4">
-            <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
               Live Preview &amp; Pipeline
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
@@ -265,7 +265,7 @@ export default function ProjectDetail() {
             transition={{ duration: 0.45 }}
           >
             <div className="mb-4">
-              <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
                 Data Flow
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
@@ -286,7 +286,7 @@ export default function ProjectDetail() {
                 >
                   <div>
                     <div className="flex items-center justify-between mb-3">
-                      <span className="font-mono text-emerald-400 font-bold text-xs">
+                      <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold text-xs">
                         PHASE {node.step}
                       </span>
                       <span className="w-2 h-2 rounded-full bg-emerald-500/70" />
@@ -314,7 +314,7 @@ export default function ProjectDetail() {
           transition={{ duration: 0.45 }}
         >
           <div className="mb-4">
-            <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
               Deliverables
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
@@ -332,7 +332,7 @@ export default function ProjectDetail() {
                 transition={{ delay: i * 0.08 }}
                 className="rounded-2xl border border-hairline bg-surface-card p-5 sm:p-6 shadow-xs flex items-start gap-4"
               >
-                <span className="text-emerald-400 font-mono font-bold text-lg shrink-0">
+                <span className="text-emerald-600 dark:text-emerald-400 font-mono font-bold text-lg shrink-0">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <p className="text-sm sm:text-base text-body leading-relaxed font-normal">
@@ -354,7 +354,7 @@ export default function ProjectDetail() {
             transition={{ duration: 0.45 }}
           >
             <div className="mb-4">
-              <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
                 System Design
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
@@ -395,7 +395,7 @@ export default function ProjectDetail() {
                     </div>
 
                     <div className="bg-surface-soft p-4 rounded-xl border border-hairline">
-                      <div className="text-[11px] font-mono text-emerald-400 uppercase tracking-wider mb-1.5 font-semibold">
+                      <div className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1.5 font-semibold">
                         Engineering Trade-off
                       </div>
                       <p className="text-body leading-relaxed font-normal">

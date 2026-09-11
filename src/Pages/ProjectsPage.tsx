@@ -65,9 +65,10 @@ const projectBadges: Record<
     { name: "Git", icon: GitIcon },
   ],
   "site-look": [
+    { name: "Java", icon: JavaIcon },
+    { name: "Spring Boot", icon: SpringIcon },
     { name: "React", icon: ReactIcon },
-    { name: "TypeScript", icon: TypeScriptIcon },
-    { name: "Node.js", icon: NodeIcon },
+    { name: "Docker", icon: DockerIcon },
     { name: "Tailwind", icon: TailwindIcon },
   ],
 }

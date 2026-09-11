@@ -72,7 +72,7 @@ export default function Hero() {
             className="text-ink font-medium hover:text-accent underline underline-offset-4 decoration-zinc-400 dark:decoration-zinc-600 hover:decoration-emerald-500 transition-colors inline-flex items-center gap-0.5"
           >
             <span>devup</span>
-            <SparkleIcon size={12} className="text-emerald-400 inline" />
+            <SparkleIcon size={12} className="text-emerald-600 dark:text-emerald-400 inline" />
           </a>
           , building resilient backend systems with Java &amp; Spring Boot, and exploring real-time WebRTC protocols.
         </motion.p>

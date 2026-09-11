@@ -146,31 +146,31 @@ html.dark {
 }
 
 html.light {
-  --canvas: #ffffff;
-  --surface-soft: #f4f4f5;
+  --canvas: #f1f2f5;
+  --surface-soft: #e4e6eb;
   --surface-card: #ffffff;
-  --surface-elevated: #f4f4f5;
+  --surface-elevated: #eaecf1;
 
   --ink: #09090b;
-  --body: #52525b;
-  --body-strong: #27272a;
-  --muted: #71717a;
+  --body: #333a44;
+  --body-strong: #0f141a;
+  --muted: #57606a;
 
-  --hairline: #e4e4e7;
-  --hairline-strong: #d4d4d8;
+  --hairline: #dbe0e6;
+  --hairline-strong: #cbd2d9;
 
-  --accent: #059669;
-  --accent-light: #10b981;
+  --accent: #047857;
+  --accent-light: #059669;
   --accent-muted: #d1fae5;
 
   --success: #16a34a;
-  --warning: #d97706;
+  --warning: #b45309;
 
   --grid-line: rgba(0, 0, 0, 0.045);
-  --scrollbar-track: #ffffff;
-  --scrollbar-thumb: #d4d4d8;
-  --scrollbar-thumb-hover: #a1a1aa;
-  --selection-bg: #e4e4e7;
+  --scrollbar-track: #f1f2f5;
+  --scrollbar-thumb: #cbd2d9;
+  --scrollbar-thumb-hover: #9ca3af;
+  --selection-bg: #dbe0e6;
   --selection-text: #09090b;
 
   color-scheme: light;
