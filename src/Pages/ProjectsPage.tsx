@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
+import { usePageTitle } from "@/hooks/usePageTitle"
 import projects from "@/data/projects"
 import LaptopMockup from "@/components/LaptopMockup"
 import MobileMockup from "@/components/MobileMockup"
@@ -18,6 +19,7 @@ import {
   PostgresIcon,
   LinuxIcon,
 } from "@/components/TechIcons"
+import React from "react";
 
 const projectBadges: Record<
   string,
@@ -88,6 +90,7 @@ const cardThemes: Record<string, { bg: string; isMobile?: boolean }> = {
 }
 
 export default function ProjectsPage() {
+  usePageTitle("Projects")
   return (
     <div className="min-h-screen bg-transparent">
       {/* Page Header matching reference */}
@@ -132,11 +135,11 @@ export default function ProjectsPage() {
                     style={{ background: theme.bg }}
                   >
                     {theme.isMobile ? (
-                      <div className="w-full max-w-[200px] flex items-center justify-center">
+                      <div className="w-full max-w-50 flex items-center justify-center">
                         <MobileMockup imageSrc={project.image} alt={project.title} />
                       </div>
                     ) : (
-                      <div className="w-full max-w-[280px] sm:max-w-[320px] transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.03]">
+                      <div className="w-full max-w-70 sm:max-w-80 transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.03]">
                         <LaptopMockup imageSrc={project.image} alt={project.title} />
                       </div>
                     )}
@@ -146,7 +149,7 @@ export default function ProjectsPage() {
                   <div className="p-5 sm:p-6 bg-surface-card">
                     {/* Project Title */}
                     <h3 className="font-bold text-ink text-base sm:text-lg transition-colors tracking-tight">
-                      {project.slug}
+                      {project.title}
                     </h3>
 
                     {/* Tagline / Excerpt */}

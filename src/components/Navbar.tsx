@@ -28,9 +28,6 @@ export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    setMobileOpen(false)
-  }, [location.pathname])
 
   const isActive = (href: string) => {
     if (href === '/') return location.pathname === '/'
@@ -58,11 +55,11 @@ export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) 
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.92 }}
               transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-              className="flex items-center gap-[3px] py-1 px-0.5 rounded-md"
+              className="flex items-center gap-0.75 py-1 px-0.5 rounded-md"
             >
-              <span className="w-[3px] h-3 bg-muted group-hover:bg-ink rounded-full transition-colors" />
-              <span className="w-[3px] h-5 bg-ink rounded-full transition-colors" />
-              <span className="w-[3px] h-3.5 bg-muted group-hover:bg-ink rounded-full transition-colors" />
+              <span className="w-0.75 h-3 bg-muted group-hover:bg-ink rounded-full transition-colors" />
+              <span className="w-0.75 h-5 bg-ink rounded-full transition-colors" />
+              <span className="w-0.75 h-3.5 bg-muted group-hover:bg-ink rounded-full transition-colors" />
             </motion.div>
             <span className="text-sm font-medium text-ink group-hover:text-accent transition-colors duration-200">
               Varun Kushwah
@@ -164,6 +161,7 @@ export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) 
                 <Link
                   key={link.href}
                   to={link.href}
+                  onClick={() => setMobileOpen(false)}
                   className={[
                     'px-4 py-3 rounded-lg text-base transition-colors duration-200',
                     isActive(link.href)

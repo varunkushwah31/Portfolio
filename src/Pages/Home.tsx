@@ -2,8 +2,10 @@ import Hero from "@/components/Hero"
 import HighlightedProjects from "@/components/HighlightedProjects"
 import LetsTalk from "@/components/LetsTalk"
 import ScrollProgress from "@/components/ScrollProgress"
+import { usePageTitle } from "@/hooks/usePageTitle"
 
 const Home = () => {
+  usePageTitle()
   return (
     <div className="w-full">
       <ScrollProgress />

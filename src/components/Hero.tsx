@@ -2,11 +2,6 @@ import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 import { CaretRightIcon, SparkleIcon } from "@phosphor-icons/react"
 import TechStack from "./TechStack"
-
-interface HeroProps {
-  onOpenResume?: () => void
-}
-
 const container = {
   hidden: { opacity: 0 },
   visible: {
@@ -20,7 +15,7 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 }
 
-export default function Hero(_props: Readonly<HeroProps>) {
+export default function Hero() {
   return (
     <section className="max-w-4xl mx-auto px-6 pt-16 sm:pt-20 pb-12">
       <motion.div

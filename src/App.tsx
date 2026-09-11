@@ -7,6 +7,7 @@ import ProjectsPage from "./Pages/ProjectsPage"
 import ResumePage from "./Pages/ResumePage"
 import ProjectDetail from "./Pages/ProjectDetail"
 import TechStackPage from "./Pages/TechStackPage"
+import NotFound from "./Pages/NotFound"
 import ScrollToTop from "./components/ScrollToTop"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
@@ -40,6 +41,7 @@ function AnimatedRoutes() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </motion.div>
     </AnimatePresence>

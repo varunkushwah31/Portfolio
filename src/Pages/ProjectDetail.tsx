@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
-import { ArrowLeftIcon, ArrowRightIcon, ArrowSquareOutIcon } from "@phosphor-icons/react"
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowSquareOutIcon,
+  SparkleIcon,
+} from "@phosphor-icons/react"
 import { motion } from "framer-motion"
 import projects from "@/data/projects"
-import MStripe from "@/components/MStripe"
 import ProjectVisual from "@/components/ProjectVisual"
-import CommandPalette from "@/components/CommandPalette"
-import ResumeModal from "@/components/ResumeModal"
+import { usePageTitle } from "@/hooks/usePageTitle"
 import { sound } from "@/lib/sound"
 
-const ProjectDetail = () => {
+export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>()
-  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
-  const [resumeModalOpen, setResumeModalOpen] = useState(false)
+
   const projectIndex = projects.findIndex(
     (p) =>
       p.slug === slug ||
@@ -20,45 +21,39 @@ const ProjectDetail = () => {
   )
   const project = projectIndex !== -1 ? projects[projectIndex] : undefined
 
-  useEffect(() => {
-    const handleOpenPalette = () => setCommandPaletteOpen(true)
-    window.addEventListener("open-command-palette", handleOpenPalette)
-    return () => window.removeEventListener("open-command-palette", handleOpenPalette)
-  }, [])
+  usePageTitle(project ? project.title : "Project Not Found")
 
   if (!project) {
     return (
-      <>
-        <main
-          className="w-full bg-canvas flex items-center justify-center"
-          style={{ minHeight: "60vh", paddingTop: "96px", paddingBottom: "96px" }}
+      <div className="min-h-[72vh] flex items-center justify-center px-6 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          className="max-w-md w-full text-center"
         >
-          <div className="max-w-[1440px] mx-auto px-6 text-center">
-            <h1 className="text-ink mb-6 text-4xl font-bold uppercase">PROJECT NOT FOUND</h1>
-            <p className="body-light mb-12 text-muted">
-              The project specification you are looking for does not exist or has been relocated.
-            </p>
-            <Link
-              to="/"
-              onClick={() => sound.click()}
-              className="btn-text inline-flex items-center gap-3 text-ink bg-transparent border border-ink px-8 hover:bg-ink hover:text-canvas transition-colors duration-200"
-              style={{ height: "48px", borderRadius: "0px" }}
-            >
-              <ArrowLeftIcon size={16} strokeWidth={2} />
-              BACK TO HOME
-            </Link>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-hairline bg-surface-card text-xs text-muted font-mono mb-6 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-amber-400" />
+            <span>404 · Not Found</span>
           </div>
-        </main>
-        <CommandPalette
-          isOpen={commandPaletteOpen}
-          onClose={() => setCommandPaletteOpen(false)}
-          onOpenResume={() => setResumeModalOpen(true)}
-        />
-        <ResumeModal
-          isOpen={resumeModalOpen}
-          onClose={() => setResumeModalOpen(false)}
-        />
-      </>
+
+          <h1 className="text-3xl sm:text-4xl font-bold text-ink tracking-tight mb-3">
+            Project not found
+          </h1>
+          <p className="text-sm sm:text-base text-muted font-normal leading-relaxed mb-8">
+            The project specification you are looking for does not exist or has been relocated.
+          </p>
+
+          <Link
+            to="/projects"
+            onClick={() => sound.click()}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-ink text-canvas hover:opacity-90 text-sm font-medium transition-all shadow-xs"
+          >
+            <ArrowLeftIcon size={16} weight="bold" />
+            <span>Return to Projects</span>
+          </Link>
+        </motion.div>
+      </div>
     )
   }
 
@@ -67,430 +62,414 @@ const ProjectDetail = () => {
     projectIndex < projects.length - 1 ? projects[projectIndex + 1] : null
 
   return (
-    <>
-      <main className="bg-transparent text-ink overflow-hidden">
-        {/* Hero band */}
-        <section
-          className="w-full bg-transparent flex items-center relative overflow-hidden"
-          style={{
-            paddingTop: "64px",
-            paddingBottom: "64px",
-          }}
+    <div className="min-h-screen bg-transparent">
+      {/* Container */}
+      <div className="max-w-4xl mx-auto px-6 pt-12 sm:pt-16 pb-24 space-y-12 sm:space-y-16">
+        {/* ============================================================
+            HERO / HEADER SECTION
+            ============================================================ */}
+        <motion.section
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
         >
-          <div className="max-w-[1440px] mx-auto px-6 w-full relative z-10">
-            {/* Back link */}
-            <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
-              <Link
-                to="/#projects"
-                onClick={() => sound.click()}
-                className="label-uppercase text-muted inline-flex items-center gap-2 mb-8 hover:text-ink transition-colors duration-200"
-              >
-                <ArrowLeftIcon size={14} strokeWidth={2} />
-                ALL REPOSITORIES & PROJECTS
-              </Link>
-            </motion.div>
+          {/* Back link */}
+          <div className="mb-6">
+            <Link
+              to="/projects"
+              onClick={() => sound.click()}
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-muted hover:text-ink transition-colors group"
+            >
+              <ArrowLeftIcon size={14} weight="bold" className="group-hover:-translate-x-1 transition-transform" />
+              <span>Back to all projects</span>
+            </Link>
+          </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Asymmetric section index marker */}
-              <div className="hidden lg:block lg:col-span-2 pt-2">
-                <div className="label-uppercase text-muted tracking-[3px] text-xs font-mono">
-                  [ SPEC // {String(projectIndex + 1).padStart(2, "0")} ]
-                </div>
+          {/* Badges row: Category, Version, Year */}
+          <div className="flex flex-wrap items-center gap-2.5 mb-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 border border-emerald-500/20 shadow-xs">
+              <SparkleIcon size={12} weight="fill" />
+              <span>{project.category}</span>
+            </span>
+
+            <span className="px-2.5 py-1 rounded-lg bg-surface-card border border-hairline text-xs font-mono text-body-strong shadow-xs">
+              {project.version}
+            </span>
+
+            <span className="px-2.5 py-1 rounded-lg bg-surface-card border border-hairline text-xs font-mono text-muted shadow-xs">
+              {project.year}
+            </span>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-ink tracking-tight mb-4">
+            {project.title}
+          </h1>
+
+          {/* Tagline */}
+          <p className="text-base sm:text-lg text-body font-normal leading-relaxed mb-6 max-w-2xl">
+            {project.tagline}
+          </p>
+
+          {/* Metadata & Actions Row */}
+          <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-hairline">
+            <div className="flex flex-wrap items-center gap-6 text-xs sm:text-sm">
+              <div>
+                <span className="text-muted block text-[11px] uppercase font-mono mb-0.5">Role</span>
+                <span className="font-semibold text-ink">{project.role}</span>
               </div>
 
-              {/* Title & Metadata */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="lg:col-span-10 border-l border-hairline-strong pl-6 md:pl-12 py-2"
-              >
-                {/* Category badge & version */}
-                <div className="flex flex-wrap items-center gap-3 mb-6">
-                  <span className="label-uppercase text-m-blue-light tracking-[1.5px] font-bold">
-                    {project.category}
-                  </span>
-                  <span className="text-hairline">|</span>
-                  <span className="text-body-strong font-mono text-xs bg-surface-elevated px-2.5 py-1 border border-hairline-strong">
-                    {project.version}
-                  </span>
-                  <span className="text-body-strong font-mono text-xs bg-surface-elevated px-2.5 py-1 border border-hairline-strong">
-                    {project.year}
-                  </span>
-                </div>
+              <div>
+                <span className="text-muted block text-[11px] uppercase font-mono mb-0.5">Status</span>
+                <span className="inline-flex items-center gap-1.5 font-medium text-ink">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>{project.status}</span>
+                </span>
+              </div>
+            </div>
 
-                {/* Project title — display-xl */}
-                <h1 className="text-ink mb-4 max-w-[900px] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase leading-[0.96]">
-                  {project.title}
-                </h1>
+            {/* Action buttons */}
+            <div className="flex items-center gap-3">
+              {project.githubUrl && (
+                <motion.a
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.click()}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-ink text-xs sm:text-sm font-medium transition-all shadow-xs"
+                >
+                  <ArrowSquareOutIcon size={15} />
+                  <span>Source Code</span>
+                </motion.a>
+              )}
 
-                {/* Tagline */}
-                <p className="label-uppercase text-muted text-xs md:text-sm tracking-[1.5px] mb-8 max-w-[800px]">
-                  {project.tagline}
-                </p>
-
-                {/* Meta row & Action links */}
-                <div className="flex flex-wrap items-end justify-between gap-6 mb-8 pb-8 border-b border-hairline-strong">
-                  <div className="flex flex-wrap gap-8">
-                    <div>
-                      <div className="label-uppercase text-muted mb-2 text-xs">ROLE</div>
-                      <p className="text-ink font-sans font-bold uppercase text-base">
-                        {project.role}
-                      </p>
-                    </div>
-                    <div>
-                      <div className="label-uppercase text-muted mb-2 text-xs">STATUS</div>
-                      <p className="text-ink font-mono text-base flex items-center gap-2">
-                        <span className="w-2 h-2 bg-success rounded-full" />
-                        {project.status}
-                      </p>
-                    </div>
-                  </div>
-
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => sound.click()}
-                      className="btn-text inline-flex items-center gap-2 text-xs bg-surface-card hover:bg-surface-elevated text-ink border border-hairline px-5 py-3 transition-colors duration-200"
-                      style={{ borderRadius: "0px" }}
-                    >
-                      <ArrowSquareOutIcon size={14} />
-                      VIEW SOURCE ON GITHUB
-                      <ArrowRightIcon size={14} />
-                    </a>
-                  )}
-                </div>
-
-                {/* Tech tags */}
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="text-muted bg-surface-elevated px-3 py-1.5 border border-hairline-strong font-mono text-xs"
-                      style={{ borderRadius: "0px" }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+              {project.liveUrl && (
+                <motion.a
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.click()}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-ink text-canvas hover:opacity-90 text-xs sm:text-sm font-medium transition-all shadow-xs"
+                >
+                  <span>Live Preview</span>
+                  <ArrowRightIcon size={14} />
+                </motion.a>
+              )}
             </div>
           </div>
-        </section>
 
-        <MStripe />
+          {/* Tech Stack Pills */}
+          <div className="flex flex-wrap gap-2 pt-5">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className="px-3 py-1 rounded-full text-xs font-medium bg-surface-card border border-hairline text-body-strong shadow-xs"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </motion.section>
 
-        {/* Telemetry Specification Matrix Section */}
-        <section className="w-full bg-surface-soft py-12 border-b border-hairline-strong">
-          <div className="max-w-[1440px] mx-auto px-6">
-            <div className="label-uppercase text-muted text-xs mb-6 tracking-[2px]">
-              [ TELEMETRY SPECIFICATION MATRIX ]
+        {/* ============================================================
+            TELEMETRY SPECIFICATION MATRIX
+            ============================================================ */}
+        {project.metrics && project.metrics.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+          >
+            <div className="mb-4">
+              <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+                Specifications
+              </span>
+              <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
+                Architecture &amp; Key Metrics
+              </h2>
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
               {project.metrics.map((m, idx) => (
-                <div
+                <motion.div
                   key={idx}
-                  className="bg-surface-card p-6 border border-hairline flex flex-col justify-between"
-                  style={{ borderRadius: "0px" }}
+                  whileHover={{ y: -2 }}
+                  className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-xs flex flex-col justify-between"
                 >
-                  <div className="label-uppercase text-muted text-xs mb-3 tracking-[1.5px]">
-                    {m.label}
-                  </div>
-                  <div className="text-ink font-bold font-mono text-base md:text-xl text-m-blue-light tracking-tight">
+                  <span className="text-xs text-muted font-medium mb-2">{m.label}</span>
+                  <span className="text-sm sm:text-base font-bold font-mono text-emerald-500 dark:text-emerald-400 tracking-tight">
                     {m.value}
-                  </div>
-                </div>
+                  </span>
+                </motion.div>
               ))}
             </div>
-          </div>
-        </section>
-
-        <MStripe />
-
-        {/* Project Visual Showcase */}
-        <section className="w-full bg-canvas py-12 border-b border-hairline-strong">
-          <div className="max-w-[1440px] mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative max-w-[1000px] mx-auto bg-surface-card border border-hairline overflow-hidden shadow-2xl"
-              style={{ borderRadius: "0px" }}
-            >
-              <ProjectVisual slug={project.slug} title={project.title} />
-            </motion.div>
-          </div>
-        </section>
-
-        <MStripe />
-
-        {/* Description band */}
-        <section
-          className="w-full bg-surface-soft"
-          style={{ paddingTop: "96px", paddingBottom: "96px" }}
-        >
-          <div className="max-w-[1440px] mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-              {/* Left — section label */}
-              <div className="lg:col-span-4">
-                <div className="label-uppercase text-muted mb-4 text-xs tracking-[2px]">
-                  OVERVIEW
-                </div>
-                <h2 className="text-ink text-2xl md:text-3xl font-bold uppercase">
-                  ABOUT THIS ARCHITECTURE
-                </h2>
-              </div>
-
-              {/* Right — description paragraphs */}
-              <div className="lg:col-span-8 space-y-6">
-                {project.longDescription.map((paragraph, i) => (
-                  <p
-                    key={i}
-                    className="body-light text-base md:text-lg leading-relaxed text-body"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <MStripe />
-
-        {/* Architecture Data-Flow Pipeline Section */}
-        {project.architectureFlow && project.architectureFlow.length > 0 && (
-          <>
-            <section
-              className="w-full bg-canvas"
-              style={{ paddingTop: "96px", paddingBottom: "96px" }}
-            >
-              <div className="max-w-[1440px] mx-auto px-6">
-                <div className="label-uppercase text-muted mb-4 text-xs tracking-[2px]">
-                  SYSTEM ARCHITECTURE
-                </div>
-                <h2 className="text-ink mb-12 text-2xl md:text-3xl font-bold uppercase">
-                  DATA FLOW & PIPELINE LIFECYCLE
-                </h2>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {project.architectureFlow.map((node, i) => (
-                    <motion.div
-                      key={node.step}
-                      initial={{ opacity: 0, y: 15 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.08 }}
-                      className="bg-surface-card p-6 border border-hairline-strong relative flex flex-col justify-between"
-                      style={{ borderRadius: "0px" }}
-                    >
-                      <div>
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="font-mono text-m-blue-light font-bold text-xs">
-                            PHASE // {node.step}
-                          </span>
-                          <span className="w-2 h-2 bg-m-blue-dark rounded-full" />
-                        </div>
-                        <h4 className="text-ink font-bold uppercase text-sm mb-3">
-                          {node.title}
-                        </h4>
-                        <p className="body-light text-body text-xs leading-relaxed">
-                          {node.detail}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-            <MStripe />
-          </>
+          </motion.section>
         )}
 
-        {/* Highlights band */}
-        <section
-          className="w-full bg-surface-soft"
-          style={{ paddingTop: "96px", paddingBottom: "96px" }}
+        {/* ============================================================
+            INTERACTIVE SYSTEM VISUAL SHOWCASE
+            ============================================================ */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
         >
-          <div className="max-w-[1440px] mx-auto px-6">
-            <div className="label-uppercase text-muted mb-4 text-xs tracking-[2px]">
-              KEY HIGHLIGHTS
-            </div>
-            <h2 className="text-ink mb-12 text-2xl md:text-3xl font-bold uppercase">
-              WHAT WAS BUILT & VALIDATED
+          <div className="mb-4">
+            <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+              Live Preview &amp; Pipeline
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
+              System Visual Showcase
             </h2>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {project.highlights.map((highlight, i) => (
+          <div className="rounded-2xl border border-hairline bg-surface-card overflow-hidden shadow-lg">
+            <ProjectVisual slug={project.slug} title={project.title} />
+          </div>
+        </motion.section>
+
+        {/* ============================================================
+            OVERVIEW & LONG DESCRIPTION
+            ============================================================ */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+        >
+          <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight mb-4">
+            About the Architecture
+          </h2>
+
+          <div className="space-y-4 text-sm sm:text-base text-body leading-relaxed font-normal">
+            {project.longDescription.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* ============================================================
+            ARCHITECTURE DATA-FLOW PIPELINE
+            ============================================================ */}
+        {project.architectureFlow && project.architectureFlow.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+          >
+            <div className="mb-4">
+              <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+                Data Flow
+              </span>
+              <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
+                Pipeline Lifecycle
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {project.architectureFlow.map((node, i) => (
                 <motion.div
-                  key={i}
+                  key={node.step}
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 }}
-                  className="bg-canvas p-6 border border-hairline-strong hover:border-hairline transition-colors duration-200"
-                  style={{ borderRadius: "0px" }}
+                  whileHover={{ y: -3 }}
+                  className="rounded-2xl border border-hairline bg-surface-card p-5 shadow-xs flex flex-col justify-between group hover:border-muted transition-all"
                 >
-                  <div className="text-m-blue-dark mb-3 font-mono text-2xl font-bold">
-                    {String(i + 1).padStart(2, "0")}
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-mono text-emerald-400 font-bold text-xs">
+                        PHASE {node.step}
+                      </span>
+                      <span className="w-2 h-2 rounded-full bg-emerald-500/70" />
+                    </div>
+                    <h3 className="text-ink font-semibold text-sm sm:text-base mb-2 group-hover:text-accent transition-colors">
+                      {node.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-body leading-relaxed font-normal">
+                      {node.detail}
+                    </p>
                   </div>
-                  <p className="body-light text-body text-base leading-relaxed">
-                    {highlight}
-                  </p>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
-
-        <MStripe />
-
-        {/* Engineering Decisions & Trade-Offs Section */}
-        {project.tradeoffs && project.tradeoffs.length > 0 && (
-          <>
-            <section
-              className="w-full bg-canvas"
-              style={{ paddingTop: "96px", paddingBottom: "96px" }}
-            >
-              <div className="max-w-[1440px] mx-auto px-6">
-                <div className="label-uppercase text-muted mb-4 text-xs tracking-[2px]">
-                  DECISION LOG
-                </div>
-                <h2 className="text-ink mb-12 text-2xl md:text-3xl font-bold uppercase">
-                  ENGINEERING DECISIONS & TRADE-OFFS
-                </h2>
-
-                <div className="space-y-6">
-                  {project.tradeoffs.map((t, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, y: 15 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      className="bg-surface-card border border-hairline p-6 md:p-8"
-                      style={{ borderRadius: "0px" }}
-                    >
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="w-3 h-3 bg-m-blue-light" style={{ borderRadius: "0px" }} />
-                        <h4 className="text-ink font-bold text-base md:text-lg uppercase">
-                          {t.decision}
-                        </h4>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-hairline-strong text-xs leading-relaxed">
-                        <div>
-                          <div className="label-uppercase text-muted text-[10px] mb-2 tracking-[1px]">
-                            WHY CHOSEN / RATIONALE
-                          </div>
-                          <p className="body-light text-body-strong">
-                            {t.rationale}
-                          </p>
-                        </div>
-                        <div>
-                          <div className="label-uppercase text-muted text-[10px] mb-2 tracking-[1px]">
-                            ALTERNATIVE CONSIDERED
-                          </div>
-                          <p className="body-light text-body">
-                            {t.alternative}
-                          </p>
-                        </div>
-                        <div>
-                          <div className="label-uppercase text-muted text-[10px] mb-2 tracking-[1px]">
-                            ENGINEERING TRADE-OFF
-                          </div>
-                          <p className="body-light text-m-blue-light font-mono">
-                            {t.tradeoff}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
-            <MStripe />
-          </>
+          </motion.section>
         )}
 
-        {/* Navigation band — prev/next project */}
-        <section
-          className="w-full bg-surface-soft"
-          style={{ paddingTop: "64px", paddingBottom: "64px" }}
+        {/* ============================================================
+            KEY HIGHLIGHTS
+            ============================================================ */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
         >
-          <div className="max-w-[1440px] mx-auto px-6">
-            <div className="flex flex-col sm:flex-row justify-between gap-8">
-              {/* Previous */}
-              <div className="flex-1">
-                {prevProject ? (
-                  <Link
-                    to={`/project/${prevProject.slug}`}
-                    onClick={() => sound.click()}
-                    className="group block p-4 bg-canvas border border-hairline-strong hover:border-hairline transition-colors"
-                  >
-                    <div className="label-uppercase text-muted mb-2 flex items-center gap-2 text-xs">
-                      <ArrowLeftIcon size={12} strokeWidth={2} />
-                      PREVIOUS SPECIFICATION
-                    </div>
-                    <div className="text-ink group-hover:text-m-blue-light transition-colors duration-200 font-bold uppercase text-lg">
-                      {prevProject.title}
-                    </div>
-                  </Link>
-                ) : (
-                  <div />
-                )}
-              </div>
+          <div className="mb-4">
+            <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+              Deliverables
+            </span>
+            <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
+              What Was Built &amp; Validated
+            </h2>
+          </div>
 
-              {/* Next */}
-              <div className="flex-1 text-right">
-                {nextProject ? (
-                  <Link
-                    to={`/project/${nextProject.slug}`}
-                    onClick={() => sound.click()}
-                    className="group block p-4 bg-canvas border border-hairline-strong hover:border-hairline transition-colors"
-                  >
-                    <div className="label-uppercase text-muted mb-2 flex items-center justify-end gap-2 text-xs">
-                      NEXT SPECIFICATION
-                      <ArrowRightIcon size={12} strokeWidth={2} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {project.highlights.map((highlight, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="rounded-2xl border border-hairline bg-surface-card p-5 sm:p-6 shadow-xs flex items-start gap-4"
+              >
+                <span className="text-emerald-400 font-mono font-bold text-lg shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="text-sm sm:text-base text-body leading-relaxed font-normal">
+                  {highlight}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* ============================================================
+            ENGINEERING DECISIONS & TRADE-OFFS
+            ============================================================ */}
+        {project.tradeoffs && project.tradeoffs.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+          >
+            <div className="mb-4">
+              <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mb-1">
+                System Design
+              </span>
+              <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
+                Engineering Decisions &amp; Trade-offs
+              </h2>
+            </div>
+
+            <div className="space-y-4">
+              {project.tradeoffs.map((t, idx) => (
+                <div
+                  key={idx}
+                  className="rounded-2xl border border-hairline bg-surface-card p-5 sm:p-7 shadow-xs space-y-4"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
+                    <h3 className="text-ink font-semibold text-base sm:text-lg">
+                      {t.decision}
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-hairline text-xs sm:text-sm">
+                    <div className="bg-surface-soft p-4 rounded-xl border border-hairline">
+                      <div className="text-[11px] font-mono text-muted uppercase tracking-wider mb-1.5 font-semibold">
+                        Why Chosen / Rationale
+                      </div>
+                      <p className="text-body-strong leading-relaxed font-normal">
+                        {t.rationale}
+                      </p>
                     </div>
-                    <div className="text-ink group-hover:text-m-blue-light transition-colors duration-200 font-bold uppercase text-lg">
-                      {nextProject.title}
+
+                    <div className="bg-surface-soft p-4 rounded-xl border border-hairline">
+                      <div className="text-[11px] font-mono text-muted uppercase tracking-wider mb-1.5 font-semibold">
+                        Alternative Considered
+                      </div>
+                      <p className="text-body leading-relaxed font-normal">
+                        {t.alternative}
+                      </p>
                     </div>
-                  </Link>
-                ) : (
-                  <Link
-                    to="/"
-                    onClick={() => sound.click()}
-                    className="group block p-4 bg-canvas border border-hairline-strong hover:border-hairline transition-colors"
-                  >
-                    <div className="label-uppercase text-muted mb-2 flex items-center justify-end gap-2 text-xs">
-                      RETURN TO
-                      <ArrowRightIcon size={12} strokeWidth={2} />
+
+                    <div className="bg-surface-soft p-4 rounded-xl border border-hairline">
+                      <div className="text-[11px] font-mono text-emerald-400 uppercase tracking-wider mb-1.5 font-semibold">
+                        Engineering Trade-off
+                      </div>
+                      <p className="text-body leading-relaxed font-normal">
+                        {t.tradeoff}
+                      </p>
                     </div>
-                    <div className="text-ink group-hover:text-m-blue-light transition-colors duration-200 font-bold uppercase text-lg">
-                      HOME / REPOSITORIES
-                    </div>
-                  </Link>
-                )}
-              </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
+        {/* ============================================================
+            PREVIOUS / NEXT PROJECT NAVIGATION
+            ============================================================ */}
+        <div className="pt-8 border-t border-hairline">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Previous */}
+            <div>
+              {prevProject ? (
+                <Link
+                  to={`/project/${prevProject.slug}`}
+                  onClick={() => sound.click()}
+                  className="group block p-5 rounded-2xl border border-hairline bg-surface-card hover:bg-surface-elevated hover:border-muted transition-all duration-200 shadow-xs h-full"
+                >
+                  <div className="text-xs text-muted mb-1 flex items-center gap-1.5 font-medium group-hover:text-ink transition-colors">
+                    <ArrowLeftIcon size={13} weight="bold" className="group-hover:-translate-x-0.5 transition-transform" />
+                    <span>Previous Project</span>
+                  </div>
+                  <div className="text-ink group-hover:text-accent transition-colors font-bold text-base sm:text-lg">
+                    {prevProject.title}
+                  </div>
+                </Link>
+              ) : (
+                <div />
+              )}
+            </div>
+
+            {/* Next */}
+            <div className="text-right">
+              {nextProject ? (
+                <Link
+                  to={`/project/${nextProject.slug}`}
+                  onClick={() => sound.click()}
+                  className="group block p-5 rounded-2xl border border-hairline bg-surface-card hover:bg-surface-elevated hover:border-muted transition-all duration-200 shadow-xs h-full"
+                >
+                  <div className="text-xs text-muted mb-1 flex items-center justify-end gap-1.5 font-medium group-hover:text-ink transition-colors">
+                    <span>Next Project</span>
+                    <ArrowRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                  <div className="text-ink group-hover:text-accent transition-colors font-bold text-base sm:text-lg">
+                    {nextProject.title}
+                  </div>
+                </Link>
+              ) : (
+                <Link
+                  to="/projects"
+                  onClick={() => sound.click()}
+                  className="group block p-5 rounded-2xl border border-hairline bg-surface-card hover:bg-surface-elevated hover:border-muted transition-all duration-200 shadow-xs h-full"
+                >
+                  <div className="text-xs text-muted mb-1 flex items-center justify-end gap-1.5 font-medium group-hover:text-ink transition-colors">
+                    <span>Explore All</span>
+                    <ArrowRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                  <div className="text-ink group-hover:text-accent transition-colors font-bold text-base sm:text-lg">
+                    Browse All Projects
+                  </div>
+                </Link>
+              )}
             </div>
           </div>
-        </section>
-      </main>
-
-      {/* Global Engineering Modals */}
-      <CommandPalette
-        isOpen={commandPaletteOpen}
-        onClose={() => setCommandPaletteOpen(false)}
-        onOpenResume={() => setResumeModalOpen(true)}
-      />
-      <ResumeModal
-        isOpen={resumeModalOpen}
-        onClose={() => setResumeModalOpen(false)}
-      />
-    </>
+        </div>
+      </div>
+    </div>
   )
 }
-
-export default ProjectDetail

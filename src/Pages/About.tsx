@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
+import { usePageTitle } from "@/hooks/usePageTitle"
 import {
   GithubLogoIcon,
   LinkedinLogoIcon,
@@ -49,6 +50,7 @@ const socials = [
 ]
 
 export default function About() {
+  usePageTitle("About")
   return (
     <div className="min-h-screen bg-transparent">
       {/* Page Header */}

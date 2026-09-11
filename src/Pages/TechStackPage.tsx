@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { usePageTitle } from "@/hooks/usePageTitle"
 import {
   ArrowSquareOutIcon,
   SparkleIcon,
@@ -273,6 +274,7 @@ const statusColors: Record<string, string> = {
 }
 
 export default function TechStackPage() {
+  usePageTitle("Tech Stack & Uses")
   const [selectedCategory, setSelectedCategory] = useState<typeof categories[number]>("All")
 
   const filteredTech =

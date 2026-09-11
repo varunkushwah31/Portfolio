@@ -52,12 +52,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   useEffect(() => {
     if (isOpen) {
-      setQuery("")
-      setSelectedIndex(0)
-      setCopied(false)
-      setTimeout(() => {
+      const timer = setTimeout(() => {
+        setQuery("")
+        setSelectedIndex(0)
+        setCopied(false)
         inputRef.current?.focus()
-      }, 50)
+      }, 0)
+      return () => clearTimeout(timer)
     }
   }, [isOpen])
 
@@ -269,7 +270,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           >
             {/* Search Input Box */}
             <div className="flex items-center gap-3.5 px-5 py-4 border-b border-hairline bg-surface-card w-full">
-              <MagnifyingGlassIcon size={18} className="text-muted flex-shrink-0" />
+              <MagnifyingGlassIcon size={18} className="text-muted shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -289,13 +290,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     setQuery("")
                     setSelectedIndex(0)
                   }}
-                  className="p-1 text-muted hover:text-ink transition-colors flex-shrink-0 cursor-pointer"
+                  className="p-1 text-muted hover:text-ink transition-colors shrink-0 cursor-pointer"
                   aria-label="Clear query"
                 >
                   <XIcon size={15} />
                 </button>
               )}
-              <kbd className="hidden sm:inline-flex text-[11px] font-mono text-muted border border-hairline px-2 py-0.5 rounded-md bg-surface-elevated flex-shrink-0">
+              <kbd className="hidden sm:inline-flex text-[11px] font-mono text-muted border border-hairline px-2 py-0.5 rounded-md bg-surface-elevated shrink-0">
                 ESC
               </kbd>
             </div>
@@ -308,7 +309,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             )}
 
             {/* Command List */}
-            <div className="max-h-[420px] sm:max-h-[480px] overflow-y-auto p-3 sm:p-3.5 w-full space-y-3 bg-surface-card">
+            <div className="max-h-105 sm:max-h-120 overflow-y-auto p-3 sm:p-3.5 w-full space-y-3 bg-surface-card">
               {Object.entries(grouped).map(([category, cmds]) => (
                 <div key={category} className="mb-2 last:mb-0">
                   <div className="px-3.5 py-1 text-[11px] font-semibold text-muted uppercase tracking-wider">
@@ -330,7 +331,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                               : "text-body hover:bg-surface-elevated hover:text-ink border border-transparent"
                           }`}
                         >
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
                             isSelected ? "bg-surface-card border border-zinc-300 dark:border-zinc-700 text-ink" : "bg-surface-elevated border border-hairline text-muted"
                           }`}>
                             {cmd.icon}
@@ -346,7 +347,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                             )}
                           </div>
                           {isSelected && (
-                            <CaretRightIcon size={14} weight="bold" className="text-muted flex-shrink-0 ml-1" />
+                            <CaretRightIcon size={14} weight="bold" className="text-muted shrink-0 ml-1" />
                           )}
                         </button>
                       )

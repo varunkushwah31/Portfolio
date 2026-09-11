@@ -13,7 +13,7 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
 const STORAGE_KEY = "portfolio-theme"
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
+  const [themeState, setThemeState] = useState<Theme>(() => {
     if (typeof window === "undefined") return "dark"
     const saved = localStorage.getItem(STORAGE_KEY)
     if (saved === "dark" || saved === "light") return saved
@@ -23,7 +23,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     const root = document.documentElement
-    if (theme === "light") {
+    if (themeState === "light") {
       root.classList.remove("dark")
       root.classList.add("light")
       root.dataset.theme = "light"
@@ -34,8 +34,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       root.dataset.theme = "dark"
       root.style.colorScheme = "dark"
     }
-    localStorage.setItem(STORAGE_KEY, theme)
-  }, [theme])
+    localStorage.setItem(STORAGE_KEY, themeState)
+  }, [themeState])
 
   const toggleTheme = () => {
     setThemeState((prev: Theme) => (prev === "dark" ? "light" : "dark"))
@@ -47,16 +47,17 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const value = useMemo(
     () => ({
-      theme,
+      theme: themeState,
       toggleTheme,
       setTheme,
     }),
-    [theme]
+    [themeState]
   )
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = (): ThemeContextValue => {
   const context = useContext(ThemeContext)
   if (!context) {
