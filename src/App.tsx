@@ -30,7 +30,7 @@ function AnimatedRoutes() {
         initial="initial"
         animate="animate"
         exit="exit"
-        className="flex-grow flex flex-col"
+        className="flex-grow flex flex-col w-full"
       >
         <Routes location={location}>
           <Route path="/" element={<Home />} />
@@ -77,7 +77,7 @@ function AppContent() {
 
       <div className="relative z-10 flex flex-col min-h-screen justify-between">
         <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
-        <main className="flex-grow flex flex-col">
+        <main className="flex-grow flex flex-col w-full">
           <AnimatedRoutes />
         </main>
         <Footer />
