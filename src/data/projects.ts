@@ -1,8 +1,9 @@
 import leetcodeImg from "../assets/project_leetcode.png"
-import mangoshareImg from "../assets/project_mangoshare.png"
+import w2wshareImg from "../assets/project_w2wshare.png"
 import dashboardImg from "../assets/project_dashboard.png"
 import diseaseImg from "../assets/project_disease.png"
 import quotesImg from "../assets/project_quotes.png"
+import sitelookImg from "../assets/project_sitelook.png"
 
 export interface ProjectMetric {
   label: string
@@ -111,7 +112,7 @@ const projects: Project[] = [
     accentColor: "#1a3a2a",
     description:
       "Enterprise-grade 100% offline peer-to-peer file transfer platform using WebRTC DataChannels with AES-256-GCM end-to-end encryption and near-zero memory footprint.",
-    image: mangoshareImg,
+    image: w2wshareImg,
     longDescription: [
       "W2W Share is an enterprise-grade offline peer-to-peer file transfer platform engineered for zero-trust, high-security local network environments. Built to eliminate reliance on centralized storage servers or third-party cloud relays, the system establishes direct browser-to-browser data channels with end-to-end privacy.",
       "Under the hood, file payloads are protected with AES-256-GCM authenticated encryption, chunked into 64KB binary segments, and streamed directly via WebRTC RTCDataChannels over UDP. A high-concurrency Java 25 and Spring Boot backend orchestrates WebSocket room negotiation, STUN/ICE candidate signaling, and connection lifecycle management.",
@@ -152,7 +153,8 @@ const projects: Project[] = [
     ],
     role: "Distributed Systems & Full-stack Developer",
     status: "Active Development",
-    githubUrl: "https://github.com/varunkushwah31",
+    githubUrl: "https://github.com/varunkushwah31/W2WShare",
+    liveUrl: "https://w2wshare.vercel.app/",
   },
   {
     slug: "system-health-dashboard",
@@ -316,6 +318,62 @@ const projects: Project[] = [
     status: "Completed",
     githubUrl: "https://github.com/varunkushwah31",
   },
+  {
+    slug: "site-look",
+    category: "Full-Stack",
+    title: "Site-Look",
+    tagline: "Enterprise web performance, SEO compliance & accessibility auditing engine.",
+    version: "v1.0",
+    year: "2024",
+    featured: false,
+    accentColor: "#0d2b27",
+    description:
+      "A comprehensive real-time web performance, SEO compliance, DOM metric extraction, and accessibility auditing platform with automated executive PDF report generation.",
+    image: sitelookImg,
+    longDescription: [
+      "Site-Look (Page Pulse) is an automated web audit engine engineered to evaluate websites across performance, SEO health, accessibility standards, and DOM structural integrity in real time.",
+      "The engine dispatches headless DOM metric extractors to benchmark Core Web Vitals (LCP, FID, CLS), analyze semantic tag hierarchies, inspect OpenGraph metadata, and identify accessibility contrast violations.",
+      "Engineered with React, TypeScript, and a Node.js analysis engine, Site-Look transforms raw telemetry into visual scorecards, actionable remediation advisories, and exportable executive audit reports.",
+    ],
+    tech: ["React", "TypeScript", "Node.js", "Tailwind CSS", "Web Vitals", "DOM APIs", "OpenPDF"],
+    highlights: [
+      "Real-time Core Web Vitals benchmark & performance scoring",
+      "Semantic HTML & OpenGraph metadata SEO validation",
+      "Automated WCAG accessibility compliance scanner",
+      "Instant executive audit PDF report compilation",
+    ],
+    metrics: [
+      { label: "Audit Engine", value: "Real-time Telemetry" },
+      { label: "Standards", value: "WCAG & SEO Best Practices" },
+      { label: "Core Vitals", value: "LCP / FID / CLS Analysis" },
+      { label: "Reporting", value: "Automated PDF Export" },
+    ],
+    architectureFlow: [
+      { step: "01", title: "Target URL Dispatch", detail: "Client initiates audit request with URL validation, sanitization, and protocol normalization." },
+      { step: "02", title: "DOM & Network Inspector", detail: "Headless worker extracts DOM tree metrics, asset payloads, and Core Web Vitals timing events." },
+      { step: "03", title: "Compliance Heuristics", detail: "Rules engine evaluates SEO tags, accessibility contrast ratios, and security header posture." },
+      { step: "04", title: "Executive Scorecard", detail: "Interactive dashboard renders health scores, remediation tips, and exportable PDF audit reports." },
+    ],
+    tradeoffs: [
+      {
+        decision: "Client-Side & Server-Side Hybrid Auditing",
+        rationale: "Balances real-time interactive browser DOM inspection with secure server-side CORS-bypassing network telemetry.",
+        alternative: "Pure Client-Side In-Browser Scraping",
+        tradeoff: "Requires backend proxy service; eliminates CORS restrictions and provides accurate HTTP header validation.",
+      },
+      {
+        decision: "Modular Rule Engine Architecture",
+        rationale: "Decouples SEO, accessibility, and performance validators so new compliance checks can be added independently.",
+        alternative: "Monolithic Audit Script",
+        tradeoff: "Slightly more boilerplate interfaces; provides clean extensibility and pinpoint unit testing.",
+      },
+    ],
+    role: "Full-Stack Developer",
+    status: "Completed",
+    githubUrl: "https://github.com/varunkushwah31/Page_Pulse",
+    liveUrl: "https://site-look.vercel.app/",
+  },
 ]
 
 export default projects
+

@@ -229,7 +229,7 @@ export default function ProjectDetail() {
             </h2>
           </div>
 
-          <div className="rounded-2xl border border-hairline bg-surface-card overflow-hidden shadow-lg">
+          <div className="rounded-2xl overflow-hidden shadow-lg">
             <ProjectVisual slug={project.slug} title={project.title} />
           </div>
         </motion.section>

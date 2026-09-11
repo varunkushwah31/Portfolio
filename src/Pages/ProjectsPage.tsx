@@ -64,6 +64,12 @@ const projectBadges: Record<
     { name: "Docker", icon: DockerIcon },
     { name: "Git", icon: GitIcon },
   ],
+  "site-look": [
+    { name: "React", icon: ReactIcon },
+    { name: "TypeScript", icon: TypeScriptIcon },
+    { name: "Node.js", icon: NodeIcon },
+    { name: "Tailwind", icon: TailwindIcon },
+  ],
 }
 
 // Matching the distinct background colors from bonabrian reference image
@@ -86,6 +92,9 @@ const cardThemes: Record<string, { bg: string; isMobile?: boolean }> = {
   "daily-quotes-app": {
     bg: "linear-gradient(135deg, #0369a1 0%, #1e40af 100%)",
     isMobile: true,
+  },
+  "site-look": {
+    bg: "linear-gradient(135deg, #0d9488 0%, #115e59 100%)",
   },
 }
 

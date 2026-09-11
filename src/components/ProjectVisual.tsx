@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import {
   GitBranchIcon,
   TerminalWindowIcon,
@@ -10,6 +11,11 @@ import {
   StackIcon,
   DeviceMobileIcon,
   LightningIcon,
+  DesktopIcon,
+  FileArchiveIcon,
+  LockKeyIcon,
+  CheckCircleIcon,
+  ArrowsLeftRightIcon,
 } from "@phosphor-icons/react"
 
 interface ProjectVisualProps {
@@ -21,19 +27,25 @@ interface ProjectVisualProps {
 export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, className = "" }) => {
   // Real-time simulated telemetry states for dynamic visualizations
   const [cpuVal, setCpuVal] = useState(34.2)
-  const [transferMb, setTransferMb] = useState(142.6)
+  const [transferMb, setTransferMb] = useState(136.4)
   const [solvedCount, setSolvedCount] = useState(482)
+  const [speedVal, setSpeedVal] = useState(28.4)
+  const [rttVal, setRttVal] = useState(1.4)
 
   useEffect(() => {
     const cpuSteps = [34.2, 38.6, 31.8, 42.4, 29.5, 36.1, 40.8, 33.4]
+    const speedSteps = [27.8, 29.4, 31.2, 28.6, 32.5, 30.1, 28.4]
+    const rttSteps = [1.3, 1.5, 1.2, 1.4, 1.6, 1.3]
     let step = 0
     const timer = setInterval(() => {
       // Simulate live jitter for telemetry dashboards
       step = (step + 1) % cpuSteps.length
       setCpuVal(cpuSteps[step])
-      setTransferMb((prev) => (prev >= 160 ? 120 : Number((prev + 2.4).toFixed(1))))
+      setSpeedVal(speedSteps[step % speedSteps.length])
+      setRttVal(rttSteps[step % rttSteps.length])
+      setTransferMb((prev) => (prev >= 158 ? 112 : Number((prev + 3.2).toFixed(1))))
       setSolvedCount((prev) => (prev >= 495 ? 482 : prev + 1))
-    }, 1500)
+    }, 1200)
     return () => clearInterval(timer)
   }, [])
 
@@ -108,78 +120,276 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
 
     case "w2wshare":
     case "w2w-share":
-    case "mangoshare-clone":
+    case "mangoshare-clone": {
+      const progressPercent = Math.min(100, Math.round((transferMb / 160) * 100))
+      const totalChunks = 24
+      const completedChunks = Math.floor((transferMb / 160) * totalChunks)
+
       return (
         <div
           className={`w-full h-full bg-surface-card border border-hairline rounded-2xl flex flex-col justify-between font-mono select-none overflow-hidden relative shadow-sm ${className}`}
-          style={{ minHeight: "220px" }}
+          style={{ minHeight: "380px" }}
         >
           {/* Header Bar */}
-          <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
+          <div className="bg-surface-elevated px-4 py-3 border-b border-hairline flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+              </div>
+              <div className="flex items-center gap-2 ml-1.5">
+                <BroadcastIcon size={15} className="text-emerald-400 animate-pulse" />
+                <span className="text-body-strong text-xs font-sans font-semibold tracking-wider">
+                  WEBRTC DATA CHANNEL // P2P ZERO-RELAY PIPELINE
+                </span>
+              </div>
+            </div>
             <div className="flex items-center gap-2">
-              <BroadcastIcon size={14} className="text-emerald-400 animate-pulse" />
-              <span className="text-body-strong text-[11px] font-sans font-semibold tracking-wider">
-                WEBRTC DATA CHANNEL // W2W SHARE
+              <span className="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
+                <LockKeyIcon size={12} weight="bold" />
+                AES-256-GCM
+              </span>
+              <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-mono bg-surface-card px-2.5 py-0.5 rounded-full border border-hairline font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                ICE: DIRECT HOST
               </span>
             </div>
-            <span className="text-[10px] text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
-              AES-256-GCM DIRECT
-            </span>
           </div>
 
-          {/* P2P Topology Diagram */}
-          <div className="p-4 sm:p-5 space-y-3.5 text-xs">
-            {/* Peer Node Visualizer */}
-            <div className="flex items-center justify-between gap-2 py-3 px-4 bg-surface-soft rounded-xl border border-hairline">
-              <div className="flex flex-col items-center">
-                <div className="w-9 h-9 rounded-xl bg-surface-card border border-hairline flex items-center justify-center text-ink font-bold text-xs shadow-xs">
-                  PEER A
-                </div>
-                <span className="text-[10px] text-muted mt-1 font-sans">SENDER</span>
-              </div>
+          {/* Main Visualizer Body */}
+          <div className="p-4 sm:p-5 space-y-4 text-xs">
+            {/* 1. PEER A <----> PEER B TOPOLOGY HIGHWAY */}
+            <div className="bg-surface-soft p-4 rounded-xl border border-hairline relative overflow-hidden">
+              {/* Subtle background ambient mesh glow */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-12 bg-emerald-500/5 blur-2xl pointer-events-none" />
 
-              {/* Data Flow Channel with Animated Line */}
-              <div className="flex-1 px-3 flex flex-col items-center">
-                <div className="flex items-center justify-between w-full text-[10px] text-emerald-400 mb-1.5 font-sans">
-                  <span>RTCDataChannel</span>
-                  <span className="font-mono font-medium">24.8 MB/s</span>
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4 relative z-10">
+                {/* Peer A Node */}
+                <div className="w-full md:w-48 bg-surface-card p-3 rounded-xl border border-hairline/80 shadow-xs flex flex-col justify-between">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+                        <DesktopIcon size={15} weight="bold" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-ink">PEER A</div>
+                        <div className="text-[10px] text-muted font-sans uppercase">SENDER</div>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      HOST
+                    </span>
+                  </div>
+                  <div className="space-y-1 text-[10px] font-mono text-muted pt-1 border-t border-hairline/50">
+                    <div className="flex justify-between">
+                      <span>IP:</span>
+                      <span className="text-body font-semibold">192.168.1.14</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>CLIENT:</span>
+                      <span className="text-body font-semibold">Chromium 128</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>STREAM:</span>
+                      <span className="text-emerald-400 font-semibold">ACTIVE SINK</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="w-full h-1 bg-surface-elevated rounded-full relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 via-sky-400 to-indigo-400 animate-pulse" />
-                </div>
-                <span className="text-[10px] text-muted mt-1.5 font-sans">OFFLINE P2P · ZERO RELAY</span>
-              </div>
 
-              <div className="flex flex-col items-center">
-                <div className="w-9 h-9 rounded-xl bg-surface-card border border-hairline flex items-center justify-center text-ink font-bold text-xs shadow-xs">
-                  PEER B
+                {/* Data Highway (Conduit + Animated Packets) */}
+                <div className="flex-1 w-full px-2 sm:px-4 py-2 flex flex-col items-center justify-center">
+                  {/* Highway Labels */}
+                  <div className="flex items-center justify-between w-full text-[11px] mb-2 font-sans">
+                    <div className="flex items-center gap-1.5 text-emerald-400 font-mono font-medium">
+                      <ArrowsLeftRightIcon size={13} />
+                      <span>RTCDataChannel</span>
+                      <span className="text-muted text-[10px] hidden sm:inline">(SCTP reliable)</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-mono font-bold text-emerald-400 text-xs sm:text-sm">
+                        {speedVal.toFixed(1)} MB/s
+                      </span>
+                      <span className="text-[10px] text-muted font-mono">({rttVal.toFixed(1)}ms RTT)</span>
+                    </div>
+                  </div>
+
+                  {/* Highway Pipe with Flowing Packets */}
+                  <div className="w-full h-3 bg-surface-elevated rounded-full relative overflow-hidden border border-hairline flex items-center">
+                    {/* Underlying Flow Beam */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-sky-400/40 to-indigo-500/30" />
+
+                    {/* Animated Traveling Packets */}
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <motion.div
+                        key={i}
+                        className="absolute w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]"
+                        animate={{ left: ["0%", "98%"], opacity: [0, 1, 1, 0] }}
+                        transition={{
+                          duration: 1.8,
+                          repeat: Infinity,
+                          ease: "linear",
+                          delay: i * 0.36,
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Highway Sub-badges */}
+                  <div className="flex items-center justify-between w-full text-[10px] text-muted mt-2 font-sans">
+                    <span className="flex items-center gap-1 text-emerald-400/90 font-mono">
+                      <CheckCircleIcon size={12} weight="fill" />
+                      ZERO TURN RELAY · DIRECT P2P
+                    </span>
+                    <span className="font-mono text-muted hidden sm:inline">64 KB CHUNK SIZE</span>
+                  </div>
                 </div>
-                <span className="text-[10px] text-muted mt-1 font-sans">RECEIVER</span>
+
+                {/* Peer B Node */}
+                <div className="w-full md:w-48 bg-surface-card p-3 rounded-xl border border-hairline/80 shadow-xs flex flex-col justify-between">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400">
+                        <DesktopIcon size={15} weight="bold" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-ink">PEER B</div>
+                        <div className="text-[10px] text-muted font-sans uppercase">RECEIVER</div>
+                      </div>
+                    </div>
+                    <span className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                      TARGET
+                    </span>
+                  </div>
+                  <div className="space-y-1 text-[10px] font-mono text-muted pt-1 border-t border-hairline/50">
+                    <div className="flex justify-between">
+                      <span>IP:</span>
+                      <span className="text-body font-semibold">192.168.1.42</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>CLIENT:</span>
+                      <span className="text-body font-semibold">Firefox 130</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>DISK IO:</span>
+                      <span className="text-sky-400 font-semibold">0-COPY FLUSH</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Transfer Metrics Gauge */}
-            <div className="space-y-1.5 bg-surface-soft p-3 rounded-xl border border-hairline">
-              <div className="flex justify-between text-[11px]">
-                <span className="text-muted font-sans uppercase tracking-wider text-[10px]">Encrypted Stream Progress</span>
-                <span className="text-ink font-bold font-mono">{transferMb} MB / 160.0 MB</span>
+            {/* 2. FILE TRANSMISSION & CHUNK STREAMING MATRIX */}
+            <div className="bg-surface-soft p-4 rounded-xl border border-hairline space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-surface-card border border-hairline flex items-center justify-center text-amber-400 shrink-0 shadow-xs">
+                    <FileArchiveIcon size={18} weight="bold" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-ink font-mono">
+                      archive_distribution_v4.tar.gz
+                    </div>
+                    <div className="text-[10px] text-muted font-sans">
+                      160.0 MB · SHA-256 Verified On-the-Fly
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-right">
+                  <div className="text-xs font-mono font-bold text-ink">
+                    <span className="text-emerald-400">{transferMb.toFixed(1)} MB</span> / 160.0 MB
+                  </div>
+                  <div className="text-[10px] text-muted font-mono font-medium">
+                    {progressPercent}% COMPLETE · ~0.8s REMAINING
+                  </div>
+                </div>
               </div>
-              <div className="w-full h-2 bg-surface-elevated rounded-full overflow-hidden">
+
+              {/* Progress Bar */}
+              <div className="w-full h-2.5 bg-surface-elevated rounded-full overflow-hidden border border-hairline/60 relative">
                 <div
-                  className="h-full bg-gradient-to-r from-emerald-400 to-sky-400 transition-all duration-300 rounded-full"
-                  style={{ width: `${Math.min(100, (transferMb / 160) * 100)}%` }}
-                />
+                  className="h-full bg-gradient-to-r from-emerald-500 via-sky-400 to-emerald-400 transition-all duration-300 rounded-full relative"
+                  style={{ width: `${progressPercent}%` }}
+                >
+                  <div className="absolute inset-0 bg-white/20 animate-pulse" />
+                </div>
+              </div>
+
+              {/* SCTP 64KB Chunk Packet Map */}
+              <div className="pt-1">
+                <div className="flex items-center justify-between text-[10px] text-muted mb-2 font-mono">
+                  <span className="uppercase tracking-wider">SCTP CHUNK MAP (64 KB PACKETS)</span>
+                  <span className="text-body font-semibold">
+                    {completedChunks} / {totalChunks} BLOCKS TRANSFERRED
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-12 sm:grid-cols-24 gap-1 sm:gap-1.5">
+                  {Array.from({ length: totalChunks }).map((_, idx) => {
+                    const isDone = idx < completedChunks
+                    const isCurrent = idx === completedChunks
+                    return (
+                      <div
+                        key={idx}
+                        className={`h-4 rounded-sm transition-all duration-200 ${
+                          isDone
+                            ? "bg-emerald-500/85 shadow-[0_0_6px_rgba(16,185,129,0.35)]"
+                            : isCurrent
+                            ? "bg-sky-400 animate-pulse border border-sky-300"
+                            : "bg-surface-elevated border border-hairline/60"
+                        }`}
+                        title={`Chunk #${idx + 1}: ${isDone ? "Delivered" : isCurrent ? "In Flight" : "Queued"}`}
+                      />
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* 3. DISTRIBUTED SYSTEMS TELEMETRY GAUGES */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
+                <span className="text-[10px] text-muted font-sans font-medium uppercase">THROUGHPUT</span>
+                <span className="text-emerald-400 font-bold font-mono text-sm mt-1">
+                  {speedVal.toFixed(1)} MB/s
+                </span>
+                <span className="text-[9px] text-muted mt-0.5">Peak: 34.8 MB/s</span>
+              </div>
+
+              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
+                <span className="text-[10px] text-muted font-sans font-medium uppercase">ROUND-TRIP (RTT)</span>
+                <span className="text-ink font-bold font-mono text-sm mt-1">
+                  {rttVal.toFixed(1)} ms
+                </span>
+                <span className="text-[9px] text-emerald-400 mt-0.5">0 Relay Hops</span>
+              </div>
+
+              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
+                <span className="text-[10px] text-muted font-sans font-medium uppercase">RAM FOOTPRINT</span>
+                <span className="text-ink font-bold font-mono text-sm mt-1">&lt; 50 MB</span>
+                <span className="text-[9px] text-muted mt-0.5">StreamSaver Sink</span>
+              </div>
+
+              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex flex-col justify-between">
+                <span className="text-[10px] text-muted font-sans font-medium uppercase">PACKET LOSS</span>
+                <span className="text-emerald-400 font-bold font-mono text-sm mt-1">0.00%</span>
+                <span className="text-[9px] text-muted mt-0.5">SCTP Guaranteed</span>
               </div>
             </div>
           </div>
 
           {/* Bottom Strip */}
-          <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-emerald-400 font-semibold font-sans">ICE: Connected</span>
-            <span>Zero Memory Footprint Streaming</span>
+          <div className="bg-surface-elevated px-4 py-2.5 border-t border-hairline flex flex-wrap justify-between items-center gap-2 text-[11px] text-muted">
+            <div className="flex items-center gap-1.5 text-emerald-400">
+              <CheckCircleIcon size={13} weight="fill" />
+              <span className="font-semibold font-sans">STUN NAT Traversal: Host Candidate (LAN Direct)</span>
+            </div>
+            <span className="font-mono">In-Memory ArrayBuffer Bypass · Zero Server Ingress</span>
           </div>
         </div>
       )
+    }
 
     case "system-health-dashboard":
       return (
@@ -377,6 +587,86 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
             <span className="text-sky-400 font-semibold font-sans">Dart / Flutter Runtime</span>
             <span>Decoupled Repository Pattern</span>
+          </div>
+        </div>
+      )
+
+    case "site-look":
+      return (
+        <div
+          className={`w-full h-full bg-surface-card border border-hairline rounded-2xl flex flex-col justify-between font-mono select-none overflow-hidden relative shadow-sm ${className}`}
+          style={{ minHeight: "220px" }}
+        >
+          {/* Header Bar */}
+          <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+              <span className="text-muted ml-2 text-[11px] font-sans font-semibold tracking-wider">
+                AUDIT ENGINE // REAL-TIME COCKPIT
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 text-[11px] text-muted">
+              <PulseIcon size={14} className="text-emerald-400 animate-pulse" />
+              <span className="text-emerald-400">READY</span>
+            </div>
+          </div>
+
+          {/* Audit Metrics & Cockpit View */}
+          <div className="p-4 sm:p-5 space-y-3.5 text-xs">
+            {/* Terminal Command Simulation */}
+            <div className="flex items-center justify-between text-body bg-surface-soft p-2.5 rounded-lg border border-hairline text-[11px]">
+              <div className="flex items-center gap-2 truncate">
+                <TerminalWindowIcon size={14} className="text-teal-400 shrink-0" />
+                <span className="text-body-strong font-mono truncate">
+                  $ sitelook audit --target=site-look.vercel.app
+                </span>
+              </div>
+              <span className="text-[10px] text-emerald-400 font-mono shrink-0 ml-2">200 OK</span>
+            </div>
+
+            {/* Score Badges Grid */}
+            <div className="grid grid-cols-4 gap-2 text-center">
+              <div className="bg-surface-soft p-2 rounded-xl border border-hairline">
+                <div className="text-[10px] text-muted font-sans font-medium">PERF</div>
+                <div className="text-emerald-400 font-bold text-sm sm:text-base font-mono mt-0.5">98</div>
+              </div>
+              <div className="bg-surface-soft p-2 rounded-xl border border-hairline">
+                <div className="text-[10px] text-muted font-sans font-medium">SEO</div>
+                <div className="text-emerald-400 font-bold text-sm sm:text-base font-mono mt-0.5">100</div>
+              </div>
+              <div className="bg-surface-soft p-2 rounded-xl border border-hairline">
+                <div className="text-[10px] text-muted font-sans font-medium">A11Y</div>
+                <div className="text-emerald-400 font-bold text-sm sm:text-base font-mono mt-0.5">96</div>
+              </div>
+              <div className="bg-surface-soft p-2 rounded-xl border border-hairline">
+                <div className="text-[10px] text-muted font-sans font-medium">VITAL</div>
+                <div className="text-teal-400 font-bold text-sm sm:text-base font-mono mt-0.5">100</div>
+              </div>
+            </div>
+
+            {/* Core Web Vitals Row */}
+            <div className="grid grid-cols-3 gap-2 text-[11px]">
+              <div className="bg-surface-soft p-2 rounded-xl border border-hairline flex items-center justify-between">
+                <span className="text-muted font-sans">LCP</span>
+                <span className="text-ink font-bold font-mono">0.8s</span>
+              </div>
+              <div className="bg-surface-soft p-2 rounded-xl border border-hairline flex items-center justify-between">
+                <span className="text-muted font-sans">FID</span>
+                <span className="text-ink font-bold font-mono">12ms</span>
+              </div>
+              <div className="bg-surface-soft p-2 rounded-xl border border-hairline flex items-center justify-between">
+                <span className="text-muted font-sans">CLS</span>
+                <span className="text-ink font-bold font-mono">0.001</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Strip */}
+          <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
+            <span className="text-teal-400 font-semibold font-sans">WCAG 2.1 Compliance</span>
+            <span>Executive PDF Export Ready</span>
           </div>
         </div>
       )

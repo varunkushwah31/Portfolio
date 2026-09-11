@@ -238,6 +238,19 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                     <ArrowSquareOutIcon size={14} /> GITHUB
                   </a>
                 )}
+
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.click()}
+                    className="btn-text w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs bg-surface-card hover:bg-surface-elevated text-ink border border-hairline px-4 py-3 transition-colors duration-200"
+                    style={{ borderRadius: "0px" }}
+                  >
+                    <ArrowSquareOutIcon size={14} /> LIVE DEMO
+                  </a>
+                )}
               </div>
 
               <Link

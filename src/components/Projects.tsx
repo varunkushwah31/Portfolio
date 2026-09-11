@@ -45,6 +45,8 @@ const getProjectIcon = (slug: string) => {
       return <BrainIcon size={14} className="text-m-blue-light" />
     case "daily-quotes-app":
       return <DeviceMobileIcon size={14} className="text-m-blue-dark" />
+    case "site-look":
+      return <PulseIcon size={14} className="text-emerald-400" />
     default:
       return <StackIcon size={14} className="text-muted" />
   }
