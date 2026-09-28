@@ -17,7 +17,7 @@ export default function ProjectDetail() {
   const projectIndex = projects.findIndex(
     (p) =>
       p.slug === slug ||
-      (p.slug === "w2wshare" && (slug === "w2w-share" || slug === "mangoshare-clone"))
+      (p.slug === "w2wshare" && (slug === "w2w-share" || slug === "mango share-clone"))
   )
   const project = projectIndex !== -1 ? projects[projectIndex] : undefined
 

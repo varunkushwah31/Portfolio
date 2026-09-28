@@ -7,7 +7,7 @@ export default function NotFound() {
   usePageTitle("Page Not Found")
 
   return (
-    <section className="w-full flex-grow flex items-center justify-center px-6 py-20 sm:py-28">
+    <section className="w-full grow flex items-center justify-center px-6 py-20 sm:py-28">
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
