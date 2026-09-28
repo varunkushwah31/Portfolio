@@ -378,13 +378,7 @@ html.light {
   gap: 0.75rem;
   padding-right: 0.75rem;
   will-change: transform;
-}
-
-@media (hover: hover) {
-  .group\/marquee:hover .marquee-track,
-  .marquee-track:hover {
-    animation-play-state: paused;
-  }
+  animation-play-state: running !important;
 }
 
 /* ============================================================

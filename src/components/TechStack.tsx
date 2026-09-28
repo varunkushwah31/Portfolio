@@ -55,11 +55,11 @@ function MarqueeRow({
   items,
   reverse = false,
   speedSeconds = 38,
-}: {
+}: Readonly<{
   items: TechItem[]
   reverse?: boolean
   speedSeconds?: number
-}) {
+}>) {
   // Repeat items 3 times in each track so each track is ~4500px wide,
   // ensuring zero gap or hitch on even ultra-wide 4K screens.
   const duplicatedSet = [...items, ...items, ...items]
@@ -68,7 +68,7 @@ function MarqueeRow({
     <div className="flex items-center select-none py-1">
       {/* Primary Track */}
       <div
-        className={`marquee-track shrink-0 ${reverse ? "animate-marquee-reverse" : "animate-marquee"} group-hover/marquee:[animation-play-state:paused]`}
+        className={`marquee-track shrink-0 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
         style={{ animationDuration: `${speedSeconds}s` }}
       >
         {duplicatedSet.map((tech, idx) => {
@@ -91,7 +91,7 @@ function MarqueeRow({
 
       {/* Duplicate Track (Seamless Loop Mirror) */}
       <div
-        className={`marquee-track shrink-0 ${reverse ? "animate-marquee-reverse" : "animate-marquee"} group-hover/marquee:[animation-play-state:paused]`}
+        className={`marquee-track shrink-0 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
         style={{ animationDuration: `${speedSeconds}s` }}
         aria-hidden="true"
       >
@@ -127,7 +127,7 @@ export default function TechStack({
   reverse = false,
   speedSeconds = 38,
   rows = 1,
-}: TechStackProps) {
+}: Readonly<TechStackProps>) {
   const activeItems = items && items.length > 0 ? items : techItems
   // If 2 rows are selected, split the items between top & bottom rows
   const half = Math.ceil(activeItems.length / 2)
@@ -169,12 +169,12 @@ export default function TechStack({
       </div>
 
       {/* Endless Horizontal Scroll Across Entire Page */}
-      <div className="relative left-1/2 -translate-x-1/2 w-screen max-w-[100vw] overflow-hidden py-1 group/marquee">
+      <div className="relative left-1/2 -translate-x-1/2 w-screen max-w-[100vw] overflow-hidden py-1">
         {/* Soft Left Edge Gradient Fade */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 md:w-40 z-10 bg-gradient-to-r from-canvas via-canvas/90 to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 md:w-40 z-10 bg-linear-to-r from-canvas via-canvas/90 to-transparent" />
 
         {/* Soft Right Edge Gradient Fade */}
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 md:w-40 z-10 bg-gradient-to-l from-canvas via-canvas/90 to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 md:w-40 z-10 bg-linear-to-l from-canvas via-canvas/90 to-transparent" />
 
         {/* Scrolling Tracks */}
         <div className="flex flex-col gap-2.5">
