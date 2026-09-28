@@ -432,12 +432,13 @@ export default function TechStackPage() {
                 return (
                   <motion.div
                     key={tech.id}
+                    id={tech.id}
                     layout
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.25 }}
-                    className="rounded-2xl border border-hairline bg-surface-card hover:border-muted p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between group shadow-sm hover:shadow-md"
+                    className="scroll-mt-24 rounded-2xl border border-hairline bg-surface-card hover:border-muted p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between group shadow-sm hover:shadow-md"
                   >
                     <div>
                       {/* Top Row: Icon + Name + Status */}

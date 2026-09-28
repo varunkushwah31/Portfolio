@@ -87,6 +87,8 @@
   --animate-slide-up: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-pulse-slow: pulse-slow 4s ease-in-out infinite;
   --animate-float: float 3s ease-in-out infinite;
+  --animate-marquee: marquee 35s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 35s linear infinite;
 }
 
 @keyframes fade-in {
@@ -107,6 +109,16 @@
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-5px); }
+}
+
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translate3d(-100%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 /* ============================================================
@@ -194,6 +206,7 @@ html.light {
     text-rendering: optimizeLegibility;
     background-color: var(--canvas);
     color: var(--ink);
+    overflow-x: hidden;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
@@ -342,6 +355,23 @@ html.light {
     rgba(0, 0, 0, 0.8) 92%,
     rgba(0, 0, 0, 1) 100%
   );
+}
+
+/* Infinite Horizontal Scrolling Marquee Utilities */
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
+  will-change: transform;
+}
+
+@media (hover: hover) {
+  .group\/marquee:hover .marquee-track,
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
 }
 
 /* ============================================================

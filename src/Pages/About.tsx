@@ -25,22 +25,23 @@ import {
   LinuxIcon,
   PostmanIcon,
 } from "@/components/TechIcons"
+import TechStack, { type TechItem } from "@/components/TechStack"
 
-const techStack = [
-  { name: "Java 21", icon: JavaIcon },
-  { name: "Spring Boot", icon: SpringIcon },
-  { name: "React 19", icon: ReactIcon },
-  { name: "TypeScript", icon: TypeScriptIcon },
-  { name: "Node.js", icon: NodeIcon },
-  { name: "Flutter", icon: FlutterIcon },
-  { name: "Python", icon: PythonIcon },
-  { name: "WebRTC", icon: WebRTCIcon },
-  { name: "PostgreSQL", icon: PostgresIcon },
-  { name: "Docker", icon: DockerIcon },
-  { name: "Git", icon: GitIcon },
-  { name: "Tailwind CSS", icon: TailwindIcon },
-  { name: "Linux", icon: LinuxIcon },
-  { name: "Postman", icon: PostmanIcon },
+const techStack: TechItem[] = [
+  { id: "java", name: "Java 21", icon: JavaIcon },
+  { id: "spring-boot", name: "Spring Boot", icon: SpringIcon },
+  { id: "react", name: "React 19", icon: ReactIcon },
+  { id: "typescript", name: "TypeScript", icon: TypeScriptIcon },
+  { id: "node", name: "Node.js", icon: NodeIcon },
+  { id: "flutter", name: "Flutter", icon: FlutterIcon },
+  { id: "python", name: "Python", icon: PythonIcon },
+  { id: "webrtc", name: "WebRTC", icon: WebRTCIcon },
+  { id: "postgresql", name: "PostgreSQL", icon: PostgresIcon },
+  { id: "docker", name: "Docker", icon: DockerIcon },
+  { id: "git", name: "Git", icon: GitIcon },
+  { id: "tailwind", name: "Tailwind CSS", icon: TailwindIcon },
+  { id: "linux", name: "Linux", icon: LinuxIcon },
+  { id: "postman", name: "Postman", icon: PostmanIcon },
 ]
 
 const socials = [
@@ -201,7 +202,7 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Tech Stack Section matching Image 1 */}
+        {/* Tech Stack Endless Horizontal Scrolling Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -209,33 +210,13 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
-              Tech Stack
-            </h2>
-            <Link
-              to="/tech-stack"
-              className="text-xs text-muted hover:text-ink font-medium transition-colors"
-            >
-              Explore all stack →
-            </Link>
-          </div>
-
-          <div className="flex flex-wrap gap-2.5">
-            {techStack.map((tech) => {
-              const Icon = tech.icon
-              return (
-                <motion.div
-                  key={tech.name}
-                  whileHover={{ scale: 1.06, y: -2 }}
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-surface-card hover:bg-surface-elevated text-xs sm:text-sm text-body-strong hover:text-ink transition-colors duration-150 cursor-default shadow-xs"
-                >
-                  <Icon size={16} className="w-4 h-4 shrink-0" />
-                  <span>{tech.name}</span>
-                </motion.div>
-              )
-            })}
-          </div>
+          <TechStack
+            items={techStack}
+            title="Tech Stack"
+            titleSize="lg"
+            exploreText="Explore all stack →"
+            className="mt-0"
+          />
         </motion.div>
 
         {/* Let's Connect Section matching Image 1 */}
