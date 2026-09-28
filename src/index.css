@@ -324,7 +324,7 @@ html.light {
   line-height: 1;
 }
 
-/* Subtle, blurry background grid with compact top & bottom margin */
+/* Subtle background grid visible only at the top and bottom of the screen (middle ~74% invisible) */
 .bg-grid,
 .bg-grid-fade {
   background-image: 
@@ -336,23 +336,23 @@ html.light {
   mask-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.8) 8%,
-    rgba(0, 0, 0, 0.2) 16%,
-    rgba(0, 0, 0, 0) 24%,
-    rgba(0, 0, 0, 0) 76%,
-    rgba(0, 0, 0, 0.2) 84%,
-    rgba(0, 0, 0, 0.8) 92%,
+    rgba(0, 0, 0, 0.85) 6%,
+    rgba(0, 0, 0, 0.3) 10%,
+    rgba(0, 0, 0, 0) 13%,
+    rgba(0, 0, 0, 0) 87%,
+    rgba(0, 0, 0, 0.3) 90%,
+    rgba(0, 0, 0, 0.85) 94%,
     rgba(0, 0, 0, 1) 100%
   );
   -webkit-mask-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.8) 8%,
-    rgba(0, 0, 0, 0.2) 16%,
-    rgba(0, 0, 0, 0) 24%,
-    rgba(0, 0, 0, 0) 76%,
-    rgba(0, 0, 0, 0.2) 84%,
-    rgba(0, 0, 0, 0.8) 92%,
+    rgba(0, 0, 0, 0.85) 6%,
+    rgba(0, 0, 0, 0.3) 10%,
+    rgba(0, 0, 0, 0) 13%,
+    rgba(0, 0, 0, 0) 87%,
+    rgba(0, 0, 0, 0.3) 90%,
+    rgba(0, 0, 0, 0.85) 94%,
     rgba(0, 0, 0, 1) 100%
   );
 }

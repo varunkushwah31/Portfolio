@@ -42,7 +42,7 @@ const footerNav: NavColumn[] = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-hairline bg-transparent text-muted transition-colors">
+    <footer className="bg-transparent text-muted transition-colors">
       {/* 3-Column Navigation Grid */}
       <div className="max-w-4xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
@@ -78,7 +78,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar with Copyright & Socials*/}
-      <div className="border-t border-hairline">
+      <div>
         <div className="max-w-4xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted">
           <p>© 2026 Varun Kushwah — India</p>
 
