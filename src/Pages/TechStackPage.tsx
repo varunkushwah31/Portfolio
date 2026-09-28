@@ -471,7 +471,7 @@ export default function TechStackPage() {
 
                       {/* Application Context */}
                       <div className="text-xs text-muted bg-surface-soft border border-hairline rounded-lg p-3 mb-4">
-                        <strong className="text-body-strong font-medium">Application: </strong>
+                        <strong className="text-strong font-semibold">Application: </strong>
                         {tech.useCase}
                       </div>
                     </div>

@@ -114,7 +114,7 @@ export default function About() {
             </p>
 
             <p>
-              I'm <strong className="text-ink font-semibold">Varun Kushwah</strong>, a Software Developer passionate about building innovative digital solutions that drive real technical and business impact. I specialize in backend architecture and scalable distributed services—the robust processes powering applications behind the scenes—as well as crafting clean, responsive client experiences.
+              I'm <strong className="text-strong font-bold">Varun Kushwah</strong>, a Software Developer passionate about building innovative digital solutions that drive real technical and business impact. I specialize in backend architecture and scalable distributed services—the robust processes powering applications behind the scenes—as well as crafting clean, responsive client experiences.
             </p>
 
             <p>
@@ -126,7 +126,7 @@ export default function About() {
               <li className="flex items-start gap-2">
                 <span className="text-muted mt-0.5">•</span>
                 <span>
-                  <strong className="text-ink font-medium">Languages: </strong>
+                  <strong className="text-strong font-semibold">Languages: </strong>
                   <span className="text-body-strong font-medium">Java 21</span>,{" "}
                   <span className="text-body-strong font-medium">Python</span>,{" "}
                   <span className="text-body-strong font-medium">TypeScript</span>,{" "}
@@ -136,7 +136,7 @@ export default function About() {
               <li className="flex items-start gap-2">
                 <span className="text-muted mt-0.5">•</span>
                 <span>
-                  <strong className="text-ink font-medium">Frontend &amp; Mobile: </strong>
+                  <strong className="text-strong font-semibold">Frontend &amp; Mobile: </strong>
                   <span className="text-body-strong font-medium">React 19</span>,{" "}
                   <span className="text-body-strong font-medium">Flutter</span>,{" "}
                   <span className="text-body-strong font-medium">Tailwind CSS</span>, Vite
@@ -145,7 +145,7 @@ export default function About() {
               <li className="flex items-start gap-2">
                 <span className="text-muted mt-0.5">•</span>
                 <span>
-                  <strong className="text-ink font-medium">Backend &amp; Real-Time: </strong>
+                  <strong className="text-strong font-semibold">Backend &amp; Real-Time: </strong>
                   <span className="text-body-strong font-medium">Spring Boot 3.x</span>,{" "}
                   <span className="text-body-strong font-medium">WebRTC</span>,{" "}
                   <span className="text-body-strong font-medium">Node.js</span>, WebSockets
@@ -154,7 +154,7 @@ export default function About() {
               <li className="flex items-start gap-2">
                 <span className="text-muted mt-0.5">•</span>
                 <span>
-                  <strong className="text-ink font-medium">Database &amp; DevOps: </strong>
+                  <strong className="text-strong font-semibold">Database &amp; DevOps: </strong>
                   <span className="text-body-strong font-medium">PostgreSQL</span>,{" "}
                   <span className="text-body-strong font-medium">Docker</span>, Git Subtrees, Linux
                 </span>
@@ -162,7 +162,7 @@ export default function About() {
             </ul>
 
             <p>
-              As a Software Developer and <strong className="text-ink font-medium">Java Coordinator at </strong>
+              As a Software Developer and <strong className="text-strong font-semibold">Java Coordinator at </strong>
               <a
                 href="https://devup.co.in/"
                 target="_blank"

@@ -22,6 +22,7 @@
   --color-ink: var(--ink);
   --color-body: var(--body);
   --color-body-strong: var(--body-strong);
+  --color-strong: var(--strong);
   --color-muted: var(--muted);
 
   /* Borders */
@@ -135,6 +136,7 @@ html.dark {
   --ink: #fafafa;
   --body: #a1a1aa;
   --body-strong: #d4d4d8;
+  --strong: #34d399;
   --muted: #71717a;
 
   --hairline: #27272a;
@@ -166,6 +168,7 @@ html.light {
   --ink: #09090b;
   --body: #333a44;
   --body-strong: #0f141a;
+  --strong: #047857;
   --muted: #57606a;
 
   --hairline: #dbe0e6;
@@ -253,6 +256,11 @@ html.light {
     outline-offset: 2px;
   }
 
+  strong, b {
+    font-weight: 700;
+    color: var(--strong);
+  }
+
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
   ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 9999px; }
@@ -285,8 +293,13 @@ html.light {
 }
 
 .body-strong {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--color-body-strong);
+}
+
+.text-strong {
+  font-weight: 700;
+  color: var(--strong);
 }
 
 .caption {

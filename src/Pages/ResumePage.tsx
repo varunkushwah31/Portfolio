@@ -175,6 +175,18 @@ const skillsList = [
   "Algorithms",
 ]
 
+function renderBulletText(bullet: string) {
+  if (bullet.startsWith("Tech Stack:")) {
+    return (
+      <span>
+        <strong className="text-strong font-semibold">Tech Stack:</strong>
+        {bullet.slice("Tech Stack:".length)}
+      </span>
+    )
+  }
+  return <span>{bullet}</span>
+}
+
 export default function ResumePage() {
   usePageTitle("Resume")
   return (
@@ -267,7 +279,7 @@ export default function ResumePage() {
                     {entry.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
                         <span className="text-emerald-600 dark:text-emerald-400 mt-1.5 shrink-0 text-xs">•</span>
-                        <span>{bullet}</span>
+                        {renderBulletText(bullet)}
                       </li>
                     ))}
                   </ul>
@@ -330,7 +342,7 @@ export default function ResumePage() {
                     {entry.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
                         <span className="text-sky-600 dark:text-sky-400 mt-1.5 shrink-0 text-xs">•</span>
-                        <span>{bullet}</span>
+                        {renderBulletText(bullet)}
                       </li>
                     ))}
                   </ul>
@@ -376,7 +388,7 @@ export default function ResumePage() {
                     {entry.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
                         <span className="text-indigo-600 dark:text-indigo-400 mt-1.5 shrink-0 text-xs">•</span>
-                        <span>{bullet}</span>
+                        {renderBulletText(bullet)}
                       </li>
                     ))}
                   </ul>

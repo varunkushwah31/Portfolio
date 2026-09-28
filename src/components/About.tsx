@@ -78,18 +78,18 @@ const About = () => {
           >
             <p className="body-light text-body text-base md:text-lg leading-relaxed">
               I am a Computer Science undergraduate focused on building robust, scalable backend systems with{" "}
-              <strong className="text-ink font-semibold">Java</strong> and{" "}
-              <strong className="text-ink font-semibold">Spring Boot</strong>. I combine deep object-oriented principles with modern asynchronous protocols to create resilient software solutions.
+              <strong className="text-strong font-semibold">Java</strong> and{" "}
+              <strong className="text-strong font-semibold">Spring Boot</strong>. I combine deep object-oriented principles with modern asynchronous protocols to create resilient software solutions.
             </p>
 
             <p className="body-light text-body text-base leading-relaxed">
-              As the <strong className="text-ink font-semibold">Java Coordinator at devup</strong>, I spearhead technical workshops, mentor emerging developers in core Java fundamentals and object-oriented architecture, and champion clean Git branching workflows across collaborative student repositories.
+              As the <strong className="text-strong font-semibold">Java Coordinator at devup</strong>, I spearhead technical workshops, mentor emerging developers in core Java fundamentals and object-oriented architecture, and champion clean Git branching workflows across collaborative student repositories.
             </p>
 
             <p className="body-light text-body text-base leading-relaxed">
               Beyond enterprise backend architecture, my work spans peer-to-peer data streaming via{" "}
-              <strong className="text-ink font-semibold">WebRTC</strong>, monorepo maintenance with{" "}
-              <strong className="text-ink font-semibold">Git Subtree</strong>, cross-platform mobile apps with Flutter, and applied machine learning classification pipelines.
+              <strong className="text-strong font-semibold">WebRTC</strong>, monorepo maintenance with{" "}
+              <strong className="text-strong font-semibold">Git Subtree</strong>, cross-platform mobile apps with Flutter, and applied machine learning classification pipelines.
             </p>
 
             {/* Engineering Philosophy Callout Box */}
