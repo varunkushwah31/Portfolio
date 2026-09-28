@@ -66,12 +66,12 @@ const experiences: ResumeEntry[] = [
 const projects: ResumeEntry[] = [
   {
     id: "leetcode-tracker",
-    role: "LeetcodeTracker",
-    organization: "Full-Stack Coding Progress Tracker",
-    type: "Personal Project",
-    period: "2024",
-    icon: <CodeIcon size={20} weight="bold" className="text-sky-600 dark:text-sky-400" />,
-    iconBg: "bg-sky-500/10 border-sky-500/30",
+    role: "LeetcodeTracker (MentorSync)",
+    organization: "The Modern OS for Coding Bootcamps & Mentors",
+    type: "Two-Sided EdTech LMS",
+    period: "2024 – Present",
+    icon: <CodeIcon size={20} weight="bold" className="text-indigo-600 dark:text-indigo-400" />,
+    iconBg: "bg-indigo-500/10 border-indigo-500/30",
     techIcons: [
       { name: "Java", icon: JavaIcon },
       { name: "Spring Boot", icon: SpringIcon },
@@ -79,8 +79,9 @@ const projects: ResumeEntry[] = [
       { name: "Docker", icon: DockerIcon },
     ],
     bullets: [
-      "Built a full-stack coding-progress tracker with real-time metrics across 100+ tracked submissions.",
-      "Tech Stack: Java, Spring Boot, React, MongoDB, Docker.",
+      "Architected a two-sided LMS for bootcamps to automate student LeetCode tracking, assignments, and cohort leaderboards.",
+      "Engineered automated submission validation using regex + LeetCode API synchronization with stateless JWT and OAuth2 Google auth.",
+      "Tech Stack: Java 17+, Spring Boot 3, React 19, MongoDB, Spring Security, OAuth2, Tailwind CSS, Docker.",
     ],
   },
   {

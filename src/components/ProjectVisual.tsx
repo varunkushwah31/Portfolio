@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import {
-  GitBranchIcon,
   TerminalWindowIcon,
   PulseIcon,
   BroadcastIcon,
@@ -54,66 +53,74 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
       return (
         <div
           className={`w-full h-full bg-surface-card border border-hairline rounded-2xl flex flex-col justify-between font-mono select-none overflow-hidden relative shadow-sm ${className}`}
-          style={{ minHeight: "220px" }}
+          style={{ minHeight: "240px" }}
         >
-          {/* Top IDE Header Bar */}
+          {/* Top Header Bar */}
           <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-              <span className="text-muted ml-2 text-[11px] font-sans font-semibold tracking-wider">
-                WORKSPACE // GIT-SUBTREE
+              <span className="text-indigo-400 font-bold ml-2 text-[11px] font-sans tracking-wider flex items-center gap-1">
+                <span>&gt;_ MentorSync</span>
+                <span className="text-muted font-normal text-[10px]">· CLASSROOM LMS</span>
               </span>
             </div>
-            <div className="flex items-center gap-1.5 text-[11px] text-muted">
-              <GitBranchIcon size={13} className="text-emerald-600 dark:text-emerald-400" />
-              <span>main: HEAD</span>
+            <div className="flex items-center gap-1.5 text-[11px] text-emerald-500 dark:text-emerald-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-mono text-[10px]">LEETCODE SYNC: LIVE</span>
             </div>
           </div>
 
-          {/* Code & Telemetry Canvas */}
+          {/* Telemetry Canvas */}
           <div className="p-4 sm:p-5 space-y-3.5 text-xs leading-relaxed">
-            <div className="flex items-center gap-2 text-body bg-surface-soft p-2.5 rounded-lg border border-hairline text-[11px]">
-              <TerminalWindowIcon size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
-              <span className="text-body-strong font-mono">$ git subtree pull --prefix=client origin main</span>
+            <div className="flex items-center justify-between gap-2 text-body bg-surface-soft p-2.5 rounded-lg border border-hairline text-[11px]">
+              <div className="flex items-center gap-2 truncate">
+                <TerminalWindowIcon size={14} className="text-indigo-500 shrink-0" />
+                <span className="text-body-strong font-mono truncate">POST /api/v1/assignments/validate-submission</span>
+              </div>
+              <span className="text-emerald-500 font-bold font-mono text-[10px] shrink-0">200 OK</span>
             </div>
 
-            {/* Simulated Progress Analytics */}
+            {/* Simulated Classroom Progress Analytics */}
             <div className="space-y-2 pt-1">
               <div className="flex justify-between text-[11px]">
-                <span className="text-muted font-sans font-medium uppercase tracking-wider">Solved Problems Progress</span>
-                <span className="text-ink font-bold font-mono">{solvedCount} / 500 [96.4%]</span>
+                <span className="text-muted font-sans font-medium uppercase tracking-wider">Cohort Problem Submissions</span>
+                <span className="text-ink font-bold font-mono">{solvedCount} / 500 Verified</span>
               </div>
               {/* Progress Proportion Bar */}
               <div className="h-2 w-full bg-surface-elevated rounded-full flex overflow-hidden">
                 <div className="h-full bg-emerald-500 w-[55%]" title="Easy" />
-                <div className="h-full bg-sky-500 w-[30%]" title="Medium" />
+                <div className="h-full bg-indigo-500 w-[30%]" title="Medium" />
                 <div className="h-full bg-amber-500 w-[15%]" title="Hard" />
               </div>
             </div>
 
             {/* Architecture Subsystem Grid */}
-            <div className="grid grid-cols-3 gap-2 pt-1 text-[11px]">
-              <div className="bg-surface-soft p-2.5 rounded-lg border border-hairline text-center">
-                <div className="text-muted text-[10px]">FRONTEND</div>
-                <div className="text-ink font-bold mt-0.5">REACT 19</div>
+            <div className="grid grid-cols-4 gap-2 pt-1 text-[11px]">
+              <div className="bg-surface-soft p-2 rounded-lg border border-hairline text-center">
+                <div className="text-muted text-[9px] uppercase">Client</div>
+                <div className="text-ink font-bold mt-0.5 text-[10px]">REACT 19</div>
               </div>
-              <div className="bg-surface-soft p-2.5 rounded-lg border border-hairline text-center">
-                <div className="text-muted text-[10px]">BACKEND</div>
-                <div className="text-ink font-bold mt-0.5">EXPRESS</div>
+              <div className="bg-surface-soft p-2 rounded-lg border border-hairline text-center">
+                <div className="text-muted text-[9px] uppercase">Backend</div>
+                <div className="text-indigo-400 font-bold mt-0.5 text-[10px]">SPRING BOOT 3</div>
               </div>
-              <div className="bg-surface-soft p-2.5 rounded-lg border border-hairline text-center">
-                <div className="text-muted text-[10px]">SYNC</div>
-                <div className="text-emerald-600 dark:text-emerald-400 font-bold mt-0.5">ACTIVE</div>
+              <div className="bg-surface-soft p-2 rounded-lg border border-hairline text-center">
+                <div className="text-muted text-[9px] uppercase">Database</div>
+                <div className="text-ink font-bold mt-0.5 text-[10px]">MONGODB</div>
+              </div>
+              <div className="bg-surface-soft p-2 rounded-lg border border-hairline text-center">
+                <div className="text-muted text-[9px] uppercase">Auth</div>
+                <div className="text-emerald-500 font-bold mt-0.5 text-[10px]">OAUTH2 + JWT</div>
               </div>
             </div>
           </div>
 
           {/* Bottom Strip */}
           <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-emerald-600 dark:text-emerald-400 font-semibold font-sans">LeetcodeTracker Core</span>
-            <span>REST API · JWT AUTH</span>
+            <span className="text-indigo-400 font-semibold font-sans">MentorSync LMS Engine</span>
+            <span>JAVA 17+ · SPRING SECURITY · LEETCODE API</span>
           </div>
         </div>
       )

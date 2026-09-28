@@ -7,10 +7,8 @@ import {
   JavaIcon,
   SpringIcon,
   ReactIcon,
-  NodeIcon,
   WebRTCIcon,
   TypeScriptIcon,
-  GitIcon,
   TailwindIcon,
   DockerIcon,
 } from "./TechIcons"
@@ -20,10 +18,10 @@ const featuredProjects = projects.filter((p) => p.featured)
 
 const projectBadges: Record<string, Array<{ name: string; icon: React.FC<{ size?: number; className?: string }> }>> = {
   "leetcode-tracker": [
-    { name: "TypeScript", icon: TypeScriptIcon },
-    { name: "Node.js", icon: NodeIcon },
+    { name: "Java", icon: JavaIcon },
+    { name: "Spring Boot", icon: SpringIcon },
     { name: "React", icon: ReactIcon },
-    { name: "Git", icon: GitIcon },
+    { name: "TypeScript", icon: TypeScriptIcon },
     { name: "Tailwind", icon: TailwindIcon },
   ],
   "w2wshare": [
@@ -44,7 +42,7 @@ const projectBadges: Record<string, Array<{ name: string; icon: React.FC<{ size?
 
 // Vibrant banner gradients for the 2 featured projects
 const cardThemes: Record<string, { bg: string }> = {
-  "leetcode-tracker": { bg: "linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%)" },
+  "leetcode-tracker": { bg: "linear-gradient(135deg, #312e81 0%, #1e1b4b 100%)" },
   "w2wshare": { bg: "linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)" },
   "mangoshare-clone": { bg: "linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)" },
 }

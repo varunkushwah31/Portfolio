@@ -67,8 +67,8 @@ Java Coordinator — devup College Club (2024 – Present)
 - Structured code review sessions and established Git workflows for collaborative projects.
 
 FEATURED PROJECTS
-1. LeetcodeTracker (Full-Stack / Git Subtree Monorepo)
-- Full-stack progress tracker with Git Subtree repository architecture and JWT authentication.
+1. MentorSync / LeetcodeTracker (Two-Sided EdTech LMS)
+- Automated LeetCode progress tracking, assignment dispatch, regex submission validation, Spring Boot 3, and OAuth2/JWT security.
 2. W2W Share (Enterprise Offline P2P / WebRTC)
 - 100% offline peer-to-peer file transfer platform using WebRTC DataChannels with AES-256-GCM encryption.
 3. System Health Dashboard (Systems / Telemetry)
@@ -256,12 +256,12 @@ B.Tech / Undergraduate in Computer Science & Engineering (2023 – 2027)`
                   <div className="bg-surface-soft p-5 border border-hairline-strong space-y-2">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                       <div className="text-ink font-bold text-sm uppercase text-m-blue-light">
-                        LEETCODETRACKER · FULL-STACK ENGINE
+                        MENTORSYNC (LEETCODETRACKER) · EDTECH LMS
                       </div>
-                      <span className="font-mono text-[11px] text-muted">REACT · EXPRESS · GIT SUBTREES</span>
+                      <span className="font-mono text-[11px] text-muted">JAVA · SPRING BOOT 3 · REACT 19 · MONGODB</span>
                     </div>
                     <p className="body-light text-xs text-body leading-relaxed">
-                      Unified monorepo architecture using Git Subtree workflows; persistent session management, streak analytics computation, and full-stack integration.
+                      Two-sided bootcamp LMS automating student LeetCode sync, assignments, regex-based submission validation, dynamic leaderboards, and stateless JWT/OAuth2 Google security.
                     </p>
                   </div>
 

@@ -26,10 +26,10 @@ const projectBadges: Record<
   Array<{ name: string; icon: React.FC<{ size?: number; className?: string }> }>
 > = {
   "leetcode-tracker": [
-    { name: "TypeScript", icon: TypeScriptIcon },
-    { name: "Node.js", icon: NodeIcon },
+    { name: "Java", icon: JavaIcon },
+    { name: "Spring Boot", icon: SpringIcon },
     { name: "React", icon: ReactIcon },
-    { name: "Git", icon: GitIcon },
+    { name: "TypeScript", icon: TypeScriptIcon },
     { name: "Tailwind", icon: TailwindIcon },
   ],
   "w2wshare": [
@@ -76,7 +76,7 @@ const projectBadges: Record<
 // Matching the distinct background colors from bonabrian reference image
 const cardThemes: Record<string, { bg: string; isMobile?: boolean }> = {
   "leetcode-tracker": {
-    bg: "linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%)",
+    bg: "linear-gradient(135deg, #312e81 0%, #1e1b4b 100%)",
   },
   "w2wshare": {
     bg: "linear-gradient(135deg, #a78bfa 0%, #818cf8 100%)",
