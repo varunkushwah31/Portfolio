@@ -102,6 +102,7 @@ const projects: Project[] = [
     role: "Full-Stack Developer & Backend Architect",
     status: "Active Development",
     githubUrl: "https://github.com/varunkushwah31/Leetcode-Tracker-Frontend",
+    liveUrl: "https://mentorssync.vercel.app/",
   },
   {
     slug: "w2wshare",
