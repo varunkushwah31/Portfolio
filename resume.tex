@@ -1,0 +1,165 @@
+%-------------------------
+% Resume in LaTeX
+% Author : Varun Kushwah
+% Targeted for : Java Developer / SDE
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
+
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-1.5pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1.5pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+  \vspace{-1.5pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      #1 & #2 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-3pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=12pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-4pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{center}
+    \textbf{\Huge \scshape Varun Kushwah} \\ \vspace{2pt}
+    \small +91-8218568519 $|$ \href{mailto:varun.kush3@gmail.com}{\underline{varun.kush3@gmail.com}} $|$ 
+    \href{https://linkedin.com/in/varun-kushwah}{\underline{linkedin.com/in/varun-kushwah}} $|$
+    \href{https://github.com/varunkushwah31}{\underline{github.com/varunkushwah31}} $|$
+    \href{https://www.varunkushwah.xyz}{\underline{varunkushwah.xyz}}
+\end{center}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=*,label={}]
+    \small{\item{
+     \textbf{Languages}{: Java (Java 17/21, OOP, Multithreading, Concurrency, Stream API, Collections), SQL, TypeScript, JavaScript, Python} \\
+     \textbf{Backend \& Frameworks}{: Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, RESTful APIs, WebSockets} \\
+     \textbf{Databases \& Caching}{: PostgreSQL, MySQL, MongoDB, Redis} \\
+     \textbf{DevOps \& Tools}{: Git, GitHub, Docker, Postman, Linux/Bash, Maven, Gradle, CI/CD} \\
+     \textbf{Core Competencies}{: Data Structures \& Algorithms, Object-Oriented Design (OOD), Microservices Basics, Distributed Systems Basics}
+    }}
+ \end{itemize}
+
+%-----------EDUCATION-----------------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {KIET Group of Institutions}{2024 -- 2028}
+      {Bachelor of Technology in Computer Science \& Engineering (CGPA: 8.27 / 10.0)}{Ghaziabad, India}
+    \resumeSubheading
+      {New St. Stephens Public School}{2021 -- 2023}
+      {Senior Secondary (CBSE Class XII: 80\%) $\cdot$ Secondary (CBSE Class X: 82\%)}{Agra, India}
+  \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------------
+\section{Experience \& Leadership}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {devup -- College Tech Club}{Aug 2024 -- Present}
+      {Java \& DSA Coordinator $\cdot$ Technical Mentor}{KIET Campus}
+      \resumeItemListStart
+        \resumeItem{Java Backend Curriculum}{Spearheaded structured Java & backend modules for 20+ active student members, accelerating peer readiness for software engineering internships and technical assessments.}
+        \resumeItem{DSA Mentorship}{Conducted weekly algorithmic problem-solving sessions on trees, graphs, and dynamic programming, mentoring juniors to improve average coding speed and accuracy by 30\%.}
+        \resumeItem{Engineering Standards}{Orchestrated code reviews and Git workflows, enforcing clean architecture patterns, OOP principles, and test-driven development practices across collaborative cohort projects.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------------
+\section{Key Projects}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{MentorSync -- LeetCode \& Codeforces LMS} $|$ \emph{Java 21, Spring Boot 4, React 19, Redis 7+, MongoDB, Docker}}{\href{https://mentorssync.vercel.app/}{\underline{Live Demo}} $|$ \href{https://github.com/varunkushwah31/Leetcode-Tracker-Frontend}{\underline{GitHub}}}
+          \resumeItemListStart
+            \resumeItem{Dual-Platform LMS}{Architected a scalable two-sided LMS for bootcamps to automate LeetCode \& Codeforces progress tracking, assignment distribution, and real-time leaderboards.}
+            \resumeItem{Automated Verification}{Built automated verification pipeline consuming LeetCode GraphQL/REST APIs and regex parsing to validate submissions, eliminating manual grading overhead across 100+ active submissions.}
+            \resumeItem{Cache Warming \& Resilience}{Engineered nightly Redis cache warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{W2W Share -- Offline Encrypted P2P File Transfer Platform} $|$ \emph{Java, Spring Boot, WebRTC, WebSockets, AES-256-GCM, Docker}}{\href{https://w2wshare.vercel.app/}{\underline{Live Demo}} $|$ \href{https://github.com/varunkushwah31/W2WShare}{\underline{GitHub}}}
+          \resumeItemListStart
+            \resumeItem{P2P Networking}{Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central storage servers and eliminating cloud relay bandwidth costs.}
+            \resumeItem{Signaling Broker}{Implemented high-concurrency Spring Boot WebSocket signaling server to orchestrate SDP offer/answer handshakes, STUN/ICE candidate negotiation, and room connection lifecycles.}
+            \resumeItem{Streaming Protocol}{Engineered 64KB chunk streaming protocol with AES-256-GCM authenticated encryption and client backpressure control, reliably streaming 10GB+ files with a steady $<$50MB RAM footprint.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Stateless Authentication \& RBAC Service} $|$ \emph{Java, Spring Boot, Spring Security, JWT, OAuth 2.0, PostgreSQL, Docker}}{\href{https://github.com/varunkushwah31}{\underline{GitHub}}}
+          \resumeItemListStart
+            \resumeItem{Stateless Identity}{Designed a modular stateless authentication service implementing JWT access/refresh token rotation and OAuth 2.0 social sign-in, eliminating server-side session memory overhead.}
+            \resumeItem{Access Control}{Configured custom Spring Security filter chains with granular Role-Based Access Control (RBAC), securing 15+ REST endpoints with zero unauthorized access vulnerabilities.}
+            \resumeItem{Data Persistence}{Integrated relational persistence layer with connection pooling, automated validation filters, and comprehensive integration testing via Postman.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------ACHIEVEMENTS-----------------
+\section{Achievements \& Competitive Programming}
+ \begin{itemize}[leftmargin=12pt]
+    \small{\item{
+     \textbf{500+ Problems Solved on LeetCode}{: Demonstrated strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graph algorithms.} \\
+     \textbf{Top 105 Nationally -- Google Solution Challenge 2025}{: Recognized among the top 105 projects nationwide out of thousands of submissions for real-world engineering impact.}
+    }}
+ \end{itemize}
+
+%-------------------------------------------
+\end{document}

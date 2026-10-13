@@ -53,20 +53,21 @@ public class TelemetryEngine {
     category: "BACKEND",
     highlight: true,
     codeSnippet: {
-      filename: "ProblemTrackerController.java",
-      language: "Java / Spring",
-      architectureNote: "RESTful API design with stateless JWT token validation, Spring Data JPA repositories, and streak computation.",
+      filename: "AssignmentVerificationController.java",
+      language: "Java / Spring Boot",
+      architectureNote: "RESTful API design with global Redis POTD caching, LeetCode API synchronization, and automated submission verification.",
       code: `@RestController
-@RequestMapping("/api/v1/problems")
+@RequestMapping("/api/v1/assignments")
 @RequiredArgsConstructor
-public class ProblemController {
-    private final ProblemService problemService;
+public class AssignmentController {
+    private final LeetCodeVerificationService verificationService;
 
-    @GetMapping("/streak")
-    public ResponseEntity<StreakDto> getDeveloperStreak(
-            @AuthenticationPrincipal UserPrincipal principal) {
-        StreakDto streak = problemService.calculateStreak(principal.getId());
-        return ResponseEntity.ok(streak);
+    @PostMapping("/{id}/auto-validate")
+    @PreAuthorize("hasRole('STUDENT')")
+    public ResponseEntity<ValidationResult> validateSubmission(
+            @PathVariable String id,
+            @AuthenticationPrincipal UserPrincipal student) {
+        return ResponseEntity.ok(verificationService.verifySubmission(id, student));
     }
 }`,
       linkedProject: "leetcode-tracker",

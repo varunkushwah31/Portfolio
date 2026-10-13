@@ -24,6 +24,13 @@ const projectBadges: Record<string, Array<{ name: string; icon: React.FC<{ size?
     { name: "TypeScript", icon: TypeScriptIcon },
     { name: "Tailwind", icon: TailwindIcon },
   ],
+  "mentorsync": [
+    { name: "Java", icon: JavaIcon },
+    { name: "Spring Boot", icon: SpringIcon },
+    { name: "React", icon: ReactIcon },
+    { name: "TypeScript", icon: TypeScriptIcon },
+    { name: "Tailwind", icon: TailwindIcon },
+  ],
   "w2wshare": [
     { name: "Java", icon: JavaIcon },
     { name: "Spring Boot", icon: SpringIcon },
@@ -43,6 +50,7 @@ const projectBadges: Record<string, Array<{ name: string; icon: React.FC<{ size?
 // Vibrant banner gradients for the 2 featured projects
 const cardThemes: Record<string, { bg: string }> = {
   "leetcode-tracker": { bg: "linear-gradient(135deg, #312e81 0%, #1e1b4b 100%)" },
+  "mentorsync": { bg: "linear-gradient(135deg, #312e81 0%, #1e1b4b 100%)" },
   "w2wshare": { bg: "linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)" },
   "mangoshare-clone": { bg: "linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)" },
 }
