@@ -94,3 +94,36 @@ export const ViteIcon = createDevicon("devicons-vite", "#646CFF")
 
 // 23. WEBSOCKET (Bidirectional Socket)
 export const WebSocketIcon = createDevicon("devicons-websocket", "#38BDF8")
+
+// 24. THREE.JS (3D WebGL Graphics)
+export const ThreeJSIcon: React.FC<IconProps> = ({ className = "", size = 16, style }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: size, height: size, ...style }}
+    className={`inline-block ${className}`.trim()}
+    aria-hidden="true"
+  >
+    <path d="M12 2L2 7.5v9L12 22l10-5.5v-9L12 2z" />
+    <path d="M12 22V12" />
+    <path d="M22 7.5l-10 4.5-10-4.5" />
+    <circle cx="12" cy="12" r="2" fill="#38bdf8" stroke="none" />
+  </svg>
+)
+
+// 25. GSAP (GreenSock Animation Platform)
+export const GSAPIcon: React.FC<IconProps> = ({ className = "", size = 16, style }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    style={{ width: size, height: size, color: "#88CE02", ...style }}
+    className={`inline-block ${className}`.trim()}
+    aria-hidden="true"
+  >
+    <path d="M12 2L2 8l10 5 10-5-10-6zM3 14l9 5 9-5M3 18l9 5 9-5" stroke="#88CE02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </svg>
+)

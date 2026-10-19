@@ -100,10 +100,10 @@ const projects: ResumeEntry[] = [
       { name: "Docker", icon: DockerIcon },
     ],
     bullets: [
-      "Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central storage servers and eliminating cloud relay bandwidth costs.",
-      "Implemented high-concurrency Spring Boot WebSocket signaling server to orchestrate SDP offer/answer handshakes, STUN/ICE candidate negotiation, and room connection lifecycles.",
-      "Engineered 64KB chunk streaming protocol with AES-256-GCM authenticated encryption and client backpressure control, reliably streaming 10GB+ files with a steady <50MB RAM footprint.",
-      "Tech Stack: Java, Spring Boot, WebRTC DataChannels, WebSockets, AES-256-GCM, React 19, Docker, Prometheus.",
+      "Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.",
+      "Built high-concurrency Java 25 Virtual Threads & Spring Boot 4 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.",
+      "Engineered 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with <50MB RAM.",
+      "Tech Stack: Java 25, Spring Boot 4.1, WebRTC, Bouncy Castle, Virtual Threads, ZXing, WebSockets, Docker, Prometheus.",
     ],
   },
   {

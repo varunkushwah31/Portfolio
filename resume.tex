@@ -92,10 +92,10 @@
 \section{Technical Skills}
  \begin{itemize}[leftmargin=*,label={}]
     \small{\item{
-     \textbf{Languages}{: Java (Java 17/21, OOP, Multithreading, Concurrency, Stream API, Collections), SQL, TypeScript, JavaScript, Python} \\
-     \textbf{Backend \& Frameworks}{: Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, RESTful APIs, WebSockets} \\
+     \textbf{Languages}{: Java (Java 17/21/25, OOP, Multithreading, Concurrency, Virtual Threads, Stream API), SQL, TypeScript, JavaScript, Python} \\
+     \textbf{Backend \& Frameworks}{: Spring Boot 3/4, Spring MVC, Spring Security, Spring Data JPA, Hibernate, RESTful APIs, WebSockets, WebRTC} \\
      \textbf{Databases \& Caching}{: PostgreSQL, MySQL, MongoDB, Redis} \\
-     \textbf{DevOps \& Tools}{: Git, GitHub, Docker, Postman, Linux/Bash, Maven, Gradle, CI/CD} \\
+     \textbf{DevOps \& Tools}{: Git, GitHub, Docker, Postman, Linux/Bash, Maven, Gradle, CI/CD, Prometheus, Grafana} \\
      \textbf{Core Competencies}{: Data Structures \& Algorithms, Object-Oriented Design (OOD), Microservices Basics, Distributed Systems Basics}
     }}
  \end{itemize}
@@ -136,11 +136,11 @@
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{W2W Share -- Offline Encrypted P2P File Transfer Platform} $|$ \emph{Java, Spring Boot, WebRTC, WebSockets, AES-256-GCM, Docker}}{\href{https://w2wshare.vercel.app/}{\underline{Live Demo}} $|$ \href{https://github.com/varunkushwah31/W2WShare}{\underline{GitHub}}}
+          {\textbf{W2W Share -- Offline Encrypted P2P File Transfer Platform} $|$ \emph{Java 25, Spring Boot 4.1, WebRTC, Bouncy Castle, Docker}}{\href{https://w2wshare.vercel.app/}{\underline{Live Demo}} $|$ \href{https://github.com/varunkushwah31/W2WShare}{\underline{GitHub}}}
           \resumeItemListStart
-            \resumeItem{P2P Networking}{Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central storage servers and eliminating cloud relay bandwidth costs.}
-            \resumeItem{Signaling Broker}{Implemented high-concurrency Spring Boot WebSocket signaling server to orchestrate SDP offer/answer handshakes, STUN/ICE candidate negotiation, and room connection lifecycles.}
-            \resumeItem{Streaming Protocol}{Engineered 64KB chunk streaming protocol with AES-256-GCM authenticated encryption and client backpressure control, reliably streaming 10GB+ files with a steady $<$50MB RAM footprint.}
+            \resumeItem{P2P Networking}{Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.}
+            \resumeItem{Signaling Broker}{Built high-concurrency Java 25 Virtual Threads \& Spring Boot 4 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.}
+            \resumeItem{Encrypted Streaming}{Engineered 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with $<$50MB RAM.}
           \resumeItemListEnd
 
       \resumeProjectHeading

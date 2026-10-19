@@ -28,7 +28,10 @@ import {
   PostmanIcon,
   ViteIcon,
   WebSocketIcon,
+  ThreeJSIcon,
+  GSAPIcon,
 } from "@/components/TechIcons"
+import GsapTiltCard from "@/components/gsap/GsapTiltCard"
 
 // 1. Workstation & Hardware Items (matching bonabrian Uses page)
 const workstationItems = [
@@ -187,6 +190,26 @@ const techDetails: TechDetail[] = [
     description: "Next-generation frontend tooling with lightning-fast Hot Module Replacement (HMR).",
     useCase: "Bundling and local developer tooling for React projects.",
     link: "https://vite.dev/",
+  },
+  {
+    id: "threejs",
+    name: "Three.js",
+    category: "Frontend",
+    icon: ThreeJSIcon,
+    status: "Proficient",
+    description: "High-performance JavaScript 3D WebGL library for rendering GPU-accelerated graphics, geometric shaders, and interactive spatial canvases in the browser.",
+    useCase: "Powering interactive 3D WebRTC node core, spatial data visualizations, and ambient background particle grids.",
+    link: "https://threejs.org/",
+  },
+  {
+    id: "gsap",
+    name: "GSAP",
+    category: "Frontend",
+    icon: GSAPIcon,
+    status: "Proficient",
+    description: "GreenSock Animation Platform — the industry-standard robust animation library for high-performance scroll triggers, magnetic physics, and timeline orchestrations.",
+    useCase: "Silky-smooth ScrollTrigger entrances, 3D card tilt physics, magnetic buttons, and text decoding micro-interactions.",
+    link: "https://gsap.com/",
   },
 
   // Real-Time & Protocols
@@ -438,11 +461,16 @@ export default function TechStackPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.25 }}
-                    className="scroll-mt-24 rounded-2xl border border-hairline bg-surface-card hover:border-muted p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between group shadow-sm hover:shadow-md"
+                    className="scroll-mt-24 h-full"
                   >
-                    <div>
-                      {/* Top Row: Icon + Name + Status */}
-                      <div className="flex items-start justify-between gap-3 mb-3">
+                    <GsapTiltCard
+                      maxRotation={4}
+                      scaleOnHover={1.015}
+                      className="h-full rounded-2xl border border-hairline bg-surface-card hover:border-emerald-500/40 dark:hover:border-emerald-400/40 p-5 sm:p-6 transition-colors duration-200 flex flex-col justify-between group shadow-sm hover:shadow-md"
+                    >
+                      <div>
+                        {/* Top Row: Icon + Name + Status */}
+                        <div className="flex items-start justify-between gap-3 mb-3">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-xl bg-surface-elevated border border-hairline flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                             <Icon size={22} className="w-5 h-5" />
@@ -488,8 +516,9 @@ export default function TechStackPage() {
                         <ArrowSquareOutIcon size={13} />
                       </a>
                     </div>
-                  </motion.div>
-                )
+                  </GsapTiltCard>
+                </motion.div>
+              )
               })}
             </AnimatePresence>
           </motion.div>

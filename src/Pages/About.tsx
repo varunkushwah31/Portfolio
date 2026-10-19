@@ -24,12 +24,17 @@ import {
   PostgresIcon,
   LinuxIcon,
   PostmanIcon,
+  ThreeJSIcon,
+  GSAPIcon,
 } from "@/components/TechIcons"
 import TechStack, { type TechItem } from "@/components/TechStack"
+import MagneticButton from "@/components/gsap/MagneticButton"
 
 const techStack: TechItem[] = [
   { id: "java", name: "Java 21", icon: JavaIcon },
   { id: "spring-boot", name: "Spring Boot", icon: SpringIcon },
+  { id: "threejs", name: "Three.js", icon: ThreeJSIcon },
+  { id: "gsap", name: "GSAP", icon: GSAPIcon },
   { id: "react", name: "React 19", icon: ReactIcon },
   { id: "typescript", name: "TypeScript", icon: TypeScriptIcon },
   { id: "node", name: "Node.js", icon: NodeIcon },
@@ -189,7 +194,7 @@ export default function About() {
 
             {/* My Resume Button */}
             <div className="pt-3">
-              <motion.div whileHover={{ scale: 1.03, x: 2 }} whileTap={{ scale: 0.97 }} className="inline-block">
+              <MagneticButton strength={0.35}>
                 <Link
                   to="/resume"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-ink text-xs sm:text-sm font-medium transition-all duration-150 shadow-xs hover:shadow-sm"
@@ -197,7 +202,7 @@ export default function About() {
                   <FileTextIcon size={15} weight="bold" />
                   <span>My Resume</span>
                 </Link>
-              </motion.div>
+              </MagneticButton>
             </div>
           </motion.div>
         </div>
@@ -244,18 +249,17 @@ export default function About() {
             {socials.map((s) => {
               const Icon = s.icon
               return (
-                <motion.a
-                  key={s.label}
-                  href={s.href}
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
-                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  title={s.label}
-                  whileHover={{ scale: 1.12, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-9 h-9 rounded-lg border border-hairline bg-surface-card text-muted hover:text-ink hover:bg-surface-elevated transition-colors flex items-center justify-center shadow-xs"
-                >
-                  <Icon size={18} />
-                </motion.a>
+                <MagneticButton key={s.label} strength={0.4}>
+                  <a
+                    href={s.href}
+                    target={s.href.startsWith("http") ? "_blank" : undefined}
+                    rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    title={s.label}
+                    className="w-9 h-9 rounded-lg border border-hairline bg-surface-card text-muted hover:text-ink hover:bg-surface-elevated transition-colors flex items-center justify-center shadow-xs"
+                  >
+                    <Icon size={18} />
+                  </a>
+                </MagneticButton>
               )
             })}
           </div>

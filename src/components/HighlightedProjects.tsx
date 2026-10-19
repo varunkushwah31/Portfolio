@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
 import { CaretRightIcon } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 import LaptopMockup from "./LaptopMockup"
+import GsapTiltCard from "./gsap/GsapTiltCard"
+import MagneticButton from "./gsap/MagneticButton"
+import GsapReveal from "./gsap/GsapReveal"
 import {
   JavaIcon,
   SpringIcon,
@@ -12,7 +14,6 @@ import {
   TailwindIcon,
   DockerIcon,
 } from "./TechIcons"
-
 
 const featuredProjects = projects.filter((p) => p.featured)
 
@@ -57,39 +58,35 @@ const cardThemes: Record<string, { bg: string }> = {
 
 export default function HighlightedProjects() {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: "easeOut" as const }}
-      className="py-12"
-    >
+    <GsapReveal direction="up" distance={25} duration={0.65} className="py-12">
       {/* Section Header */}
-      <p className="text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-1">
-        Highlighted projects
-      </p>
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-ink mb-8 tracking-tight">
-        What I've been working on
-      </h2>
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <p className="text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-1">
+            Highlighted projects
+          </p>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-ink tracking-tight">
+            What I've been working on
+          </h2>
+        </div>
+      </div>
 
-      {/* 2-Column Grid */}
+      {/* 2-Column Grid with GSAP 3D Tilt */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        {featuredProjects.slice(0, 2).map((project, i) => {
+        {featuredProjects.slice(0, 2).map((project) => {
           const theme = cardThemes[project.slug] || { bg: project.accentColor }
           const badges = projectBadges[project.slug] || []
 
           return (
-            <motion.div
+            <GsapTiltCard
               key={project.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: i * 0.12 }}
-              whileHover={{ y: -6, transition: { type: "spring", stiffness: 350, damping: 20 } }}
+              maxRotation={5}
+              scaleOnHover={1.02}
+              className="rounded-2xl"
             >
               <Link
                 to={`/project/${project.slug}`}
-                className="group block rounded-2xl border border-hairline bg-surface-card hover:border-muted hover:shadow-lg transition-all duration-300 overflow-hidden shadow-sm"
+                className="group block rounded-2xl border border-hairline bg-surface-card hover:border-emerald-500/40 dark:hover:border-emerald-400/40 hover:shadow-xl transition-all duration-300 overflow-hidden shadow-sm"
               >
                 {/* Top Colorful Display Banner with Laptop Mockup */}
                 <div
@@ -104,10 +101,10 @@ export default function HighlightedProjects() {
                 {/* Bottom Content Area */}
                 <div className="p-5 sm:p-6 bg-surface-card">
                   <div className="flex items-center justify-between gap-2 mb-1">
-                    <h3 className="font-bold text-ink text-lg group-hover:text-accent transition-colors">
+                    <h3 className="font-bold text-ink text-lg group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
                       {project.title}
                     </h3>
-                    <span className="text-muted text-xs font-mono group-hover:translate-x-1 transition-transform">
+                    <span className="text-muted text-xs font-mono group-hover:translate-x-1 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-all">
                       →
                     </span>
                   </div>
@@ -121,27 +118,26 @@ export default function HighlightedProjects() {
                     {badges.map((b) => {
                       const Icon = b.icon
                       return (
-                        <motion.div
+                        <div
                           key={b.name}
-                          whileHover={{ scale: 1.2, y: -2 }}
                           className="w-7 h-7 rounded-md bg-surface-elevated border border-hairline flex items-center justify-center text-body-strong hover:border-muted hover:text-ink transition-colors shadow-xs cursor-default"
                           title={b.name}
                         >
                           <Icon size={14} className="w-3.5 h-3.5" />
-                        </motion.div>
+                        </div>
                       )
                     })}
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </GsapTiltCard>
           )
         })}
       </div>
 
-      {/* Centered See All Projects Button */}
+      {/* Centered See All Projects Button with GSAP Magnetic Attraction */}
       <div className="flex justify-center">
-        <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+        <MagneticButton strength={0.35}>
           <Link
             to="/projects"
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-xs sm:text-sm font-medium text-body-strong hover:text-ink transition-all duration-200 shadow-xs group"
@@ -149,8 +145,8 @@ export default function HighlightedProjects() {
             <span>See all projects</span>
             <CaretRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
           </Link>
-        </motion.div>
+        </MagneticButton>
       </div>
-    </motion.section>
+    </GsapReveal>
   )
 }

@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { RocketLaunchIcon, CaretRightIcon, EnvelopeSimpleIcon, CopyIcon, CheckIcon } from "@phosphor-icons/react"
+import MagneticButton from "./gsap/MagneticButton"
+import GsapReveal from "./gsap/GsapReveal"
 
 export default function LetsTalk() {
   const [copied, setCopied] = useState(false)
@@ -15,13 +17,7 @@ export default function LetsTalk() {
   }
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: "easeOut" as const }}
-      className="py-12"
-    >
+    <GsapReveal direction="up" distance={20} duration={0.6} className="py-12">
       <motion.div
         whileHover={{ y: -4, transition: { type: "spring", stiffness: 350, damping: 20 } }}
         className="rounded-2xl border border-hairline bg-surface-card p-6 sm:p-8 relative overflow-hidden group shadow-sm hover:border-muted hover:shadow-md transition-all duration-300"
@@ -51,45 +47,41 @@ export default function LetsTalk() {
           I'm open for software developer roles, internships, and high-impact engineering collaborations. Feel free to reach out directly, and let's discuss how we can build something amazing together!
         </p>
 
-        {/* CTA Buttons with Spring Hover */}
+        {/* CTA Buttons with GSAP Magnetic Interaction */}
         <div className="flex flex-wrap items-center gap-3 relative z-10">
-          <motion.div
-            whileHover={{ scale: 1.04, x: 2 }}
-            whileTap={{ scale: 0.96 }}
-            className="inline-block"
-          >
+          <MagneticButton strength={0.35}>
             <a
               href={`mailto:${email}?subject=Project%20Inquiry%20%2F%20Collaboration%20-%20Varun%20Kushwah&body=Hi%20Varun%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20love%20to%20connect%20regarding...`}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-hairline hover:border-muted bg-surface-card hover:bg-surface-elevated text-ink text-sm font-medium transition-all duration-150 shadow-xs hover:shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-hairline hover:border-emerald-500/50 dark:hover:border-emerald-400/50 bg-surface-card hover:bg-surface-elevated text-ink text-sm font-medium transition-all duration-150 shadow-xs hover:shadow-sm"
             >
               <EnvelopeSimpleIcon size={16} weight="bold" />
               <span>Get in touch</span>
               <CaretRightIcon size={13} weight="bold" className="group-hover:translate-x-0.5 transition-transform" />
             </a>
-          </motion.div>
+          </MagneticButton>
 
-          <motion.button
-            type="button"
-            onClick={handleCopy}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg border border-hairline hover:border-muted bg-surface-soft hover:bg-surface-elevated text-body-strong hover:text-ink text-xs sm:text-sm font-medium transition-colors cursor-pointer"
-            title="Copy email to clipboard"
-          >
-            {copied ? (
-              <>
-                <CheckIcon size={15} weight="bold" className="text-emerald-500 dark:text-emerald-400" />
-                <span className="text-emerald-500 dark:text-emerald-400 font-medium">Copied {email}</span>
-              </>
-            ) : (
-              <>
-                <CopyIcon size={15} />
-                <span>Copy Email</span>
-              </>
-            )}
-          </motion.button>
+          <MagneticButton strength={0.3}>
+            <button
+              type="button"
+              onClick={handleCopy}
+              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg border border-hairline hover:border-muted bg-surface-soft hover:bg-surface-elevated text-body-strong hover:text-ink text-xs sm:text-sm font-medium transition-colors cursor-pointer"
+              title="Copy email to clipboard"
+            >
+              {copied ? (
+                <>
+                  <CheckIcon size={15} weight="bold" className="text-emerald-500 dark:text-emerald-400" />
+                  <span className="text-emerald-500 dark:text-emerald-400 font-medium">Copied {email}</span>
+                </>
+              ) : (
+                <>
+                  <CopyIcon size={15} />
+                  <span>Copy Email</span>
+                </>
+              )}
+            </button>
+          </MagneticButton>
         </div>
       </motion.div>
-    </motion.section>
+    </GsapReveal>
   )
 }

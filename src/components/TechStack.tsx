@@ -14,6 +14,8 @@ import {
   GitIcon,
   WebRTCIcon,
   TailwindIcon,
+  ThreeJSIcon,
+  GSAPIcon,
 } from "./TechIcons"
 
 export interface TechItem {
@@ -25,11 +27,13 @@ export interface TechItem {
 export const techItems: TechItem[] = [
   { id: "java", name: "Java", icon: JavaIcon },
   { id: "spring-boot", name: "Spring Boot", icon: SpringIcon },
+  { id: "threejs", name: "Three.js", icon: ThreeJSIcon },
+  { id: "gsap", name: "GSAP", icon: GSAPIcon },
   { id: "react", name: "React", icon: ReactIcon },
-  { id: "flutter", name: "Flutter", icon: FlutterIcon },
-  { id: "python", name: "Python", icon: PythonIcon },
   { id: "webrtc", name: "WebRTC", icon: WebRTCIcon },
   { id: "typescript", name: "TypeScript", icon: TypeScriptIcon },
+  { id: "flutter", name: "Flutter", icon: FlutterIcon },
+  { id: "python", name: "Python", icon: PythonIcon },
   { id: "node", name: "Node.js", icon: NodeIcon },
   { id: "docker", name: "Docker", icon: DockerIcon },
   { id: "git", name: "Git", icon: GitIcon },

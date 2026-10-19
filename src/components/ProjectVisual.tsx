@@ -155,13 +155,16 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
+              <span className="inline-flex items-center gap-1 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 font-medium">
                 <LockKeyIcon size={12} weight="bold" />
                 AES-256-GCM
               </span>
+              <span className="inline-flex items-center gap-1 text-[11px] text-indigo-700 dark:text-indigo-400 font-mono bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20 font-medium hidden sm:inline-flex">
+                JAVA 25 VIRTUAL THREADS
+              </span>
               <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-surface-card px-2.5 py-0.5 rounded-full border border-hairline font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                ICE: DIRECT HOST
+                LAN DIRECT
               </span>
             </div>
           </div>
@@ -392,9 +395,9 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
           <div className="bg-surface-elevated px-4 py-2.5 border-t border-hairline flex flex-wrap justify-between items-center gap-2 text-[11px] text-muted">
             <div className="flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
               <CheckCircleIcon size={13} weight="fill" />
-              <span className="font-semibold font-sans">STUN NAT Traversal: Host Candidate (LAN Direct)</span>
+              <span className="font-semibold font-sans">LAN Direct P2P · Zero Internet · ZXing QR & PIN Pairing</span>
             </div>
-            <span className="font-mono">In-Memory ArrayBuffer Bypass · Zero Server Ingress</span>
+            <span className="font-mono">JAVA 25 VIRTUAL THREADS · BOUNCY CASTLE AES-256-GCM · PROMETHEUS</span>
           </div>
         </div>
       )

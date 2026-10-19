@@ -75,10 +75,10 @@ KEY PROJECTS
    - Engineered nightly Redis cache warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.
 
 2. W2W Share — Offline Encrypted P2P File Transfer Platform
-   Tech Stack: Java, Spring Boot, WebRTC DataChannels, WebSockets, AES-256-GCM, Docker, Prometheus
-   - Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central storage servers and eliminating cloud relay bandwidth costs.
-   - Implemented high-concurrency Spring Boot WebSocket signaling server to orchestrate SDP offer/answer handshakes, STUN/ICE candidate negotiation, and room connection lifecycles.
-   - Engineered 64KB chunk streaming protocol with AES-256-GCM authenticated encryption and client backpressure control, reliably streaming 10GB+ files with a steady <50MB RAM footprint.
+   Tech Stack: Java 25, Spring Boot 4.1, WebRTC DataChannels, Bouncy Castle, Virtual Threads, ZXing, WebSockets, Docker, Prometheus
+   - Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.
+   - Built high-concurrency Java 25 Virtual Threads & Spring Boot 4 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.
+   - Engineered 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with <50MB RAM.
 
 3. Stateless Authentication & RBAC Service
    Tech Stack: Java, Spring Boot, Spring Security, JWT, OAuth 2.0, PostgreSQL, Docker
@@ -280,10 +280,10 @@ ACHIEVEMENTS & COMPETITIVE PROGRAMMING
                       <div className="text-ink font-bold text-sm uppercase text-m-blue-light">
                         W2W SHARE · OFFLINE ENCRYPTED P2P FILE TRANSFER
                       </div>
-                      <span className="font-mono text-[11px] text-muted">JAVA · SPRING BOOT · WEBRTC DATACHANNELS · AES-256-GCM · DOCKER</span>
+                      <span className="font-mono text-[11px] text-muted">JAVA 25 · SPRING BOOT 4 · WEBRTC · BOUNCY CASTLE · DOCKER</span>
                     </div>
                     <p className="body-light text-xs text-body leading-relaxed">
-                      Bypasses central storage servers via direct WebRTC RTCDataChannels, with a Spring Boot WebSocket signaling broker and 64KB AES-256-GCM chunk streaming protocol handling 10GB+ files under 50MB RAM.
+                      Zero-internet P2P file sharing via WebRTC RTCDataChannels, Java 25 Virtual Threads signaling broker, ZXing QR-pairing, and Bouncy Castle AES-256-GCM chunk streaming under 50MB RAM.
                     </p>
                   </div>
 
