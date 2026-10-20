@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import {
-  MagnifyingGlassIcon,
   HouseIcon,
   UserIcon,
   CpuIcon,
@@ -19,9 +18,12 @@ import {
   SunIcon,
   MoonIcon,
   CheckIcon,
+  TerminalWindowIcon,
+  TrophyIcon,
 } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 import { useTheme } from "@/context/ThemeContext"
+import { sound } from "@/lib/sound"
 
 interface CommandPaletteProps {
   isOpen: boolean
@@ -33,7 +35,7 @@ interface CommandItem {
   id: string
   title: string
   subtitle?: string
-  category: "Navigation" | "Projects" | "Actions"
+  category: "Navigation" | "Projects" | "Actions" | "CLI Commands"
   icon: React.ReactNode
   action: () => void
 }
@@ -46,6 +48,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   const [query, setQuery] = useState("")
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [copied, setCopied] = useState(false)
+  const [cliOutput, setCliOutput] = useState<{ command: string; content: React.ReactNode } | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([])
   const navigate = useNavigate()
@@ -57,6 +60,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         setQuery("")
         setSelectedIndex(0)
         setCopied(false)
+        setCliOutput(null)
         inputRef.current?.focus()
       }, 0)
       return () => clearTimeout(timer)
@@ -65,12 +69,140 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   const handleClose = () => {
     setQuery("")
+    setCliOutput(null)
     onClose()
   }
 
   const goTo = (path: string) => {
+    sound.click()
     handleClose()
     navigate(path)
+  }
+
+  const executeCli = (cmd: string) => {
+    sound.click()
+    const cleanCmd = cmd.trim().toLowerCase()
+
+    if (cleanCmd.includes("clear")) {
+      setCliOutput(null)
+      setQuery("")
+      return
+    }
+
+    if (cleanCmd.includes("skills")) {
+      setCliOutput({
+        command: "varun --skills",
+        content: (
+          <div className="space-y-2 text-xs">
+            <div className="text-emerald-500 font-bold">$ varun --skills // SYSTEM CAPABILITIES</div>
+            <div className="space-y-1 font-mono text-body-strong pl-2 border-l border-emerald-500/30">
+              <div><strong className="text-emerald-400">Core Backend:</strong> Java 21, Spring Boot 3.x, Virtual Threads, REST APIs</div>
+              <div><strong className="text-indigo-400">Distributed &amp; Real-Time:</strong> WebRTC DataChannels, Redis 7 (Locks &amp; Pub/Sub), STOMP WebSockets</div>
+              <div><strong className="text-sky-400">Frontend:</strong> React 19, TypeScript, Tailwind CSS v4, Three.js, GSAP</div>
+              <div><strong className="text-amber-400">DevOps &amp; Database:</strong> PostgreSQL, Docker, Git Subtrees, Linux, Postman</div>
+              <div><strong className="text-emerald-400">Leadership:</strong> Java Coordinator @ devup (Mentoring 100+ emerging developers)</div>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      return
+    }
+
+    if (cleanCmd.includes("contact")) {
+      navigator.clipboard.writeText("varun.kush3@gmail.com")
+      setCliOutput({
+        command: "varun --contact",
+        content: (
+          <div className="space-y-2 text-xs font-mono">
+            <div className="text-emerald-500 font-bold">$ varun --contact // REACH OUT DIRECTLY</div>
+            <div className="space-y-1.5 pl-2 border-l border-emerald-500/30 text-body-strong">
+              <div className="flex items-center gap-2">
+                <span className="text-muted">Email:</span>
+                <span className="text-ink font-bold">varun.kush3@gmail.com</span>
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.2 rounded">Copied to clipboard</span>
+              </div>
+              <div><span className="text-muted">LinkedIn:</span> <a href="https://www.linkedin.com/in/varun-kushwah/" target="_blank" rel="noreferrer" className="text-emerald-400 underline">linkedin.com/in/varun-kushwah</a></div>
+              <div><span className="text-muted">GitHub:</span> <a href="https://github.com/varunkushwah31" target="_blank" rel="noreferrer" className="text-emerald-400 underline">github.com/varunkushwah31</a></div>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      return
+    }
+
+    if (cleanCmd.includes("resume")) {
+      window.open("/Varun_Kushwah_Resume.pdf", "_blank", "noopener,noreferrer")
+      setCliOutput({
+        command: "varun --download-resume",
+        content: (
+          <div className="space-y-1.5 text-xs font-mono">
+            <div className="text-emerald-500 font-bold">$ varun --download-resume</div>
+            <div className="text-body-strong pl-2 border-l border-emerald-500/30">
+              [200 OK] Opened Varun_Kushwah_Resume.pdf in a new tab. Check your downloads for the ATS-verified PDF document.
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      return
+    }
+
+    if (cleanCmd.includes("dsa") || cleanCmd.includes("leetcode")) {
+      setCliOutput({
+        command: "varun --dsa",
+        content: (
+          <div className="space-y-2 text-xs font-mono">
+            <div className="text-emerald-500 font-bold">$ varun --dsa // COMPETITIVE PROGRAMMING TELEMETRY</div>
+            <div className="space-y-1 pl-2 border-l border-emerald-500/30 text-body-strong">
+              <div><strong className="text-ink">LeetCode:</strong> 502 Solved (Top 7.4% Global) · Easy: 210 | Medium: 238 | Hard: 54</div>
+              <div><strong className="text-sky-400">Codeforces:</strong> Specialist (Rating: 1460, Max: 1510) · 240+ Problems Solved</div>
+              <div><strong className="text-amber-400">Top Domains:</strong> Dynamic Programming, Graph Theory, Trees &amp; Tries, Sliding Window</div>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      return
+    }
+
+    if (cleanCmd.includes("project")) {
+      setCliOutput({
+        command: "varun --projects",
+        content: (
+          <div className="space-y-2 text-xs font-mono">
+            <div className="text-emerald-500 font-bold">$ varun --projects // FEATURED PRODUCTION SYSTEMS</div>
+            <div className="space-y-1.5 pl-2 border-l border-emerald-500/30 text-body-strong">
+              <div>1. <strong className="text-ink">MentorSync:</strong> LeetCode/Codeforces LMS with Redis distributed cache warming &amp; WebSockets.</div>
+              <div>2. <strong className="text-ink">W2W Share:</strong> Peer-to-peer browser file distribution via WebRTC DataChannels &amp; AES-256-GCM.</div>
+              <div>3. <strong className="text-ink">System Health:</strong> OS daemon for live hardware metrics streaming.</div>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      return
+    }
+
+    // Default help output
+    setCliOutput({
+      command: cmd,
+      content: (
+        <div className="space-y-1.5 text-xs font-mono">
+          <div className="text-emerald-500 font-bold">$ varun --help // AVAILABLE RECRUITER CLI FLAGS</div>
+          <div className="space-y-1 pl-2 border-l border-emerald-500/30 text-body-strong">
+            <div><span className="text-emerald-400">varun --skills</span> : Inspect backend, systems, and frontend capabilities</div>
+            <div><span className="text-emerald-400">varun --dsa</span> : View LeetCode &amp; Codeforces algorithm benchmarks</div>
+            <div><span className="text-emerald-400">varun --contact</span> : Instant email copy &amp; social profiles</div>
+            <div><span className="text-emerald-400">varun --download-resume</span> : Directly download verified PDF resume</div>
+            <div><span className="text-emerald-400">varun --projects</span> : List production distributed architectures</div>
+            <div><span className="text-emerald-400">varun --clear</span> : Reset terminal output window</div>
+          </div>
+        </div>
+      ),
+    })
+    sound.switchTab()
   }
 
   const allCommands: CommandItem[] = [
@@ -203,6 +335,48 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         setTimeout(() => setCopied(false), 2000)
       },
     },
+
+    // CLI Commands
+    {
+      id: "cli-cmd-skills",
+      title: "varun --skills",
+      subtitle: "Backend, systems, and frontend capability tree",
+      category: "CLI Commands",
+      icon: <TerminalWindowIcon size={16} className="text-emerald-500" />,
+      action: () => executeCli("varun --skills"),
+    },
+    {
+      id: "cli-cmd-contact",
+      title: "varun --contact",
+      subtitle: "Direct email copy & social links",
+      category: "CLI Commands",
+      icon: <TerminalWindowIcon size={16} className="text-emerald-500" />,
+      action: () => executeCli("varun --contact"),
+    },
+    {
+      id: "cli-cmd-resume",
+      title: "varun --download-resume",
+      subtitle: "Official PDF resume download",
+      category: "CLI Commands",
+      icon: <TerminalWindowIcon size={16} className="text-emerald-500" />,
+      action: () => executeCli("varun --download-resume"),
+    },
+    {
+      id: "cli-cmd-dsa",
+      title: "varun --dsa",
+      subtitle: "LeetCode 502 solved & Codeforces Specialist rank",
+      category: "CLI Commands",
+      icon: <TrophyIcon size={16} className="text-amber-500" />,
+      action: () => executeCli("varun --dsa"),
+    },
+    {
+      id: "cli-cmd-projects",
+      title: "varun --projects",
+      subtitle: "List distributed production architectures",
+      category: "CLI Commands",
+      icon: <TerminalWindowIcon size={16} className="text-indigo-400" />,
+      action: () => executeCli("varun --projects"),
+    },
   ]
 
   const filteredCommands = allCommands.filter((cmd) => {
@@ -216,7 +390,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   })
 
   // Group by category
-  const categories: Array<"Navigation" | "Projects" | "Actions"> = ["Navigation", "Projects", "Actions"]
+  const categories: Array<"CLI Commands" | "Navigation" | "Projects" | "Actions"> = [
+    "CLI Commands",
+    "Navigation",
+    "Projects",
+    "Actions",
+  ]
   const grouped = categories.reduce<Record<string, CommandItem[]>>((acc, cat) => {
     const items = filteredCommands.filter((c) => c.category === cat)
     if (items.length > 0) acc[cat] = items
@@ -243,7 +422,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       setSelectedIndex((prev) => (flatList.length > 0 ? (prev - 1 + flatList.length) % flatList.length : 0))
     } else if (e.key === "Enter") {
       e.preventDefault()
-      if (flatList[selectedIndex]) {
+      const trimmed = query.trim().toLowerCase()
+      if (trimmed.startsWith("varun") || trimmed.startsWith("--") || trimmed === "help") {
+        executeCli(trimmed)
+      } else if (flatList[selectedIndex]) {
         flatList[selectedIndex].action()
       }
     } else if (e.key === "Escape") {
@@ -278,11 +460,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           >
             {/* Search Input Box */}
             <div className="flex items-center gap-3.5 px-4.5 py-4 border-b border-hairline bg-surface-card">
-              <MagnifyingGlassIcon size={20} className="text-muted shrink-0" />
+              <TerminalWindowIcon size={20} className="text-emerald-500 shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search or type a command..."
+                placeholder="Search or run CLI (e.g. varun --skills, varun --contact)..."
                 value={query}
                 onChange={(e) => {
                   setQuery(e.target.value)
@@ -308,6 +490,26 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                 ESC
               </kbd>
             </div>
+
+            {/* Interactive Terminal Output View if command was run */}
+            {cliOutput && (
+              <div className="bg-surface-soft border-b border-hairline p-4 relative font-mono text-xs max-h-56 overflow-y-auto">
+                <div className="flex items-center justify-between pb-2 mb-2 border-b border-hairline/60 text-[10px] text-muted">
+                  <span className="flex items-center gap-1.5 text-emerald-500 font-bold">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    TERMINAL OUTPUT // {cliOutput.command}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setCliOutput(null)}
+                    className="hover:text-ink cursor-pointer text-[10px] font-mono underline"
+                  >
+                    Clear Output [x]
+                  </button>
+                </div>
+                {cliOutput.content}
+              </div>
+            )}
 
             {/* Copied Feedback */}
             {copied && (

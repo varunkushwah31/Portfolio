@@ -4,11 +4,11 @@
 class SoundFX {
   private ctx: AudioContext | null = null
   private enabled = false
+  private listeners: ((enabled: boolean) => void)[] = []
 
   constructor() {
-    // Check localStorage preference (default: muted for accessibility & low noise)
     if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("bmw-m-audio-enabled")
+      const stored = localStorage.getItem("portfolio-sound-enabled")
       this.enabled = stored === "true"
     }
   }
@@ -17,14 +17,22 @@ class SoundFX {
     return this.enabled
   }
 
+  public subscribe(fn: (enabled: boolean) => void): () => void {
+    this.listeners.push(fn)
+    return () => {
+      this.listeners = this.listeners.filter((l) => l !== fn)
+    }
+  }
+
   public toggle(): boolean {
     this.enabled = !this.enabled
     if (typeof window !== "undefined") {
-      localStorage.setItem("bmw-m-audio-enabled", String(this.enabled))
+      localStorage.setItem("portfolio-sound-enabled", String(this.enabled))
     }
+    this.listeners.forEach((fn) => fn(this.enabled))
     if (this.enabled) {
       this.init()
-      this.playBeep(880, 0.04, "sine", 0.05)
+      this.playMechanicalClick(1400, 0.03, 0.08)
     }
     return this.enabled
   }
@@ -41,53 +49,93 @@ class SoundFX {
     }
   }
 
-  private playBeep(freq: number, duration: number, type: OscillatorType = "sine", gainVal = 0.03) {
+  // Synthesize tactile lubricated mechanical switch click
+  private playMechanicalClick(freq = 1200, duration = 0.025, volume = 0.05) {
     if (!this.enabled) return
     this.init()
     if (!this.ctx) return
 
     try {
+      const now = this.ctx.currentTime
       const osc = this.ctx.createOscillator()
       const gain = this.ctx.createGain()
 
-      osc.type = type
-      osc.frequency.setValueAtTime(freq, this.ctx.currentTime)
+      osc.type = "triangle"
+      osc.frequency.setValueAtTime(freq, now)
+      osc.frequency.exponentialRampToValueAtTime(120, now + duration)
 
-      gain.gain.setValueAtTime(gainVal, this.ctx.currentTime)
-      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration)
+      gain.gain.setValueAtTime(volume, now)
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration)
 
       osc.connect(gain)
       gain.connect(this.ctx.destination)
 
-      osc.start()
-      osc.stop(this.ctx.currentTime + duration)
+      osc.start(now)
+      osc.stop(now + duration)
     } catch {
-      // Ignore audio synthesis errors silently
+      // Ignore audio synthesis errors
     }
   }
 
   public hover() {
-    this.playBeep(1200, 0.02, "sine", 0.015)
+    if (!this.enabled) return
+    this.playMechanicalClick(1800, 0.015, 0.02)
   }
 
   public click() {
-    this.playBeep(600, 0.04, "triangle", 0.04)
+    this.playMechanicalClick(1100, 0.028, 0.06)
   }
 
   public switchTab() {
-    this.playBeep(900, 0.03, "sine", 0.025)
+    this.playMechanicalClick(950, 0.03, 0.05)
   }
 
   public openModal() {
-    this.playBeep(440, 0.06, "sine", 0.03)
+    if (!this.enabled) return
+    this.init()
+    if (!this.ctx) return
+    try {
+      const now = this.ctx.currentTime
+      const osc = this.ctx.createOscillator()
+      const gain = this.ctx.createGain()
+
+      osc.type = "sine"
+      osc.frequency.setValueAtTime(320, now)
+      osc.frequency.exponentialRampToValueAtTime(640, now + 0.06)
+
+      gain.gain.setValueAtTime(0.04, now)
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06)
+
+      osc.connect(gain)
+      gain.connect(this.ctx.destination)
+
+      osc.start(now)
+      osc.stop(now + 0.06)
+    } catch {}
   }
 
   public success() {
     if (!this.enabled) return
     this.init()
     if (!this.ctx) return
-    this.playBeep(523.25, 0.05, "sine", 0.03)
-    setTimeout(() => this.playBeep(659.25, 0.08, "sine", 0.03), 60)
+    try {
+      const now = this.ctx.currentTime
+      const playTone = (freq: number, start: number, dur: number) => {
+        if (!this.ctx) return
+        const osc = this.ctx.createOscillator()
+        const gain = this.ctx.createGain()
+        osc.type = "sine"
+        osc.frequency.setValueAtTime(freq, start)
+        gain.gain.setValueAtTime(0.04, start)
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + dur)
+        osc.connect(gain)
+        gain.connect(this.ctx.destination)
+        osc.start(start)
+        osc.stop(start + dur)
+      }
+      playTone(523.25, now, 0.06)
+      playTone(659.25, now + 0.06, 0.08)
+    } catch {}
   }
 }
 

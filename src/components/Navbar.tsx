@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { ListIcon, XIcon, MoonIcon, SunIcon, TerminalWindowIcon } from '@phosphor-icons/react'
+import { ListIcon, XIcon, MoonIcon, SunIcon, TerminalWindowIcon, SpeakerHighIcon, SpeakerSimpleSlashIcon } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '@/context/ThemeContext'
+import { sound } from '@/lib/sound'
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void
@@ -19,13 +20,18 @@ const navLinks = [
 export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [soundEnabled, setSoundEnabled] = useState(() => sound.isEnabled())
   const location = useLocation()
   const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const unsub = sound.subscribe((enabled) => setSoundEnabled(enabled))
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      unsub()
+    }
   }, [])
 
 
@@ -96,10 +102,29 @@ export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) 
 
           {/* Right icons cluster */}
           <div className="flex items-center gap-1">
+            {/* Audio Feedback Toggle */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => sound.toggle()}
+              title={soundEnabled ? 'Mute UI sounds' : 'Enable tactile sound feedback'}
+              aria-label={soundEnabled ? 'Mute UI sounds' : 'Enable tactile sound feedback'}
+              className="w-9 h-9 flex items-center justify-center rounded-md text-muted hover:text-ink hover:bg-surface-elevated transition-colors duration-200 cursor-pointer"
+            >
+              {soundEnabled ? (
+                <SpeakerHighIcon size={18} weight="bold" className="text-emerald-500" />
+              ) : (
+                <SpeakerSimpleSlashIcon size={18} weight="regular" />
+              )}
+            </motion.button>
+
             <motion.button
               whileHover={{ scale: 1.1, rotate: 15 }}
               whileTap={{ scale: 0.9 }}
-              onClick={toggleTheme}
+              onClick={() => {
+                sound.switchTab()
+                toggleTheme()
+              }}
               title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
               className="w-9 h-9 flex items-center justify-center rounded-md text-muted hover:text-ink hover:bg-surface-elevated transition-colors duration-200 cursor-pointer"
@@ -127,7 +152,10 @@ export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) 
               whileTap={{ scale: 0.9 }}
               title="Command palette (⌘K)"
               aria-label="Open command palette"
-              onClick={onOpenCommandPalette}
+              onClick={() => {
+                sound.openModal()
+                onOpenCommandPalette?.()
+              }}
               className="w-9 h-9 flex items-center justify-center rounded-md text-muted hover:text-ink hover:bg-surface-elevated transition-colors duration-200 cursor-pointer"
             >
               <TerminalWindowIcon size={18} weight="regular" />

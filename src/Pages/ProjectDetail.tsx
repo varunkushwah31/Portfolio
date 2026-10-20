@@ -8,6 +8,7 @@ import {
 import { motion } from "framer-motion"
 import projects from "@/data/projects"
 import ProjectVisual from "@/components/ProjectVisual"
+import InteractiveArchitectureFlow from "@/components/InteractiveArchitectureFlow"
 import { usePageTitle } from "@/hooks/usePageTitle"
 import { sound } from "@/lib/sound"
 
@@ -259,50 +260,10 @@ export default function ProjectDetail() {
             ARCHITECTURE DATA-FLOW PIPELINE
             ============================================================ */}
         {project.architectureFlow && project.architectureFlow.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45 }}
-          >
-            <div className="mb-4">
-              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block mb-1">
-                Data Flow
-              </span>
-              <h2 className="text-xl sm:text-2xl font-bold text-ink tracking-tight">
-                Pipeline Lifecycle
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {project.architectureFlow.map((node, i) => (
-                <motion.div
-                  key={node.step}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  whileHover={{ y: -3 }}
-                  className="rounded-2xl border border-hairline bg-surface-card p-5 shadow-xs flex flex-col justify-between group hover:border-muted transition-all"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold text-xs">
-                        PHASE {node.step}
-                      </span>
-                      <span className="w-2 h-2 rounded-full bg-emerald-500/70" />
-                    </div>
-                    <h3 className="text-ink font-semibold text-sm sm:text-base mb-2 group-hover:text-accent transition-colors">
-                      {node.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-body leading-relaxed font-normal">
-                      {node.detail}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.section>
+          <InteractiveArchitectureFlow
+            flow={project.architectureFlow}
+            projectTitle={project.title}
+          />
         )}
 
         {/* ============================================================

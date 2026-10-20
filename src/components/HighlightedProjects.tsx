@@ -3,8 +3,10 @@ import { CaretRightIcon } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 import LaptopMockup from "./LaptopMockup"
 import GsapTiltCard from "./gsap/GsapTiltCard"
+import SpotlightCard from "./gsap/SpotlightCard"
 import MagneticButton from "./gsap/MagneticButton"
 import GsapReveal from "./gsap/GsapReveal"
+import { sound } from "@/lib/sound"
 import {
   JavaIcon,
   SpringIcon,
@@ -82,54 +84,57 @@ export default function HighlightedProjects() {
               key={project.slug}
               maxRotation={5}
               scaleOnHover={1.02}
-              className="rounded-2xl"
+              className="rounded-2xl h-full"
             >
-              <Link
-                to={`/project/${project.slug}`}
-                className="group block rounded-2xl border border-hairline bg-surface-card hover:border-emerald-500/40 dark:hover:border-emerald-400/40 hover:shadow-xl transition-all duration-300 overflow-hidden shadow-sm"
-              >
-                {/* Top Colorful Display Banner with Laptop Mockup */}
-                <div
-                  className="h-56 sm:h-64 flex items-center justify-center p-6 sm:p-8 overflow-hidden relative"
-                  style={{ background: theme.bg }}
+              <SpotlightCard className="h-full rounded-2xl" size={450}>
+                <Link
+                  to={`/project/${project.slug}`}
+                  onClick={() => sound.click()}
+                  className="group block rounded-2xl overflow-hidden shadow-sm h-full"
                 >
-                  <div className="w-full max-w-[280px] sm:max-w-[320px] transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.03]">
-                    <LaptopMockup imageSrc={project.image} alt={project.title} />
-                  </div>
-                </div>
-
-                {/* Bottom Content Area */}
-                <div className="p-5 sm:p-6 bg-surface-card">
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <h3 className="font-bold text-ink text-lg group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <span className="text-muted text-xs font-mono group-hover:translate-x-1 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-all">
-                      →
-                    </span>
+                  {/* Top Colorful Display Banner with Laptop Mockup */}
+                  <div
+                    className="h-56 sm:h-64 flex items-center justify-center p-6 sm:p-8 overflow-hidden relative"
+                    style={{ background: theme.bg }}
+                  >
+                    <div className="w-full max-w-[280px] sm:max-w-[320px] transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.03]">
+                      <LaptopMockup imageSrc={project.image} alt={project.title} />
+                    </div>
                   </div>
 
-                  <p className="text-sm text-body leading-relaxed line-clamp-2 mb-4 font-normal">
-                    {project.tagline}
-                  </p>
+                  {/* Bottom Content Area */}
+                  <div className="p-5 sm:p-6 bg-surface-card">
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <h3 className="font-bold text-ink text-lg group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-colors">
+                        {project.title}
+                      </h3>
+                      <span className="text-muted text-xs font-mono group-hover:translate-x-1 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-all">
+                        →
+                      </span>
+                    </div>
 
-                  {/* Tech stack badge row at bottom-left */}
-                  <div className="flex items-center gap-1.5 flex-wrap">
-                    {badges.map((b) => {
-                      const Icon = b.icon
-                      return (
-                        <div
-                          key={b.name}
-                          className="w-7 h-7 rounded-md bg-surface-elevated border border-hairline flex items-center justify-center text-body-strong hover:border-muted hover:text-ink transition-colors shadow-xs cursor-default"
-                          title={b.name}
-                        >
-                          <Icon size={14} className="w-3.5 h-3.5" />
-                        </div>
-                      )
-                    })}
+                    <p className="text-sm text-body leading-relaxed line-clamp-2 mb-4 font-normal">
+                      {project.tagline}
+                    </p>
+
+                    {/* Tech stack badge row at bottom-left */}
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      {badges.map((b) => {
+                        const Icon = b.icon
+                        return (
+                          <div
+                            key={b.name}
+                            className="w-7 h-7 rounded-md bg-surface-elevated border border-hairline flex items-center justify-center text-body-strong hover:border-muted hover:text-ink transition-colors shadow-xs cursor-default"
+                            title={b.name}
+                          >
+                            <Icon size={14} className="w-3.5 h-3.5" />
+                          </div>
+                        )
+                      })}
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </SpotlightCard>
             </GsapTiltCard>
           )
         })}
