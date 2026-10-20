@@ -28,11 +28,11 @@ export const BackgroundCanvas3D: React.FC<BackgroundCanvas3DProps> = ({ classNam
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
-      antialias: false, // Turn off antialias for background particle grid to optimize performance
+      antialias: false,
       powerPreference: "low-power",
     })
     renderer.setSize(width, height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25))
     renderer.setClearColor(0x000000, 0)
     container.appendChild(renderer.domElement)
 
@@ -40,9 +40,10 @@ export const BackgroundCanvas3D: React.FC<BackgroundCanvas3DProps> = ({ classNam
     const particleColor = isDark ? 0x10b981 : 0x059669
     const lineColor = isDark ? 0x38bdf8 : 0x64748b
 
-    // Particle nodes data
-    const particleCount = 75
-    const maxDistance = 95
+    // Lightweight particle nodes count to guarantee 120fps scrolling
+    const particleCount = 42
+    const maxDistance = 100
+    const maxDistanceSq = maxDistance * maxDistance
     const positions = new Float32Array(particleCount * 3)
     const velocities: { x: number; y: number; z: number }[] = []
 
@@ -54,9 +55,9 @@ export const BackgroundCanvas3D: React.FC<BackgroundCanvas3DProps> = ({ classNam
       positions[i * 3 + 2] = (Math.random() - 0.5) * bounds.z * 2
 
       velocities.push({
-        x: (Math.random() - 0.5) * (prefersReducedMotion ? 0.05 : 0.35),
-        y: (Math.random() - 0.5) * (prefersReducedMotion ? 0.05 : 0.35),
-        z: (Math.random() - 0.5) * (prefersReducedMotion ? 0.05 : 0.25),
+        x: (Math.random() - 0.5) * (prefersReducedMotion ? 0.05 : 0.3),
+        y: (Math.random() - 0.5) * (prefersReducedMotion ? 0.05 : 0.3),
+        z: (Math.random() - 0.5) * (prefersReducedMotion ? 0.05 : 0.2),
       })
     }
 
@@ -73,7 +74,6 @@ export const BackgroundCanvas3D: React.FC<BackgroundCanvas3DProps> = ({ classNam
     scene.add(points)
 
     // Dynamic Connections Lines
-    // Allocate maximum possible lines buffer
     const maxConnections = (particleCount * (particleCount - 1)) / 2
     const linePositions = new Float32Array(maxConnections * 6)
     const lineColors = new Float32Array(maxConnections * 6)
@@ -96,10 +96,22 @@ export const BackgroundCanvas3D: React.FC<BackgroundCanvas3DProps> = ({ classNam
     const onMouseMove = (e: MouseEvent) => {
       const halfW = window.innerWidth / 2
       const halfH = window.innerHeight / 2
-      mouseX = (e.clientX - halfW) * 0.15
-      mouseY = (e.clientY - halfH) * 0.15
+      mouseX = (e.clientX - halfW) * 0.12
+      mouseY = (e.clientY - halfH) * 0.12
     }
     window.addEventListener("mousemove", onMouseMove, { passive: true })
+
+    // Pause heavy updates during scroll for butter-smooth 120fps scrolling
+    let isScrolling = false
+    let scrollTimer: ReturnType<typeof setTimeout> | null = null
+    const onScroll = () => {
+      isScrolling = true
+      if (scrollTimer) clearTimeout(scrollTimer)
+      scrollTimer = setTimeout(() => {
+        isScrolling = false
+      }, 80)
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
 
     // Viewport Intersection
     const observer = new IntersectionObserver(
@@ -136,6 +148,12 @@ export const BackgroundCanvas3D: React.FC<BackgroundCanvas3DProps> = ({ classNam
       camera.position.y += (-mouseY - camera.position.y) * 0.03
       camera.lookAt(scene.position)
 
+      // Skip line geometry CPU churn during active scroll bursts
+      if (isScrolling) {
+        renderer.render(scene, camera)
+        return
+      }
+
       const posArr = pointsGeometry.attributes.position.array as Float32Array
 
       // Update particle positions
@@ -152,25 +170,30 @@ export const BackgroundCanvas3D: React.FC<BackgroundCanvas3DProps> = ({ classNam
       }
       pointsGeometry.attributes.position.needsUpdate = true
 
-      // Connect close particles with lines
+      // Connect close particles with fast squared distance check
       let vertexCount = 0
       let colorCount = 0
       const linePos = linesGeometry.attributes.position.array as Float32Array
       const lineCol = linesGeometry.attributes.color.array as Float32Array
 
       for (let i = 0; i < particleCount; i++) {
-        for (let j = i + 1; j < particleCount; j++) {
-          const dx = posArr[i * 3] - posArr[j * 3]
-          const dy = posArr[i * 3 + 1] - posArr[j * 3 + 1]
-          const dz = posArr[i * 3 + 2] - posArr[j * 3 + 2]
-          const dist = Math.sqrt(dx * dx + dy * dy + dz * dz)
+        const pi0 = posArr[i * 3]
+        const pi1 = posArr[i * 3 + 1]
+        const pi2 = posArr[i * 3 + 2]
 
-          if (dist < maxDistance) {
+        for (let j = i + 1; j < particleCount; j++) {
+          const dx = pi0 - posArr[j * 3]
+          const dy = pi1 - posArr[j * 3 + 1]
+          const dz = pi2 - posArr[j * 3 + 2]
+          const distSq = dx * dx + dy * dy + dz * dz
+
+          if (distSq < maxDistanceSq) {
+            const dist = Math.sqrt(distSq)
             const alpha = 1.0 - dist / maxDistance
 
-            linePos[vertexCount++] = posArr[i * 3]
-            linePos[vertexCount++] = posArr[i * 3 + 1]
-            linePos[vertexCount++] = posArr[i * 3 + 2]
+            linePos[vertexCount++] = pi0
+            linePos[vertexCount++] = pi1
+            linePos[vertexCount++] = pi2
 
             linePos[vertexCount++] = posArr[j * 3]
             linePos[vertexCount++] = posArr[j * 3 + 1]
@@ -198,7 +221,9 @@ export const BackgroundCanvas3D: React.FC<BackgroundCanvas3DProps> = ({ classNam
 
     return () => {
       if (animFrameId.current) cancelAnimationFrame(animFrameId.current)
+      if (scrollTimer) clearTimeout(scrollTimer)
       window.removeEventListener("mousemove", onMouseMove)
+      window.removeEventListener("scroll", onScroll)
       window.removeEventListener("resize", onResize)
       observer.disconnect()
 
