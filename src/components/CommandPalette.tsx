@@ -19,7 +19,6 @@ import {
   MoonIcon,
   CheckIcon,
   TerminalWindowIcon,
-  TrophyIcon,
 } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 import { useTheme } from "@/context/ThemeContext"
@@ -149,24 +148,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       return
     }
 
-    if (cleanCmd.includes("dsa") || cleanCmd.includes("leetcode")) {
-      setCliOutput({
-        command: "varun --dsa",
-        content: (
-          <div className="space-y-2 text-xs font-mono">
-            <div className="text-emerald-500 font-bold">$ varun --dsa // COMPETITIVE PROGRAMMING TELEMETRY</div>
-            <div className="space-y-1 pl-2 border-l border-emerald-500/30 text-body-strong">
-              <div><strong className="text-ink">LeetCode:</strong> 502 Solved (Top 7.4% Global) · Easy: 210 | Medium: 238 | Hard: 54</div>
-              <div><strong className="text-sky-400">Codeforces:</strong> Specialist (Rating: 1460, Max: 1510) · 240+ Problems Solved</div>
-              <div><strong className="text-amber-400">Top Domains:</strong> Dynamic Programming, Graph Theory, Trees &amp; Tries, Sliding Window</div>
-            </div>
-          </div>
-        ),
-      })
-      sound.success()
-      return
-    }
-
     if (cleanCmd.includes("project")) {
       setCliOutput({
         command: "varun --projects",
@@ -193,7 +174,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           <div className="text-emerald-500 font-bold">$ varun --help // AVAILABLE RECRUITER CLI FLAGS</div>
           <div className="space-y-1 pl-2 border-l border-emerald-500/30 text-body-strong">
             <div><span className="text-emerald-400">varun --skills</span> : Inspect backend, systems, and frontend capabilities</div>
-            <div><span className="text-emerald-400">varun --dsa</span> : View LeetCode &amp; Codeforces algorithm benchmarks</div>
             <div><span className="text-emerald-400">varun --contact</span> : Instant email copy &amp; social profiles</div>
             <div><span className="text-emerald-400">varun --download-resume</span> : Directly download verified PDF resume</div>
             <div><span className="text-emerald-400">varun --projects</span> : List production distributed architectures</div>
@@ -360,14 +340,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: "CLI Commands",
       icon: <TerminalWindowIcon size={16} className="text-emerald-500" />,
       action: () => executeCli("varun --download-resume"),
-    },
-    {
-      id: "cli-cmd-dsa",
-      title: "varun --dsa",
-      subtitle: "LeetCode 502 solved & Codeforces Specialist rank",
-      category: "CLI Commands",
-      icon: <TrophyIcon size={16} className="text-amber-500" />,
-      action: () => executeCli("varun --dsa"),
     },
     {
       id: "cli-cmd-projects",
