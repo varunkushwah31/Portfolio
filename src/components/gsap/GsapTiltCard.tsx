@@ -27,14 +27,21 @@ export const GsapTiltCard: React.FC<GsapTiltCardProps> = ({
     if (!card) return
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    if (mediaQuery.matches) return
+    const isTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window
+    if (mediaQuery.matches || isTouch) return
+
+    let cachedRect: DOMRect | null = null
+
+    const handleMouseEnter = () => {
+      cachedRect = card.getBoundingClientRect()
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-      const centerX = rect.width / 2
-      const centerY = rect.height / 2
+      if (!cachedRect) cachedRect = card.getBoundingClientRect()
+      const x = e.clientX - cachedRect.left
+      const y = e.clientY - cachedRect.top
+      const centerX = cachedRect.width / 2
+      const centerY = cachedRect.height / 2
 
       const rotateX = ((y - centerY) / centerY) * -maxRotation
       const rotateY = ((x - centerX) / centerX) * maxRotation
@@ -51,8 +58,8 @@ export const GsapTiltCard: React.FC<GsapTiltCardProps> = ({
       })
 
       if (glare && glareEl) {
-        const glareX = (x / rect.width) * 100
-        const glareY = (y / rect.height) * 100
+        const glareX = (x / cachedRect.width) * 100
+        const glareY = (y / cachedRect.height) * 100
         gsap.to(glareEl, {
           opacity: 0.15,
           background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.8), transparent 70%)`,
@@ -63,49 +70,53 @@ export const GsapTiltCard: React.FC<GsapTiltCardProps> = ({
     }
 
     const handleMouseLeave = () => {
+      cachedRect = null
       gsap.to(card, {
         rotateX: 0,
         rotateY: 0,
         scale: 1,
-        duration: 0.65,
-        ease: "elastic.out(1.1, 0.4)",
+        duration: 0.5,
+        ease: "elastic.out(1, 0.45)",
         overwrite: "auto",
       })
 
       if (glare && glareEl) {
         gsap.to(glareEl, {
           opacity: 0,
-          duration: 0.4,
+          duration: 0.35,
           overwrite: "auto",
         })
       }
     }
 
+    card.addEventListener("mouseenter", handleMouseEnter)
     card.addEventListener("mousemove", handleMouseMove)
     card.addEventListener("mouseleave", handleMouseLeave)
 
     return () => {
+      card.removeEventListener("mouseenter", handleMouseEnter)
       card.removeEventListener("mousemove", handleMouseMove)
       card.removeEventListener("mouseleave", handleMouseLeave)
-      gsap.killTweensOf(card)
-      if (glareEl) gsap.killTweensOf(glareEl)
+      gsap.killTweensOf([card, glareEl])
     }
   }, [maxRotation, glare, scaleOnHover])
 
   return (
     <div
       ref={cardRef}
-      className={`relative will-change-transform ${className}`}
+      className={`relative overflow-hidden will-change-transform ${className}`}
       style={{ transformStyle: "preserve-3d" }}
       {...props}
     >
-      {children}
+      {/* Dynamic Specular Glare Reflection Layer */}
       {glare && (
         <div
           ref={glareRef}
-          className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity z-20"
+          className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] opacity-0 transition-opacity duration-300"
+          style={{ mixBlendMode: "overlay" }}
         />
       )}
+      {children}
     </div>
   )
 }

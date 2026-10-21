@@ -414,7 +414,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.12 }}
-          className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-16 sm:pt-24"
+          className="fixed inset-0 z-50 flex items-start justify-center p-3 sm:p-4 pt-12 sm:pt-24"
           onClick={handleClose}
         >
           {/* Backdrop overlay */}
@@ -436,7 +436,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search or run CLI (e.g. varun --skills, varun --contact)..."
+                placeholder="Search or run CLI (e.g. varun --skills)..."
                 value={query}
                 onChange={(e) => {
                   setQuery(e.target.value)
@@ -559,7 +559,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
             {/* Footer */}
             <div className="px-4.5 py-2.5 border-t border-hairline bg-surface-card text-[11px] text-muted flex items-center justify-between font-mono">
-              <div className="flex items-center gap-3.5">
+              <div className="hidden sm:flex items-center gap-3.5">
                 <span className="flex items-center gap-1.5">
                   <kbd className="px-1.5 py-0.5 rounded border border-hairline bg-surface-soft text-[10px]">↑↓</kbd>
                   <span className="font-sans text-xs text-muted">navigate</span>
@@ -573,6 +573,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   <span className="font-sans text-xs text-muted">close</span>
                 </span>
               </div>
+              <span className="sm:hidden font-sans text-xs text-muted">
+                Tap command to run
+              </span>
               <span className="font-mono text-[11px] text-muted/70 hidden sm:inline">
                 {filteredCommands.length} {filteredCommands.length === 1 ? "result" : "results"}
               </span>

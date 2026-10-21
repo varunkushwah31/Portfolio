@@ -18,27 +18,46 @@ export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   ...props
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const rectRef = useRef<DOMRect | null>(null)
   const [position, setPosition] = useState({ x: -1000, y: -1000 })
   const [isHovered, setIsHovered] = useState(false)
 
+  const handleMouseEnter = useCallback(() => {
+    if (containerRef.current) {
+      rectRef.current = containerRef.current.getBoundingClientRect()
+    }
+    setIsHovered(true)
+  }, [])
+
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return
-    const rect = containerRef.current.getBoundingClientRect()
+    if (!rectRef.current) {
+      if (containerRef.current) {
+        rectRef.current = containerRef.current.getBoundingClientRect()
+      } else {
+        return
+      }
+    }
+    const rect = rectRef.current
     setPosition({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
     })
   }, [])
 
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false)
+    rectRef.current = null
+    setPosition({ x: -1000, y: -1000 })
+  }, [])
+
   return (
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false)
-        setPosition({ x: -1000, y: -1000 })
-      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onTouchStart={() => setIsHovered(false)}
+      onTouchEnd={() => setIsHovered(false)}
       className={`relative rounded-2xl border border-hairline bg-surface-card overflow-hidden transition-all duration-300 ${className}`}
       {...props}
     >

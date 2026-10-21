@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react"
-import { gsap, ScrollTrigger } from "@/lib/gsap"
+import { gsap } from "@/lib/gsap"
 
 interface GsapRevealProps {
   children: React.ReactNode
@@ -44,7 +44,7 @@ export const GsapReveal: React.FC<GsapRevealProps> = ({
 
     const targets = stagger > 0 ? el.children : el
 
-    gsap.fromTo(
+    const tween = gsap.fromTo(
       targets,
       {
         opacity: 0,
@@ -68,10 +68,8 @@ export const GsapReveal: React.FC<GsapRevealProps> = ({
     )
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger === el) trigger.kill()
-      })
-      gsap.killTweensOf(targets)
+      tween.scrollTrigger?.kill()
+      tween.kill()
     }
   }, [direction, delay, duration, distance, stagger, threshold])
 

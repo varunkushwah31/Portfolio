@@ -19,17 +19,17 @@ import {
   type GitHubStatsData,
 } from "@/data/githubData"
 
-const CACHE_KEY = "portfolio_github_realtime_cache_v2"
-const CACHE_TTL_MS = 3 * 60 * 1000 // 3 minutes
+const CACHE_KEY = "portfolio_github_realtime_cache_v3"
+const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes cache
 
 export const GithubActivityWidget: React.FC = () => {
   const [hoveredDay, setHoveredDay] = useState<ContributionDay | null>(null)
   const [contributions, setContributions] = useState<ContributionDay[]>(REAL_GITHUB_CONTRIBUTIONS)
   const [stats, setStats] = useState<GitHubStatsData>(REAL_GITHUB_STATS)
   const [isRefreshing, setIsRefreshing] = useState(false)
-  const [lastSyncTime, setLastSyncTime] = useState<string>("Just now")
+  const [lastSyncTime, setLastSyncTime] = useState<string>("Live")
 
-  // Real-time synchronization with GitHub API
+  // Real-time synchronization with GitHub Contributions proxy
   const syncWithGithub = useCallback(async (isManual = false) => {
     if (isManual) {
       setIsRefreshing(true)
@@ -37,7 +37,7 @@ export const GithubActivityWidget: React.FC = () => {
     }
 
     try {
-      // 1. Check local cache first if not manual
+      // 1. Check local cache first if automatic mount
       if (!isManual) {
         try {
           const cached = localStorage.getItem(CACHE_KEY)
@@ -46,7 +46,7 @@ export const GithubActivityWidget: React.FC = () => {
             if (parsed.timestamp && Date.now() - parsed.timestamp < CACHE_TTL_MS) {
               if (parsed.contributions?.length) setContributions(parsed.contributions)
               if (parsed.stats) setStats(parsed.stats)
-              setLastSyncTime("Synced")
+              setLastSyncTime("Live")
               return
             }
           }
@@ -55,23 +55,11 @@ export const GithubActivityWidget: React.FC = () => {
         }
       }
 
-      // 2. Fetch live contributions from public GitHub contributions API
+      // 2. Fetch live contributions from public GitHub contributions proxy (no 403 rate-limits)
       const username = stats.username
-      const contribPromise = fetch(`https://github-contributions-api.jogruber.de/v4/${username}`)
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null)
-
-      // 3. Fetch live user profile stats from GitHub REST API
-      const userPromise = fetch(`https://api.github.com/users/${username}`)
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null)
-
-      // 4. Fetch live repos list for exact star counts
-      const reposPromise = fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`)
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null)
-
-      const [contribData, userData, reposData] = await Promise.all([contribPromise, userPromise, reposPromise])
+      const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`)
+      if (!res.ok) return
+      const contribData = await res.json()
 
       let updatedContributions = contributions
       let updatedStats = { ...stats }
@@ -129,30 +117,6 @@ export const GithubActivityWidget: React.FC = () => {
         }
       }
 
-      if (userData?.public_repos) {
-        updatedStats.publicRepos = userData.public_repos
-      }
-
-      if (reposData && Array.isArray(reposData)) {
-        const totalStars = reposData.reduce((acc, r) => acc + (r.stargazers_count || 0), 0)
-        if (totalStars > 0) {
-          updatedStats.totalStars = totalStars
-        }
-
-        // Update pinned repos star count and descriptions if changed
-        updatedStats.pinnedRepos = updatedStats.pinnedRepos.map((repo) => {
-          const match = reposData.find((r) => r.name.toLowerCase() === repo.name.toLowerCase())
-          if (match) {
-            return {
-              ...repo,
-              stars: match.stargazers_count ?? repo.stars,
-              description: match.description || repo.description,
-            }
-          }
-          return repo
-        })
-      }
-
       setStats(updatedStats)
       setLastSyncTime("Live")
 
@@ -170,7 +134,7 @@ export const GithubActivityWidget: React.FC = () => {
         // ignore storage quota error
       }
     } catch {
-      // Keep static verified fallback
+      // Keep static verified fallback without console pollution
     } finally {
       setIsRefreshing(false)
     }
@@ -227,9 +191,9 @@ export const GithubActivityWidget: React.FC = () => {
   const daysOfWeek = ["", "Mon", "", "Wed", "", "Fri", ""]
 
   return (
-    <div className="rounded-2xl border border-hairline bg-surface-card p-5 sm:p-6 shadow-xs transition-colors">
+    <div className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-6 shadow-xs transition-colors">
       {/* Top Header */}
-      <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-surface-elevated border border-hairline flex items-center justify-center text-ink shrink-0 shadow-xs">
             <GithubLogoIcon size={22} weight="bold" />
@@ -256,8 +220,8 @@ export const GithubActivityWidget: React.FC = () => {
         </div>
 
         {/* Real-time Indicator & Sync Controls */}
-        <div className="flex items-center gap-3">
-          <div className="text-right font-sans">
+        <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-hairline/60">
+          <div className="text-left sm:text-right font-sans">
             <div className="text-xl sm:text-2xl font-bold text-ink tracking-tight font-sans">
               {stats.totalContributionsLastYear.toLocaleString()}
             </div>
@@ -269,11 +233,11 @@ export const GithubActivityWidget: React.FC = () => {
             onClick={() => syncWithGithub(true)}
             disabled={isRefreshing}
             title={`Real-time GitHub sync (${lastSyncTime})`}
-            className="p-2 rounded-lg bg-surface-soft hover:bg-surface-elevated border border-hairline text-muted hover:text-ink transition-all cursor-pointer disabled:opacity-50"
+            className="p-2 sm:p-2.5 rounded-lg bg-surface-soft hover:bg-surface-elevated border border-hairline text-muted hover:text-ink transition-all cursor-pointer disabled:opacity-50 shrink-0"
             aria-label="Refresh real-time GitHub data"
           >
             <ArrowsClockwiseIcon
-              size={15}
+              size={16}
               className={`transition-transform duration-700 ${isRefreshing ? "animate-spin text-emerald-500" : ""}`}
             />
           </button>
@@ -281,56 +245,64 @@ export const GithubActivityWidget: React.FC = () => {
       </div>
 
       {/* GitHub Calendar Heatmap Frame */}
-      <div className="bg-surface-soft/40 p-4 sm:p-5 rounded-xl border border-hairline relative overflow-x-auto pb-3 scrollbar-none">
-        <div className="min-w-[720px]">
-          {/* Month Labels Row (Using clean sans-serif) */}
-          <div className="flex mb-2 pl-8 text-[11px] font-sans text-muted relative h-4 select-none">
-            {monthHeaders.map((header) => (
-              <span
-                key={`${header.weekIdx}-${header.label}`}
-                className="absolute"
-                style={{ left: `calc(${header.weekIdx * 13.5}px + 2rem)` }}
-              >
-                {header.label}
-              </span>
-            ))}
-          </div>
+      <div className="bg-surface-soft/40 p-3 sm:p-5 rounded-xl border border-hairline relative">
+        <div className="flex items-center justify-between text-[11px] text-muted mb-2 font-sans sm:hidden">
+          <span>Activity Timeline</span>
+          <span className="text-[10px] text-emerald-500 font-medium">← Swipe calendar →</span>
+        </div>
 
-          {/* Calendar Grid: Day labels on left + 53 week columns */}
-          <div className="flex gap-2">
-            {/* Day of Week Labels (Mon, Wed, Fri - Clean sans-serif) */}
-            <div className="flex flex-col gap-[3.5px] w-6 shrink-0 text-[10px] font-sans text-muted text-right pr-1 pt-[1px] select-none">
-              {daysOfWeek.map((day, idx) => (
-                <div key={idx} className="h-[10px] leading-[10px]">
-                  {day}
-                </div>
+        <div className="overflow-x-auto pb-2 scrollbar-none touch-pan-x">
+          <div className="min-w-[720px]">
+            {/* Month Labels Row (Using clean sans-serif) */}
+            <div className="flex mb-2 pl-8 text-[11px] font-sans text-muted relative h-4 select-none">
+              {monthHeaders.map((header) => (
+                <span
+                  key={`${header.weekIdx}-${header.label}`}
+                  className="absolute"
+                  style={{ left: `calc(${header.weekIdx * 13.5}px + 2rem)` }}
+                >
+                  {header.label}
+                </span>
               ))}
             </div>
 
-            {/* 53 Columns of 7 Days */}
-            <div className="flex gap-[3.5px]">
-              {weeks.map((week, wIdx) => (
-                <div key={wIdx} className="flex flex-col gap-[3.5px]">
-                  {week.map((day) => (
-                    <div
-                      key={day.date}
-                      onMouseEnter={() => setHoveredDay(day)}
-                      onMouseLeave={() => setHoveredDay(null)}
-                      className={`w-[10px] h-[10px] rounded-[2px] transition-all duration-150 hover:scale-130 cursor-pointer ${
-                        levelColors[day.level]
-                      }`}
-                      title={`${day.date}: ${day.count} contributions`}
-                    />
-                  ))}
-                </div>
-              ))}
+            {/* Calendar Grid: Day labels on left + 53 week columns */}
+            <div className="flex gap-2">
+              {/* Day of Week Labels (Mon, Wed, Fri - Clean sans-serif) */}
+              <div className="flex flex-col gap-[3.5px] w-6 shrink-0 text-[10px] font-sans text-muted text-right pr-1 pt-[1px] select-none">
+                {daysOfWeek.map((day, idx) => (
+                  <div key={idx} className="h-[10px] leading-[10px]">
+                    {day}
+                  </div>
+                ))}
+              </div>
+
+              {/* 53 Columns of 7 Days */}
+              <div className="flex gap-[3.5px]">
+                {weeks.map((week, wIdx) => (
+                  <div key={wIdx} className="flex flex-col gap-[3.5px]">
+                    {week.map((day) => (
+                      <div
+                        key={day.date}
+                        onMouseEnter={() => setHoveredDay(day)}
+                        onMouseLeave={() => setHoveredDay(null)}
+                        onClick={() => setHoveredDay(day)}
+                        className={`w-[10px] h-[10px] rounded-[2px] transition-all duration-150 hover:scale-130 active:scale-140 cursor-pointer ${
+                          levelColors[day.level]
+                        }`}
+                        title={`${day.date}: ${day.count} contributions`}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Hover Tooltip & Footer (Clean sans-serif typography) */}
-        <div className="h-5 mt-3 pt-2.5 border-t border-hairline/60 flex items-center justify-between text-xs text-muted font-sans">
-          <div>
+        {/* Hover / Tap Tooltip & Footer (Clean sans-serif typography) */}
+        <div className="h-6 mt-3 pt-2.5 border-t border-hairline/60 flex items-center justify-between text-xs text-muted font-sans">
+          <div className="truncate mr-2">
             {hoveredDay ? (
               <span className="text-ink font-normal">
                 <strong className="text-emerald-500 font-bold">{hoveredDay.count}</strong>{" "}
@@ -347,13 +319,13 @@ export const GithubActivityWidget: React.FC = () => {
                 href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/managing-contribution-settings-on-your-profile/why-are-my-contributions-not-showing-up-on-my-profile"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted hover:text-ink transition-colors hover:underline"
+                className="text-muted hover:text-ink transition-colors hover:underline truncate"
               >
                 Learn how we count contributions
               </a>
             )}
           </div>
-          <div className="flex items-center gap-1.5 text-[11px] font-sans">
+          <div className="flex items-center gap-1.5 text-[11px] font-sans shrink-0">
             <span>Less</span>
             <span className="w-2.5 h-2.5 rounded-[2px] bg-surface-elevated border border-white/[0.04] dark:bg-[#161b22] inline-block" />
             <span className="w-2.5 h-2.5 rounded-[2px] bg-[#0e4429] inline-block" />
@@ -366,67 +338,67 @@ export const GithubActivityWidget: React.FC = () => {
       </div>
 
       {/* Real GitHub Profile Metrics Cards (Matching Real Profile Stats in font-sans) */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-4 mt-3 border-t border-hairline">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 pt-4 mt-3 border-t border-hairline">
         {/* Current Active Streak */}
-        <div className="bg-surface-soft p-3 rounded-xl border border-hairline flex flex-col justify-between">
+        <div className="bg-surface-soft p-2.5 sm:p-3 rounded-xl border border-hairline flex flex-col justify-between">
           <div>
-            <div className="text-[11px] text-muted font-sans font-medium uppercase tracking-wider flex items-center gap-1">
+            <div className="text-[10px] sm:text-[11px] text-muted font-sans font-medium uppercase tracking-wider flex items-center gap-1">
               <FireIcon size={12} className="text-amber-500" weight="fill" />
               <span>Current Streak</span>
             </div>
-            <div className="text-ink font-bold font-sans text-lg mt-1 tracking-tight">
+            <div className="text-ink font-bold font-sans text-base sm:text-lg mt-1 tracking-tight">
               {stats.currentStreak} Days
             </div>
           </div>
-          <div className="text-xs text-emerald-600 dark:text-emerald-400 font-sans font-medium mt-1">
+          <div className="text-[11px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-sans font-medium mt-1">
             {stats.currentStreakRange}
           </div>
         </div>
 
         {/* Longest Verified Streak */}
-        <div className="bg-surface-soft p-3 rounded-xl border border-hairline flex flex-col justify-between">
+        <div className="bg-surface-soft p-2.5 sm:p-3 rounded-xl border border-hairline flex flex-col justify-between">
           <div>
-            <div className="text-[11px] text-muted font-sans font-medium uppercase tracking-wider flex items-center gap-1">
+            <div className="text-[10px] sm:text-[11px] text-muted font-sans font-medium uppercase tracking-wider flex items-center gap-1">
               <CalendarCheckIcon size={12} className="text-emerald-500" weight="bold" />
               <span>Longest Streak</span>
             </div>
-            <div className="text-ink font-bold font-sans text-lg mt-1 tracking-tight">
+            <div className="text-ink font-bold font-sans text-base sm:text-lg mt-1 tracking-tight">
               {stats.longestStreak} Days
             </div>
           </div>
-          <div className="text-xs text-muted font-sans mt-1">
+          <div className="text-[11px] sm:text-xs text-muted font-sans mt-1">
             {stats.longestStreakRange}
           </div>
         </div>
 
         {/* Total Commits & Velocity */}
-        <div className="bg-surface-soft p-3 rounded-xl border border-hairline flex flex-col justify-between">
+        <div className="bg-surface-soft p-2.5 sm:p-3 rounded-xl border border-hairline flex flex-col justify-between">
           <div>
-            <div className="text-[11px] text-muted font-sans font-medium uppercase tracking-wider flex items-center gap-1">
+            <div className="text-[10px] sm:text-[11px] text-muted font-sans font-medium uppercase tracking-wider flex items-center gap-1">
               <GitCommitIcon size={12} className="text-sky-500" weight="bold" />
               <span>Total Commits</span>
             </div>
-            <div className="text-ink font-bold font-sans text-lg mt-1 tracking-tight">
+            <div className="text-ink font-bold font-sans text-base sm:text-lg mt-1 tracking-tight">
               {stats.totalCommits}+
             </div>
           </div>
-          <div className="text-xs text-emerald-600 dark:text-emerald-400 font-sans font-medium mt-1">
+          <div className="text-[11px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-sans font-medium mt-1">
             {stats.commitsThisMonth} in October
           </div>
         </div>
 
         {/* Public Repos & OSS Stars */}
-        <div className="bg-surface-soft p-3 rounded-xl border border-hairline flex flex-col justify-between">
+        <div className="bg-surface-soft p-2.5 sm:p-3 rounded-xl border border-hairline flex flex-col justify-between">
           <div>
-            <div className="text-[11px] text-muted font-sans font-medium uppercase tracking-wider flex items-center gap-1">
+            <div className="text-[10px] sm:text-[11px] text-muted font-sans font-medium uppercase tracking-wider flex items-center gap-1">
               <StarIcon size={12} className="text-amber-400" weight="fill" />
               <span>Public Repos &amp; Stars</span>
             </div>
-            <div className="text-ink font-bold font-sans text-lg mt-1 tracking-tight">
+            <div className="text-ink font-bold font-sans text-base sm:text-lg mt-1 tracking-tight">
               {stats.publicRepos} Repos
             </div>
           </div>
-          <div className="text-xs text-amber-500 dark:text-amber-400 font-sans font-medium mt-1">
+          <div className="text-[11px] sm:text-xs text-amber-500 dark:text-amber-400 font-sans font-medium mt-1">
             {stats.totalStars} Stars Earned
           </div>
         </div>
@@ -434,13 +406,13 @@ export const GithubActivityWidget: React.FC = () => {
 
       {/* Real Pinned Repositories Row (Direct from github.com/varunkushwah31) */}
       <div className="pt-4 mt-3 border-t border-hairline">
-        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
           <span className="text-xs font-semibold text-ink font-sans tracking-tight flex items-center gap-1.5">
-            <BookBookmarkIcon size={14} className="text-emerald-500" />
-            <span>Pinned Repositories &amp; Recent OSS Contributions</span>
+            <BookBookmarkIcon size={14} className="text-emerald-500 shrink-0" />
+            <span>Pinned Repositories &amp; Recent Contributions</span>
           </span>
-          <span className="text-[11px] font-sans font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 inline-flex items-center gap-1.5">
-            <GitPullRequestIcon size={12} weight="bold" />
+          <span className="text-[10px] sm:text-[11px] font-sans font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 inline-flex items-center gap-1.5 w-fit">
+            <GitPullRequestIcon size={12} weight="bold" className="shrink-0" />
             <span>{stats.recentAchievement}</span>
           </span>
         </div>
@@ -453,7 +425,7 @@ export const GithubActivityWidget: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.click()}
-              className="group/repo p-3.5 rounded-xl bg-surface-soft hover:bg-surface-elevated border border-hairline transition-all hover:border-emerald-500/30 flex flex-col justify-between"
+              className="group/repo p-3 sm:p-3.5 rounded-xl bg-surface-soft hover:bg-surface-elevated active:scale-[0.99] border border-hairline transition-all hover:border-emerald-500/30 flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between gap-1 mb-1.5">

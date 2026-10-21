@@ -44,10 +44,13 @@ export default function Footer() {
   return (
     <footer className="bg-transparent text-muted transition-colors">
       {/* 3-Column Navigation Grid */}
-      <div className="max-w-4xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
+      <div className="max-w-4xl mx-auto px-5 sm:px-6 py-12 sm:py-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
           {footerNav.map((col) => (
-            <div key={col.title} className="flex flex-col gap-3 min-w-0">
+            <div
+              key={col.title}
+              className={`flex flex-col gap-2.5 sm:gap-3 min-w-0 ${col.title === 'Social & Connect' ? 'col-span-2 sm:col-span-1' : ''}`}
+            >
               <p className="text-xs font-semibold text-muted uppercase tracking-wider mb-1">
                 {col.title}
               </p>
@@ -77,9 +80,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar with Copyright & Socials*/}
-      <div>
-        <div className="max-w-4xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted">
+      {/* Bottom Bar with Copyright & Socials */}
+      <div className="border-t border-hairline/60">
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted text-center sm:text-left">
           <p>© 2026 Varun Kushwah — India</p>
 
           <div className="flex items-center gap-3">
@@ -88,7 +91,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="p-1 text-muted hover:text-ink transition-colors"
+              className="p-1.5 text-muted hover:text-ink transition-colors"
             >
               <GithubLogoIcon size={16} />
             </a>
@@ -97,14 +100,14 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="p-1 text-muted hover:text-ink transition-colors"
+              className="p-1.5 text-muted hover:text-ink transition-colors"
             >
               <LinkedinLogoIcon size={16} />
             </a>
             <a
               href="mailto:varun.kush3@gmail.com"
               aria-label="Email"
-              className="p-1 text-muted hover:text-ink transition-colors"
+              className="p-1.5 text-muted hover:text-ink transition-colors"
             >
               <EnvelopeSimpleIcon size={16} />
             </a>

@@ -226,13 +226,13 @@ export default function ResumePage() {
           </div>
 
           {/* Top-Right Download Resume Button */}
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="shrink-0">
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full sm:w-auto shrink-0">
             <a
               href="/Varun_Kushwah_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               download="Varun_Kushwah_Resume.pdf"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-ink text-sm font-medium transition-all duration-150 shadow-xs hover:shadow-sm whitespace-nowrap"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-ink text-sm font-medium transition-all duration-150 shadow-xs hover:shadow-sm w-full sm:w-auto whitespace-nowrap"
             >
               <DownloadSimpleIcon size={16} weight="bold" />
               <span>Download resume</span>

@@ -28,12 +28,19 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
 
     // Check prefers-reduced-motion
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    if (mediaQuery.matches) return
+    const isTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window
+    if (mediaQuery.matches || isTouch) return
+
+    let cachedRect: DOMRect | null = null
+
+    const handleMouseEnter = () => {
+      cachedRect = el.getBoundingClientRect()
+    }
 
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect()
-      const centerX = rect.left + rect.width / 2
-      const centerY = rect.top + rect.height / 2
+      if (!cachedRect) cachedRect = el.getBoundingClientRect()
+      const centerX = cachedRect.left + cachedRect.width / 2
+      const centerY = cachedRect.top + cachedRect.height / 2
       const deltaX = e.clientX - centerX
       const deltaY = e.clientY - centerY
 
@@ -57,6 +64,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
     }
 
     const handleMouseLeave = () => {
+      cachedRect = null
       gsap.to(el, {
         x: 0,
         y: 0,
@@ -76,24 +84,25 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
       }
     }
 
+    el.addEventListener("mouseenter", handleMouseEnter)
     el.addEventListener("mousemove", handleMouseMove)
     el.addEventListener("mouseleave", handleMouseLeave)
 
     return () => {
+      el.removeEventListener("mouseenter", handleMouseEnter)
       el.removeEventListener("mousemove", handleMouseMove)
       el.removeEventListener("mouseleave", handleMouseLeave)
-      gsap.killTweensOf(el)
-      if (inner) gsap.killTweensOf(inner)
+      gsap.killTweensOf([el, inner])
     }
   }, [strength, innerStrength])
 
   return (
     <Component
       ref={containerRef}
-      className={`inline-block ${className}`}
+      className={`inline-block cursor-pointer select-none ${className}`}
       {...props}
     >
-      <div ref={innerRef} className="inline-flex items-center">
+      <div ref={innerRef} className="w-full h-full">
         {children}
       </div>
     </Component>

@@ -55,7 +55,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="max-w-4xl mx-auto px-6 pt-16 sm:pt-20 pb-12 relative overflow-visible">
+    <section className="max-w-4xl mx-auto px-5 sm:px-6 pt-10 sm:pt-20 pb-10 sm:pb-12 relative overflow-visible">
       {/* Three.js Ambient Particle Constellation Background */}
       <BackgroundCanvas3D className="opacity-60 dark:opacity-75" />
 
@@ -86,13 +86,13 @@ export default function Hero() {
 
         {/* Main 2-line Heading with GSAP Text Scramble */}
         <motion.div variants={item} className="mb-6">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight leading-[1.15]">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-ink tracking-tight leading-[1.15]">
             Hi, I'm{" "}
             <span className="text-ink hover:text-emerald-500 dark:hover:text-emerald-400 inline-block transition-colors duration-300 cursor-pointer">
               <TextScramble text="Varun Kushwah" trigger="both" duration={0.65} />
             </span>
           </h1>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-body-strong tracking-tight mt-1">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-body-strong tracking-tight mt-1">
             Software Developer
           </h2>
         </motion.div>
