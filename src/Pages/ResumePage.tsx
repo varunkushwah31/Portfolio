@@ -448,16 +448,16 @@ export default function ResumePage() {
           </div>
 
           {/* View Mode Switcher (Interactive vs PDF vs ATS Plain Text) */}
-          <div className="flex items-center justify-between gap-3 flex-wrap">
-            <div className="inline-flex p-1 rounded-xl bg-surface-card border border-hairline shadow-xs">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="inline-flex p-1 rounded-xl bg-surface-card border border-hairline shadow-xs overflow-x-auto scrollbar-none touch-pan-x max-w-full">
               <button
                 onClick={() => {
                   sound.click()
                   setViewMode("interactive")
                 }}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                   viewMode === "interactive"
-                    ? "bg-canvas text-ink shadow-xs border border-hairline/80"
+                    ? "bg-canvas text-ink shadow-xs border border-hairline/80 font-bold"
                     : "text-muted hover:text-ink"
                 }`}
               >
@@ -470,9 +470,9 @@ export default function ResumePage() {
                   sound.click()
                   setViewMode("pdf")
                 }}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                   viewMode === "pdf"
-                    ? "bg-canvas text-ink shadow-xs border border-hairline/80"
+                    ? "bg-canvas text-ink shadow-xs border border-hairline/80 font-bold"
                     : "text-muted hover:text-ink"
                 }`}
               >
@@ -485,9 +485,9 @@ export default function ResumePage() {
                   sound.click()
                   setViewMode("ats")
                 }}
-                className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer whitespace-nowrap active:scale-95 ${
                   viewMode === "ats"
-                    ? "bg-canvas text-ink shadow-xs border border-hairline/80"
+                    ? "bg-canvas text-ink shadow-xs border border-hairline/80 font-bold"
                     : "text-muted hover:text-ink"
                 }`}
               >
@@ -499,7 +499,7 @@ export default function ResumePage() {
             {/* Quick Copy ATS Button */}
             <button
               onClick={handleCopyAts}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-xs font-medium text-ink transition-colors cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-xs font-medium text-ink transition-colors cursor-pointer active:scale-95 w-full sm:w-auto shadow-xs"
               title="Copy ATS plaintext directly to clipboard"
             >
               {copiedAts ? (

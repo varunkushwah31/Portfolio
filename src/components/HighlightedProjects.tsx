@@ -75,38 +75,38 @@ export default function HighlightedProjects() {
                 <Link
                   to={`/project/${project.slug}`}
                   onClick={() => sound.click()}
-                  className="group block h-56 sm:h-64 flex items-center justify-center p-6 sm:p-8 overflow-hidden relative cursor-pointer"
+                  className="group block h-56 sm:h-64 flex items-center justify-center p-4 sm:p-8 overflow-hidden relative cursor-pointer"
                   style={{ background: theme.bg }}
                 >
-                  <div className="w-full max-w-[280px] sm:max-w-[320px] transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.03]">
+                  <div className="w-full max-w-[260px] sm:max-w-[320px] transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.03]">
                     <LaptopMockup imageSrc={project.image} alt={project.title} />
                   </div>
                 </Link>
 
                 {/* Bottom Content Area */}
-                <div className="p-5 sm:p-6 bg-surface-card flex flex-col justify-between flex-grow">
+                <div className="p-4 sm:p-6 bg-surface-card flex flex-col justify-between flex-grow">
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-1.5">
                       <Link
                         to={`/project/${project.slug}`}
                         onClick={() => sound.click()}
-                        className="font-bold text-ink text-lg hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors tracking-tight"
+                        className="font-bold text-ink text-base sm:text-lg hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors tracking-tight"
                       >
                         {project.title}
                       </Link>
 
-                      <span className="text-xs font-mono text-muted">
+                      <span className="text-[11px] font-mono text-muted uppercase">
                         {project.category}
                       </span>
                     </div>
 
-                    <p className="text-sm text-body leading-relaxed line-clamp-2 mb-4 font-normal">
+                    <p className="text-xs sm:text-sm text-body leading-relaxed line-clamp-2 mb-4 font-normal">
                       {project.tagline}
                     </p>
                   </div>
 
                   {/* Footer Row: Tech Badges & Direct Links */}
-                  <div className="pt-2 border-t border-hairline/60 flex items-center justify-between gap-2 flex-wrap">
+                  <div className="pt-2.5 border-t border-hairline/60 flex items-center justify-between gap-2 flex-wrap">
                     {/* Tech stack badge row */}
                     <div className="flex items-center gap-1.5 flex-wrap">
                       {badges.map((b) => {
@@ -124,16 +124,16 @@ export default function HighlightedProjects() {
                     </div>
 
                     {/* Action Links */}
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5 shrink-0">
                       {project.githubUrl && (
                         <a
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-7 h-7 rounded-md bg-surface-elevated hover:bg-surface-soft border border-hairline flex items-center justify-center text-muted hover:text-ink transition-colors shadow-xs"
+                          className="w-8 h-8 rounded-lg bg-surface-elevated hover:bg-surface-soft border border-hairline flex items-center justify-center text-muted hover:text-ink transition-colors shadow-xs active:scale-95"
                           title="View Source on GitHub"
                         >
-                          <GithubLogoIcon size={15} />
+                          <GithubLogoIcon size={16} />
                         </a>
                       )}
 
@@ -142,17 +142,17 @@ export default function HighlightedProjects() {
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-7 h-7 rounded-md bg-surface-elevated hover:bg-surface-soft border border-hairline flex items-center justify-center text-muted hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors shadow-xs"
+                          className="w-8 h-8 rounded-lg bg-surface-elevated hover:bg-surface-soft border border-hairline flex items-center justify-center text-muted hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors shadow-xs active:scale-95"
                           title="Visit Live Application"
                         >
-                          <ArrowSquareOutIcon size={15} />
+                          <ArrowSquareOutIcon size={16} />
                         </a>
                       )}
 
                       <Link
                         to={`/project/${project.slug}`}
                         onClick={() => sound.click()}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/10 transition-colors"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 transition-colors active:scale-95"
                       >
                         <span>Details</span>
                         <CaretRightIcon size={11} weight="bold" />
