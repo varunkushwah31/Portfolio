@@ -69,15 +69,15 @@ devup — College Tech Club | Java & DSA Coordinator · Technical Mentor | Aug 2
 
 KEY PROJECTS
 1. MentorSync — LeetCode & Codeforces LMS
-   Tech Stack: Java 21, Spring Boot 4, React 19, TypeScript, Redis 7+, MongoDB, Spring Security, Docker, Resilience4j
+   Tech Stack: Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, Spring Security, Docker, Resilience4j
    - Architected a scalable two-sided LMS for bootcamps and educators to automate LeetCode & Codeforces progress tracking, classroom assignment distribution, and real-time leaderboards.
    - Built automated verification pipeline consuming LeetCode GraphQL/REST APIs and regex parsing to validate submissions, eliminating manual grading overhead across 100+ active submissions.
    - Engineered nightly Redis cache warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.
 
 2. W2W Share — Offline Encrypted P2P File Transfer Platform
-   Tech Stack: Java 25, Spring Boot 4.1, WebRTC DataChannels, Bouncy Castle, Virtual Threads, ZXing, WebSockets, Docker, Prometheus
+   Tech Stack: Java 21, Spring Boot 3.3, WebRTC DataChannels, AES-256-GCM, Virtual Threads, ZXing, WebSockets, Docker
    - Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.
-   - Built high-concurrency Java 25 Virtual Threads & Spring Boot 4 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.
+   - Built high-concurrency Java 21 Virtual Threads & Spring Boot 3.3 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.
    - Engineered 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with <50MB RAM.
 
 3. Stateless Authentication & RBAC Service
@@ -268,7 +268,7 @@ ACHIEVEMENTS & COMPETITIVE PROGRAMMING
                       <div className="text-ink font-bold text-sm uppercase text-m-blue-light">
                         MENTORSYNC · LEETCODE & CODEFORCES LMS
                       </div>
-                      <span className="font-mono text-[11px] text-muted">JAVA 21 · SPRING BOOT 4 · REDIS 7+ · MONGODB</span>
+                      <span className="font-mono text-[11px] text-muted">JAVA 21 · SPRING BOOT 3.3 · REDIS 7 · MONGODB</span>
                     </div>
                     <p className="body-light text-xs text-body leading-relaxed">
                       High-performance LMS tracking LeetCode & Codeforces telemetry, automated assignment verification, nightly Redis cache warming with distributed locks, and STOMP WebSockets.
@@ -280,10 +280,10 @@ ACHIEVEMENTS & COMPETITIVE PROGRAMMING
                       <div className="text-ink font-bold text-sm uppercase text-m-blue-light">
                         W2W SHARE · OFFLINE ENCRYPTED P2P FILE TRANSFER
                       </div>
-                      <span className="font-mono text-[11px] text-muted">JAVA 25 · SPRING BOOT 4 · WEBRTC · BOUNCY CASTLE · DOCKER</span>
+                      <span className="font-mono text-[11px] text-muted">JAVA 21 · SPRING BOOT 3.3 · WEBRTC · DOCKER</span>
                     </div>
                     <p className="body-light text-xs text-body leading-relaxed">
-                      Zero-internet P2P file sharing via WebRTC RTCDataChannels, Java 25 Virtual Threads signaling broker, ZXing QR-pairing, and Bouncy Castle AES-256-GCM chunk streaming under 50MB RAM.
+                      Zero-internet P2P file sharing via WebRTC RTCDataChannels, Java 21 Spring Boot signaling broker, ZXing QR-pairing, and encrypted chunk streaming over local networks.
                     </p>
                   </div>
 

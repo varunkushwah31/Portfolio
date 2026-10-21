@@ -19,7 +19,9 @@ export const HeroScene3D: React.FC<HeroScene3DProps> = ({ className = "" }) => {
   const animFrameId = useRef<number | null>(null)
   const isVisibleRef = useRef(true)
   const themeRef = useRef(theme)
-  themeRef.current = theme
+  useEffect(() => {
+    themeRef.current = theme
+  }, [theme])
 
   // Interactive pulse trigger ref
   const triggerPulseRef = useRef<(() => void) | null>(null)
@@ -296,7 +298,7 @@ export const HeroScene3D: React.FC<HeroScene3DProps> = ({ className = "" }) => {
     window.addEventListener("resize", handleResize)
 
     // 8. Animation Loop
-    let clock = new THREE.Clock()
+    const clock = new THREE.Clock()
 
     const animate = () => {
       animFrameId.current = requestAnimationFrame(animate)

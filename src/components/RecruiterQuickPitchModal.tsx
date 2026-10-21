@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link } from "react-router-dom"
 import {
@@ -26,7 +26,7 @@ const PITCH_TEXT_FOR_CLIPBOARD = `Varun Kushwah — Software Engineer / Backend 
 * Primary Stack: Java 21, Spring Boot, PostgreSQL, WebRTC, Docker, Redis 7, React 19, TypeScript
 * Key Technical Highlights:
   - Java Coordinator @ devup: Mentoring 20+ peers in advanced Java, Spring Boot, clean OOP & DSA.
-  - W2WShare: 0-relay encrypted P2P file transfer (WebRTC RTCDataChannel, Java 25 Virtual Threads, AES-256-GCM, 50GB transfers with <50MB RAM).
+  - W2WShare: 0-relay encrypted P2P file transfer (WebRTC RTCDataChannel, Java 21 Virtual Threads, AES-256-GCM, 50GB transfers with <50MB RAM).
   - MentorSync: Automated LeetCode verification pipeline, Redis distributed cache warming (0ms peak latency), Resilience4j circuit breakers.
   - 500+ LeetCode Solved & Top 105 Nationally (Google Solution Challenge 2025) | CGPA: 8.27/10.00.
 
@@ -47,14 +47,14 @@ export default function RecruiterQuickPitchModal({
   const isControlled = controlledIsOpen !== undefined
   const isOpen = isControlled ? controlledIsOpen : internalIsOpen
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     sound.click()
     if (isControlled && controlledOnClose) {
       controlledOnClose()
     } else {
       setInternalIsOpen(false)
     }
-  }
+  }, [isControlled, controlledOnClose])
 
   // Listen for global custom event "open-recruiter-pitch"
   useEffect(() => {
@@ -75,7 +75,7 @@ export default function RecruiterQuickPitchModal({
     }
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [isOpen])
+  }, [isOpen, handleClose])
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -237,7 +237,7 @@ export default function RecruiterQuickPitchModal({
                       <li className="flex items-start gap-2">
                         <span className="text-amber-500 mt-0.5 font-bold">•</span>
                         <span>
-                          <strong className="text-ink">W2WShare (P2P Transfer):</strong> 0-relay encrypted WebRTC platform handling 50GB transfers with &lt;50MB RAM via Java 25 Virtual Threads &amp; AES-256-GCM.
+                          <strong className="text-ink">W2WShare (P2P Transfer):</strong> 0-relay encrypted WebRTC platform handling 50GB transfers with &lt;50MB RAM via Java 21 Virtual Threads &amp; AES-256-GCM.
                         </span>
                       </li>
                       <li className="flex items-start gap-2">

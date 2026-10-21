@@ -93,7 +93,7 @@ const projects: ResumeEntry[] = [
       "Architected a scalable two-sided LMS for bootcamps and educators to automate LeetCode & Codeforces progress tracking, classroom assignment distribution, and real-time leaderboards.",
       "Built automated verification pipeline consuming LeetCode GraphQL/REST APIs and regex parsing to validate submissions, eliminating manual grading overhead for 100+ active submissions.",
       "Engineered nightly Redis cache warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.",
-      "Tech Stack: Java 21, Spring Boot 4, React 19, TypeScript, Redis 7+, MongoDB, Spring Security, Docker, Resilience4j.",
+      "Tech Stack: Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, Spring Security, Docker, Resilience4j.",
     ],
   },
   {
@@ -113,9 +113,9 @@ const projects: ResumeEntry[] = [
     ],
     bullets: [
       "Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.",
-      "Built high-concurrency Java 25 Virtual Threads & Spring Boot 4 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.",
-      "Engineered 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with <50MB RAM.",
-      "Tech Stack: Java 25, Spring Boot 4.1, WebRTC, Bouncy Castle, Virtual Threads, ZXing, WebSockets, Docker, Prometheus.",
+      "Built high-concurrency Java 21 Virtual Threads & Spring Boot 3.3 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.",
+      "Engineered 64KB chunk streaming protocol with AES-256-GCM encryption and backpressure control, handling large file transfers reliably with minimal RAM overhead.",
+      "Tech Stack: Java 21, Spring Boot 3.3, WebRTC, Virtual Threads, ZXing, WebSockets, Docker.",
     ],
   },
   {
@@ -219,7 +219,7 @@ Backend Developer and Java Coordinator specializing in distributed systems, real
 TECHNICAL SKILLS
 ================================================================================
 * Languages: Java (17/21), Python, TypeScript, SQL, Bash
-* Frameworks & Libraries: Spring Boot 3/4, Spring Security, Spring Data JPA, Hibernate, React 19, STOMP WebSockets
+* Frameworks & Libraries: Spring Boot 3.x, Spring Security, Spring Data JPA, Hibernate, React 19, STOMP WebSockets
 * Distributed Systems & Protocols: WebRTC (RTCDataChannels), Redis 7 (Distributed Locking & Pub/Sub), Resilience4j
 * Databases & Storage: PostgreSQL, MySQL, MongoDB, Redis
 * DevOps & Tools: Docker, Git, GitHub, Linux / Bash, Postman, Maven, Gradle
@@ -238,16 +238,16 @@ Aug 2024 - Present | Campus · Hybrid
 FEATURED PROJECTS
 ================================================================================
 MentorSync (LeetCode Progress & Classroom LMS)
-Tech Stack: Java 21, Spring Boot 4, React 19, TypeScript, Redis 7, MongoDB, Spring Security, Docker, Resilience4j
+Tech Stack: Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, Spring Security, Docker, Resilience4j
 * Architected a scalable two-sided LMS for bootcamps and educators to automate LeetCode & Codeforces progress tracking, classroom assignment distribution, and real-time leaderboards.
 * Built automated verification pipeline consuming LeetCode GraphQL/REST APIs and regex parsing to validate submissions, eliminating manual grading overhead for 100+ active submissions.
 * Engineered nightly Redis cache warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.
 
 W2W Share (Offline Encrypted P2P File Transfer)
-Tech Stack: Java 25, Spring Boot 4.1, WebRTC, Bouncy Castle AES-256-GCM, Virtual Threads, ZXing, WebSockets, Docker
+Tech Stack: Java 21, Spring Boot 3.3, WebRTC, AES-256-GCM, Virtual Threads, ZXing, WebSockets, Docker
 * Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.
-* Built high-concurrency Java 25 Virtual Threads & Spring Boot 4 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.
-* Engineered 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with <50MB RAM.
+* Built high-concurrency Java 21 Virtual Threads & Spring Boot 3.3 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.
+* Engineered 64KB chunk streaming protocol with AES-256-GCM encryption and backpressure control, handling large file transfers with minimal RAM overhead.
 
 Stateless Authentication & RBAC Service
 Tech Stack: Java, Spring Boot, Spring Security, JWT, OAuth 2.0, PostgreSQL, Docker

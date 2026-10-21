@@ -106,7 +106,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               </div>
               <div className="bg-surface-soft p-2 rounded-lg border border-hairline text-center">
                 <div className="text-muted text-[9px] uppercase">Core</div>
-                <div className="text-indigo-400 font-bold mt-0.5 text-[10px]">SPRING BOOT 4</div>
+                <div className="text-indigo-400 font-bold mt-0.5 text-[10px]">SPRING BOOT 3.3</div>
               </div>
               <div className="bg-surface-soft p-2 rounded-lg border border-hairline text-center">
                 <div className="text-muted text-[9px] uppercase">Cache</div>
@@ -160,7 +160,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 AES-256-GCM
               </span>
               <span className="inline-flex items-center gap-1 text-[11px] text-indigo-700 dark:text-indigo-400 font-mono bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20 font-medium hidden sm:inline-flex">
-                JAVA 25 VIRTUAL THREADS
+                JAVA 21 VIRTUAL THREADS
               </span>
               <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-surface-card px-2.5 py-0.5 rounded-full border border-hairline font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -397,7 +397,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               <CheckCircleIcon size={13} weight="fill" />
               <span className="font-semibold font-sans">LAN Direct P2P · Zero Internet · ZXing QR & PIN Pairing</span>
             </div>
-            <span className="font-mono">JAVA 25 VIRTUAL THREADS · BOUNCY CASTLE AES-256-GCM · PROMETHEUS</span>
+            <span className="font-mono">JAVA 21 VIRTUAL THREADS · AES-256-GCM · WEBSOCKETS</span>
           </div>
         </div>
       )
@@ -620,7 +620,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               <div className="flex items-center gap-2 ml-1.5">
                 <PulseIcon size={15} className="text-emerald-600 dark:text-emerald-400 animate-pulse" />
                 <span className="text-body-strong text-xs font-sans font-semibold tracking-wider">
-                  SPRING BOOT 4.1 // JAVA 25 VIRTUAL THREADS ENGINE
+                  SPRING BOOT 3.3 // JAVA 21 VIRTUAL THREADS ENGINE
                 </span>
               </div>
             </div>
@@ -740,7 +740,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               <CheckCircleIcon size={13} weight="fill" />
               <span className="font-semibold font-sans">OpenTelemetry &amp; Micrometer Tracing Active</span>
             </div>
-            <span className="font-mono">Java 25 (OpenJDK 64-Bit Server VM) · Spring Boot 4.1.0</span>
+            <span className="font-mono">Java 21 (OpenJDK 64-Bit Server VM) · Spring Boot 3.3.4</span>
           </div>
         </div>
       )

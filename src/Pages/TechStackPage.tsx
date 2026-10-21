@@ -39,7 +39,7 @@ const workstationItems = [
     id: "laptopIcon",
     title: "Development Machine",
     subtitle: "High-Performance Workstation",
-    specs: "Core i7 CPUIcon · 16GB RAM · 512GB Fast NVMe SSD",
+    specs: "Intel Core i7 · 16GB RAM · 512GB NVMe SSD",
     icon: LaptopIcon,
     badge: "Primary",
   },

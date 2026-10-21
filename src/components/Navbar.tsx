@@ -57,9 +57,11 @@ export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) 
   }, [mobileOpen])
 
   // Close mobile drawer on route change
-  useEffect(() => {
+  const [prevPath, setPrevPath] = useState(location.pathname)
+  if (prevPath !== location.pathname) {
+    setPrevPath(location.pathname)
     setMobileOpen(false)
-  }, [location.pathname])
+  }
 
   const isActive = (href: string) => {
     if (href === '/') return location.pathname === '/'

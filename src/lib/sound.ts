@@ -111,7 +111,7 @@ class SoundFX {
 
       osc.start(now)
       osc.stop(now + 0.06)
-    } catch {}
+    } catch (_err) { void _err }
   }
 
   public success() {
@@ -135,7 +135,7 @@ class SoundFX {
       }
       playTone(523.25, now, 0.06)
       playTone(659.25, now + 0.06, 0.08)
-    } catch {}
+    } catch (_err) { void _err }
   }
 }
 

@@ -24,7 +24,7 @@ export interface TechItem {
   icon: React.FC<{ size?: number; className?: string }>
 }
 
-export const techItems: TechItem[] = [
+const techItems: TechItem[] = [
   { id: "java", name: "Java", icon: JavaIcon },
   { id: "spring-boot", name: "Spring Boot", icon: SpringIcon },
   { id: "threejs", name: "Three.js", icon: ThreeJSIcon },
