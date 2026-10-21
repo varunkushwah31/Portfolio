@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
-import { AnimatePresence, motion } from "framer-motion"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./Pages/Home"
 import About from "./Pages/About"
 import ProjectsPage from "./Pages/ProjectsPage"
@@ -13,38 +12,21 @@ import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import CommandPalette from "./components/CommandPalette"
 
-const pageVariants = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.28, ease: "easeOut" as const } },
-  exit: { opacity: 0, y: -8, transition: { duration: 0.18, ease: "easeIn" as const } },
-}
-
-function AnimatedRoutes() {
-  const location = useLocation()
-
+function AppRoutes() {
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-        variants={pageVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        className="flex-grow flex flex-col w-full"
-      >
-        <Routes location={location}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/tech-stack" element={<TechStackPage />} />
-          <Route path="/stack" element={<TechStackPage />} />
-          <Route path="/uses" element={<TechStackPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/resume" element={<ResumePage />} />
-          <Route path="/project/:slug" element={<ProjectDetail />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </motion.div>
-    </AnimatePresence>
+    <div className="flex-grow flex flex-col w-full">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/tech-stack" element={<TechStackPage />} />
+        <Route path="/stack" element={<TechStackPage />} />
+        <Route path="/uses" element={<TechStackPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/resume" element={<ResumePage />} />
+        <Route path="/project/:slug" element={<ProjectDetail />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   )
 }
 
@@ -78,7 +60,7 @@ function AppContent() {
       <div className="relative z-10 flex flex-col min-h-screen justify-between">
         <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
         <main className="flex-grow flex flex-col w-full">
-          <AnimatedRoutes />
+          <AppRoutes />
         </main>
         <Footer />
       </div>
