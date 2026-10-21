@@ -114,7 +114,7 @@ export default function ProjectsPage() {
             Projects
           </h1>
           <p className="text-muted text-base sm:text-lg font-normal">
-            A collection of finest projects that I have built. ❤️
+            A collection of finest projects that I have built.
           </p>
         </motion.div>
       </div>

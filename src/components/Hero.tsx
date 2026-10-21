@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
-import { CaretRightIcon, SparkleIcon } from "@phosphor-icons/react"
+import { CaretRightIcon, SparkleIcon, LightningIcon } from "@phosphor-icons/react"
 import TechStack from "./TechStack"
 import BackgroundCanvas3D from "./three/BackgroundCanvas3D"
 import MagneticButton from "./gsap/MagneticButton"
 import TextScramble from "./gsap/TextScramble"
+import { sound } from "@/lib/sound"
 
 const container = {
   hidden: { opacity: 0 },
@@ -136,11 +137,12 @@ export default function Hero() {
           , building resilient backend systems with <strong>Java &amp; Spring Boot</strong>, and exploring real-time <strong>WebRTC</strong> protocols.
         </motion.p>
 
-        {/* Discover more button with GSAP Magnetic Interaction */}
-        <motion.div variants={item} className="mb-4">
+        {/* Action Buttons: Discover more + Recruiter TL;DR (30s Pitch) */}
+        <motion.div variants={item} className="mb-6 flex flex-wrap items-center gap-3">
           <MagneticButton strength={0.35}>
             <Link
               to="/projects"
+              onClick={() => sound.click()}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-hairline hover:border-emerald-500/50 dark:hover:border-emerald-400/50 bg-surface-card hover:bg-surface-elevated text-ink hover:text-emerald-500 dark:hover:text-emerald-400 text-xs sm:text-sm font-medium transition-all duration-200 group shadow-xs hover:shadow-sm"
             >
               <span>Discover more</span>
@@ -150,6 +152,20 @@ export default function Hero() {
                 className="group-hover:translate-x-0.5 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-all duration-200"
               />
             </Link>
+          </MagneticButton>
+
+          <MagneticButton strength={0.35}>
+            <button
+              onClick={() => {
+                sound.click()
+                window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
+              }}
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-semibold transition-all duration-200 shadow-xs hover:shadow-sm cursor-pointer group"
+              title="Open 30-Second Candidate Pitch"
+            >
+              <LightningIcon size={15} weight="fill" className="text-emerald-500 group-hover:scale-110 transition-transform" />
+              <span>Recruiter TL;DR (30s Pitch)</span>
+            </button>
           </MagneticButton>
         </motion.div>
 

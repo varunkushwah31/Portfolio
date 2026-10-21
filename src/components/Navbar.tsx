@@ -105,6 +105,7 @@ export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) 
                 <li key={link.href} className="relative">
                   <Link
                     to={link.href}
+                    onClick={() => sound.click()}
                     className={`relative px-3 py-1.5 rounded-md text-sm transition-colors duration-200 block z-10 ${
                       active
                         ? 'text-ink font-semibold'

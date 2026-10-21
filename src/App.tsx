@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import Home from "./Pages/Home"
 import About from "./Pages/About"
 import ProjectsPage from "./Pages/ProjectsPage"
@@ -11,11 +11,14 @@ import ScrollToTop from "./components/ScrollToTop"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import CommandPalette from "./components/CommandPalette"
+import RecruiterQuickPitchModal from "./components/RecruiterQuickPitchModal"
 
 function AppRoutes() {
+  const location = useLocation()
+
   return (
-    <div className="flex-grow flex flex-col w-full">
-      <Routes>
+    <div key={location.pathname} className="flex-grow flex flex-col w-full">
+      <Routes location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/tech-stack" element={<TechStackPage />} />
@@ -70,6 +73,9 @@ function AppContent() {
         isOpen={commandPaletteOpen}
         onClose={() => setCommandPaletteOpen(false)}
       />
+
+      {/* Global Recruiter 30s Quick Pitch Modal */}
+      <RecruiterQuickPitchModal />
     </div>
   )
 }

@@ -7,6 +7,7 @@ import {
   EnvelopeSimpleIcon,
   FileTextIcon,
   SparkleIcon,
+  LightningIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -29,6 +30,7 @@ import {
 } from "@/components/TechIcons"
 import TechStack, { type TechItem } from "@/components/TechStack"
 import MagneticButton from "@/components/gsap/MagneticButton"
+import { sound } from "@/lib/sound"
 
 const techStack: TechItem[] = [
   { id: "java", name: "Java 21", icon: JavaIcon },
@@ -126,7 +128,7 @@ export default function About() {
               I have extensive experience in crafting scalable software systems that align with both technical architecture and product needs, leveraging a wide range of technologies:
             </p>
 
-            {/* Structured Bullet List matching reference image */}
+            {/* Structured Bullet List */}
             <ul className="space-y-2 py-1 pl-1 text-sm sm:text-[14px]">
               <li className="flex items-start gap-2">
                 <span className="text-muted mt-0.5">•</span>
@@ -185,23 +187,38 @@ export default function About() {
             </p>
 
             <p>
-              Besides hacking, I also have a strong appreciation for video games, chess, and music. I find that these activities provide an important balance to my professional life, allowing me to relax and recharge after a long day of coding. I believe that maintaining a healthy work-life balance is the key to keeping both my code and my spirits bug-free! 🎮 🎧
+              Besides hacking, I also have a strong appreciation for video games, chess, and music. I find that these activities provide an important balance to my professional life, allowing me to relax and recharge after a long day of coding. I believe that maintaining a healthy work-life balance is the key to keeping both my code and my spirits bug-free!
             </p>
 
             <p>
               If you'd like to learn more about my professional background and qualifications, feel free to explore my resume.
             </p>
 
-            {/* My Resume Button */}
-            <div className="pt-3">
+            {/* Action Buttons: Resume + Recruiter TL;DR */}
+            <div className="pt-3 flex flex-wrap items-center gap-3">
               <MagneticButton strength={0.35}>
                 <Link
                   to="/resume"
+                  onClick={() => sound.click()}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-ink text-xs sm:text-sm font-medium transition-all duration-150 shadow-xs hover:shadow-sm"
                 >
                   <FileTextIcon size={15} weight="bold" />
                   <span>My Resume</span>
                 </Link>
+              </MagneticButton>
+
+              <MagneticButton strength={0.35}>
+                <button
+                  onClick={() => {
+                    sound.click()
+                    window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
+                  }}
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-semibold transition-all duration-150 shadow-xs hover:shadow-sm cursor-pointer group"
+                  title="Open 30-Second Candidate Pitch"
+                >
+                  <LightningIcon size={15} weight="fill" className="text-emerald-500 group-hover:scale-110 transition-transform" />
+                  <span>Recruiter TL;DR (30s Pitch)</span>
+                </button>
               </MagneticButton>
             </div>
           </motion.div>
@@ -224,7 +241,7 @@ export default function About() {
           />
         </motion.div>
 
-        {/* Let's Connect Section matching Image 1 */}
+        {/* Let's Connect Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

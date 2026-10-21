@@ -19,6 +19,7 @@ import {
   MoonIcon,
   CheckIcon,
   TerminalWindowIcon,
+  LightningIcon,
 } from "@phosphor-icons/react"
 import projects from "@/data/projects"
 import { useTheme } from "@/context/ThemeContext"
@@ -85,6 +86,35 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     if (cleanCmd.includes("clear")) {
       setCliOutput(null)
       setQuery("")
+      return
+    }
+
+    if (cleanCmd.includes("pitch") || cleanCmd.includes("tldr") || cleanCmd.includes("recruiter")) {
+      setCliOutput({
+        command: "varun --pitch",
+        content: (
+          <div className="space-y-2 text-xs font-mono">
+            <div className="text-emerald-500 font-bold">$ varun --pitch // 30-SECOND RECRUITER TL;DR</div>
+            <div className="space-y-1.5 pl-2 border-l border-emerald-500/30 text-body-strong">
+              <div><strong className="text-ink">Role Sought:</strong> Software Engineering Intern / Junior Backend Developer</div>
+              <div><strong className="text-emerald-400">Primary Stack:</strong> Java 21, Spring Boot, PostgreSQL, WebRTC, Docker, Redis, React 19</div>
+              <div><strong className="text-amber-400">Highlights:</strong> Java Coordinator @ devup · W2WShare (P2P encrypted file transfer) · 500+ LeetCode · Google Solution Challenge Top 105</div>
+            </div>
+            <div className="pt-1.5 flex items-center gap-2">
+              <button
+                onClick={() => {
+                  handleClose()
+                  window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
+                }}
+                className="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 text-[11px] font-sans font-semibold cursor-pointer transition-colors"
+              >
+                Open Full 30s Pitch Modal →
+              </button>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
       return
     }
 
@@ -250,6 +280,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
     // Actions
     {
+      id: "action-recruiter-pitch",
+      title: "Recruiter TL;DR (30-Second Pitch)",
+      subtitle: "Executive candidate summary & role sought",
+      category: "Actions",
+      icon: <LightningIcon size={16} className="text-emerald-500" />,
+      action: () => {
+        handleClose()
+        window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
+      },
+    },
+    {
       id: "action-toggle-theme",
       title: theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode",
       category: "Actions",
@@ -317,6 +358,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     },
 
     // CLI Commands
+    {
+      id: "cli-cmd-pitch",
+      title: "varun --pitch",
+      subtitle: "30-second executive summary for recruiters & tech leads",
+      category: "CLI Commands",
+      icon: <TerminalWindowIcon size={16} className="text-emerald-500" />,
+      action: () => executeCli("varun --pitch"),
+    },
     {
       id: "cli-cmd-skills",
       title: "varun --skills",

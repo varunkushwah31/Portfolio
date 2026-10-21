@@ -56,13 +56,9 @@ export const GithubActivityWidget: React.FC = () => {
       }
 
       // 2. Fetch live contributions from public GitHub contributions proxy (no 403 rate-limits)
-      const username = stats.username
-      const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}`)
+      const res = await fetch("https://github-contributions-api.jogruber.de/v4/varunkushwah31")
       if (!res.ok) return
       const contribData = await res.json()
-
-      let updatedContributions = contributions
-      let updatedStats = { ...stats }
 
       if (contribData?.contributions && Array.isArray(contribData.contributions)) {
         // Filter past 53 weeks (Oct 15, 2025 through today)
@@ -72,7 +68,6 @@ export const GithubActivityWidget: React.FC = () => {
         const past53Weeks = sorted.filter((c: ContributionDay) => c.date >= "2025-10-15")
 
         if (past53Weeks.length > 0) {
-          updatedContributions = past53Weeks
           setContributions(past53Weeks)
         }
 
@@ -108,39 +103,39 @@ export const GithubActivityWidget: React.FC = () => {
           .filter((c: ContributionDay) => c.date.startsWith("2026-10") || c.date.startsWith("2025-10"))
           .reduce((acc: number, c: ContributionDay) => acc + c.count, 0)
 
-        updatedStats = {
-          ...updatedStats,
+        const freshStats: GitHubStatsData = {
+          ...REAL_GITHUB_STATS,
           totalContributionsLastYear: totalPastYear > 0 ? totalPastYear : 841,
           currentStreak: curStreak > 0 ? curStreak : 7,
           longestStreak: longest > 0 ? longest : 115,
           commitsThisMonth: octCommits > 0 ? octCommits : 153,
         }
-      }
 
-      setStats(updatedStats)
-      setLastSyncTime("Live")
+        setStats(freshStats)
+        setLastSyncTime("Live")
 
-      // Cache the fresh data
-      try {
-        localStorage.setItem(
-          CACHE_KEY,
-          JSON.stringify({
-            timestamp: Date.now(),
-            contributions: updatedContributions,
-            stats: updatedStats,
-          })
-        )
-      } catch {
-        // ignore storage quota error
+        // Cache the fresh data
+        try {
+          localStorage.setItem(
+            CACHE_KEY,
+            JSON.stringify({
+              timestamp: Date.now(),
+              contributions: past53Weeks.length > 0 ? past53Weeks : REAL_GITHUB_CONTRIBUTIONS,
+              stats: freshStats,
+            })
+          )
+        } catch {
+          // ignore storage quota error
+        }
       }
     } catch {
       // Keep static verified fallback without console pollution
     } finally {
       setIsRefreshing(false)
     }
-  }, [contributions, stats])
+  }, [])
 
-  // Run on mount
+  // Run on mount once
   useEffect(() => {
     syncWithGithub(false)
   }, [syncWithGithub])
