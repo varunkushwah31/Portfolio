@@ -19,8 +19,12 @@ import {
   type GitHubStatsData,
 } from "@/data/githubData"
 
-const CACHE_KEY = "portfolio_github_realtime_cache_v3"
-const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes cache
+const getTodayDateStr = () => {
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
+}
+const getCacheKey = () => `portfolio_github_cache_v5_${getTodayDateStr()}`
+const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes cache within the same day
 
 export const GithubActivityWidget: React.FC = () => {
   const [hoveredDay, setHoveredDay] = useState<ContributionDay | null>(null)
@@ -40,7 +44,7 @@ export const GithubActivityWidget: React.FC = () => {
       // 1. Check local cache first if automatic mount
       if (!isManual) {
         try {
-          const cached = localStorage.getItem(CACHE_KEY)
+          const cached = localStorage.getItem(getCacheKey())
           if (cached) {
             const parsed = JSON.parse(cached)
             if (parsed.timestamp && Date.now() - parsed.timestamp < CACHE_TTL_MS) {
@@ -61,18 +65,21 @@ export const GithubActivityWidget: React.FC = () => {
       const contribData = await res.json()
 
       if (contribData?.contributions && Array.isArray(contribData.contributions)) {
-        // Filter past 53 weeks (Oct 15, 2025 through today)
+        // Filter past 53 weeks dynamically from today
         const sorted = contribData.contributions.sort((a: ContributionDay, b: ContributionDay) =>
           a.date.localeCompare(b.date)
         )
-        const past53Weeks = sorted.filter((c: ContributionDay) => c.date >= "2025-10-15")
+        const cutoffDate = new Date()
+        cutoffDate.setDate(cutoffDate.getDate() - 371) // 53 weeks back
+        const cutoffStr = cutoffDate.toISOString().split("T")[0]
+        const past53Weeks = sorted.filter((c: ContributionDay) => c.date >= cutoffStr)
 
         if (past53Weeks.length > 0) {
           setContributions(past53Weeks)
         }
 
         // Compute total contributions for last 365 days
-        const todayStr = new Date().toISOString().split("T")[0]
+        const todayStr = getTodayDateStr()
         const last365 = sorted.filter((c: ContributionDay) => c.date <= todayStr).slice(-365)
         const totalPastYear = last365.reduce((acc: number, c: ContributionDay) => acc + c.count, 0)
 
@@ -80,11 +87,13 @@ export const GithubActivityWidget: React.FC = () => {
         let curStreak = 0
         let idx = sorted.length - 1
         while (idx >= 0 && sorted[idx].date > todayStr) idx--
-        if (idx >= 0 && sorted[idx].count === 0) idx-- // permit today to not yet have commits
+        const streakEndIdx = (idx >= 0 && sorted[idx].count === 0) ? idx - 1 : idx
+        idx = streakEndIdx
         while (idx >= 0 && sorted[idx].count > 0) {
           curStreak++
           idx--
         }
+        const streakStartIdx = idx + 1
 
         // Compute longest streak
         let longest = 0
@@ -98,17 +107,35 @@ export const GithubActivityWidget: React.FC = () => {
           }
         }
 
-        // Compute commits in October
-        const octCommits = sorted
-          .filter((c: ContributionDay) => c.date.startsWith("2026-10") || c.date.startsWith("2025-10"))
+        // Compute current streak range string dynamically from actual streak dates
+        let streakRange = REAL_GITHUB_STATS.currentStreakRange
+        if (curStreak > 0 && streakStartIdx >= 0 && streakEndIdx < sorted.length) {
+          const startDateObj = new Date(sorted[streakStartIdx].date + "T00:00:00Z")
+          const endDateObj = new Date(sorted[streakEndIdx].date + "T00:00:00Z")
+          const fmtOpts: Intl.DateTimeFormatOptions = { month: "short", day: "numeric", timeZone: "UTC" }
+          streakRange = `${startDateObj.toLocaleDateString("en-US", fmtOpts)} – ${endDateObj.toLocaleDateString("en-US", fmtOpts)}`
+        }
+
+        // Compute commits in current month dynamically
+        const now = new Date()
+        const currentMonthPrefix = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
+        const currentMonthName = now.toLocaleDateString("en-US", { month: "long" })
+        const monthCommits = sorted
+          .filter((c: ContributionDay) => c.date.startsWith(currentMonthPrefix))
           .reduce((acc: number, c: ContributionDay) => acc + c.count, 0)
+
+        // Compute total all-time commits from all contribution data
+        const totalAllTime = sorted.reduce((acc: number, c: ContributionDay) => acc + c.count, 0)
 
         const freshStats: GitHubStatsData = {
           ...REAL_GITHUB_STATS,
-          totalContributionsLastYear: totalPastYear > 0 ? totalPastYear : 841,
-          currentStreak: curStreak > 0 ? curStreak : 7,
-          longestStreak: longest > 0 ? longest : 115,
-          commitsThisMonth: octCommits > 0 ? octCommits : 153,
+          totalContributionsLastYear: totalPastYear > 0 ? totalPastYear : REAL_GITHUB_STATS.totalContributionsLastYear,
+          totalCommits: totalAllTime > 0 ? totalAllTime : REAL_GITHUB_STATS.totalCommits,
+          currentStreak: curStreak > 0 ? curStreak : REAL_GITHUB_STATS.currentStreak,
+          currentStreakRange: streakRange,
+          longestStreak: longest > 0 ? longest : REAL_GITHUB_STATS.longestStreak,
+          commitsThisMonth: monthCommits > 0 ? monthCommits : REAL_GITHUB_STATS.commitsThisMonth,
+          commitsThisMonthLabel: `${monthCommits > 0 ? monthCommits : REAL_GITHUB_STATS.commitsThisMonth} in ${currentMonthName}`,
         }
 
         setStats(freshStats)
@@ -117,7 +144,7 @@ export const GithubActivityWidget: React.FC = () => {
         // Cache the fresh data
         try {
           localStorage.setItem(
-            CACHE_KEY,
+            getCacheKey(),
             JSON.stringify({
               timestamp: Date.now(),
               contributions: past53Weeks.length > 0 ? past53Weeks : REAL_GITHUB_CONTRIBUTIONS,
@@ -145,9 +172,14 @@ export const GithubActivityWidget: React.FC = () => {
     const map = new Map<string, ContributionDay>()
     contributions.forEach((c) => map.set(c.date, c))
 
-    const end = new Date("2026-10-24T00:00:00Z")
+    // Dynamically compute end date: the Saturday ending the current week
+    const today = new Date()
+    const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()))
+    const dayOfWeek = todayUTC.getUTCDay() // 0=Sun, 6=Sat
+    const end = new Date(todayUTC)
+    end.setUTCDate(end.getUTCDate() + (6 - dayOfWeek)) // advance to this Saturday
     const start = new Date(end)
-    start.setDate(end.getDate() - (53 * 7 - 1)) // 371 days
+    start.setUTCDate(end.getUTCDate() - (53 * 7 - 1)) // 371 days back
 
     const matrix: ContributionDay[][] = []
     const headers: { weekIdx: number; label: string }[] = []
@@ -166,7 +198,7 @@ export const GithubActivityWidget: React.FC = () => {
         const dateStr = cur.toISOString().split("T")[0]
         const c = map.get(dateStr) || { date: dateStr, count: 0, level: 0 }
         week.push(c)
-        cur.setDate(cur.getDate() + 1)
+        cur.setUTCDate(cur.getUTCDate() + 1)
       }
       matrix.push(week)
     }
@@ -378,7 +410,7 @@ export const GithubActivityWidget: React.FC = () => {
             </div>
           </div>
           <div className="text-[11px] sm:text-xs text-emerald-600 dark:text-emerald-400 font-sans font-medium mt-1">
-            {stats.commitsThisMonth} in October
+            {stats.commitsThisMonthLabel || `${stats.commitsThisMonth} this month`}
           </div>
         </div>
 
