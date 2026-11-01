@@ -127,3 +127,21 @@ export const GSAPIcon: React.FC<IconProps> = ({ className = "", size = 16, style
     <path d="M12 2L2 8l10 5 10-5-10-6zM3 14l9 5 9-5M3 18l9 5 9-5" stroke="#88CE02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
   </svg>
 )
+
+// 26. TABLEPLUS (Database GUI Client)
+export const TablePlusIcon: React.FC<IconProps> = ({ className = "", size = 26, style }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    style={{ width: size, height: size, ...style }}
+    className={`inline-block ${className}`.trim()}
+    aria-hidden="true"
+  >
+    <ellipse cx="12" cy="5" rx="8" ry="3" stroke="#0284C7" strokeWidth="1.8" fill="#0284C7" fillOpacity="0.15" />
+    <path d="M4 5v5c0 1.66 3.58 3 8 3s8-1.34 8-3V5" stroke="#0284C7" strokeWidth="1.8" strokeLinecap="round" />
+    <path d="M4 10v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5" stroke="#0284C7" strokeWidth="1.8" strokeLinecap="round" />
+    <path d="M4 15v4c0 1.66 3.58 3 8 3 2.1 0 4.02-.31 5.43-.84" stroke="#0284C7" strokeWidth="1.8" strokeLinecap="round" />
+    <circle cx="18" cy="18" r="4.5" fill="#0284C7" />
+    <path d="M18 15.8v4.4M15.8 18h4.4" stroke="#ffffff" strokeWidth="1.4" strokeLinecap="round" />
+  </svg>
+)

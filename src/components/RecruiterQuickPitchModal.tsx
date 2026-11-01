@@ -136,9 +136,6 @@ export default function RecruiterQuickPitchModal({
             {/* Mobile Drag Handle Indicator */}
             <div className="w-12 h-1.5 bg-muted/40 rounded-full mx-auto mt-2.5 mb-1 sm:hidden shrink-0" />
 
-            {/* Top Accent Gradient Bar */}
-            <div className="h-1.5 w-full bg-linear-to-r from-emerald-500 via-teal-400 to-indigo-500 shrink-0" />
-
             {/* Modal Header */}
             <div className="p-5 sm:p-6 pb-4 border-b border-hairline/60">
               <div className="flex items-start justify-between gap-4">

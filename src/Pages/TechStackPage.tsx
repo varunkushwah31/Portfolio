@@ -33,6 +33,7 @@ import {
   WebSocketIcon,
   ThreeJSIcon,
   GSAPIcon,
+  TablePlusIcon,
 } from "@/components/TechIcons"
 import GsapTiltCard from "@/components/gsap/GsapTiltCard"
 
@@ -275,7 +276,13 @@ const workstationItems = [
 ]
 
 // 3. Software & Daily Driver Apps (Devicons)
-const softwareApps = [
+const softwareApps: Array<{
+  name: string
+  category: string
+  color: string
+  icon?: string
+  customIcon?: React.ReactNode
+}> = [
   { name: "IntelliJ IDEA", category: "Java & Spring IDE", icon: "devicons-intellij-idea", color: "#FE2857" },
   { name: "VS Code", category: "Web & TS Editor", icon: "devicons-visual-studio-code", color: "#007ACC" },
   { name: "Postman", category: "API Testing & Mocks", icon: "devicons-postman-icon", color: "#FF6C37" },
@@ -283,9 +290,9 @@ const softwareApps = [
   { name: "Warp", category: "Modern Terminal", icon: "devicons-terminal", color: "#29D2BF" },
   { name: "Git", category: "Version Control", icon: "devicons-git-icon", color: "#F05032" },
   { name: "PostgreSQL", category: "Relational DBMS", icon: "devicons-postgresql", color: "#336791" },
-  { name: "TablePlus", category: "Database GUI", icon: "devicons-database", color: "#0284C7" },
+  { name: "TablePlus", category: "Database GUI", color: "#0284C7", customIcon: <TablePlusIcon size={28} /> },
   { name: "Figma", category: "UI & Prototype", icon: "devicons-figma", color: "#F24E1E" },
-  { name: "Obsidian", category: "Knowledge & Notes", icon: "devicons-markdown", color: "#7C3AED" },
+  { name: "Obsidian", category: "Knowledge & Notes", icon: "devicons-obsidian-icon", color: "#7C3AED" },
   { name: "Raycast", category: "Command Launcher", icon: "devicons-terminal", color: "#FF6363" },
   { name: "Linux / WSL2", category: "POSIX Kernel", icon: "devicons-linux-tux", color: "#FCC624" },
 ]
@@ -578,11 +585,17 @@ export default function TechStackPage() {
                   className="flex flex-col items-center gap-2 text-center cursor-pointer group select-none min-h-17.5"
                 >
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-surface-card border border-hairline group-hover:border-zinc-400 dark:group-hover:border-zinc-600 flex items-center justify-center p-2.5 sm:p-3 transition-all duration-200 shadow-xs">
-                    <i
-                      className={`devicons ${app.icon} text-[24px] sm:text-[28px] transition-transform duration-200 group-hover:scale-110`}
-                      style={{ color: app.color }}
-                      aria-label={app.name}
-                    />
+                    {app.customIcon ? (
+                      <div className="transition-transform duration-200 group-hover:scale-110 flex items-center justify-center">
+                        {app.customIcon}
+                      </div>
+                    ) : (
+                      <i
+                        className={`devicons ${app.icon} text-[24px] sm:text-[28px] transition-transform duration-200 group-hover:scale-110`}
+                        style={{ color: app.color }}
+                        aria-label={app.name}
+                      />
+                    )}
                   </div>
                   <span className="text-[11px] sm:text-xs font-medium text-body-strong group-hover:text-ink transition-colors tracking-tight line-clamp-1">
                     {app.name}
