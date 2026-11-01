@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback } from "react"
+import React, { useState, useMemo, useEffect, useCallback, useRef } from "react"
 import {
   GithubLogoIcon,
   ArrowSquareOutIcon,
@@ -167,6 +167,16 @@ export const GithubActivityWidget: React.FC = () => {
     void syncWithGithub(false)
   }, [syncWithGithub])
 
+  const calendarScrollRef = useRef<HTMLDivElement>(null)
+
+  // Auto-scroll calendar to right (latest current streak) on mobile load
+  useEffect(() => {
+    const el = calendarScrollRef.current
+    if (el) {
+      el.scrollLeft = el.scrollWidth
+    }
+  }, [contributions])
+
   // Build exact 53-week Sunday-to-Saturday matrix ending on current week
   const { weeks, monthHeaders } = useMemo(() => {
     const map = new Map<string, ContributionDay>()
@@ -206,13 +216,13 @@ export const GithubActivityWidget: React.FC = () => {
     return { weeks: matrix, monthHeaders: headers }
   }, [contributions])
 
-  // Authentic GitHub Dark Theme Color Palette
+  // Authentic GitHub Light & Dark Theme Color Palettes
   const levelColors = {
-    0: "bg-surface-elevated/70 border border-white/[0.04] dark:bg-[#161b22] dark:border-white/[0.04]",
-    1: "bg-[#0e4429] border border-[#006d32]/30",
-    2: "bg-[#006d32] border border-[#26a641]/40",
-    3: "bg-[#26a641] border border-[#39d353]/50",
-    4: "bg-[#39d353] border border-[#56ff74]/60",
+    0: "bg-[#ebedf0] dark:bg-[#161b22] border border-black/5 dark:border-white/5",
+    1: "bg-[#9be9a8] dark:bg-[#0e4429] border border-emerald-300/40 dark:border-[#006d32]/30",
+    2: "bg-[#40c463] dark:bg-[#006d32] border border-emerald-500/40 dark:border-[#26a641]/40",
+    3: "bg-[#30a14e] dark:bg-[#26a641] border border-emerald-600/40 dark:border-[#39d353]/50",
+    4: "bg-[#216e39] dark:bg-[#39d353] border border-emerald-700/50 dark:border-[#56ff74]/60",
   }
 
   const daysOfWeek = ["", "Mon", "", "Wed", "", "Fri", ""]
@@ -278,7 +288,7 @@ export const GithubActivityWidget: React.FC = () => {
           <span className="text-[10px] text-emerald-500 font-medium">← Swipe calendar →</span>
         </div>
 
-        <div className="overflow-x-auto pb-2 scrollbar-none touch-pan-x">
+        <div ref={calendarScrollRef} className="overflow-x-auto pb-2 scrollbar-none touch-pan-x">
           <div className="min-w-180">
             {/* Month Labels Row (Using clean sans-serif) */}
             <div className="flex mb-2 pl-8 text-[11px] font-sans text-muted relative h-4 select-none">
@@ -358,11 +368,11 @@ export const GithubActivityWidget: React.FC = () => {
           </div>
           <div className="flex items-center gap-1.5 text-[11px] font-sans shrink-0">
             <span>Less</span>
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-surface-elevated border border-white/4 dark:bg-[#161b22] inline-block" />
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#0e4429] inline-block" />
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#006d32] inline-block" />
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#26a641] inline-block" />
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#39d353] inline-block" />
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#ebedf0] dark:bg-[#161b22] border border-black/5 dark:border-white/5 inline-block" />
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#9be9a8] dark:bg-[#0e4429] inline-block" />
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#40c463] dark:bg-[#006d32] inline-block" />
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#30a14e] dark:bg-[#26a641] inline-block" />
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-[#216e39] dark:bg-[#39d353] inline-block" />
             <span>More</span>
           </div>
         </div>

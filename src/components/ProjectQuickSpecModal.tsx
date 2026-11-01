@@ -46,7 +46,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
   return (
     <AnimatePresence>
       {project && (
-        <div className="fixed inset-0 z-150 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div className="fixed inset-0 z-150 flex items-end sm:items-center justify-center p-0 sm:p-6 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -62,13 +62,15 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
 
           {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 20 }}
+            initial={{ opacity: 0, scale: 0.98, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 20 }}
+            exit={{ opacity: 0, scale: 0.98, y: 20 }}
             transition={{ type: "spring", duration: 0.35, bounce: 0 }}
-            className="relative w-full max-w-4xl bg-surface-card border border-hairline my-8 z-10 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
-            style={{ borderRadius: "0px" }}
+            className="relative w-full max-w-4xl bg-surface-card border border-hairline my-0 sm:my-8 z-10 shadow-2xl flex flex-col max-h-[88dvh] sm:max-h-[90vh] overflow-hidden rounded-t-3xl sm:rounded-none"
           >
+            {/* Mobile Drag Handle Indicator */}
+            <div className="w-12 h-1.5 bg-muted/40 rounded-full mx-auto mt-2.5 mb-1 sm:hidden shrink-0" />
+
             {/* Top M-Stripe Divider */}
             <div className="m-stripe shrink-0" />
 

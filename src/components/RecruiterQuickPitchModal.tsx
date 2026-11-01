@@ -114,7 +114,7 @@ export default function RecruiterQuickPitchModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+        <div className="fixed inset-0 z-100 flex items-end sm:items-center justify-center p-0 sm:p-5 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -127,14 +127,17 @@ export default function RecruiterQuickPitchModal({
 
           {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 14 }}
+            initial={{ opacity: 0, scale: 0.98, y: 18 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 14 }}
+            exit={{ opacity: 0, scale: 0.98, y: 18 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-2xl bg-canvas border border-hairline/80 rounded-2xl shadow-2xl overflow-hidden my-auto z-10"
+            className="relative w-full max-w-2xl bg-canvas border border-hairline/80 rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden my-0 sm:my-auto z-10 max-h-[88dvh] sm:max-h-none flex flex-col"
           >
+            {/* Mobile Drag Handle Indicator */}
+            <div className="w-12 h-1.5 bg-muted/40 rounded-full mx-auto mt-2.5 mb-1 sm:hidden shrink-0" />
+
             {/* Top Accent Gradient Bar */}
-            <div className="h-1.5 w-full bg-linear-to-r from-emerald-500 via-teal-400 to-indigo-500" />
+            <div className="h-1.5 w-full bg-linear-to-r from-emerald-500 via-teal-400 to-indigo-500 shrink-0" />
 
             {/* Modal Header */}
             <div className="p-5 sm:p-6 pb-4 border-b border-hairline/60">

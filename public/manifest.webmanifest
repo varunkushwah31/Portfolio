@@ -1,0 +1,19 @@
+{
+  "name": "Varun Kushwah — Software Developer",
+  "short_name": "Varun K.",
+  "description": "Portfolio of Varun Kushwah — Computer Science student, Java Coordinator at devup, specializing in Java, Spring Boot, and full-stack development.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

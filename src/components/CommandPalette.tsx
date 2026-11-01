@@ -83,10 +83,376 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     sound.click()
     const cleanCmd = cmd.trim().toLowerCase()
 
-    if (cleanCmd.includes("clear")) {
+    if (cleanCmd === "clear" || cleanCmd === "cls" || cleanCmd === "varun --clear") {
       setCliOutput(null)
       setQuery("")
-      return
+            return
+    }
+
+    if (
+      cleanCmd === "help" ||
+      cleanCmd === "varun --help" ||
+      cleanCmd === "?" ||
+      cleanCmd === "commands" ||
+      cleanCmd === "man"
+    ) {
+      setCliOutput({
+        command: "help",
+        content: (
+          <div className="space-y-2.5 text-xs font-mono">
+            <div className="text-emerald-500 font-bold flex items-center justify-between">
+              <span>$ help — VARUN INTERACTIVE DEVELOPER CLI v2.4</span>
+              <span className="text-[10px] text-muted font-sans bg-surface-card px-2 py-0.5 rounded border border-hairline">
+                6 commands registered
+              </span>
+            </div>
+            <div className="text-body-muted text-[11px] font-sans">
+              Type any command below or click a quick-action card to run:
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 border-t border-hairline/60">
+              <button
+                type="button"
+                onClick={() => executeCli("help")}
+                className="p-2.5 rounded-lg bg-surface-card border border-hairline text-left hover:border-emerald-500/40 transition-colors cursor-pointer group"
+              >
+                <div className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-between">
+                  <span>help</span>
+                  <span className="text-[10px] text-muted font-sans">Manual</span>
+                </div>
+                <div className="text-body-muted text-[11px] font-sans mt-0.5">List all available interactive terminal commands</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => executeCli("skills")}
+                className="p-2.5 rounded-lg bg-surface-card border border-hairline text-left hover:border-emerald-500/40 transition-colors cursor-pointer group"
+              >
+                <div className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-between">
+                  <span>skills</span>
+                  <span className="text-[10px] text-muted font-sans">Capability Tree</span>
+                </div>
+                <div className="text-body-muted text-[11px] font-sans mt-0.5">Output core languages, databases &amp; frameworks</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => executeCli("curl contact")}
+                className="p-2.5 rounded-lg bg-surface-card border border-hairline text-left hover:border-emerald-500/40 transition-colors cursor-pointer group"
+              >
+                <div className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-between">
+                  <span>curl contact</span>
+                  <span className="text-[10px] text-muted font-sans">HTTP GET</span>
+                </div>
+                <div className="text-body-muted text-[11px] font-sans mt-0.5">Copy email address and show LinkedIn / GitHub</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => executeCli("sudo hire")}
+                className="p-2.5 rounded-lg bg-surface-card border border-hairline text-left hover:border-emerald-500/40 transition-colors cursor-pointer group"
+              >
+                <div className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-between">
+                  <span>sudo hire</span>
+                  <span className="text-[10px] text-muted font-sans">Root Execution</span>
+                </div>
+                <div className="text-body-muted text-[11px] font-sans mt-0.5">Prompt root credentials &amp; open verified resume</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => executeCli("theme toggle")}
+                className="p-2.5 rounded-lg bg-surface-card border border-hairline text-left hover:border-emerald-500/40 transition-colors cursor-pointer group"
+              >
+                <div className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-between">
+                  <span>theme toggle</span>
+                  <span className="text-[10px] text-muted font-sans">Display Sync</span>
+                </div>
+                <div className="text-body-muted text-[11px] font-sans mt-0.5">Switch dark / light themes via terminal</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => executeCli("varun --pitch")}
+                className="p-2.5 rounded-lg bg-surface-card border border-hairline text-left hover:border-emerald-500/40 transition-colors cursor-pointer group"
+              >
+                <div className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-between">
+                  <span>varun --pitch</span>
+                  <span className="text-[10px] text-muted font-sans">Fast TL;DR</span>
+                </div>
+                <div className="text-body-muted text-[11px] font-sans mt-0.5">30-second candidate summary for recruiters</div>
+              </button>
+            </div>
+            <div className="text-[10px] text-muted pt-1 flex items-center justify-between font-mono">
+              <span>Type 'clear' to reset this terminal window</span>
+              <span className="text-emerald-400">STATUS 0 [OK]</span>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      setQuery("")
+            return
+    }
+
+    if (
+      cleanCmd === "skills" ||
+      cleanCmd === "varun --skills" ||
+      cleanCmd === "stack" ||
+      cleanCmd.includes("skills")
+    ) {
+      setCliOutput({
+        command: "skills",
+        content: (
+          <div className="space-y-2.5 text-xs font-mono">
+            <div className="text-emerald-500 font-bold flex items-center justify-between">
+              <span>$ skills — VARUN KUSHWAH TECH STACK COMPILATION</span>
+              <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
+                LTS &amp; Modern
+              </span>
+            </div>
+            <div className="space-y-2 pl-2 border-l border-emerald-500/30 text-body-strong">
+              <div>
+                <div className="text-emerald-600 dark:text-emerald-400 font-semibold text-[11px] uppercase tracking-wider">Languages &amp; Runtimes</div>
+                <div className="text-ink">Java 21 (Virtual Threads / LTS), TypeScript 5, Python 3.11, JavaScript (ESNext), SQL</div>
+              </div>
+              <div>
+                <div className="text-sky-600 dark:text-sky-400 font-semibold text-[11px] uppercase tracking-wider">Frameworks &amp; Backend Systems</div>
+                <div className="text-ink">Spring Boot 3.x (Security, Data JPA, Cloud), Node.js, Express, Resilience4j, STOMP WebSockets</div>
+              </div>
+              <div>
+                <div className="text-indigo-600 dark:text-indigo-400 font-semibold text-[11px] uppercase tracking-wider">Databases &amp; Caching</div>
+                <div className="text-ink">PostgreSQL, Redis 7 (Distributed Locking, Pub/Sub, Cache Warming), MySQL, MongoDB Atlas</div>
+              </div>
+              <div>
+                <div className="text-amber-600 dark:text-amber-400 font-semibold text-[11px] uppercase tracking-wider">Distributed &amp; Real-Time Networking</div>
+                <div className="text-ink">WebRTC (RTCDataChannel P2P), STOMP WebSockets, AES-256-GCM chunk streaming</div>
+              </div>
+              <div>
+                <div className="text-teal-600 dark:text-teal-400 font-semibold text-[11px] uppercase tracking-wider">Frontend &amp; Creative</div>
+                <div className="text-ink">React 19, Tailwind CSS v4, Three.js (WebGL), GSAP, Vite</div>
+              </div>
+              <div>
+                <div className="text-purple-600 dark:text-purple-400 font-semibold text-[11px] uppercase tracking-wider">Cloud, DevOps &amp; Tooling</div>
+                <div className="text-ink">Docker, Docker Compose, Git &amp; GitHub, Linux/Bash, Postman, Maven, Gradle</div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 pt-1 font-sans">
+              <button
+                type="button"
+                onClick={() => goTo("/tech-stack")}
+                className="px-2.5 py-1 rounded bg-surface-elevated border border-hairline text-ink hover:text-emerald-400 text-xs font-medium transition-colors cursor-pointer"
+              >
+                Open Full Tech Stack &amp; Uses Page →
+              </button>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      setQuery("")
+            return
+    }
+
+    if (
+      cleanCmd === "curl contact" ||
+      cleanCmd === "curl" ||
+      cleanCmd === "contact" ||
+      cleanCmd.includes("curl") ||
+      cleanCmd.includes("contact") ||
+      cleanCmd === "varun --contact"
+    ) {
+      void navigator.clipboard.writeText("varun.kush3@gmail.com").catch(() => {})
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2500)
+      setCliOutput({
+        command: "curl contact",
+        content: (
+          <div className="space-y-2 text-xs font-mono">
+            <div className="text-emerald-500 font-bold flex items-center justify-between">
+              <span>$ curl -s https://varunkushwah.dev/api/contact</span>
+              <span className="text-emerald-400 text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
+                HTTP/2 200 OK
+              </span>
+            </div>
+            <div className="bg-surface-card p-3 rounded-lg border border-hairline space-y-2 text-ink">
+              <div className="text-muted text-[11px]">
+                Email copied to your clipboard automatically:
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-emerald-400 font-bold">email:</span>
+                <span className="text-ink font-semibold">varun.kush3@gmail.com</span>
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-sans font-medium">
+                  Copied to clipboard
+                </span>
+              </div>
+              <div className="space-y-1.5 pt-1 border-t border-hairline/60">
+                <div>
+                  <span className="text-sky-400 font-bold">linkedin:</span>{" "}
+                  <a
+                    href="https://www.linkedin.com/in/varun-kushwah/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-body-strong hover:text-emerald-400 underline transition-colors"
+                  >
+                    https://www.linkedin.com/in/varun-kushwah/
+                  </a>
+                </div>
+                <div>
+                  <span className="text-indigo-400 font-bold">github:</span>{" "}
+                  <a
+                    href="https://github.com/varunkushwah31"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-body-strong hover:text-emerald-400 underline transition-colors"
+                  >
+                    https://github.com/varunkushwah31
+                  </a>
+                </div>
+                <div>
+                  <span className="text-amber-400 font-bold">availability:</span>{" "}
+                  <span className="text-emerald-400">Available for Software Developer Internships &amp; Roles</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 pt-1 font-sans">
+              <a
+                href="mailto:varun.kush3@gmail.com"
+                className="px-2.5 py-1 rounded bg-emerald-500 text-black font-semibold text-xs hover:bg-emerald-400 transition-colors"
+              >
+                Compose Direct Email
+              </a>
+              <a
+                href="https://www.linkedin.com/in/varun-kushwah/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1 rounded bg-surface-elevated border border-hairline text-ink hover:text-emerald-400 text-xs transition-colors"
+              >
+                Open LinkedIn Profile
+              </a>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      setQuery("")
+            return
+    }
+
+    if (
+      cleanCmd === "sudo hire" ||
+      cleanCmd === "sudo" ||
+      cleanCmd === "hire" ||
+      cleanCmd.includes("hire") ||
+      cleanCmd === "varun --hire"
+    ) {
+      window.open("/Varun_Kushwah_Resume.pdf", "_blank", "noopener,noreferrer")
+      setCliOutput({
+        command: "sudo hire",
+        content: (
+          <div className="space-y-2 text-xs font-mono">
+            <div className="text-emerald-500 font-bold flex items-center justify-between">
+              <span>$ sudo hire --candidate=varun-kushwah</span>
+              <span className="text-emerald-600 dark:text-emerald-400 text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 font-bold">
+                ROOT PRIVILEGES GRANTED
+              </span>
+            </div>
+            <div className="bg-surface-card p-3 rounded-lg border border-hairline space-y-1.5 text-body-strong">
+              <div className="text-muted text-[11px]">
+                [sudo] password for recruiter: **********
+              </div>
+              <div className="text-emerald-600 dark:text-emerald-400 font-semibold">
+                Authentication successful. Elevating session to root engineering recruiter.
+              </div>
+              <div className="text-ink pl-2 border-l border-emerald-500/40 space-y-1 mt-1">
+                <div>&gt; Candidate: <strong className="text-ink">Varun Kushwah</strong></div>
+                <div>&gt; Primary focus: <span className="text-emerald-600 dark:text-emerald-400">Java 21 · Spring Boot · WebRTC · Distributed Systems</span></div>
+                <div>&gt; Credentials: <span className="text-sky-600 dark:text-sky-400">500+ LeetCode · Google Solution Challenge Top 105 · CGPA 8.27</span></div>
+                <div>&gt; Status: <span className="text-amber-600 dark:text-amber-400">Available for Summer / Immediate 2025/2026 Developer Roles</span></div>
+              </div>
+              <div className="pt-1.5 text-emerald-600 dark:text-emerald-400 text-[11px] font-semibold">
+                [SUCCESS] Dispatched ATS-optimized document: <span className="underline">Varun_Kushwah_Resume.pdf</span>
+              </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-2 pt-1 font-sans">
+              <a
+                href="/Varun_Kushwah_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1 rounded bg-emerald-500 text-black font-semibold text-xs hover:bg-emerald-400 transition-colors"
+              >
+                Download Resume PDF
+              </a>
+              <button
+                type="button"
+                onClick={() => goTo("/resume")}
+                className="px-2.5 py-1 rounded bg-surface-elevated border border-hairline text-ink hover:text-emerald-400 text-xs transition-colors cursor-pointer"
+              >
+                Open Interactive Timeline
+              </button>
+              <a
+                href="mailto:varun.kush3@gmail.com?subject=Interview%20Invitation%20%E2%80%94%20Varun%20Kushwah"
+                className="px-2.5 py-1 rounded bg-surface-elevated border border-hairline text-ink hover:text-emerald-400 text-xs transition-colors"
+              >
+                Schedule Interview
+              </a>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      setQuery("")
+            return
+    }
+
+    if (
+      cleanCmd === "theme toggle" ||
+      cleanCmd === "theme" ||
+      cleanCmd.startsWith("theme") ||
+      cleanCmd === "dark" ||
+      cleanCmd === "light"
+    ) {
+      sound.switchTab()
+      let nextTheme: "dark" | "light"
+      if (cleanCmd.includes("light")) {
+        if (theme !== "light") toggleTheme()
+        nextTheme = "light"
+      } else if (cleanCmd.includes("dark")) {
+        if (theme !== "dark") toggleTheme()
+        nextTheme = "dark"
+      } else {
+        toggleTheme()
+        nextTheme = theme === "dark" ? "light" : "dark"
+      }
+
+      setCliOutput({
+        command: `theme toggle (${nextTheme} mode)`,
+        content: (
+          <div className="space-y-2 text-xs font-mono">
+            <div className="text-emerald-500 font-bold flex items-center justify-between">
+              <span>$ theme toggle</span>
+              <span className="text-emerald-600 dark:text-emerald-400 text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 font-bold">
+                PALETTE SYNCHRONIZED
+              </span>
+            </div>
+            <div className="bg-surface-card p-3 rounded-lg border border-hairline space-y-1.5 text-body-strong">
+              <div>
+                Active display palette switched to:{" "}
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold uppercase">{nextTheme} MODE</span>
+              </div>
+              <div className="text-muted text-[11px]">
+                CSS design tokens, backdrop filters, and high-contrast surfaces synchronized in real time.
+              </div>
+            </div>
+            <div className="flex items-center gap-2 pt-1 font-sans">
+              <button
+                type="button"
+                onClick={() => executeCli("theme toggle")}
+                className="px-2.5 py-1 rounded bg-surface-elevated border border-hairline text-ink hover:text-emerald-400 text-xs transition-colors cursor-pointer"
+              >
+                Toggle Theme Again
+              </button>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      setQuery("")
+            return
     }
 
     if (cleanCmd.includes("pitch") || cleanCmd.includes("tldr") || cleanCmd.includes("recruiter")) {
@@ -94,7 +460,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         command: "varun --pitch",
         content: (
           <div className="space-y-2 text-xs font-mono">
-            <div className="text-emerald-500 font-bold">$ varun --pitch // 30-SECOND RECRUITER TL;DR</div>
+            <div className="text-emerald-500 font-bold">$ varun --pitch — 30-SECOND RECRUITER TL;DR</div>
             <div className="space-y-1.5 pl-2 border-l border-emerald-500/30 text-body-strong">
               <div><strong className="text-ink">Role Sought:</strong> Software Engineering Intern / Junior Backend Developer</div>
               <div><strong className="text-emerald-400">Primary Stack:</strong> Java 21, Spring Boot, PostgreSQL, WebRTC, Docker, Redis, React 19</div>
@@ -102,6 +468,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             </div>
             <div className="pt-1.5 flex items-center gap-2">
               <button
+                type="button"
                 onClick={() => {
                   handleClose()
                   window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
@@ -115,50 +482,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         ),
       })
       sound.success()
-      return
-    }
-
-    if (cleanCmd.includes("skills")) {
-      setCliOutput({
-        command: "varun --skills",
-        content: (
-          <div className="space-y-2 text-xs">
-            <div className="text-emerald-500 font-bold">$ varun --skills // SYSTEM CAPABILITIES</div>
-            <div className="space-y-1 font-mono text-body-strong pl-2 border-l border-emerald-500/30">
-              <div><strong className="text-emerald-400">Core Backend:</strong> Java 21, Spring Boot 3.x, Virtual Threads, REST APIs</div>
-              <div><strong className="text-indigo-400">Distributed &amp; Real-Time:</strong> WebRTC DataChannels, Redis 7 (Locks &amp; Pub/Sub), STOMP WebSockets</div>
-              <div><strong className="text-sky-400">Frontend:</strong> React 19, TypeScript, Tailwind CSS v4, Three.js, GSAP</div>
-              <div><strong className="text-amber-400">DevOps &amp; Database:</strong> PostgreSQL, Docker, Git Subtrees, Linux, Postman</div>
-              <div><strong className="text-emerald-400">Leadership:</strong> Java Coordinator @ devup (Mentoring 100+ emerging developers)</div>
-            </div>
-          </div>
-        ),
-      })
-      sound.success()
-      return
-    }
-
-    if (cleanCmd.includes("contact")) {
-      void navigator.clipboard.writeText("varun.kush3@gmail.com")
-      setCliOutput({
-        command: "varun --contact",
-        content: (
-          <div className="space-y-2 text-xs font-mono">
-            <div className="text-emerald-500 font-bold">$ varun --contact // REACH OUT DIRECTLY</div>
-            <div className="space-y-1.5 pl-2 border-l border-emerald-500/30 text-body-strong">
-              <div className="flex items-center gap-2">
-                <span className="text-muted">Email:</span>
-                <span className="text-ink font-bold">varun.kush3@gmail.com</span>
-                <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-1.5 py-0.2 rounded">Copied to clipboard</span>
-              </div>
-              <div><span className="text-muted">LinkedIn:</span> <a href="https://www.linkedin.com/in/varun-kushwah/" target="_blank" rel="noreferrer" className="text-emerald-400 underline">linkedin.com/in/varun-kushwah</a></div>
-              <div><span className="text-muted">GitHub:</span> <a href="https://github.com/varunkushwah31" target="_blank" rel="noreferrer" className="text-emerald-400 underline">github.com/varunkushwah31</a></div>
-            </div>
-          </div>
-        ),
-      })
-      sound.success()
-      return
+      setQuery("")
+            return
     }
 
     if (cleanCmd.includes("resume")) {
@@ -175,45 +500,76 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         ),
       })
       sound.success()
-      return
+      setQuery("")
+            return
     }
 
     if (cleanCmd.includes("project")) {
       setCliOutput({
-        command: "varun --projects",
+        command: "projects",
         content: (
           <div className="space-y-2 text-xs font-mono">
-            <div className="text-emerald-500 font-bold">$ varun --projects // FEATURED PRODUCTION SYSTEMS</div>
+            <div className="text-emerald-500 font-bold">$ projects — FEATURED PRODUCTION SYSTEMS</div>
             <div className="space-y-1.5 pl-2 border-l border-emerald-500/30 text-body-strong">
               <div>1. <strong className="text-ink">MentorSync:</strong> LeetCode/Codeforces LMS with Redis distributed cache warming &amp; WebSockets.</div>
               <div>2. <strong className="text-ink">W2W Share:</strong> Peer-to-peer browser file distribution via WebRTC DataChannels &amp; AES-256-GCM.</div>
               <div>3. <strong className="text-ink">System Health:</strong> OS daemon for live hardware metrics streaming.</div>
             </div>
+            <div className="pt-1.5 flex items-center gap-2 font-sans">
+              <button
+                type="button"
+                onClick={() => goTo("/projects")}
+                className="px-2.5 py-1 rounded bg-surface-elevated border border-hairline text-ink hover:text-emerald-400 text-xs transition-colors cursor-pointer"
+              >
+                View All Projects →
+              </button>
+            </div>
           </div>
         ),
       })
       sound.success()
-      return
+      setQuery("")
+            return
     }
 
-    // Default help output
+    if (cleanCmd === "whoami") {
+      setCliOutput({
+        command: "whoami",
+        content: (
+          <div className="space-y-1.5 text-xs font-mono">
+            <div className="text-emerald-500 font-bold">$ whoami</div>
+            <div className="bg-surface-card p-3 rounded-lg border border-hairline space-y-1 text-body-strong">
+              <div>User: <strong className="text-emerald-400">guest@varunkushwah.dev</strong></div>
+              <div>Role: <span className="text-ink">Engineering Recruiter / Technical Visitor</span></div>
+              <div>Permissions: <span className="text-sky-400">Interactive CLI Exec (read-only + elevated sudo)</span></div>
+              <div className="text-[11px] text-muted pt-1">Type <span className="text-emerald-400">'help'</span> to inspect all terminal commands.</div>
+            </div>
+          </div>
+        ),
+      })
+      sound.success()
+      setQuery("")
+            return
+    }
+
+    // Default fallback output
     setCliOutput({
       command: cmd,
       content: (
         <div className="space-y-1.5 text-xs font-mono">
-          <div className="text-emerald-500 font-bold">$ varun --help // AVAILABLE RECRUITER CLI FLAGS</div>
-          <div className="space-y-1 pl-2 border-l border-emerald-500/30 text-body-strong">
-            <div><span className="text-emerald-400">varun --skills</span> : Inspect backend, systems, and frontend capabilities</div>
-            <div><span className="text-emerald-400">varun --contact</span> : Instant email copy &amp; social profiles</div>
-            <div><span className="text-emerald-400">varun --download-resume</span> : Directly download verified PDF resume</div>
-            <div><span className="text-emerald-400">varun --projects</span> : List production distributed architectures</div>
-            <div><span className="text-emerald-400">varun --clear</span> : Reset terminal output window</div>
+          <div className="text-red-400 font-bold">$ {cmd} — COMMAND NOT FOUND</div>
+          <div className="space-y-1 pl-2 border-l border-red-500/30 text-body-strong">
+            <div>shell: command not found: <code className="text-ink">{cmd}</code></div>
+            <div className="text-muted text-[11px] pt-1">
+              Available commands: <span className="text-emerald-400">help</span>, <span className="text-emerald-400">skills</span>, <span className="text-emerald-400">curl contact</span>, <span className="text-emerald-400">sudo hire</span>, <span className="text-emerald-400">theme toggle</span>, <span className="text-emerald-400">varun --pitch</span>, <span className="text-emerald-400">clear</span>
+            </div>
           </div>
         </div>
       ),
     })
     sound.switchTab()
-  }
+    setQuery("")
+      }
 
   const allCommands: CommandItem[] = [
     // Navigation
@@ -359,44 +715,52 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
     // CLI Commands
     {
-      id: "cli-cmd-pitch",
-      title: "varun --pitch",
-      subtitle: "30-second executive summary for recruiters & tech leads",
+      id: "cli-cmd-help",
+      title: "help",
+      subtitle: "List all available interactive terminal commands",
       category: "CLI Commands",
       icon: <TerminalWindowIcon size={16} className="text-emerald-500" />,
-      action: () => executeCli("varun --pitch"),
+      action: () => executeCli("help"),
     },
     {
       id: "cli-cmd-skills",
-      title: "varun --skills",
-      subtitle: "Backend, systems, and frontend capability tree",
+      title: "skills",
+      subtitle: "Output core languages, databases, and frameworks",
       category: "CLI Commands",
-      icon: <TerminalWindowIcon size={16} className="text-emerald-500" />,
-      action: () => executeCli("varun --skills"),
+      icon: <CpuIcon size={16} className="text-emerald-500" />,
+      action: () => executeCli("skills"),
     },
     {
       id: "cli-cmd-contact",
-      title: "varun --contact",
-      subtitle: "Direct email copy & social links",
+      title: "curl contact",
+      subtitle: "Copy email address and show LinkedIn & GitHub",
       category: "CLI Commands",
-      icon: <TerminalWindowIcon size={16} className="text-emerald-500" />,
-      action: () => executeCli("varun --contact"),
+      icon: <EnvelopeSimpleIcon size={16} className="text-sky-400" />,
+      action: () => executeCli("curl contact"),
     },
     {
-      id: "cli-cmd-resume",
-      title: "varun --download-resume",
-      subtitle: "Official PDF resume download",
+      id: "cli-cmd-hire",
+      title: "sudo hire",
+      subtitle: "Triggers a confetti-free terminal prompt opening resume",
       category: "CLI Commands",
-      icon: <TerminalWindowIcon size={16} className="text-emerald-500" />,
-      action: () => executeCli("varun --download-resume"),
+      icon: <LightningIcon size={16} className="text-amber-400" />,
+      action: () => executeCli("sudo hire"),
     },
     {
-      id: "cli-cmd-projects",
-      title: "varun --projects",
-      subtitle: "List distributed production architectures",
+      id: "cli-cmd-theme",
+      title: "theme toggle",
+      subtitle: "Switch dark/light themes via terminal",
       category: "CLI Commands",
-      icon: <TerminalWindowIcon size={16} className="text-indigo-400" />,
-      action: () => executeCli("varun --projects"),
+      icon: theme === "dark" ? <SunIcon size={16} className="text-amber-300" /> : <MoonIcon size={16} className="text-indigo-400" />,
+      action: () => executeCli("theme toggle"),
+    },
+    {
+      id: "cli-cmd-pitch",
+      title: "varun --pitch",
+      subtitle: "30-second executive TL;DR for recruiters & leads",
+      category: "CLI Commands",
+      icon: <TerminalWindowIcon size={16} className="text-emerald-400" />,
+      action: () => executeCli("varun --pitch"),
     },
   ]
 
@@ -444,7 +808,24 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     } else if (e.key === "Enter") {
       e.preventDefault()
       const trimmed = query.trim().toLowerCase()
-      if (trimmed.startsWith("varun") || trimmed.startsWith("--") || trimmed === "help") {
+      const isDirectCliCmd =
+        trimmed.startsWith("help") ||
+        trimmed.startsWith("skills") ||
+        trimmed.startsWith("curl") ||
+        trimmed.startsWith("contact") ||
+        trimmed.startsWith("sudo") ||
+        trimmed.startsWith("hire") ||
+        trimmed.startsWith("theme") ||
+        trimmed.startsWith("varun") ||
+        trimmed.startsWith("--") ||
+        trimmed === "clear" ||
+        trimmed === "cls" ||
+        trimmed === "whoami" ||
+        trimmed === "projects" ||
+        trimmed === "pitch" ||
+        trimmed === "tldr"
+
+      if (isDirectCliCmd) {
         executeCli(trimmed)
       } else if (flatList[selectedIndex]) {
         flatList[selectedIndex].action()
@@ -463,7 +844,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.12 }}
-          className="fixed inset-0 z-50 flex items-start justify-center p-3 sm:p-4 pt-12 sm:pt-24"
+          className="fixed inset-0 z-50 flex items-end sm:items-start justify-center p-0 sm:p-4 pt-0 sm:pt-24"
           onClick={handleClose}
         >
           {/* Backdrop overlay */}
@@ -471,21 +852,22 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
           {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.98, y: -8 }}
+            initial={{ opacity: 0, scale: 0.98, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: -8 }}
+            exit={{ opacity: 0, scale: 0.98, y: 16 }}
             transition={{ duration: 0.15, ease: "easeOut" }}
-            className="relative w-full max-w-2xl rounded-2xl border border-hairline bg-surface-card shadow-2xl overflow-hidden z-10 flex flex-col"
-            style={{ maxHeight: "80vh" }}
+            className="relative w-full max-w-2xl rounded-t-3xl sm:rounded-2xl border border-hairline bg-surface-card shadow-2xl overflow-hidden z-10 flex flex-col max-h-[88dvh] sm:max-h-[80vh]"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Mobile Drag Handle Indicator */}
+            <div className="w-12 h-1.5 bg-muted/30 rounded-full mx-auto mt-2.5 sm:hidden shrink-0" />
             {/* Search Input Box */}
             <div className="flex items-center gap-3.5 px-4.5 py-4 border-b border-hairline bg-surface-card">
               <TerminalWindowIcon size={20} className="text-emerald-500 shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search or run CLI (e.g. varun --skills)..."
+                placeholder="Type a command (help, skills, curl contact, sudo hire, theme toggle)..."
                 value={query}
                 onChange={(e) => {
                   setQuery(e.target.value)
@@ -518,7 +900,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                 <div className="flex items-center justify-between pb-2 mb-2 border-b border-hairline/60 text-[10px] text-muted">
                   <span className="flex items-center gap-1.5 text-emerald-500 font-bold">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    TERMINAL OUTPUT // {cliOutput.command}
+                    TERMINAL OUTPUT — {cliOutput.command}
                   </span>
                   <button
                     type="button"

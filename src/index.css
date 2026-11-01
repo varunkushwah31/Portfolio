@@ -160,35 +160,51 @@ html.dark {
 }
 
 html.light {
-  --canvas: #f1f2f5;
-  --surface-soft: #e4e6eb;
+  /* Canvas & Surfaces — Clean Porcelain & Zinc Palette (Inspired by bonabrian.com) */
+  --canvas: #fafafa;
+  --surface-soft: #f4f4f5;
   --surface-card: #ffffff;
-  --surface-elevated: #eaecf1;
+  --surface-elevated: #e4e4e7;
 
+  /* Typography — WCAG AA High Contrast */
   --ink: #09090b;
-  --body: #333a44;
-  --body-strong: #0f141a;
-  --strong: #047857;
-  --muted: #57606a;
+  --body: #3f3f46;
+  --body-strong: #18181b;
+  --strong: #059669;
+  --muted: #71717a;
 
-  --hairline: #dbe0e6;
-  --hairline-strong: #cbd2d9;
+  /* Borders — Soft, Clean Zinc Dividers */
+  --hairline: #e4e4e7;
+  --hairline-strong: #d4d4d8;
 
-  --accent: #047857;
-  --accent-light: #059669;
-  --accent-muted: #d1fae5;
+  /* Accent — Vibrant Emerald */
+  --accent: #059669;
+  --accent-light: #10b981;
+  --accent-muted: #ecfdf5;
 
+  /* Semantic */
   --success: #16a34a;
-  --warning: #b45309;
+  --warning: #d97706;
 
-  --grid-line: rgba(0, 0, 0, 0.045);
-  --scrollbar-track: #f1f2f5;
-  --scrollbar-thumb: #cbd2d9;
-  --scrollbar-thumb-hover: #9ca3af;
-  --selection-bg: #dbe0e6;
+  --grid-line: rgba(0, 0, 0, 0.032);
+  --scrollbar-track: #fafafa;
+  --scrollbar-thumb: #d4d4d8;
+  --scrollbar-thumb-hover: #a1a1aa;
+  --selection-bg: #e4e4e7;
   --selection-text: #09090b;
 
   color-scheme: light;
+}
+
+/* Light mode card tactile elevation */
+html.light .bg-surface-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+}
+
+/* Crisp non-blurry grid in light mode */
+html.light .bg-grid-fade {
+  filter: none;
+  opacity: 0.65;
 }
 
 /* ============================================================
@@ -225,6 +241,8 @@ html.light {
     color: var(--ink);
     background-color: var(--canvas);
     min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
     overflow-x: hidden;
     transition: background-color 0.2s ease, color 0.2s ease;
   }

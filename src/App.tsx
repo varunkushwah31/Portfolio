@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import ScrollToTop from "./components/ScrollToTop"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
+import MobileBottomNav from "./components/MobileBottomNav"
 import PageLoader from "./components/PageLoader"
 
 // Dynamic route-level code splitting
@@ -73,11 +74,14 @@ function AppContent() {
 
       <div className="relative z-10 flex flex-col min-h-screen justify-between">
         <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
-        <main className="grow flex flex-col w-full">
+        <main className="grow flex flex-col w-full pb-20 md:pb-0">
           <AppRoutes />
         </main>
         <Footer />
       </div>
+
+      {/* Mobile Floating App Tab Bar */}
+      <MobileBottomNav onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
 
       {/* Global Command Palette (Loaded on demand) */}
       <Suspense fallback={null}>
