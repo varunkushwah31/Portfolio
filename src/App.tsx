@@ -1,40 +1,48 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, lazy, Suspense } from "react"
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
-import Home from "./Pages/Home"
-import About from "./Pages/About"
-import ProjectsPage from "./Pages/ProjectsPage"
-import ResumePage from "./Pages/ResumePage"
-import ProjectDetail from "./Pages/ProjectDetail"
-import TechStackPage from "./Pages/TechStackPage"
-import NotFound from "./Pages/NotFound"
 import ScrollToTop from "./components/ScrollToTop"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
-import CommandPalette from "./components/CommandPalette"
-import RecruiterQuickPitchModal from "./components/RecruiterQuickPitchModal"
+import PageLoader from "./components/PageLoader"
+
+// Dynamic route-level code splitting
+const Home = lazy(() => import("./Pages/Home"))
+const About = lazy(() => import("./Pages/About"))
+const ProjectsPage = lazy(() => import("./Pages/ProjectsPage"))
+const ResumePage = lazy(() => import("./Pages/ResumePage"))
+const ProjectDetail = lazy(() => import("./Pages/ProjectDetail"))
+const TechStackPage = lazy(() => import("./Pages/TechStackPage"))
+const NotFound = lazy(() => import("./Pages/NotFound"))
+
+// Dynamic modal code splitting
+const CommandPalette = lazy(() => import("./components/CommandPalette"))
+const RecruiterQuickPitchModal = lazy(() => import("./components/RecruiterQuickPitchModal"))
 
 function AppRoutes() {
   const location = useLocation()
 
   return (
     <div key={location.pathname} className="grow flex flex-col w-full">
-      <Routes location={location}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/tech-stack" element={<TechStackPage />} />
-        <Route path="/stack" element={<TechStackPage />} />
-        <Route path="/uses" element={<TechStackPage />} />
-        <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/resume" element={<ResumePage />} />
-        <Route path="/project/:slug" element={<ProjectDetail />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Suspense fallback={<PageLoader />}>
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/tech-stack" element={<TechStackPage />} />
+          <Route path="/stack" element={<TechStackPage />} />
+          <Route path="/uses" element={<TechStackPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/project/:slug" element={<ProjectDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </div>
   )
 }
 
 function AppContent() {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
+  const [recruiterPitchOpen, setRecruiterPitchOpen] = useState(false)
 
   // Listen for global keyboard shortcut and custom events
   useEffect(() => {
@@ -45,13 +53,16 @@ function AppContent() {
       }
     }
 
-    const handleOpenCustomEvent = () => setCommandPaletteOpen(true)
+    const handleOpenCommandPalette = () => setCommandPaletteOpen(true)
+    const handleOpenRecruiterPitch = () => setRecruiterPitchOpen(true)
 
     window.addEventListener("keydown", handleKeyDown)
-    window.addEventListener("open-command-palette", handleOpenCustomEvent)
+    window.addEventListener("open-command-palette", handleOpenCommandPalette)
+    window.addEventListener("open-recruiter-pitch", handleOpenRecruiterPitch)
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
-      window.removeEventListener("open-command-palette", handleOpenCustomEvent)
+      window.removeEventListener("open-command-palette", handleOpenCommandPalette)
+      window.removeEventListener("open-recruiter-pitch", handleOpenRecruiterPitch)
     }
   }, [])
 
@@ -68,14 +79,25 @@ function AppContent() {
         <Footer />
       </div>
 
-      {/* Global Command Palette */}
-      <CommandPalette
-        isOpen={commandPaletteOpen}
-        onClose={() => setCommandPaletteOpen(false)}
-      />
+      {/* Global Command Palette (Loaded on demand) */}
+      <Suspense fallback={null}>
+        {commandPaletteOpen && (
+          <CommandPalette
+            isOpen={commandPaletteOpen}
+            onClose={() => setCommandPaletteOpen(false)}
+          />
+        )}
+      </Suspense>
 
-      {/* Global Recruiter 30s Quick Pitch Modal */}
-      <RecruiterQuickPitchModal />
+      {/* Global Recruiter 30s Quick Pitch Modal (Loaded on demand) */}
+      <Suspense fallback={null}>
+        {recruiterPitchOpen && (
+          <RecruiterQuickPitchModal
+            isOpen={recruiterPitchOpen}
+            onClose={() => setRecruiterPitchOpen(false)}
+          />
+        )}
+      </Suspense>
     </div>
   )
 }

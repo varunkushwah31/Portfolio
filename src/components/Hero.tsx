@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, lazy, Suspense } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { CaretRightIcon, SparkleIcon, LightningIcon } from "@phosphor-icons/react"
 import TechStack from "./TechStack"
-import BackgroundCanvas3D from "./three/BackgroundCanvas3D"
 import MagneticButton from "./gsap/MagneticButton"
 import TextScramble from "./gsap/TextScramble"
 import { sound } from "@/lib/sound"
+
+// Dynamic lazy import for Three.js 3D canvas to keep initial landing render fast
+const BackgroundCanvas3D = lazy(() => import("./three/BackgroundCanvas3D"))
 
 const container = {
   hidden: { opacity: 0 },
@@ -57,8 +59,10 @@ export default function Hero() {
 
   return (
     <section className="max-w-4xl mx-auto px-5 sm:px-6 pt-10 sm:pt-20 pb-10 sm:pb-12 relative overflow-visible">
-      {/* Three.js Ambient Particle Constellation Background */}
-      <BackgroundCanvas3D className="opacity-60 dark:opacity-75" />
+      {/* Three.js Ambient Particle Constellation Background (Lazy Loaded) */}
+      <Suspense fallback={null}>
+        <BackgroundCanvas3D className="opacity-60 dark:opacity-75" />
+      </Suspense>
 
       <motion.div
         variants={container}

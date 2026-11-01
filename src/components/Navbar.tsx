@@ -27,6 +27,28 @@ const navLinks = [
   { label: 'Resume', href: '/resume' },
 ]
 
+const prefetchRoute = (href: string) => {
+  switch (href) {
+    case '/':
+      void import('@/Pages/Home').catch(() => {})
+      break
+    case '/about':
+      void import('@/Pages/About').catch(() => {})
+      break
+    case '/tech-stack':
+      void import('@/Pages/TechStackPage').catch(() => {})
+      break
+    case '/projects':
+      void import('@/Pages/ProjectsPage').catch(() => {})
+      break
+    case '/resume':
+      void import('@/Pages/ResumePage').catch(() => {})
+      break
+    default:
+      break
+  }
+}
+
 export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -108,6 +130,8 @@ export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) 
                   <Link
                     to={link.href}
                     onClick={() => sound.click()}
+                    onMouseEnter={() => prefetchRoute(link.href)}
+                    onTouchStart={() => prefetchRoute(link.href)}
                     className={`relative px-3 py-1.5 rounded-md text-sm transition-colors duration-200 block z-10 ${
                       active
                         ? 'text-ink font-semibold'
@@ -219,6 +243,8 @@ export default function Navbar({ onOpenCommandPalette }: Readonly<NavbarProps>) 
                   <Link
                     key={link.href}
                     to={link.href}
+                    onMouseEnter={() => prefetchRoute(link.href)}
+                    onTouchStart={() => prefetchRoute(link.href)}
                     onClick={() => {
                       sound.click()
                       setMobileOpen(false)
