@@ -20,7 +20,7 @@ export default function ResumePdfViewer({
   pdfUrl = "/Varun_Kushwah_Resume.pdf",
   previewImgUrl = "/resume_preview.png",
   fileName = "Varun_Kushwah_Resume.pdf",
-}: ResumePdfViewerProps) {
+}: Readonly<ResumePdfViewerProps>) {
   const [zoomLevel, setZoomLevel] = useState<number>(100)
   const [copiedLink, setCopiedLink] = useState(false)
   const [iframeError, setIframeError] = useState(false)
@@ -145,7 +145,7 @@ export default function ResumePdfViewer({
       </div>
 
       {/* Main Document Viewer Canvas */}
-      <div className="relative w-full bg-zinc-900/10 dark:bg-zinc-950/40 min-h-[580px] sm:min-h-[750px] flex items-center justify-center p-2 sm:p-6 overflow-x-auto">
+      <div className="relative w-full bg-zinc-900/10 dark:bg-zinc-950/40 min-h-145 sm:min-h-187.5 flex items-center justify-center p-2 sm:p-6 overflow-x-auto">
         {!iframeError ? (
           <div
             className="w-full max-w-4xl transition-all duration-200 shadow-xl rounded-lg overflow-hidden bg-white"
@@ -154,14 +154,14 @@ export default function ResumePdfViewer({
             <iframe
               src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=1`}
               title="Varun Kushwah Resume PDF"
-              className="w-full h-[650px] sm:h-[860px] border-none"
+              className="w-full h-162.5 sm:h-215 border-none"
               onError={() => setIframeError(true)}
             />
           </div>
         ) : (
           /* Mobile / Disabled PDF iframe fallback */
           <div className="w-full max-w-2xl bg-surface-card border border-hairline rounded-xl p-4 sm:p-6 text-center space-y-4">
-            <div className="rounded-lg overflow-hidden border border-hairline shadow-md max-h-[500px]">
+            <div className="rounded-lg overflow-hidden border border-hairline shadow-md max-h-125">
               <img
                 src={previewImgUrl}
                 alt="Varun Kushwah Resume Preview"

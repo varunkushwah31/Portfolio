@@ -1,3 +1,9 @@
+const CHUNK_GRID_BLOCKS = Array.from({ length: 48 }, (_, i) => ({
+  id: `w2w-sctp-chunk-block-${i + 1}`,
+  index: i,
+  label: `Chunk #${i + 1}`,
+}))
+
 import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import {
@@ -159,12 +165,12 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 <LockKeyIcon size={12} weight="bold" />
                 AES-256-GCM
               </span>
-              <span className="inline-flex items-center gap-1 text-[11px] text-indigo-700 dark:text-indigo-400 font-mono bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20 font-medium hidden sm:inline-flex">
+              <span className="inline-flex items-center gap-1 text-[11px] text-indigo-700 dark:text-indigo-400 font-mono bg-indigo-500/10 px-2 py-0.5 rounded-full border border-indigo-500/20 font-medium sm:inline-flex">
                 JAVA 21 VIRTUAL THREADS
               </span>
               <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-surface-card px-2.5 py-0.5 rounded-full border border-hairline font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                LAN DIRECT
+                <span>LAN DIRECT</span>
               </span>
             </div>
           </div>
@@ -229,7 +235,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                   {/* Highway Pipe with Flowing Packets */}
                   <div className="w-full h-3 bg-surface-elevated rounded-full relative overflow-hidden border border-hairline flex items-center">
                     {/* Underlying Flow Beam */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-sky-400/40 to-indigo-500/30" />
+                    <div className="absolute inset-0 bg-linear-to-r from-emerald-500/30 via-sky-400/40 to-indigo-500/30" />
 
                     {/* Animated Traveling Packets */}
                     {[0, 1, 2, 3, 4].map((i) => (
@@ -321,7 +327,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               {/* Progress Bar */}
               <div className="w-full h-2.5 bg-surface-elevated rounded-full overflow-hidden border border-hairline/60 relative">
                 <div
-                  className="h-full bg-gradient-to-r from-emerald-500 via-sky-400 to-emerald-400 transition-all duration-300 rounded-full relative"
+                  className="h-full bg-linear-to-r from-emerald-500 via-sky-400 to-emerald-400 transition-all duration-300 rounded-full relative"
                   style={{ width: `${progressPercent}%` }}
                 >
                   <div className="absolute inset-0 bg-white/20 animate-pulse" />
@@ -338,12 +344,12 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                 </div>
 
                 <div className="grid grid-cols-12 sm:grid-cols-24 gap-1 sm:gap-1.5">
-                  {Array.from({ length: totalChunks }).map((_, idx) => {
-                    const isDone = idx < completedChunks
-                    const isCurrent = idx === completedChunks
+                  {CHUNK_GRID_BLOCKS.slice(0, totalChunks).map((chunk) => {
+                    const isDone = chunk.index < completedChunks
+                    const isCurrent = chunk.index === completedChunks
                     return (
                       <div
-                        key={idx}
+                        key={chunk.id}
                         className={`h-4 rounded-sm transition-all duration-200 ${
                           isDone
                             ? "bg-emerald-500/85 shadow-[0_0_6px_rgba(16,185,129,0.35)]"
@@ -351,7 +357,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
                             ? "bg-sky-400 animate-pulse border border-sky-300"
                             : "bg-surface-elevated border border-hairline/60"
                         }`}
-                        title={`Chunk #${idx + 1}: ${isDone ? "Delivered" : isCurrent ? "In Flight" : "Queued"}`}
+                        title={`${chunk.label}: ${isDone ? "Delivered" : isCurrent ? "In Flight" : "Queued"}`}
                       />
                     )
                   })}
@@ -631,7 +637,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
               </span>
               <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-700 dark:text-emerald-400 font-mono bg-surface-card px-2.5 py-0.5 rounded-full border border-hairline font-medium">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                LOOM: 1,000+ VTHREADS
+                <span>LOOM: 1,000+ VTHREADS</span>
               </span>
             </div>
           </div>

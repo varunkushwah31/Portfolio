@@ -11,7 +11,7 @@ export default function LetsTalk() {
   const handleCopy = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    navigator.clipboard.writeText(email)
+    void navigator.clipboard.writeText(email)
     setCopied(true)
     setTimeout(() => setCopied(false), 2200)
   }

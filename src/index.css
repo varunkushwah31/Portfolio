@@ -349,7 +349,7 @@ html.light {
 
 /* Devicons icon font normalization */
 .devicons {
-  font-family: "Devicons", "devicons", sans-serif !important;
+  font-family: "Devicons", "devicons", sans-serif;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -397,7 +397,7 @@ html.light {
   gap: 0.75rem;
   padding-right: 0.75rem;
   will-change: transform;
-  animation-play-state: running !important;
+  animation-play-state: running;
 }
 
 /* ============================================================
@@ -419,9 +419,9 @@ html.light {
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
   }
 }

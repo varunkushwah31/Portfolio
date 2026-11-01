@@ -221,7 +221,7 @@ const Skills = () => {
   const handleCopyCode = () => {
     if (!selectedSkill?.codeSnippet) return
     sound.click()
-    navigator.clipboard.writeText(selectedSkill.codeSnippet.code)
+    void navigator.clipboard.writeText(selectedSkill.codeSnippet.code)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

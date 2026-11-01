@@ -198,7 +198,7 @@ export default function ProjectsPage() {
                   </Link>
 
                   {/* Bottom Card Content */}
-                  <div className="p-4 sm:p-6 bg-surface-card flex flex-col justify-between flex-grow">
+                  <div className="p-4 sm:p-6 bg-surface-card flex flex-col justify-between grow">
                     <div>
                       {/* Title & Category Badge */}
                       <div className="flex items-center justify-between gap-2 mb-1.5">

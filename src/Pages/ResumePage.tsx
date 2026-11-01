@@ -643,8 +643,8 @@ export default function ResumePage() {
                       )}
 
                       <ul className="space-y-2 text-sm text-body font-normal leading-relaxed mt-2">
-                        {entry.bullets.map((bullet, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5">
+                        {entry.bullets.map((bullet) => (
+                          <li key={bullet.slice(0, 32)} className="flex items-start gap-2.5">
                             <span className="text-emerald-600 dark:text-emerald-400 mt-1.5 shrink-0 text-xs">•</span>
                             {renderBulletText(bullet)}
                           </li>
@@ -706,8 +706,8 @@ export default function ResumePage() {
                       )}
 
                       <ul className="space-y-2 text-sm text-body font-normal leading-relaxed mt-2">
-                        {entry.bullets.map((bullet, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5">
+                        {entry.bullets.map((bullet) => (
+                          <li key={bullet.slice(0, 32)} className="flex items-start gap-2.5">
                             <span className="text-sky-600 dark:text-sky-400 mt-1.5 shrink-0 text-xs">•</span>
                             {renderBulletText(bullet)}
                           </li>
@@ -752,8 +752,8 @@ export default function ResumePage() {
                       </div>
 
                       <ul className="space-y-2 text-sm text-body font-normal leading-relaxed mt-3">
-                        {entry.bullets.map((bullet, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5">
+                        {entry.bullets.map((bullet) => (
+                          <li key={bullet.slice(0, 32)} className="flex items-start gap-2.5">
                             <span className="text-indigo-600 dark:text-indigo-400 mt-1.5 shrink-0 text-xs">•</span>
                             {renderBulletText(bullet)}
                           </li>

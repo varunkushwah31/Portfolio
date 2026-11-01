@@ -39,7 +39,7 @@ const About = () => {
       className="w-full bg-canvas relative overflow-hidden border-b border-hairline-strong"
       style={{ paddingTop: "96px", paddingBottom: "96px" }}
     >
-      <div className="max-w-[1440px] mx-auto px-6">
+      <div className="max-w-360 mx-auto px-6">
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -61,7 +61,7 @@ const About = () => {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-ink mb-12 max-w-[800px]"
+          className="text-ink mb-12 max-w-200"
         >
           ENGINEERED WITH DISCIPLINE, DRIVEN BY BACKEND PRECISION
         </motion.h3>
@@ -160,7 +160,7 @@ const About = () => {
                   >
                     {/* Active accent bar */}
                     {isActive && (
-                      <span className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-m-blue-light via-m-blue-dark to-m-red" />
+                      <span className="absolute left-0 top-0 bottom-0 w-0.75 bg-linear-to-b from-m-blue-light via-m-blue-dark to-m-red" />
                     )}
 
                     <div className="flex items-start justify-between gap-4 mb-2">

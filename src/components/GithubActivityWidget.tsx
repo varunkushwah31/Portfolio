@@ -98,8 +98,8 @@ export const GithubActivityWidget: React.FC = () => {
         // Compute longest streak
         let longest = 0
         let tempStreak = 0
-        for (let i = 0; i < sorted.length; i++) {
-          if (sorted[i].count > 0) {
+        for (const item of sorted) {
+          if (item.count > 0) {
             tempStreak++
             if (tempStreak > longest) longest = tempStreak
           } else {
@@ -164,7 +164,7 @@ export const GithubActivityWidget: React.FC = () => {
 
   // Run on mount once
   useEffect(() => {
-    syncWithGithub(false)
+    void syncWithGithub(false)
   }, [syncWithGithub])
 
   // Build exact 53-week Sunday-to-Saturday matrix ending on current week
@@ -279,7 +279,7 @@ export const GithubActivityWidget: React.FC = () => {
         </div>
 
         <div className="overflow-x-auto pb-2 scrollbar-none touch-pan-x">
-          <div className="min-w-[720px]">
+          <div className="min-w-180">
             {/* Month Labels Row (Using clean sans-serif) */}
             <div className="flex mb-2 pl-8 text-[11px] font-sans text-muted relative h-4 select-none">
               {monthHeaders.map((header) => (
@@ -296,9 +296,9 @@ export const GithubActivityWidget: React.FC = () => {
             {/* Calendar Grid: Day labels on left + 53 week columns */}
             <div className="flex gap-2">
               {/* Day of Week Labels (Mon, Wed, Fri - Clean sans-serif) */}
-              <div className="flex flex-col gap-[3.5px] w-6 shrink-0 text-[10px] font-sans text-muted text-right pr-1 pt-[1px] select-none">
+              <div className="flex flex-col gap-[3.5px] w-6 shrink-0 text-[10px] font-sans text-muted text-right pr-1 pt-px select-none">
                 {daysOfWeek.map((day, idx) => (
-                  <div key={idx} className="h-[10px] leading-[10px]">
+                  <div key={idx} className="h-2.5 leading-2.5">
                     {day}
                   </div>
                 ))}
@@ -306,17 +306,21 @@ export const GithubActivityWidget: React.FC = () => {
 
               {/* 53 Columns of 7 Days */}
               <div className="flex gap-[3.5px]">
-                {weeks.map((week, wIdx) => (
-                  <div key={wIdx} className="flex flex-col gap-[3.5px]">
+                {weeks.map((week) => (
+                  <div key={week[0]?.date || "week"} className="flex flex-col gap-[3.5px]">
                     {week.map((day) => (
-                      <div
+                      <button
+                        type="button"
                         key={day.date}
                         onMouseEnter={() => setHoveredDay(day)}
                         onMouseLeave={() => setHoveredDay(null)}
                         onClick={() => setHoveredDay(day)}
-                        className={`w-[10px] h-[10px] rounded-[2px] transition-all duration-150 hover:scale-130 active:scale-140 cursor-pointer ${
+                        onFocus={() => setHoveredDay(day)}
+                        onBlur={() => setHoveredDay(null)}
+                        className={`w-2.5 h-2.5 rounded-[2px] transition-all duration-150 hover:scale-130 active:scale-140 cursor-pointer p-0 border-0 ${
                           levelColors[day.level]
                         }`}
+                        aria-label={`${day.date}: ${day.count} contributions`}
                         title={`${day.date}: ${day.count} contributions`}
                       />
                     ))}
@@ -354,7 +358,7 @@ export const GithubActivityWidget: React.FC = () => {
           </div>
           <div className="flex items-center gap-1.5 text-[11px] font-sans shrink-0">
             <span>Less</span>
-            <span className="w-2.5 h-2.5 rounded-[2px] bg-surface-elevated border border-white/[0.04] dark:bg-[#161b22] inline-block" />
+            <span className="w-2.5 h-2.5 rounded-[2px] bg-surface-elevated border border-white/4 dark:bg-[#161b22] inline-block" />
             <span className="w-2.5 h-2.5 rounded-[2px] bg-[#0e4429] inline-block" />
             <span className="w-2.5 h-2.5 rounded-[2px] bg-[#006d32] inline-block" />
             <span className="w-2.5 h-2.5 rounded-[2px] bg-[#26a641] inline-block" />

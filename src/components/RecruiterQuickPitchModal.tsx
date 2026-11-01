@@ -39,7 +39,7 @@ const PITCH_TEXT_FOR_CLIPBOARD = `Varun Kushwah — Software Engineer / Backend 
 export default function RecruiterQuickPitchModal({
   isOpen: controlledIsOpen,
   onClose: controlledOnClose,
-}: RecruiterQuickPitchModalProps) {
+}: Readonly<RecruiterQuickPitchModalProps>) {
   const [internalIsOpen, setInternalIsOpen] = useState(false)
   const [copiedPitch, setCopiedPitch] = useState(false)
   const [copiedEmail, setCopiedEmail] = useState(false)
@@ -114,7 +114,7 @@ export default function RecruiterQuickPitchModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -134,7 +134,7 @@ export default function RecruiterQuickPitchModal({
             className="relative w-full max-w-2xl bg-canvas border border-hairline/80 rounded-2xl shadow-2xl overflow-hidden my-auto z-10"
           >
             {/* Top Accent Gradient Bar */}
-            <div className="h-1.5 w-full bg-gradient-to-r from-emerald-500 via-teal-400 to-indigo-500" />
+            <div className="h-1.5 w-full bg-linear-to-r from-emerald-500 via-teal-400 to-indigo-500" />
 
             {/* Modal Header */}
             <div className="p-5 sm:p-6 pb-4 border-b border-hairline/60">
@@ -177,7 +177,7 @@ export default function RecruiterQuickPitchModal({
                       </span>
                       <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-medium bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                        Actively Interviewing
+                        <span>Actively Interviewing</span>
                       </span>
                     </div>
                     <div className="text-sm sm:text-base font-bold text-ink">

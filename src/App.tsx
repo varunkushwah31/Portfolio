@@ -17,7 +17,7 @@ function AppRoutes() {
   const location = useLocation()
 
   return (
-    <div key={location.pathname} className="flex-grow flex flex-col w-full">
+    <div key={location.pathname} className="grow flex flex-col w-full">
       <Routes location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -62,7 +62,7 @@ function AppContent() {
 
       <div className="relative z-10 flex flex-col min-h-screen justify-between">
         <Navbar onOpenCommandPalette={() => setCommandPaletteOpen(true)} />
-        <main className="flex-grow flex flex-col w-full">
+        <main className="grow flex flex-col w-full">
           <AppRoutes />
         </main>
         <Footer />

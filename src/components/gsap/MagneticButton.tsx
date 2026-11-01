@@ -38,7 +38,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
     }
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!cachedRect) cachedRect = el.getBoundingClientRect()
+      cachedRect ??= el.getBoundingClientRect();
       const centerX = cachedRect.left + cachedRect.width / 2
       const centerY = cachedRect.top + cachedRect.height / 2
       const deltaX = e.clientX - centerX

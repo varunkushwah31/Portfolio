@@ -120,7 +120,7 @@ const Projects = () => {
       className="w-full bg-canvas relative border-b border-hairline-strong"
       style={{ paddingTop: "96px", paddingBottom: "96px" }}
     >
-      <div className="max-w-[1440px] mx-auto px-6">
+      <div className="max-w-360 mx-auto px-6">
         {/* Section Telemetry Eyebrow */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-hairline pb-6 mb-12">
           <motion.div
@@ -206,7 +206,7 @@ const Projects = () => {
             {/* Right Controls: Sort & View Toggle */}
             <div className="flex flex-wrap items-center gap-3">
               {/* Sort Selector */}
-              <div className="flex items-center bg-surface-soft border border-hairline px-3 h-[48px]">
+              <div className="flex items-center bg-surface-soft border border-hairline px-3 h-12">
                 <SlidersHorizontalIcon size={14} className="text-muted mr-2" />
                 <span className="label-uppercase text-muted text-[11px] mr-2">SORT:</span>
                 <select
@@ -224,7 +224,7 @@ const Projects = () => {
               </div>
 
               {/* View Mode Toggle Switcher */}
-              <div className="flex items-center bg-surface-soft border border-hairline p-1 h-[48px]">
+              <div className="flex items-center bg-surface-soft border border-hairline p-1 h-12">
                 <button
                   type="button"
                   onClick={() => {
@@ -295,7 +295,7 @@ const Projects = () => {
                   {isActive && (
                     <motion.span
                       layoutId="activeProjectCategoryLine"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-m-blue-light via-m-blue-dark to-m-red"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-m-blue-light via-m-blue-dark to-m-red"
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}

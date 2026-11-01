@@ -76,7 +76,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   const goTo = (path: string) => {
     sound.click()
     handleClose()
-    navigate(path)
+    void navigate(path)
   }
 
   const executeCli = (cmd: string) => {
@@ -139,7 +139,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     }
 
     if (cleanCmd.includes("contact")) {
-      navigator.clipboard.writeText("varun.kush3@gmail.com")
+      void navigator.clipboard.writeText("varun.kush3@gmail.com")
       setCliOutput({
         command: "varun --contact",
         content: (
@@ -274,7 +274,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       icon: <CodeIcon size={16} />,
       action: () => {
         handleClose()
-        navigate(`/project/${p.slug}`)
+        void navigate(`/project/${p.slug}`)
       },
     })),
 
@@ -351,7 +351,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: "Actions",
       icon: <EnvelopeSimpleIcon size={16} />,
       action: () => {
-        navigator.clipboard.writeText("varun.kush3@gmail.com")
+        void navigator.clipboard.writeText("varun.kush3@gmail.com")
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
       },

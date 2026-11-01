@@ -38,7 +38,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
     if (!project) return
     sound.click()
     const url = `${window.location.origin}/project/${project.slug}`
-    navigator.clipboard.writeText(url)
+    void navigator.clipboard.writeText(url)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
@@ -46,7 +46,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
   return (
     <AnimatePresence>
       {project && (
-        <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+        <div className="fixed inset-0 z-150 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}

@@ -92,7 +92,7 @@ ACHIEVEMENTS & COMPETITIVE PROGRAMMING
 
   const handleCopyText = () => {
     sound.click()
-    navigator.clipboard.writeText(rawResumeText)
+    void navigator.clipboard.writeText(rawResumeText)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }

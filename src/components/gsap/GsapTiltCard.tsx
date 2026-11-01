@@ -37,7 +37,7 @@ export const GsapTiltCard: React.FC<GsapTiltCardProps> = ({
     }
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!cachedRect) cachedRect = card.getBoundingClientRect()
+      cachedRect ??= card.getBoundingClientRect();
       const x = e.clientX - cachedRect.left
       const y = e.clientY - cachedRect.top
       const centerX = cachedRect.width / 2

@@ -237,10 +237,9 @@ export const HeroScene3D: React.FC<HeroScene3DProps> = ({ className = "" }) => {
       setIsInteracting(false)
     }
 
-    const onClick = () => {
-      if (triggerPulseRef.current) {
-        triggerPulseRef.current()
-      }
+    const onCanvasClick = (e: MouseEvent) => {
+      e.stopPropagation()
+      triggerPulseRef.current?.()
     }
 
     // Touch support for mobile
@@ -270,7 +269,7 @@ export const HeroScene3D: React.FC<HeroScene3DProps> = ({ className = "" }) => {
     container.addEventListener("mousemove", onPointerMove)
     container.addEventListener("mousedown", onMouseDown)
     window.addEventListener("mouseup", onMouseUp)
-    container.addEventListener("click", onClick)
+    container.addEventListener("click", onCanvasClick)
     container.addEventListener("touchstart", onTouchStart, { passive: true })
     container.addEventListener("touchmove", onTouchMove, { passive: true })
     container.addEventListener("touchend", onTouchEnd)
@@ -298,14 +297,14 @@ export const HeroScene3D: React.FC<HeroScene3DProps> = ({ className = "" }) => {
     window.addEventListener("resize", handleResize)
 
     // 8. Animation Loop
-    const clock = new THREE.Clock()
+    const startTime = performance.now()
 
     const animate = () => {
       animFrameId.current = requestAnimationFrame(animate)
 
       if (!isVisibleRef.current) return
 
-      const elapsedTime = clock.getElapsedTime()
+      const elapsedTime = (performance.now() - startTime) / 1000
 
       // Idle Rotation + Inertial Mouse Parallax
       const idleSpeed = prefersReducedMotion ? 0.05 : 0.25
@@ -357,7 +356,7 @@ export const HeroScene3D: React.FC<HeroScene3DProps> = ({ className = "" }) => {
       window.removeEventListener("mouseup", onMouseUp)
       container.removeEventListener("mousemove", onPointerMove)
       container.removeEventListener("mousedown", onMouseDown)
-      container.removeEventListener("click", onClick)
+      container.removeEventListener("click", onCanvasClick)
       container.removeEventListener("touchstart", onTouchStart)
       container.removeEventListener("touchmove", onTouchMove)
       container.removeEventListener("touchend", onTouchEnd)
@@ -380,16 +379,14 @@ export const HeroScene3D: React.FC<HeroScene3DProps> = ({ className = "" }) => {
       })
 
       if (renderer.domElement && container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement)
+        renderer.domElement.remove()
       }
       renderer.dispose()
     }
   }, [theme]) // Re-run when theme changes to smoothly update palette
 
   const handlePulse = () => {
-    if (triggerPulseRef.current) {
-      triggerPulseRef.current()
-    }
+    triggerPulseRef.current?.()
   }
 
   return (
@@ -397,7 +394,7 @@ export const HeroScene3D: React.FC<HeroScene3DProps> = ({ className = "" }) => {
       {/* Three.js Canvas Container */}
       <div
         ref={containerRef}
-        className={`w-full h-full min-h-[300px] sm:min-h-[360px] lg:min-h-[400px] cursor-grab active:cursor-grabbing relative overflow-hidden rounded-2xl ${
+        className={`w-full h-full min-h-75 sm:min-h-90 lg:min-h-100 cursor-grab active:cursor-grabbing relative overflow-hidden rounded-2xl ${
           isInteracting ? "ring-1 ring-emerald-500/30" : ""
         }`}
       />

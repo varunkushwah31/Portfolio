@@ -197,9 +197,9 @@ export default function ProjectDetail() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-              {project.metrics.map((m, idx) => (
+              {project.metrics.map((m) => (
                 <motion.div
-                  key={idx}
+                  key={m.label}
                   whileHover={{ y: -2 }}
                   className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-5 shadow-xs flex flex-col justify-between"
                 >
@@ -250,8 +250,8 @@ export default function ProjectDetail() {
           </h2>
 
           <div className="space-y-4 text-sm sm:text-base text-body leading-relaxed font-normal">
-            {project.longDescription.map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
+            {project.longDescription.map((paragraph) => (
+              <p key={paragraph.slice(0, 32)}>{paragraph}</p>
             ))}
           </div>
         </motion.section>
@@ -287,7 +287,7 @@ export default function ProjectDetail() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {project.highlights.map((highlight, i) => (
               <motion.div
-                key={i}
+                key={highlight.slice(0, 32)}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -325,9 +325,9 @@ export default function ProjectDetail() {
             </div>
 
             <div className="space-y-4">
-              {project.tradeoffs.map((t, idx) => (
+              {project.tradeoffs.map((t) => (
                 <div
-                  key={idx}
+                  key={t.decision}
                   className="rounded-2xl border border-hairline bg-surface-card p-5 sm:p-7 shadow-xs space-y-4"
                 >
                   <div className="flex items-center gap-3">

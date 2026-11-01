@@ -233,7 +233,7 @@ export const BackgroundCanvas3D: React.FC<BackgroundCanvas3DProps> = ({ classNam
       linesMaterial.dispose()
 
       if (renderer.domElement && container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement)
+        renderer.domElement.remove()
       }
       renderer.dispose()
     }

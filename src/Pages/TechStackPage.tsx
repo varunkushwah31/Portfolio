@@ -405,7 +405,7 @@ export default function TechStackPage() {
                       sound.click()
                       setSelectedCategory(cat)
                     }}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap cursor-pointer active:scale-95 shrink-0 min-h-[34px] flex items-center ${
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap cursor-pointer active:scale-95 shrink-0 min-h-8.5 flex items-center ${
                       isActive
                         ? "bg-ink text-canvas border border-ink shadow-xs font-semibold"
                         : "bg-surface-card text-muted hover:text-ink border border-hairline hover:border-muted"
@@ -470,7 +470,7 @@ export default function TechStackPage() {
 
                         {/* Application Context */}
                         <div className="text-xs text-muted bg-surface-soft border border-hairline rounded-lg p-2.5 sm:p-3 mb-4 leading-relaxed font-normal">
-                          <strong className="text-strong font-semibold text-ink">Application: </strong>
+                          <strong className="font-semibold text-ink">Application: </strong>
                           {tech.useCase}
                         </div>
                       </div>
@@ -575,7 +575,7 @@ export default function TechStackPage() {
                   key={app.name}
                   whileHover={{ scale: 1.1, y: -4, transition: { type: "spring", stiffness: 400, damping: 18 } }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex flex-col items-center gap-2 text-center cursor-pointer group select-none min-h-[70px]"
+                  className="flex flex-col items-center gap-2 text-center cursor-pointer group select-none min-h-17.5"
                 >
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-surface-card border border-hairline group-hover:border-zinc-400 dark:group-hover:border-zinc-600 flex items-center justify-center p-2.5 sm:p-3 transition-all duration-200 shadow-xs">
                     <i

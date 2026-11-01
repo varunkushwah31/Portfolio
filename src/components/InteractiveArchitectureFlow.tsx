@@ -197,7 +197,7 @@ export const InteractiveArchitectureFlow: React.FC<InteractiveArchitectureFlowPr
           </div>
           <div className="space-y-1 text-body-strong max-h-36 overflow-y-auto pt-1">
             {telemetryLog.map((log, idx) => (
-              <div key={idx} className="leading-snug">
+              <div key={`${log}_${idx}`} className="leading-snug">
                 <span className="text-emerald-500 mr-2">&gt;</span>
                 <span>{log}</span>
               </div>
