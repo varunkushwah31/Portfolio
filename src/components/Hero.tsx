@@ -6,6 +6,13 @@ import TechStack from "./TechStack"
 import MagneticButton from "./gsap/MagneticButton"
 import TextScramble from "./gsap/TextScramble"
 import { sound } from "@/lib/sound"
+import {
+  JavaIcon,
+  SpringIcon,
+  WebRTCIcon,
+  DockerIcon,
+  PostgresIcon,
+} from "./TechIcons"
 
 // Dynamic lazy import for Three.js 3D canvas to keep initial landing render fast
 const BackgroundCanvas3D = lazy(() => import("./three/BackgroundCanvas3D"))
@@ -47,7 +54,20 @@ const phraseVariants = {
   },
 }
 
-export default function Hero() {
+export interface HeroProps {
+  activeTechFilter?: string | null
+  onSelectTechFilter?: (techId: string | null) => void
+}
+
+const heroTechChips = [
+  { id: "java", name: "Java", icon: JavaIcon },
+  { id: "spring-boot", name: "Spring Boot", icon: SpringIcon },
+  { id: "webrtc", name: "WebRTC", icon: WebRTCIcon },
+  { id: "postgres", name: "PostgreSQL", icon: PostgresIcon },
+  { id: "docker", name: "Docker", icon: DockerIcon },
+]
+
+export default function Hero({ activeTechFilter, onSelectTechFilter }: HeroProps) {
   const [messageIndex, setMessageIndex] = useState(0)
 
   useEffect(() => {
@@ -56,6 +76,18 @@ export default function Hero() {
     }, 3600)
     return () => clearInterval(timer)
   }, [])
+
+  const handleChipClick = (chipId: string) => {
+    sound.switchTab()
+    const next = activeTechFilter === chipId ? null : chipId
+    onSelectTechFilter?.(next)
+
+    // Smoothly scroll down to highlighted projects section
+    const el = document.getElementById("highlighted-projects")
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
 
   return (
     <section className="max-w-4xl mx-auto px-5 sm:px-6 pt-10 sm:pt-20 pb-10 sm:pb-12 relative overflow-visible">
@@ -171,6 +203,65 @@ export default function Hero() {
               <span>Recruiter TL;DR (30s Pitch)</span>
             </button>
           </MagneticButton>
+        </motion.div>
+
+        {/* Interactive Quick Tech Stack Filter Chips */}
+        <motion.div variants={item} className="mt-8 mb-6">
+          <div className="flex items-center justify-between gap-2 mb-2.5">
+            <span className="text-xs font-semibold text-muted uppercase tracking-wider">
+              Filter projects by stack:
+            </span>
+            {activeTechFilter && (
+              <button
+                type="button"
+                onClick={() => {
+                  sound.click()
+                  onSelectTechFilter?.(null)
+                }}
+                className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-500 rounded px-1.5 py-0.5"
+                aria-label="Clear active technology filter"
+              >
+                Clear filter [x]
+              </button>
+            )}
+          </div>
+          <div
+            role="toolbar"
+            aria-label="Filter projects by technology stack"
+            className="flex flex-wrap items-center gap-2"
+          >
+            {heroTechChips.map((chip) => {
+              const isSelected = activeTechFilter === chip.id
+              const Icon = chip.icon
+              return (
+                <button
+                  key={chip.id}
+                  type="button"
+                  role="button"
+                  aria-pressed={isSelected}
+                  aria-label={`Filter projects by ${chip.name}`}
+                  onClick={() => handleChipClick(chip.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault()
+                      handleChipClick(chip.id)
+                    }
+                  }}
+                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-medium transition-all duration-200 cursor-pointer select-none active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas shadow-xs ${
+                    isSelected
+                      ? "bg-emerald-500/15 border-emerald-500 text-ink dark:text-emerald-300 font-semibold ring-1 ring-emerald-500/50 shadow-sm"
+                      : "border-hairline bg-surface-card hover:bg-surface-elevated text-body-strong hover:border-zinc-500/60 hover:text-ink"
+                  }`}
+                >
+                  <Icon size={14} className="w-3.5 h-3.5 shrink-0" />
+                  <span>{chip.name}</span>
+                  {isSelected && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  )}
+                </button>
+              )
+            })}
+          </div>
         </motion.div>
 
         {/* Tech Stack Row */}

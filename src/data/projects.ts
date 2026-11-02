@@ -64,7 +64,7 @@ const projects: Project[] = [
       "The system integrates directly with LeetCode (GraphQL API) and Codeforces (REST API) to continuously evaluate student submissions, contest ratings, and assignment completion against real-time problem slugs.",
       "To ensure high morning responsiveness and avoid external API rate limits, a scheduled Redis Cache Warming Worker runs nightly (@Scheduled) with distributed locks (setIfAbsent) to pre-warm global caches before peak classroom hours. Real-time updates are broadcast over STOMP WebSockets, backed by Resilience4j circuit breakers for graceful fallback during external API downtimes.",
     ],
-    tech: ["Java 21", "Spring Boot 3.3", "React 19", "TypeScript", "Redis 7", "MongoDB", "Spring Security", "STOMP WebSockets", "Resilience4j", "Docker", "Tailwind CSS"],
+    tech: ["Java 21", "Spring Boot 3.3", "PostgreSQL", "React 19", "TypeScript", "Redis 7", "MongoDB", "Spring Security", "STOMP WebSockets", "Resilience4j", "Docker", "Tailwind CSS"],
     highlights: [
       "Co-engineered full-stack architecture with Git subtree multi-repository synchronization",
       "Automated verification pipeline consuming LeetCode GraphQL and Codeforces REST APIs",

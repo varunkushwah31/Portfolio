@@ -145,3 +145,6 @@ export const TablePlusIcon: React.FC<IconProps> = ({ className = "", size = 26, 
     <path d="M18 15.8v4.4M15.8 18h4.4" stroke="#ffffff" strokeWidth="1.4" strokeLinecap="round" />
   </svg>
 )
+
+// 27. REDIS (In-Memory Key-Value & Cache)
+export const RedisIcon = createDevicon("devicons-redis-icon", "#DC382D")
