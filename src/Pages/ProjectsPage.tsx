@@ -187,12 +187,12 @@ export default function ProjectsPage() {
                     style={{ background: theme.bg }}
                   >
                     {theme.isMobile ? (
-                      <div className="w-full max-w-50 flex items-center justify-center">
+                      <div className="w-full max-w-50 mx-auto flex items-center justify-center">
                         <MobileMockup imageSrc={project.image} alt={project.title} />
                       </div>
                     ) : (
-                      <div className="w-full max-w-70 sm:max-w-80 transition-transform duration-500 hover:-translate-y-2 hover:scale-[1.03]">
-                        <LaptopMockup imageSrc={project.image} alt={project.title} />
+                      <div className="w-full max-w-70 sm:max-w-80 mx-auto flex items-center justify-center transition-transform duration-500 hover:-translate-y-2 hover:scale-[1.03]">
+                        <LaptopMockup className="w-full" imageSrc={project.image} alt={project.title} />
                       </div>
                     )}
                   </Link>

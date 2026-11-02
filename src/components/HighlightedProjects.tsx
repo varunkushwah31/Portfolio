@@ -75,11 +75,11 @@ export default function HighlightedProjects() {
                 <Link
                   to={`/project/${project.slug}`}
                   onClick={() => sound.click()}
-                  className="group block h-56 sm:h-64 items-center justify-center p-4 sm:p-8 overflow-hidden relative cursor-pointer"
+                  className="group flex items-center justify-center h-56 sm:h-64 p-4 sm:p-8 overflow-hidden relative cursor-pointer"
                   style={{ background: theme.bg }}
                 >
-                  <div className="w-full max-w-65 sm:max-w-[320px] transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.03]">
-                    <LaptopMockup imageSrc={project.image} alt={project.title} />
+                  <div className="w-full max-w-65 sm:max-w-[320px] mx-auto flex items-center justify-center transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-[1.03]">
+                    <LaptopMockup className="w-full" imageSrc={project.image} alt={project.title} />
                   </div>
                 </Link>
 

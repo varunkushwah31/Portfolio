@@ -8,7 +8,7 @@ interface LaptopMockupProps {
 
 export const LaptopMockup: React.FC<LaptopMockupProps> = ({ imageSrc, alt, className = "" }) => {
   return (
-    <div className={`relative mx-auto flex flex-col items-center select-none ${className}`}>
+    <div className={`relative w-full mx-auto flex flex-col items-center select-none ${className}`}>
       {/* Screen Frame (Lid) */}
       <div className="relative w-full aspect-16/10 bg-[#1a1a1a] rounded-t-xl rounded-b-[2px] p-1.5 sm:p-2 border border-zinc-700/60 shadow-2xl overflow-hidden flex flex-col">
         {/* Camera dot */}
