@@ -513,7 +513,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             <div className="space-y-1.5 pl-2 border-l border-emerald-500/30 text-body-strong">
               <div>1. <strong className="text-ink">MentorSync:</strong> LeetCode/Codeforces LMS with Redis distributed cache warming &amp; WebSockets.</div>
               <div>2. <strong className="text-ink">W2W Share:</strong> Peer-to-peer browser file distribution via WebRTC DataChannels &amp; AES-256-GCM.</div>
-              <div>3. <strong className="text-ink">System Health:</strong> OS daemon for live hardware metrics streaming.</div>
             </div>
             <div className="pt-1.5 flex items-center gap-2 font-sans">
               <button

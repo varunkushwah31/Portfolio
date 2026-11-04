@@ -1,8 +1,5 @@
 import leetcodeImg from "../assets/project_leetcode.png"
 import w2wshareImg from "../assets/project_w2wshare.png"
-import dashboardImg from "../assets/project_dashboard.png"
-import diseaseImg from "../assets/project_disease.png"
-import quotesImg from "../assets/project_quotes.png"
 import sitelookImg from "../assets/project_sitelook.png"
 
 export interface ProjectMetric {
@@ -25,7 +22,7 @@ export interface ArchitectureNode {
 
 export interface Project {
   slug: string
-  category: "Full-Stack" | "Real-Time" | "Systems" | "Machine Learning" | "Mobile"
+  category: "Full-Stack" | "Real-Time"
   title: string
   tagline: string
   version: string
@@ -224,168 +221,6 @@ const projects: Project[] = [
     status: "Active Development",
     githubUrl: "https://github.com/varunkushwah31/Page_Pulse",
     liveUrl: "https://site-look.vercel.app/",
-  },
-  {
-    slug: "system-health-dashboard",
-    category: "Systems",
-    title: "System Health Dashboard",
-    tagline: "Lightweight real-time hardware telemetry and system resource monitor.",
-    version: "v2.0",
-    year: "2024",
-    featured: false,
-    accentColor: "#3a1f1f",
-    description:
-      "A custom-built dashboard designed to accurately monitor local machine performance and resource utilization in real-time with zero external cloud dependencies.",
-    image: dashboardImg,
-    longDescription: [
-      "The System Health Dashboard provides real-time visibility into local machine performance — CPU utilization, memory consumption, disk I/O, and network throughput — through a clean, continuously updating interface.",
-      "The backend collects system metrics at regular intervals, normalizing data from OS-level APIs into a consistent format. The frontend consumes this data stream and renders it as live charts and gauges that update without page refreshes.",
-      "The project was motivated by the need for a lightweight, self-hosted monitoring solution that does not depend on cloud services or heavy agent installations. It runs entirely on the local machine and provides immediate, actionable visibility into resource bottlenecks.",
-    ],
-    tech: ["React", "OS APIs", "Node.js", "WebSockets", "Chart.js", "Tailwind CSS"],
-    highlights: [
-      "Real-time CPU, memory, disk, and network monitoring",
-      "Self-hosted with zero external service dependencies",
-      "Continuous data stream with live chart rendering",
-      "Lightweight agent for minimal system overhead",
-    ],
-    metrics: [
-      { label: "Telemetry", value: "CPU / RAM / Disk / Net" },
-      { label: "Polling Interval", value: "1000ms WebSocket Tick" },
-      { label: "Deployment", value: "100% Local Self-Hosted" },
-      { label: "Visualization", value: "Real-Time Telemetry" },
-    ],
-    architectureFlow: [
-      { step: "01", title: "OS Telemetry Probe", detail: "Background daemon polls kernel OS APIs (/proc, sysinfo, os module) every 1000ms." },
-      { step: "02", title: "Metric Normalization", detail: "Raw metrics normalized into compact JSON telemetry payloads." },
-      { step: "03", title: "WebSocket Broadcast", detail: "WebSocket connection pushes real-time telemetry stream to connected client cockpit." },
-      { step: "04", title: "Time-Series Visualizer", detail: "React frontend renders live-updating time-series charts with zero page reloads." },
-    ],
-    tradeoffs: [
-      {
-        decision: "Self-Hosted Lightweight Daemon",
-        rationale: "Runs entirely on local hardware with zero external cloud SaaS costs or network egress.",
-        alternative: "Cloud-Hosted Datadog / Grafana Agent",
-        tradeoff: "Historical metrics stored locally rather than distributed cloud DB; total data privacy & zero cost.",
-      },
-      {
-        decision: "WebSocket Stream over HTTP Polling",
-        rationale: "Eliminated repeated TCP handshake and HTTP header overhead for 1000ms interval metrics.",
-        alternative: "HTTP REST Polling every second",
-        tradeoff: "Persistent socket connection required; saved 90% network overhead per tick.",
-      },
-    ],
-    role: "Solo Developer",
-    status: "Completed",
-    githubUrl: "https://github.com/varunkushwah31",
-  },
-  {
-    slug: "disease-prediction",
-    category: "Machine Learning",
-    title: "Disease Prediction",
-    tagline: "End-to-end ML classification pipeline for multi-symptom medical diagnostics.",
-    version: "v1.2",
-    year: "2023",
-    featured: false,
-    accentColor: "#1f1a3a",
-    description:
-      "A comprehensive end-to-end Machine Learning project mapping user-inputted symptoms to potential disease predictions with cross-validated classification models.",
-    image: diseaseImg,
-    longDescription: [
-      "Disease Prediction is an end-to-end Machine Learning project developed for college coursework. The system accepts a set of user-inputted symptoms and maps them to potential disease predictions using trained classification models.",
-      "The data pipeline handles symptom encoding, feature normalization, and model training across multiple classification algorithms. The final model was selected based on cross-validated accuracy metrics and tested against a held-out evaluation set.",
-      "The project covered the full ML lifecycle — from raw data cleaning and exploratory analysis through feature engineering, model selection, hyperparameter tuning, and deployment of a prediction interface that non-technical users can interact with.",
-    ],
-    tech: ["Python", "Scikit-Learn", "Pandas", "NumPy", "Flask", "Classification Models"],
-    highlights: [
-      "End-to-end ML pipeline from data cleaning to prediction serving",
-      "Multiple classification algorithms compared via cross-validation",
-      "Symptom-to-disease mapping with probability-ranked outputs",
-      "User-facing interface for non-technical interaction",
-    ],
-    metrics: [
-      { label: "Pipeline", value: "Symptom Encoding" },
-      { label: "Validation", value: "K-Fold Cross Eval" },
-      { label: "Accuracy", value: "96.4% Cross-Validated" },
-      { label: "Deployment", value: "Flask Inference API" },
-    ],
-    architectureFlow: [
-      { step: "01", title: "Symptom Vectorization", detail: "Binary multi-hot encoding mapping user selected symptoms into 132-dimension feature vector." },
-      { step: "02", title: "Classification Pipeline", detail: "Trained Random Forest & SVM ensemble processing feature space with cross-validated parameters." },
-      { step: "03", title: "Probability Ranking", detail: "Model predicts primary diagnosis with softmax probability distribution across classes." },
-      { step: "04", title: "REST Inference Serving", detail: "Flask microservice delivers JSON diagnosis response to client interface." },
-    ],
-    tradeoffs: [
-      {
-        decision: "Random Forest Classifier with K-Fold Validation",
-        rationale: "Resilient against non-linear symptom interactions with superior accuracy on sparse binary vectors.",
-        alternative: "Single Decision Tree or Naive Bayes",
-        tradeoff: "Slightly larger model serialized artifact size; achieved 96.4% cross-validation stability.",
-      },
-      {
-        decision: "REST API Microservice Deployment",
-        rationale: "Decoupled prediction inference engine from client UI, enabling multi-platform integration.",
-        alternative: "Monolithic Jupyter Notebook with GUI",
-        tradeoff: "Required separate API service lifecycle; enabled production-like consumption.",
-      },
-    ],
-    role: "ML Developer",
-    status: "Completed",
-    githubUrl: "https://github.com/varunkushwah31",
-  },
-  {
-    slug: "daily-quotes-app",
-    category: "Mobile",
-    title: "Daily Quotes App",
-    tagline: "Cross-platform mobile app delivering daily inspirational quotes.",
-    version: "v2.0",
-    year: "2023",
-    featured: false,
-    accentColor: "#1a2a3a",
-    description:
-      "A mobile application developed to deliver daily inspirational quotes to users, engineered with Flutter and Dart using clean decoupled layers.",
-    image: quotesImg,
-    longDescription: [
-      "The Daily Quotes App is a mobile application built with Flutter that delivers curated inspirational quotes to users on a daily basis. The app combines clean material design with a smooth content-browsing experience.",
-      "Flutter's cross-platform capabilities allowed the app to target both Android and iOS from a single Dart codebase. The architecture separates the quote data layer from the presentation layer, making it straightforward to swap data sources or extend the content catalog.",
-      "The project served as a hands-on introduction to mobile development patterns — widget composition, state management, navigation, and the build/deploy workflow for mobile platforms.",
-    ],
-    tech: ["Flutter", "Dart", "Mobile UI", "Cross-Platform", "State Management", "Local Storage"],
-    highlights: [
-      "Cross-platform mobile app from a single Dart codebase",
-      "Daily content refresh with curated quote collections",
-      "Clean material design with smooth navigation",
-      "Separation of data and presentation layers",
-    ],
-    metrics: [
-      { label: "Framework", value: "Flutter & Dart" },
-      { label: "Targets", value: "iOS & Android" },
-      { label: "State", value: "Clean Decoupled" },
-      { label: "Cadence", value: "Daily Sync Engine" },
-    ],
-    architectureFlow: [
-      { step: "01", title: "Quote Repository", detail: "Abstract data layer fetching daily curated quotes from local cache and remote sources." },
-      { step: "02", title: "State Controller", detail: "Provider viewmodel managing reactive quote state and persistence logic." },
-      { step: "03", title: "Widget Composition", detail: "Custom Flutter widget tree rendering typographic layout with fluid transition curves." },
-      { step: "04", title: "Local Persistence", detail: "Offline-first caching storing favorite quotes in local device storage." },
-    ],
-    tradeoffs: [
-      {
-        decision: "Single Flutter / Dart Codebase",
-        rationale: "Unified business logic and UI rendering across both iOS and Android platforms.",
-        alternative: "Native Swift (iOS) & Kotlin (Android)",
-        tradeoff: "Slightly larger app binary size; eliminated duplicated development and maintenance effort.",
-      },
-      {
-        decision: "Decoupled Repository Pattern",
-        rationale: "Presentation widgets remain completely agnostic of data fetching mechanisms.",
-        alternative: "Inline HTTP calls inside State widgets",
-        tradeoff: "Additional abstraction layer; enabled instant unit test mocking and local cache swapping.",
-      },
-    ],
-    role: "Mobile Developer",
-    status: "Completed",
-    githubUrl: "https://github.com/varunkushwah31",
   },
 ]
 

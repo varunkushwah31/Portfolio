@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import { usePageTitle } from "@/hooks/usePageTitle"
 import projects from "@/data/projects"
 import LaptopMockup from "@/components/LaptopMockup"
-import MobileMockup from "@/components/MobileMockup"
 import { sound } from "@/lib/sound"
 import {
   GithubLogoIcon,
@@ -15,16 +14,11 @@ import {
   JavaIcon,
   SpringIcon,
   ReactIcon,
-  FlutterIcon,
-  PythonIcon,
   TypeScriptIcon,
-  NodeIcon,
   DockerIcon,
-  GitIcon,
   WebRTCIcon,
   TailwindIcon,
   PostgresIcon,
-  LinuxIcon,
 } from "@/components/TechIcons"
 
 const projectBadges: Record<
@@ -34,6 +28,7 @@ const projectBadges: Record<
   "leetcode-tracker": [
     { name: "Java", icon: JavaIcon },
     { name: "Spring Boot", icon: SpringIcon },
+    { name: "PostgreSQL", icon: PostgresIcon },
     { name: "React", icon: ReactIcon },
     { name: "TypeScript", icon: TypeScriptIcon },
     { name: "Tailwind", icon: TailwindIcon },
@@ -52,28 +47,10 @@ const projectBadges: Record<
     { name: "Docker", icon: DockerIcon },
     { name: "Tailwind", icon: TailwindIcon },
   ],
-  "system-health-dashboard": [
-    { name: "React", icon: ReactIcon },
-    { name: "Node.js", icon: NodeIcon },
-    { name: "Tailwind", icon: TailwindIcon },
-    { name: "Linux", icon: LinuxIcon },
-  ],
-  "disease-prediction": [
-    { name: "Python", icon: PythonIcon },
-    { name: "Docker", icon: DockerIcon },
-    { name: "PostgreSQL", icon: PostgresIcon },
-    { name: "Linux", icon: LinuxIcon },
-  ],
-  "daily-quotes-app": [
-    { name: "Flutter", icon: FlutterIcon },
-    { name: "Python", icon: PythonIcon },
-    { name: "Docker", icon: DockerIcon },
-    { name: "Git", icon: GitIcon },
-  ],
 }
 
 // Matching the distinct background colors from bonabrian style
-const cardThemes: Record<string, { bg: string; isMobile?: boolean }> = {
+const cardThemes: Record<string, { bg: string }> = {
   "leetcode-tracker": {
     bg: "linear-gradient(135deg, #312e81 0%, #1e1b4b 100%)",
   },
@@ -83,19 +60,9 @@ const cardThemes: Record<string, { bg: string; isMobile?: boolean }> = {
   "site-look": {
     bg: "linear-gradient(135deg, #0d9488 0%, #115e59 100%)",
   },
-  "system-health-dashboard": {
-    bg: "linear-gradient(135deg, #c2410c 0%, #9a3412 100%)",
-  },
-  "disease-prediction": {
-    bg: "linear-gradient(135deg, #0284c7 0%, #0369a1 100%)",
-  },
-  "daily-quotes-app": {
-    bg: "linear-gradient(135deg, #0369a1 0%, #1e40af 100%)",
-    isMobile: true,
-  },
 }
 
-type FilterCategory = "All" | "Full-Stack" | "Real-Time & Systems" | "Mobile & ML"
+type FilterCategory = "All" | "Full-Stack" | "Real-Time"
 
 export default function ProjectsPage() {
   usePageTitle("Projects")
@@ -106,16 +73,13 @@ export default function ProjectsPage() {
     if (activeFilter === "Full-Stack") {
       return projects.filter((p) => p.category === "Full-Stack")
     }
-    if (activeFilter === "Real-Time & Systems") {
-      return projects.filter((p) => p.category === "Real-Time" || p.category === "Systems")
-    }
-    if (activeFilter === "Mobile & ML") {
-      return projects.filter((p) => p.category === "Mobile" || p.category === "Machine Learning")
+    if (activeFilter === "Real-Time") {
+      return projects.filter((p) => p.category === "Real-Time")
     }
     return projects
   }, [activeFilter])
 
-  const categories: FilterCategory[] = ["All", "Full-Stack", "Real-Time & Systems", "Mobile & ML"]
+  const categories: FilterCategory[] = ["All", "Full-Stack", "Real-Time"]
 
   return (
     <div className="min-h-screen bg-transparent">
@@ -186,15 +150,9 @@ export default function ProjectsPage() {
                     className="h-56 sm:h-64 flex items-center justify-center p-4 sm:p-8 overflow-hidden relative cursor-pointer"
                     style={{ background: theme.bg }}
                   >
-                    {theme.isMobile ? (
-                      <div className="w-full max-w-50 mx-auto flex items-center justify-center">
-                        <MobileMockup imageSrc={project.image} alt={project.title} />
-                      </div>
-                    ) : (
-                      <div className="w-full max-w-70 sm:max-w-80 mx-auto flex items-center justify-center transition-transform duration-500 hover:-translate-y-2 hover:scale-[1.03]">
-                        <LaptopMockup className="w-full" imageSrc={project.image} alt={project.title} />
-                      </div>
-                    )}
+                    <div className="w-full max-w-70 sm:max-w-80 mx-auto flex items-center justify-center transition-transform duration-500 hover:-translate-y-2 hover:scale-[1.03]">
+                      <LaptopMockup className="w-full" imageSrc={project.image} alt={project.title} />
+                    </div>
                   </Link>
 
                   {/* Bottom Card Content */}

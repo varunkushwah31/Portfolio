@@ -10,12 +10,7 @@ import {
   TerminalWindowIcon,
   PulseIcon,
   BroadcastIcon,
-  CpuIcon,
-  HardDrivesIcon,
-  BrainIcon,
   StackIcon,
-  DeviceMobileIcon,
-  LightningIcon,
   DesktopIcon,
   FileArchiveIcon,
   LockKeyIcon,
@@ -31,22 +26,19 @@ interface ProjectVisualProps {
 
 export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, className = "" }) => {
   // Real-time simulated telemetry states for dynamic visualizations
-  const [cpuVal, setCpuVal] = useState(34.2)
   const [transferMb, setTransferMb] = useState(136.4)
   const [solvedCount, setSolvedCount] = useState(482)
   const [speedVal, setSpeedVal] = useState(28.4)
   const [rttVal, setRttVal] = useState(1.4)
 
   useEffect(() => {
-    const cpuSteps = [34.2, 38.6, 31.8, 42.4, 29.5, 36.1, 40.8, 33.4]
     const speedSteps = [27.8, 29.4, 31.2, 28.6, 32.5, 30.1, 28.4]
     const rttSteps = [1.3, 1.5, 1.2, 1.4, 1.6, 1.3]
     let step = 0
     const timer = setInterval(() => {
       // Simulate live jitter for telemetry dashboards
-      step = (step + 1) % cpuSteps.length
-      setCpuVal(cpuSteps[step])
-      setSpeedVal(speedSteps[step % speedSteps.length])
+      step = (step + 1) % speedSteps.length
+      setSpeedVal(speedSteps[step])
       setRttVal(rttSteps[step % rttSteps.length])
       setTransferMb((prev) => (prev >= 158 ? 112 : Number((prev + 3.2).toFixed(1))))
       setSolvedCount((prev) => (prev >= 495 ? 482 : prev + 1))
@@ -408,206 +400,6 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ slug, title, class
         </div>
       )
     }
-
-    case "system-health-dashboard":
-      return (
-        <div
-          className={`w-full h-full bg-surface-card border border-hairline rounded-2xl flex flex-col justify-between font-mono select-none overflow-hidden relative shadow-sm ${className}`}
-          style={{ minHeight: "220px" }}
-        >
-          {/* Header Bar */}
-          <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <PulseIcon size={14} className="text-emerald-600 dark:text-emerald-400 animate-pulse" />
-              <span className="text-body-strong text-[11px] font-sans font-semibold tracking-wider">
-                HARDWARE TELEMETRY // REAL-TIME
-              </span>
-            </div>
-            <span className="text-[10px] text-sky-700 dark:text-sky-400 font-mono bg-sky-500/10 px-2.5 py-0.5 rounded-full border border-sky-500/20 font-medium">
-              1000ms TICK
-            </span>
-          </div>
-
-          {/* Real-time Hardware Gauges */}
-          <div className="p-4 sm:p-5 space-y-3.5 text-xs">
-            {/* CPU & Memory Row */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-surface-soft p-3 rounded-xl border border-hairline space-y-2">
-                <div className="flex justify-between text-[11px]">
-                  <span className="text-muted flex items-center gap-1.5 font-sans">
-                    <CpuIcon size={13} className="text-emerald-600 dark:text-emerald-400" /> CPU
-                  </span>
-                  <span className="text-ink font-bold font-mono">{cpuVal}%</span>
-                </div>
-                <div className="w-full h-2 bg-surface-elevated rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-emerald-500 transition-all duration-300 rounded-full"
-                    style={{ width: `${cpuVal}%` }}
-                  />
-                </div>
-                <div className="text-[10px] text-muted font-sans">8 Cores · 3.8 GHz</div>
-              </div>
-
-              <div className="bg-surface-soft p-3 rounded-xl border border-hairline space-y-2">
-                <div className="flex justify-between text-[11px]">
-                  <span className="text-muted flex items-center gap-1.5 font-sans">
-                    <HardDrivesIcon size={13} className="text-sky-600 dark:text-sky-400" /> Memory
-                  </span>
-                  <span className="text-ink font-bold font-mono">6.4 / 16 GB</span>
-                </div>
-                <div className="w-full h-2 bg-surface-elevated rounded-full overflow-hidden">
-                  <div className="h-full bg-sky-500 w-[40%] rounded-full" />
-                </div>
-                <div className="text-[10px] text-muted font-sans">DDR4 Dual Channel</div>
-              </div>
-            </div>
-
-            {/* Network / Disk Stream Bar */}
-            <div className="bg-surface-soft p-3 rounded-xl border border-hairline flex items-center justify-between text-[11px]">
-              <div className="flex items-center gap-2">
-                <LightningIcon size={14} className="text-amber-600 dark:text-amber-400" />
-                <span className="text-muted font-sans">Disk I/O:</span>
-                <span className="text-ink font-bold font-mono">48.2 MB/s R · 12.1 MB/s W</span>
-              </div>
-              <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono">100% OK</span>
-            </div>
-          </div>
-
-          {/* Bottom Strip */}
-          <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-emerald-600 dark:text-emerald-400 font-semibold font-sans">Self-Hosted Daemon</span>
-            <span>OS APIs · Zero Cloud Overhead</span>
-          </div>
-        </div>
-      )
-
-    case "disease-prediction":
-      return (
-        <div
-          className={`w-full h-full bg-surface-card border border-hairline rounded-2xl flex flex-col justify-between font-mono select-none overflow-hidden relative shadow-sm ${className}`}
-          style={{ minHeight: "220px" }}
-        >
-          {/* Header Bar */}
-          <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <BrainIcon size={14} className="text-emerald-600 dark:text-emerald-400" />
-              <span className="text-body-strong text-[11px] font-sans font-semibold tracking-wider">
-                ML CLASSIFICATION // PYTHON
-              </span>
-            </div>
-            <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-medium">
-              CROSS-VAL: 96.2%
-            </span>
-          </div>
-
-          {/* ML Pipeline Flowchart */}
-          <div className="p-4 sm:p-5 space-y-3.5 text-xs">
-            {/* Pipeline Step Boxes */}
-            <div className="grid grid-cols-3 gap-2 text-center text-[11px]">
-              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline">
-                <div className="text-muted text-[10px] font-sans">INPUT</div>
-                <div className="text-ink font-bold mt-0.5">SYMPTOMS [132]</div>
-              </div>
-              <div className="bg-surface-soft p-2.5 rounded-xl border border-emerald-500/30">
-                <div className="text-emerald-600 dark:text-emerald-400 text-[10px] font-sans font-semibold">MODEL</div>
-                <div className="text-ink font-bold mt-0.5">RANDOM FOREST</div>
-              </div>
-              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline">
-                <div className="text-muted text-[10px] font-sans">OUTPUT</div>
-                <div className="text-emerald-600 dark:text-emerald-400 font-bold mt-0.5">DIAGNOSIS</div>
-              </div>
-            </div>
-
-            {/* Probability Breakdown Distribution */}
-            <div className="bg-surface-soft p-3 rounded-xl border border-hairline space-y-2">
-              <div className="flex justify-between text-[11px]">
-                <span className="text-muted font-sans text-[10px] uppercase tracking-wider">Prediction Confidence</span>
-                <span className="text-emerald-600 dark:text-emerald-400 font-bold font-mono">0.964 PROB</span>
-              </div>
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2 text-[10px] font-sans">
-                  <span className="w-24 text-muted truncate">Primary Diagnosis:</span>
-                  <div className="flex-1 h-2 bg-surface-elevated rounded-full overflow-hidden">
-                    <div className="h-full bg-emerald-500 w-[96.4%] rounded-full" />
-                  </div>
-                  <span className="font-mono text-ink text-[10px] font-semibold">96.4%</span>
-                </div>
-                <div className="flex items-center gap-2 text-[10px] font-sans">
-                  <span className="w-24 text-muted truncate">Alternative:</span>
-                  <div className="flex-1 h-2 bg-surface-elevated rounded-full overflow-hidden">
-                    <div className="h-full bg-hairline w-[3.6%] rounded-full" />
-                  </div>
-                  <span className="font-mono text-muted text-[10px]">3.6%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Strip */}
-          <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-emerald-600 dark:text-emerald-400 font-semibold font-sans">Scikit-Learn · Pandas</span>
-            <span>REST Inference Serving</span>
-          </div>
-        </div>
-      )
-
-    case "daily-quotes-app":
-      return (
-        <div
-          className={`w-full h-full bg-surface-card border border-hairline rounded-2xl flex flex-col justify-between font-mono select-none overflow-hidden relative shadow-sm ${className}`}
-          style={{ minHeight: "220px" }}
-        >
-          {/* Header Bar */}
-          <div className="bg-surface-elevated px-4 py-2.5 border-b border-hairline flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <DeviceMobileIcon size={14} className="text-sky-600 dark:text-sky-400" />
-              <span className="text-body-strong text-[11px] font-sans font-semibold tracking-wider">
-                FLUTTER CLIENT // MOBILE UI
-              </span>
-            </div>
-            <span className="text-[10px] text-muted font-mono bg-surface-soft px-2.5 py-0.5 rounded-full border border-hairline">
-              iOS / Android
-            </span>
-          </div>
-
-          {/* Mobile UI Wireframe Specimen */}
-          <div className="p-4 sm:p-5 space-y-3.5 text-xs">
-            {/* Card Mockup */}
-            <div className="bg-surface-soft p-3.5 rounded-xl border border-hairline flex items-start justify-between gap-3">
-              <div className="space-y-1 font-sans">
-                <div className="text-[10px] font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-wider">
-                  Quote of the Day
-                </div>
-                <div className="text-ink font-semibold text-xs sm:text-sm leading-snug">
-                  "Engineered for performance, designed for precision."
-                </div>
-                <div className="text-[10px] text-muted">— Curated Daily Collection</div>
-              </div>
-              <div className="w-8 h-8 rounded-lg bg-surface-card border border-hairline flex items-center justify-center text-sky-600 dark:text-sky-400 shrink-0 shadow-xs">
-                <LightningIcon size={15} />
-              </div>
-            </div>
-
-            {/* Architecture Split Tags */}
-            <div className="grid grid-cols-2 gap-2 text-[11px]">
-              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex items-center justify-between">
-                <span className="text-muted font-sans">STATE:</span>
-                <span className="text-ink font-bold font-mono">CLEAN</span>
-              </div>
-              <div className="bg-surface-soft p-2.5 rounded-xl border border-hairline flex items-center justify-between">
-                <span className="text-muted font-sans">CADENCE:</span>
-                <span className="text-ink font-bold font-mono">24H SYNC</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Strip */}
-          <div className="bg-surface-elevated px-4 py-2 border-t border-hairline flex justify-between text-[11px] text-muted">
-            <span className="text-sky-600 dark:text-sky-400 font-semibold font-sans">Dart / Flutter Runtime</span>
-            <span>Decoupled Repository Pattern</span>
-          </div>
-        </div>
-      )
 
     case "site-look":
       return (

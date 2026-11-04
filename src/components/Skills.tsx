@@ -44,7 +44,7 @@ public class TelemetryEngine {
         }
     }
 }`,
-      linkedProject: "system-health-dashboard",
+      linkedProject: "w2wshare",
     },
   },
   {
@@ -124,7 +124,7 @@ dataChannel.onmessage = (event: MessageEvent<ArrayBuffer>) => {
 
   return metrics;
 }`,
-      linkedProject: "system-health-dashboard",
+      linkedProject: "w2wshare",
     },
   },
   {
@@ -164,7 +164,7 @@ git subtree pull --prefix=server https://github.com/varun/server.git main --squa
     notifyListeners();
   }
 }`,
-      linkedProject: "daily-quotes-app",
+      linkedProject: "site-look",
     },
   },
   {
@@ -201,7 +201,7 @@ pipeline = Pipeline([
 
 scores = cross_val_score(pipeline, X_symptoms, y_diagnosis, cv=5)
 print(f"5-Fold Cross-Val Accuracy: {scores.mean():.4f}")`,
-      linkedProject: "disease-prediction",
+      linkedProject: "leetcode-tracker",
     },
   },
 ]

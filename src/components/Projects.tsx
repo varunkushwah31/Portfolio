@@ -14,8 +14,6 @@ import {
   TerminalWindowIcon,
   PulseIcon,
   BroadcastIcon,
-  BrainIcon,
-  DeviceMobileIcon,
   StackIcon,
 } from "@phosphor-icons/react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -39,12 +37,6 @@ const getProjectIcon = (slug: string) => {
     case "w2w-share":
     case "mangoshare-clone":
       return <BroadcastIcon size={14} className="text-m-blue-dark" />
-    case "system-health-dashboard":
-      return <PulseIcon size={14} className="text-m-red" />
-    case "disease-prediction":
-      return <BrainIcon size={14} className="text-m-blue-light" />
-    case "daily-quotes-app":
-      return <DeviceMobileIcon size={14} className="text-m-blue-dark" />
     case "site-look":
       return <PulseIcon size={14} className="text-emerald-600 dark:text-emerald-400" />
     default:
