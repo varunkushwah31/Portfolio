@@ -1,4 +1,5 @@
-import React, { useRef, useState, useCallback } from "react"
+import React, { useRef, useEffect } from "react"
+import { gsap } from "@/lib/gsap"
 
 interface SpotlightCardProps {
   children: React.ReactNode
@@ -12,79 +13,90 @@ interface SpotlightCardProps {
 export const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = "",
-  spotlightColor = "rgba(16, 185, 129, 0.22)",
-  borderColor = "rgba(16, 185, 129, 0.45)",
-  size = 450,
+  spotlightColor = "rgba(16, 185, 129, 0.05)",
+  size = 400,
   ...props
-}) => {
+}: Readonly<SpotlightCardProps>) => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const rectRef = useRef<DOMRect | null>(null)
-  const [position, setPosition] = useState({ x: -1000, y: -1000 })
-  const [isHovered, setIsHovered] = useState(false)
+  const glowRef = useRef<HTMLDivElement>(null)
 
-  const handleMouseEnter = useCallback(() => {
-    if (containerRef.current) {
-      rectRef.current = containerRef.current.getBoundingClientRect()
+  useEffect(() => {
+    const container = containerRef.current
+    const glow = glowRef.current
+    if (!container || !glow) return
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const isTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window
+    if (mediaQuery.matches || isTouch) return
+
+    let rect: DOMRect | null = null
+
+    const handleMouseEnter = () => {
+      rect = container.getBoundingClientRect()
+      gsap.to(glow, {
+        opacity: 1,
+        duration: 0.35,
+        ease: "power2.out",
+        overwrite: "auto",
+      })
     }
-    setIsHovered(true)
-  }, [])
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!rectRef.current) {
-      if (containerRef.current) {
-        rectRef.current = containerRef.current.getBoundingClientRect()
-      } else {
-        return
-      }
+    const handleMouseMove = (e: MouseEvent) => {
+      rect ??= container.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+
+      gsap.to(glow, {
+        x: x - size / 2,
+        y: y - size / 2,
+        duration: 0.2,
+        ease: "power2.out",
+        overwrite: "auto",
+      })
     }
-    const rect = rectRef.current
-    setPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    })
-  }, [])
 
-  const handleMouseLeave = useCallback(() => {
-    setIsHovered(false)
-    rectRef.current = null
-    setPosition({ x: -1000, y: -1000 })
-  }, [])
+    const handleMouseLeave = () => {
+      rect = null
+      gsap.to(glow, {
+        opacity: 0,
+        duration: 0.45,
+        ease: "power2.out",
+        overwrite: "auto",
+      })
+    }
+
+    container.addEventListener("mouseenter", handleMouseEnter)
+    container.addEventListener("mousemove", handleMouseMove)
+    container.addEventListener("mouseleave", handleMouseLeave)
+
+    return () => {
+      container.removeEventListener("mouseenter", handleMouseEnter)
+      container.removeEventListener("mousemove", handleMouseMove)
+      container.removeEventListener("mouseleave", handleMouseLeave)
+      gsap.killTweensOf(glow)
+    }
+  }, [size])
 
   return (
     <div
       ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onTouchStart={() => setIsHovered(false)}
-      onTouchEnd={() => setIsHovered(false)}
-      className={`relative rounded-2xl border border-hairline bg-surface-card overflow-hidden transition-all duration-300 ${className}`}
+      className={`relative rounded-2xl border border-hairline bg-surface-card overflow-hidden ${className}`}
       {...props}
     >
-      {/* Dynamic Cursor Spotlight Border Follower (Vercel / Linear Style) */}
+      {/* GSAP Ambient Cursor Spotlight Follower */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-[inherit] transition-opacity duration-300 z-10"
+        ref={glowRef}
+        className="pointer-events-none absolute top-0 left-0 rounded-full opacity-0 z-0 will-change-transform"
         style={{
-          opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(${size}px circle at ${position.x}px ${position.y}px, ${borderColor}, transparent 80%)`,
-          maskImage: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-          maskComposite: "exclude",
-          WebkitMaskComposite: "xor",
-          padding: "1px",
+          width: size,
+          height: size,
+          background: `radial-gradient(circle, ${spotlightColor} 0%, transparent 70%)`,
         }}
-      />
-
-      {/* Subtle Inner Surface Ambient Glow */}
-      <div
-        className="pointer-events-none absolute inset-0 rounded-[inherit] transition-opacity duration-300 z-0"
-        style={{
-          opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(${size * 1.2}px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 70%)`,
-        }}
+        aria-hidden="true"
       />
 
       {/* Card Content */}
-      <div className="relative z-10 w-full h-full">
+      <div className="relative z-10 w-full h-full flex flex-col justify-between">
         {children}
       </div>
     </div>

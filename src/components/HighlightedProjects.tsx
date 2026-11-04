@@ -5,6 +5,7 @@ import projects from "@/data/projects"
 import LaptopMockup from "./LaptopMockup"
 import GsapTiltCard from "./gsap/GsapTiltCard"
 import SpotlightCard from "./gsap/SpotlightCard"
+import GsapBorderShimmer from "./gsap/GsapBorderShimmer"
 import MagneticButton from "./gsap/MagneticButton"
 import GsapReveal from "./gsap/GsapReveal"
 import { sound } from "@/lib/sound"
@@ -144,15 +145,17 @@ export default function HighlightedProjects({
                 }`}
               >
                 <SpotlightCard
-                  spotlightColor="rgba(16, 185, 129, 0.05)"
-                  borderColor="rgba(16, 185, 129, 0.2)"
+                  spotlightColor="rgba(16, 185, 129, 0.04)"
                   className={`h-full rounded-2xl flex flex-col justify-between transition-all duration-300 relative ${
                     activeTechFilter && isMatch
                       ? "ring-1.5 ring-emerald-500/70 border-emerald-500/80 shadow-md shadow-emerald-500/5"
                       : ""
                   }`}
-                  size={450}
+                  size={420}
                 >
+                  {/* Subtle GSAP Hairline Border Shimmer on Hover */}
+                  <GsapBorderShimmer strokeWidth={1.5} rx={16} />
+
                   {/* Top Colorful Display Banner with Laptop Mockup */}
                   <Link
                     to={`/project/${project.slug}`}
