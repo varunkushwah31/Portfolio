@@ -84,30 +84,6 @@ export interface HighlightedProjectsProps {
   onClearFilter?: () => void
 }
 
-/**
- * Subtle hairline border shimmer that glides around the card perimeter on hover.
- */
-const BorderShimmer: React.FC = () => (
-  <div
-    className="pointer-events-none absolute -inset-px rounded-[inherit] overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-20"
-    style={{
-      maskImage: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-      maskComposite: "exclude",
-      WebkitMaskComposite: "xor",
-      padding: "1px",
-    }}
-    aria-hidden="true"
-  >
-    <div
-      className="absolute -inset-[150%] animate-border-sweep"
-      style={{
-        background:
-          "conic-gradient(from 0deg, transparent 0deg 280deg, rgba(16, 185, 129, 0.25) 320deg, rgba(52, 211, 153, 0.45) 345deg, transparent 360deg)",
-      }}
-    />
-  </div>
-)
-
 export default function HighlightedProjects({
   activeTechFilter,
   onClearFilter,
@@ -177,9 +153,6 @@ export default function HighlightedProjects({
                   }`}
                   size={450}
                 >
-                  {/* Subtle Hairline Border Shimmer Glow on Hover */}
-                  <BorderShimmer />
-
                   {/* Top Colorful Display Banner with Laptop Mockup */}
                   <Link
                     to={`/project/${project.slug}`}

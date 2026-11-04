@@ -90,7 +90,6 @@
   --animate-float: float 3s ease-in-out infinite;
   --animate-marquee: marquee 35s linear infinite;
   --animate-marquee-reverse: marquee-reverse 35s linear infinite;
-  --animate-border-sweep: border-sweep 8s linear infinite;
 }
 
 @keyframes fade-in {
@@ -123,20 +122,6 @@
   100% { transform: translate3d(0, 0, 0); }
 }
 
-@keyframes border-sweep {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.animate-border-sweep {
-  animation: border-sweep 8s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-border-sweep {
-    animation: none;
-  }
-}
 
 /* ============================================================
    THEME PALETTES (Dark / Light)
