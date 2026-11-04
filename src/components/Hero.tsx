@@ -67,7 +67,7 @@ const heroTechChips = [
   { id: "docker", name: "Docker", icon: DockerIcon },
 ]
 
-export default function Hero({ activeTechFilter, onSelectTechFilter }: HeroProps) {
+export default function Hero({ activeTechFilter, onSelectTechFilter }: Readonly<HeroProps>) {
   const [messageIndex, setMessageIndex] = useState(0)
 
   useEffect(() => {
@@ -237,7 +237,6 @@ export default function Hero({ activeTechFilter, onSelectTechFilter }: HeroProps
                 <button
                   key={chip.id}
                   type="button"
-                  role="button"
                   aria-pressed={isSelected}
                   aria-label={`Filter projects by ${chip.name}`}
                   onClick={() => handleChipClick(chip.id)}

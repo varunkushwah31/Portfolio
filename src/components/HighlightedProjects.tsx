@@ -111,7 +111,7 @@ const BorderShimmer: React.FC = () => (
 export default function HighlightedProjects({
   activeTechFilter,
   onClearFilter,
-}: HighlightedProjectsProps) {
+}: Readonly<HighlightedProjectsProps>) {
   return (
     <div id="highlighted-projects" className="scroll-mt-24">
       <GsapReveal direction="up" distance={25} duration={0.65} className="py-12">
