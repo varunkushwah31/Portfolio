@@ -17,7 +17,6 @@ const NotFound = lazy(() => import("./Pages/NotFound"))
 
 // Dynamic modal code splitting
 const CommandPalette = lazy(() => import("./components/CommandPalette"))
-const RecruiterQuickPitchModal = lazy(() => import("./components/RecruiterQuickPitchModal"))
 
 function AppRoutes() {
   const location = useLocation()
@@ -43,7 +42,6 @@ function AppRoutes() {
 
 function AppContent() {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
-  const [recruiterPitchOpen, setRecruiterPitchOpen] = useState(false)
 
   // Listen for global keyboard shortcut and custom events
   useEffect(() => {
@@ -55,15 +53,12 @@ function AppContent() {
     }
 
     const handleOpenCommandPalette = () => setCommandPaletteOpen(true)
-    const handleOpenRecruiterPitch = () => setRecruiterPitchOpen(true)
 
     window.addEventListener("keydown", handleKeyDown)
     window.addEventListener("open-command-palette", handleOpenCommandPalette)
-    window.addEventListener("open-recruiter-pitch", handleOpenRecruiterPitch)
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
       window.removeEventListener("open-command-palette", handleOpenCommandPalette)
-      window.removeEventListener("open-recruiter-pitch", handleOpenRecruiterPitch)
     }
   }, [])
 
@@ -89,16 +84,6 @@ function AppContent() {
           <CommandPalette
             isOpen={commandPaletteOpen}
             onClose={() => setCommandPaletteOpen(false)}
-          />
-        )}
-      </Suspense>
-
-      {/* Global Recruiter 30s Quick Pitch Modal (Loaded on demand) */}
-      <Suspense fallback={null}>
-        {recruiterPitchOpen && (
-          <RecruiterQuickPitchModal
-            isOpen={recruiterPitchOpen}
-            onClose={() => setRecruiterPitchOpen(false)}
           />
         )}
       </Suspense>

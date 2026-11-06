@@ -7,7 +7,6 @@ import {
   EnvelopeSimpleIcon,
   FileTextIcon,
   SparkleIcon,
-  LightningIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -209,7 +208,7 @@ export default function About() {
               If you'd like to learn more about my professional background and qualifications, feel free to explore my resume.
             </p>
 
-            {/* Action Buttons: Resume + Recruiter TL;DR */}
+            {/* Action Buttons: Resume */}
             <div className="pt-3 flex flex-wrap items-center gap-3">
               <MagneticButton strength={0.35}>
                 <Link
@@ -220,20 +219,6 @@ export default function About() {
                   <FileTextIcon size={15} weight="bold" />
                   <span>My Resume</span>
                 </Link>
-              </MagneticButton>
-
-              <MagneticButton strength={0.35}>
-                <button
-                  onClick={() => {
-                    sound.click()
-                    window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
-                  }}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-semibold transition-all duration-150 shadow-xs hover:shadow-sm cursor-pointer group"
-                  title="Open 30-Second Candidate Pitch"
-                >
-                  <LightningIcon size={15} weight="fill" className="text-emerald-500 group-hover:scale-110 transition-transform" />
-                  <span>Recruiter TL;DR (30s Pitch)</span>
-                </button>
               </MagneticButton>
             </div>
           </motion.div>

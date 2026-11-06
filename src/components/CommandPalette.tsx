@@ -168,14 +168,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               </button>
               <button
                 type="button"
-                onClick={() => executeCli("varun --pitch")}
+                onClick={() => executeCli("skills")}
                 className="p-2.5 rounded-lg bg-surface-card border border-hairline text-left hover:border-emerald-500/40 transition-colors cursor-pointer group"
               >
                 <div className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center justify-between">
-                  <span>varun --pitch</span>
-                  <span className="text-[10px] text-muted font-sans">Fast TL;DR</span>
+                  <span>skills</span>
+                  <span className="text-[10px] text-muted font-sans">Full Stack</span>
                 </div>
-                <div className="text-body-muted text-[11px] font-sans mt-0.5">30-second candidate summary for recruiters</div>
+                <div className="text-body-muted text-[11px] font-sans mt-0.5">Explore categorized technical skills</div>
               </button>
             </div>
             <div className="text-[10px] text-muted pt-1 flex items-center justify-between font-mono">
@@ -469,26 +469,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
     if (cleanCmd.includes("pitch") || cleanCmd.includes("tldr") || cleanCmd.includes("recruiter")) {
       setCliOutput({
-        command: "varun --pitch",
+        command: cleanCmd,
         content: (
           <div className="space-y-2 text-xs font-mono">
-            <div className="text-emerald-500 font-bold">$ varun --pitch — 30-SECOND RECRUITER TL;DR</div>
+            <div className="text-emerald-500 font-bold">$ candidate overview</div>
             <div className="space-y-1.5 pl-2 border-l border-emerald-500/30 text-body-strong">
               <div><strong className="text-ink">Role Sought:</strong> Software Engineering Intern / Junior Backend Developer</div>
-              <div><strong className="text-emerald-400">Primary Stack:</strong> Java 21, Spring Boot, PostgreSQL, WebRTC, Docker, Redis, React 19</div>
-              <div><strong className="text-amber-400">Highlights:</strong> Java Coordinator @ devup · W2WShare (P2P encrypted file transfer) · 500+ LeetCode · Google Solution Challenge Top 105</div>
-            </div>
-            <div className="pt-1.5 flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  handleClose()
-                  window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
-                }}
-                className="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 text-[11px] font-sans font-semibold cursor-pointer transition-colors"
-              >
-                Open Full 30s Pitch Modal →
-              </button>
+              <div><strong className="text-emerald-400">Primary Stack:</strong> Java 21, Spring Boot, PostgreSQL, WebRTC, Docker, Redis</div>
+              <div><strong className="text-amber-400">Highlights:</strong> Java Coordinator @ devup · W2WShare · 500+ LeetCode · Top 105 Nationally</div>
             </div>
           </div>
         ),
@@ -572,7 +560,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           <div className="space-y-1 pl-2 border-l border-red-500/30 text-body-strong">
             <div>shell: command not found: <code className="text-ink">{cmd}</code></div>
             <div className="text-muted text-[11px] pt-1">
-              Available commands: <span className="text-emerald-400">help</span>, <span className="text-emerald-400">skills</span>, <span className="text-emerald-400">curl contact</span>, <span className="text-emerald-400">sudo hire</span>, <span className="text-emerald-400">theme toggle</span>, <span className="text-emerald-400">varun --pitch</span>, <span className="text-emerald-400">clear</span>
+              Available commands: <span className="text-emerald-400">help</span>, <span className="text-emerald-400">skills</span>, <span className="text-emerald-400">curl contact</span>, <span className="text-emerald-400">sudo hire</span>, <span className="text-emerald-400">theme toggle</span>, <span className="text-emerald-400">clear</span>
             </div>
           </div>
         </div>
@@ -646,17 +634,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     })),
 
     // Actions
-    {
-      id: "action-recruiter-pitch",
-      title: "Recruiter TL;DR (30-Second Pitch)",
-      subtitle: "Executive candidate summary & role sought",
-      category: "Actions",
-      icon: <LightningIcon size={16} className="text-emerald-500" />,
-      action: () => {
-        handleClose()
-        window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
-      },
-    },
     {
       id: "action-toggle-theme",
       title: theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode",
@@ -775,14 +752,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: "CLI Commands",
       icon: theme === "dark" ? <SunIcon size={16} className="text-amber-300" /> : <MoonIcon size={16} className="text-indigo-400" />,
       action: () => executeCli("theme toggle"),
-    },
-    {
-      id: "cli-cmd-pitch",
-      title: "varun --pitch",
-      subtitle: "30-second executive TL;DR for recruiters & leads",
-      category: "CLI Commands",
-      icon: <TerminalWindowIcon size={16} className="text-emerald-400" />,
-      action: () => executeCli("varun --pitch"),
     },
   ]
 

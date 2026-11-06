@@ -1,7 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
-import { CaretRightIcon, SparkleIcon, LightningIcon } from "@phosphor-icons/react"
+import { CaretRightIcon, SparkleIcon } from "@phosphor-icons/react"
 import TechStack from "./TechStack"
 import MagneticButton from "./gsap/MagneticButton"
 import TextScramble from "./gsap/TextScramble"
@@ -102,23 +102,13 @@ export default function Hero({ activeTechFilter, onSelectTechFilter }: Readonly<
         animate="visible"
         className="relative z-10"
       >
-        {/* Profile Avatar & Live Status Badge */}
-        <motion.div variants={item} className="mb-6 flex flex-col sm:flex-row sm:items-center gap-4">
-          <div className="relative w-fit">
-            <img
-              src="/profile.jpg"
-              alt="Varun Kushwah"
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover object-center shadow-xl shadow-pink-500/10 hover:scale-105 transition-transform duration-300 bg-black"
-            />
-            <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-canvas" />
-            </span>
-          </div>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-surface-card/90 backdrop-blur-sm text-xs text-body-strong shadow-sm w-fit">
-            <span className="w-2 h-2 rounded-full bg-emerald-400" />
-            <span>Available for internships &amp; new opportunities</span>
-          </div>
+        {/* Profile Avatar */}
+        <motion.div variants={item} className="mb-6">
+          <img
+            src="/profile.jpg"
+            alt="Varun Kushwah"
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover object-center shadow-lg hover:scale-105 transition-transform duration-300 bg-black"
+          />
         </motion.div>
 
         {/* Main 2-line Heading with GSAP Text Scramble */}
@@ -173,7 +163,7 @@ export default function Hero({ activeTechFilter, onSelectTechFilter }: Readonly<
           , building resilient backend systems with <strong>Java &amp; Spring Boot</strong>, and exploring real-time <strong>WebRTC</strong> protocols.
         </motion.p>
 
-        {/* Action Buttons: Discover more + Recruiter TL;DR (30s Pitch) */}
+        {/* Action Button: Discover more */}
         <motion.div variants={item} className="mb-6 flex flex-wrap items-center gap-3">
           <MagneticButton strength={0.35}>
             <Link
@@ -188,20 +178,6 @@ export default function Hero({ activeTechFilter, onSelectTechFilter }: Readonly<
                 className="group-hover:translate-x-0.5 group-hover:text-emerald-500 dark:group-hover:text-emerald-400 transition-all duration-200"
               />
             </Link>
-          </MagneticButton>
-
-          <MagneticButton strength={0.35}>
-            <button
-              onClick={() => {
-                sound.click()
-                window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
-              }}
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-semibold transition-all duration-200 shadow-xs hover:shadow-sm cursor-pointer group"
-              title="Open 30-Second Candidate Pitch"
-            >
-              <LightningIcon size={15} weight="fill" className="text-emerald-500 group-hover:scale-110 transition-transform" />
-              <span>Recruiter TL;DR (30s Pitch)</span>
-            </button>
           </MagneticButton>
         </motion.div>
 

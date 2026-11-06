@@ -20,7 +20,6 @@ A production-grade, minimalist developer portfolio engineered for high performan
 - **GSAP Physics & Micro-interactions:** Fluid magnetic buttons, spotlight cards, tilt perspective containers, and SVG path border sweeps.
 - **ATS Plaintext Parser & Resume Viewer:** In-browser ATS verification engine providing 1-click single-column plaintext resume copy alongside high-fidelity PDF inspection.
 - **Developer Command Palette (`Cmd+K` / `Ctrl+K`):** Global terminal modal supporting instant navigation, project searches, theme toggles, and simulated `$ curl contact` endpoint responses.
-- **Recruiter 30-Second Fast-Pitch:** Dedicated recruiter executive summary drawer providing hiring managers with immediate stack alignment, LeetCode milestones, and candidate contact links.
 - **Zero-Emoji Design System:** Clean typographic hierarchy, Phosphor icon integration, and accessible high-contrast color tokens.
 
 ---

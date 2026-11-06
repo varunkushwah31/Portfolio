@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import { usePageTitle } from "@/hooks/usePageTitle"
 import {
   CheckCircleIcon,
@@ -10,16 +10,12 @@ import {
   TrophyIcon,
   BriefcaseIcon,
   FolderIcon,
-  LightningIcon,
   CopyIcon,
   CheckIcon,
   FilePdfIcon,
   FileTextIcon,
   EyeIcon,
-  CaretDownIcon,
-  CaretUpIcon,
   SparkleIcon,
-  CpuIcon,
   ArrowSquareOutIcon,
 } from "@phosphor-icons/react"
 
@@ -293,7 +289,6 @@ type ViewMode = "interactive" | "pdf" | "ats"
 export default function ResumePage() {
   usePageTitle("Resume")
   const [viewMode, setViewMode] = useState<ViewMode>("interactive")
-  const [isPitchExpanded, setIsPitchExpanded] = useState(false)
   const [copiedAts, setCopiedAts] = useState(false)
 
   const handleCopyAts = async () => {
@@ -305,11 +300,6 @@ export default function ResumePage() {
     } catch {
       // Fallback
     }
-  }
-
-  const triggerQuickPitchModal = () => {
-    sound.click()
-    window.dispatchEvent(new CustomEvent("open-recruiter-pitch"))
   }
 
   return (
@@ -329,9 +319,6 @@ export default function ResumePage() {
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-ink tracking-tight">
                   Resume
                 </h1>
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400">
-                  Updated 2026
-                </span>
               </div>
               <p className="text-muted text-sm sm:text-base font-normal leading-relaxed">
                 Technical background, architectural milestones, and leadership experience.
@@ -352,16 +339,6 @@ export default function ResumePage() {
 
             {/* Top Action Buttons */}
             <div className="flex items-center gap-2 flex-wrap shrink-0">
-              {/* 30-Second Recruiter Pitch Trigger */}
-              <button
-                onClick={triggerQuickPitchModal}
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs sm:text-sm font-semibold transition-all shadow-xs cursor-pointer group"
-                title="Open 30-Second Candidate Pitch"
-              >
-                <LightningIcon size={16} weight="fill" className="group-hover:scale-110 transition-transform text-emerald-500" />
-                <span>Recruiter TL;DR (30s)</span>
-              </button>
-
               {/* Direct Download Button */}
               <a
                 href="/Varun_Kushwah_Resume.pdf"
@@ -374,93 +351,6 @@ export default function ResumePage() {
                 <span>PDF Download</span>
               </a>
             </div>
-          </div>
-
-          {/* Recruiter Quick Pitch Accordion Card (In-Page 30s Rule) */}
-          <div className="rounded-2xl border border-emerald-500/25 bg-emerald-500/5 dark:bg-emerald-500/10 p-4 sm:p-5 transition-all">
-            <div className="flex items-start sm:items-center justify-between gap-3">
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-2.5 w-2.5 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-                </span>
-                <span className="font-semibold text-ink text-xs sm:text-sm">
-                  Recruiter 30-Second Executive Summary
-                </span>
-                <span className="hidden sm:inline text-xs text-muted font-normal">
-                  — Fast Technical Evaluation
-                </span>
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  onClick={() => {
-                    sound.click()
-                    setIsPitchExpanded((prev) => !prev)
-                  }}
-                  className="inline-flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 font-semibold hover:underline cursor-pointer"
-                >
-                  <span>{isPitchExpanded ? "Hide Summary" : "Expand Summary"}</span>
-                  {isPitchExpanded ? <CaretUpIcon size={13} weight="bold" /> : <CaretDownIcon size={13} weight="bold" />}
-                </button>
-              </div>
-            </div>
-
-            <AnimatePresence>
-              {isPitchExpanded && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="overflow-hidden"
-                >
-                  <div className="pt-4 mt-3 border-t border-emerald-500/20 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
-                    {/* Role */}
-                    <div className="space-y-1">
-                      <div className="text-[11px] font-mono uppercase tracking-wider text-muted font-bold flex items-center gap-1.5">
-                        <BriefcaseIcon size={13} className="text-emerald-500" />
-                        <span>Role Sought</span>
-                      </div>
-                      <div className="font-bold text-ink">
-                        SWE Intern / Junior Backend Dev
-                      </div>
-                      <p className="text-muted text-xs leading-relaxed">
-                        Available immediately / 2025/2026 batches. Distributed backend focus.
-                      </p>
-                    </div>
-
-                    {/* Primary Stack */}
-                    <div className="space-y-1">
-                      <div className="text-[11px] font-mono uppercase tracking-wider text-muted font-bold flex items-center gap-1.5">
-                        <CpuIcon size={13} className="text-indigo-500" />
-                        <span>Primary Stack</span>
-                      </div>
-                      <div className="font-semibold text-ink font-mono text-xs">
-                        Java 21 · Spring Boot · PostgreSQL · WebRTC · Docker · Redis
-                      </div>
-                      <p className="text-muted text-xs leading-relaxed">
-                        Concurrency &amp; Virtual Threads, STOMP WebSockets, Resilience4j.
-                      </p>
-                    </div>
-
-                    {/* Key Highlights */}
-                    <div className="space-y-1">
-                      <div className="text-[11px] font-mono uppercase tracking-wider text-muted font-bold flex items-center gap-1.5">
-                        <TrophyIcon size={13} className="text-amber-500" />
-                        <span>Key Highlights</span>
-                      </div>
-                      <div className="font-semibold text-ink text-xs">
-                        Java Coordinator @ devup
-                      </div>
-                      <p className="text-muted text-xs leading-relaxed">
-                        Built 0-relay encrypted P2P transfer (W2WShare) · 500+ LeetCode · Top 105 Nationally.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
 
           {/* View Mode Switcher (Interactive vs PDF vs ATS Plain Text) */}
