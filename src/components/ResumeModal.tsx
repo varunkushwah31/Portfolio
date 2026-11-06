@@ -12,6 +12,7 @@ import {
   CpuIcon,
 } from "@phosphor-icons/react"
 import { sound } from "@/lib/sound"
+import { ATS_PLAIN_TEXT_RESUME } from "@/Pages/ResumePage"
 
 interface ResumeModalProps {
   isOpen: boolean
@@ -47,48 +48,7 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
     link.click()
   }
 
-  const rawResumeText = `VARUN KUSHWAH
-+91-8218568519 | varun.kush3@gmail.com | linkedin.com/in/varun-kushwah | github.com/varunkushwah31 | leetcode.com/u/Varun_Kushwah | varunkushwah.xyz
-
-TECHNICAL SKILLS
-- Languages: Java (Java 17/21, OOP, Multithreading, Concurrency, Stream API, Collections), SQL, TypeScript, JavaScript, Python
-- Backend & Frameworks: Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, RESTful APIs, WebSockets
-- Databases & Caching: PostgreSQL, MySQL, MongoDB, Redis
-- DevOps & Tools: Git, GitHub, Docker, Postman, Linux/Bash, Maven, Gradle, CI/CD
-- Core Competencies: Data Structures & Algorithms, Object-Oriented Design (OOD), Microservices Basics, Distributed Systems Basics
-
-EDUCATION
-- KIET Group of Institutions | Bachelor of Technology in Computer Science & Engineering (CGPA: 8.27 / 10.0) | 2024 – 2028 | Ghaziabad, India
-- New St. Stephens Public School | Senior Secondary (CBSE XII: 80%) · Secondary (CBSE X: 82%) | 2021 – 2023 | Agra, India
-
-EXPERIENCE & LEADERSHIP
-devup — College Tech Club | Java & DSA Coordinator · Technical Mentor | Aug 2024 – Present
-- Spearheaded Java curriculum and structured hands-on backend modules for 20+ active student members, accelerating peer readiness for software engineering internships and technical assessments.
-- Conducted weekly algorithmic problem-solving sessions on trees, graphs, and dynamic programming, mentoring juniors to improve average coding speed and accuracy by 30%.
-- Orchestrated code reviews & Git workflows, enforcing clean architecture patterns, OOP principles, and test-driven development practices across collaborative cohort projects.
-
-KEY PROJECTS
-1. MentorSync — LeetCode & Codeforces LMS
-   Tech Stack: Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, Spring Security, Docker, Resilience4j
-   - Architected a scalable two-sided LMS for bootcamps and educators to automate LeetCode & Codeforces progress tracking, classroom assignment distribution, and real-time leaderboards.
-   - Built automated verification pipeline consuming LeetCode GraphQL/REST APIs and regex parsing to validate submissions, eliminating manual grading overhead across 100+ active submissions.
-   - Engineered nightly Redis cache warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.
-
-2. W2W Share — Offline Encrypted P2P File Transfer Platform
-   Tech Stack: Java 21, Spring Boot 3.3, WebRTC DataChannels, AES-256-GCM, Virtual Threads, ZXing, WebSockets, Docker
-   - Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.
-   - Built high-concurrency Java 21 Virtual Threads & Spring Boot 3.3 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.
-   - Engineered 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with <50MB RAM.
-
-3. Stateless Authentication & RBAC Service
-   Tech Stack: Java, Spring Boot, Spring Security, JWT, OAuth 2.0, PostgreSQL, Docker
-   - Designed a modular stateless authentication service implementing JWT access/refresh token rotation and OAuth 2.0 social sign-in, eliminating server-side session memory overhead.
-   - Configured custom Spring Security filter chains with granular Role-Based Access Control (RBAC), securing 15+ REST endpoints with zero unauthorized access vulnerabilities.
-   - Integrated relational persistence layer with connection pooling, automated validation filters, and comprehensive integration testing via Postman.
-
-ACHIEVEMENTS & COMPETITIVE PROGRAMMING
-- 500+ Problems Solved on LeetCode: Demonstrated strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graph algorithms.
-- Top 105 Nationally — Google Solution Challenge 2025: Recognized among the top 105 projects nationwide out of thousands of submissions for real-world engineering impact.`
+  const rawResumeText = ATS_PLAIN_TEXT_RESUME
 
   const handleCopyText = () => {
     sound.click()
@@ -287,18 +247,6 @@ ACHIEVEMENTS & COMPETITIVE PROGRAMMING
                       Zero-internet P2P file sharing via WebRTC RTCDataChannels, Java 21 Spring Boot signaling broker, ZXing QR-pairing, and encrypted chunk streaming over local networks.
                     </p>
                   </div>
-
-                  <div className="bg-surface-soft p-5 border border-hairline-strong space-y-2">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                      <div className="text-ink font-bold text-sm uppercase text-m-blue-light">
-                        STATELESS AUTHENTICATION & RBAC SERVICE
-                      </div>
-                      <span className="font-mono text-[11px] text-muted">JAVA · SPRING BOOT · SPRING SECURITY · JWT · POSTGRESQL</span>
-                    </div>
-                    <p className="body-light text-xs text-body leading-relaxed">
-                      Modular stateless security microservice implementing JWT token rotation and OAuth 2.0 social login with customized Spring Security filter chains securing 15+ REST endpoints.
-                    </p>
-                  </div>
                 </div>
               </div>
 
@@ -330,6 +278,35 @@ ACHIEVEMENTS & COMPETITIVE PROGRAMMING
                     <div className="font-mono text-xs text-muted font-bold">
                       2021 – 2023
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Achievements & Competitive Programming */}
+              <div>
+                <div className="label-uppercase text-muted text-xs mb-4 tracking-[2px] flex items-center gap-2">
+                  <MedalIcon size={14} className="text-amber-500" />
+                  ACHIEVEMENTS &amp; HONORS
+                </div>
+                <div className="space-y-3">
+                  <div className="bg-surface-soft p-4 border border-hairline-strong flex items-center justify-between gap-3">
+                    <div className="text-xs text-body leading-relaxed">
+                      <strong className="text-ink font-bold">500+ Problems Solved on LeetCode:</strong> Strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graph algorithms.
+                    </div>
+                    <a
+                      href="https://leetcode.com/u/Varun_Kushwah/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 text-xs font-semibold text-amber-500 hover:text-amber-400 font-mono"
+                    >
+                      [Profile]
+                    </a>
+                  </div>
+                  <div className="bg-surface-soft p-4 border border-hairline-strong text-xs text-body leading-relaxed">
+                    <strong className="text-ink font-bold">Top 105 Nationally — Google Solution Challenge 2025:</strong> Recognized out of thousands of submissions across India for engineering real-world social impact software.
+                  </div>
+                  <div className="bg-surface-soft p-4 border border-hairline-strong text-xs text-body leading-relaxed">
+                    <strong className="text-ink font-bold">2nd Place — Innotech (Department Level):</strong> Awarded for technical innovation in high-throughput backend architecture.
                   </div>
                 </div>
               </div>

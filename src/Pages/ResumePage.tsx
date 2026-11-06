@@ -54,11 +54,11 @@ interface ResumeEntry {
 const experiences: ResumeEntry[] = [
   {
     id: "devup-coordinator",
-    role: "Java & DSA Coordinator",
-    organization: "Devup - College Tech Club",
+    role: "Java & DSA Coordinator · Technical Mentor",
+    organization: "devup — College Tech Club",
     type: "Leadership & Mentorship",
     period: "Aug 2024 – Present",
-    location: "Campus · Hybrid",
+    location: "KIET Campus",
     icon: <CheckCircleIcon size={20} weight="fill" className="text-emerald-600 dark:text-emerald-400" />,
     iconBg: "bg-emerald-500/10 border-emerald-500/30",
     techIcons: [
@@ -69,9 +69,9 @@ const experiences: ResumeEntry[] = [
       { name: "PostgreSQL", icon: PostgresIcon },
     ],
     bullets: [
-      "Spearheaded Java curriculum and structured hands-on backend modules for 20+ active student members, accelerating peer readiness for software engineering internships.",
-      "Conducted weekly algorithmic problem-solving sessions on trees, graphs, and dynamic programming, mentoring juniors to improve average coding speed and accuracy by 30%.",
-      "Orchestrated code reviews & Git workflows, enforcing clean architecture patterns, OOP principles, and test-driven development practices across collaborative cohort projects.",
+      "Java Backend Curriculum: Spearheaded structured hands-on Java & Spring Boot backend modules for 20+ active student members, preparing juniors for software engineering internships and technical assessments.",
+      "DSA Mentorship: Conducted weekly algorithmic problem-solving sessions on trees, graphs, and dynamic programming, improving juniors' average coding speed and benchmark accuracy by 30%.",
+      "Engineering Standards: Orchestrated code reviews and Git workflows, enforcing clean architecture patterns, OOP principles, and test-driven practices across collaborative cohort projects.",
     ],
   },
 ]
@@ -79,7 +79,7 @@ const experiences: ResumeEntry[] = [
 const projects: ResumeEntry[] = [
   {
     id: "mentorsync",
-    role: "MentorSync (LeetCode Progress & Classroom LMS)",
+    role: "MentorSync (LeetCode & Codeforces LMS)",
     organization: "EdTech Bootcamp LMS & Automated Verification Engine",
     type: "Full-Stack System",
     period: "2024 – Present",
@@ -92,10 +92,10 @@ const projects: ResumeEntry[] = [
       { name: "Docker", icon: DockerIcon },
     ],
     bullets: [
-      "Architected a scalable two-sided LMS for bootcamps and educators to automate LeetCode & Codeforces progress tracking, classroom assignment distribution, and real-time leaderboards.",
-      "Built automated verification pipeline consuming LeetCode GraphQL/REST APIs and regex parsing to validate submissions, eliminating manual grading overhead for 100+ active submissions.",
-      "Engineered nightly Redis cache warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.",
-      "Tech Stack: Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, Spring Security, Docker, Resilience4j.",
+      "Dual-Platform Telemetry: Architected a scalable two-sided LMS for bootcamps to automate LeetCode and Codeforces progress tracking, assignment distribution, and real-time leaderboards.",
+      "Automated Verification Engine: Built an asynchronous verification engine consuming LeetCode GraphQL and Codeforces REST APIs with problem slug parsing, eliminating manual grading across 100+ active submissions.",
+      "Cache Warming & Resilience: Engineered nightly Redis cache-warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.",
+      "Tech Stack: Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, STOMP WebSockets, Resilience4j, Docker.",
     ],
   },
   {
@@ -114,31 +114,10 @@ const projects: ResumeEntry[] = [
       { name: "Docker", icon: DockerIcon },
     ],
     bullets: [
-      "Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.",
-      "Built high-concurrency Java 21 Virtual Threads & Spring Boot 3.3 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.",
-      "Engineered 64KB chunk streaming protocol with AES-256-GCM encryption and backpressure control, handling large file transfers reliably with minimal RAM overhead.",
-      "Tech Stack: Java 21, Spring Boot 3.3, WebRTC, Virtual Threads, ZXing, WebSockets, Docker.",
-    ],
-  },
-  {
-    id: "stateless-auth-service",
-    role: "Stateless Authentication & RBAC Service",
-    organization: "Microservice Security & Identity Provider",
-    type: "Backend Security System",
-    period: "2024 – Present",
-    icon: <GlobeIcon size={20} weight="bold" className="text-emerald-600 dark:text-emerald-400" />,
-    iconBg: "bg-emerald-500/10 border-emerald-500/30",
-    techIcons: [
-      { name: "Java", icon: JavaIcon },
-      { name: "Spring Boot", icon: SpringIcon },
-      { name: "PostgreSQL", icon: PostgresIcon },
-      { name: "Docker", icon: DockerIcon },
-    ],
-    bullets: [
-      "Designed a modular stateless authentication service implementing JWT access/refresh token rotation and OAuth 2.0 social sign-in, eliminating server-side session memory overhead.",
-      "Configured custom Spring Security filter chains with granular Role-Based Access Control (RBAC), securing 15+ REST endpoints with zero unauthorized access vulnerabilities.",
-      "Integrated relational persistence layer with connection pooling, automated validation filters, and comprehensive integration testing via Postman.",
-      "Tech Stack: Java, Spring Boot, Spring Security, JWT, OAuth 2.0, PostgreSQL, Docker.",
+      "Zero-Relay P2P Protocol: Engineered an offline peer-to-peer file transfer platform on WebRTC RTCDataChannels over UDP that bypasses central servers with zero internet requirement.",
+      "High-Concurrency Signaling Broker: Built a Java 25 Virtual Threads and WebSocket signaling broker supporting 10,000 pooled connections, with ZXing QR pairing and UDP subnet auto-discovery.",
+      "Encrypted Chunk Streaming: Designed a 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with <50MB of RAM.",
+      "Tech Stack: Java 25, Spring Boot 4.1, WebRTC, Bouncy Castle, Virtual Threads, ZXing, Docker, Prometheus.",
     ],
   },
 ]
@@ -209,83 +188,104 @@ const skillsList = [
 
 export const ATS_PLAIN_TEXT_RESUME = `VARUN KUSHWAH
 Software Engineer | Backend Developer
-Email: varun.kush3@gmail.com | Portfolio: https://varunkushwah.me
-GitHub: https://github.com/varunkushwah31 | LinkedIn: https://www.linkedin.com/in/varun-kushwah/ | LeetCode: https://leetcode.com/u/Varun_Kushwah/
-Location: India
+Email: varun.kush3@gmail.com | Portfolio: https://varunkushwah.xyz
+Phone: +91 82185 68519 | Location: India
+LinkedIn: https://linkedin.com/in/varun-kushwah | GitHub: https://github.com/varunkushwah31 | LeetCode: https://leetcode.com/u/Varun_Kushwah/
 
 ================================================================================
-EXECUTIVE SUMMARY
+SUMMARY
 ================================================================================
-Backend Developer and Java Coordinator specializing in distributed systems, real-time protocols, and high-concurrency architectures. Proficient in Java 21, Spring Boot, PostgreSQL, WebRTC, Docker, Redis, and React 19. Solved 500+ algorithmic problems on LeetCode and recognized in Top 105 Nationally in Google Solution Challenge 2025. Seeking Software Engineering Intern / Junior Backend Developer roles.
+Computer Science undergraduate specializing in high-concurrency Java backend systems, distributed architectures, and real-time protocols. Proficient in Java 21/25, Spring Boot 3.3, PostgreSQL, Redis, WebRTC, STOMP WebSockets, and Docker. Java & DSA Coordinator at devup mentoring 20+ peers; solved 500+ problems on LeetCode and recognized in Top 105 Nationally in Google Solution Challenge 2025. Seeking Software Engineering Intern / Junior Backend Developer roles.
 
 ================================================================================
 TECHNICAL SKILLS
 ================================================================================
-* Languages: Java (17/21), Python, TypeScript, SQL, Bash
-* Frameworks & Libraries: Spring Boot 3.x, Spring Security, Spring Data JPA, Hibernate, React 19, STOMP WebSockets
-* Distributed Systems & Protocols: WebRTC (RTCDataChannels), Redis 7 (Distributed Locking & Pub/Sub), Resilience4j
+* Languages: Java (17/21/25), SQL, TypeScript, JavaScript, Python
+* Backend & Frameworks: Spring Boot 3.x, Spring MVC, Spring Security, Spring Data JPA, Hibernate, RESTful APIs, WebSockets, STOMP
+* Distributed Systems & Networking: WebRTC (RTCDataChannel), Virtual Threads (Java 21/25), Redis 7 (Distributed Locking & Caching), Resilience4j
 * Databases & Storage: PostgreSQL, MySQL, MongoDB, Redis
-* DevOps & Tools: Docker, Git, GitHub, Linux / Bash, Postman, Maven, Gradle
-* Core Competencies: Data Structures & Algorithms, Object-Oriented Software Design (OOP), RESTful API Architecture, Microservices, Virtual Threads Concurrency
+* DevOps & Tools: Docker, Git, GitHub, Postman, Linux / Bash, Maven, Gradle, CI/CD, Prometheus, Grafana
+* Core Competencies: Data Structures & Algorithms, Object-Oriented Design (OOP), Microservices Architecture, Concurrency & Multithreading, Clean Architecture
 
 ================================================================================
 EXPERIENCE & LEADERSHIP
 ================================================================================
-Java & DSA Coordinator | Devup - College Tech Club
-Aug 2024 - Present | Campus · Hybrid
-* Spearheaded Java curriculum and structured hands-on backend modules for 20+ active student members, accelerating peer readiness for software engineering internships.
-* Conducted weekly algorithmic problem-solving sessions on trees, graphs, and dynamic programming, mentoring juniors to improve average coding speed and accuracy by 30%.
-* Orchestrated code reviews & Git workflows, enforcing clean architecture patterns, OOP principles, and test-driven development practices across collaborative cohort projects.
+devup — College Tech Club | Java & DSA Coordinator · Technical Mentor
+Aug 2024 – Present | KIET Campus
+* Java Backend Curriculum: Spearheaded structured hands-on Java & Spring Boot backend modules for 20+ active student members, preparing juniors for software engineering internships and technical assessments.
+* DSA Mentorship: Conducted weekly algorithmic problem-solving sessions on trees, graphs, and dynamic programming, improving juniors' average coding speed and benchmark accuracy by 30%.
+* Engineering Standards: Orchestrated code reviews and Git workflows, enforcing clean architecture patterns, OOP principles, and test-driven practices across collaborative cohort projects.
 
 ================================================================================
-FEATURED PROJECTS
+KEY PROJECTS
 ================================================================================
-MentorSync (LeetCode Progress & Classroom LMS)
-Tech Stack: Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, Spring Security, Docker, Resilience4j
-* Architected a scalable two-sided LMS for bootcamps and educators to automate LeetCode & Codeforces progress tracking, classroom assignment distribution, and real-time leaderboards.
-* Built automated verification pipeline consuming LeetCode GraphQL/REST APIs and regex parsing to validate submissions, eliminating manual grading overhead for 100+ active submissions.
-* Engineered nightly Redis cache warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.
+MentorSync | LeetCode & Codeforces LMS (Live Demo: https://mentorssync.vercel.app/ | GitHub: https://github.com/varunkushwah31/Leetcode-Tracker-Frontend)
+Tech Stack: Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, STOMP WebSockets, Resilience4j, Docker
+* Dual-Platform Telemetry: Architected a scalable two-sided LMS for bootcamps to automate LeetCode and Codeforces progress tracking, assignment distribution, and real-time leaderboards.
+* Automated Verification Engine: Built an asynchronous verification engine consuming LeetCode GraphQL and Codeforces REST APIs with problem slug parsing, eliminating manual grading across 100+ active submissions.
+* Cache Warming & Resilience: Engineered nightly Redis cache-warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.
 
-W2W Share (Offline Encrypted P2P File Transfer)
-Tech Stack: Java 21, Spring Boot 3.3, WebRTC, AES-256-GCM, Virtual Threads, ZXing, WebSockets, Docker
-* Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.
-* Built high-concurrency Java 21 Virtual Threads & Spring Boot 3.3 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.
-* Engineered 64KB chunk streaming protocol with AES-256-GCM encryption and backpressure control, handling large file transfers with minimal RAM overhead.
-
-Stateless Authentication & RBAC Service
-Tech Stack: Java, Spring Boot, Spring Security, JWT, OAuth 2.0, PostgreSQL, Docker
-* Designed a modular stateless authentication service implementing JWT access/refresh token rotation and OAuth 2.0 social sign-in, eliminating server-side session memory overhead.
-* Configured custom Spring Security filter chains with granular Role-Based Access Control (RBAC), securing 15+ REST endpoints with zero unauthorized access vulnerabilities.
-* Integrated relational persistence layer with connection pooling, automated validation filters, and comprehensive integration testing via Postman.
+W2W Share | Offline Encrypted P2P File Transfer (Live Demo: https://w2wshare.vercel.app/ | GitHub: https://github.com/varunkushwah31/W2WShare)
+Tech Stack: Java 25, Spring Boot 4.1, WebRTC, Bouncy Castle, Virtual Threads, ZXing, Docker, Prometheus
+* Zero-Relay P2P Protocol: Engineered an offline peer-to-peer file transfer platform on WebRTC RTCDataChannels over UDP that bypasses central servers with zero internet requirement.
+* High-Concurrency Signaling Broker: Built a Java 25 Virtual Threads and WebSocket signaling broker supporting 10,000 pooled connections, with ZXing QR pairing and UDP subnet auto-discovery.
+* Encrypted Chunk Streaming: Designed a 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with <50MB of RAM.
 
 ================================================================================
 EDUCATION
 ================================================================================
-B.Tech, Computer Science & Engineering | KIET Group of Institutions
-2024 - 2028 | CGPA: 8.27 / 10.00
+B.Tech in Computer Science & Engineering | KIET Group of Institutions
+2024 – 2028 | CGPA: 8.27 / 10.0 | Ghaziabad, India
 * Core Coursework: Data Structures & Algorithms, Operating Systems, Database Management Systems, Object-Oriented Software Design.
 
-Senior Secondary (CBSE XII) & Secondary (CBSE X) | New St. Stephens Public School
-2021 - 2023 | Agra, India
+Senior Secondary (CBSE Class XII) & Secondary (CBSE Class X) | New St. Stephens Public School
+2021 – 2023 | Agra, India
 * Class XII (CBSE): 80.0% | Class X (CBSE): 82.0%
 
 ================================================================================
 ACHIEVEMENTS & HONORS
 ================================================================================
-* 500+ Problems Solved on LeetCode: Strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graphs (Profile: https://leetcode.com/u/Varun_Kushwah/).
-* Top 105 Nationally - Google Solution Challenge 2025: Recognized out of thousands of submissions across India.
-* 2nd Place, Innotech (Department Level).`
+* 500+ Problems Solved on LeetCode: Demonstrated strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graph algorithms (Profile: https://leetcode.com/u/Varun_Kushwah/).
+* Top 105 Nationally — Google Solution Challenge 2025: Recognized out of thousands of submissions across India for engineering real-world social impact software.
+* 2nd Place — Innotech (Department Level): Awarded for technical innovation in high-throughput backend architecture.`
+
+const METRICS_REGEX = /(\b\d+[\d,]*\+?%?|\b\d+k\b|<50MB\b|50GB\b|0ms\b|\b20\+\b|\b30%\b|\b100\+\b|\b10,000\b)/gi
+
+function highlightMetrics(text: string) {
+  const parts = text.split(METRICS_REGEX)
+  return parts.map((part, index) => {
+    if (METRICS_REGEX.test(part)) {
+      return (
+        <strong key={index} className="text-ink font-bold">
+          {part}
+        </strong>
+      )
+    }
+    return <React.Fragment key={index}>{part}</React.Fragment>
+  })
+}
 
 function renderBulletText(bullet: string) {
   if (bullet.startsWith("Tech Stack:")) {
     return (
       <span>
-        <strong className="text-strong font-semibold">Tech Stack:</strong>
+        <strong className="text-ink font-bold">Tech Stack:</strong>
         {bullet.slice("Tech Stack:".length)}
       </span>
     )
   }
-  return <span>{bullet}</span>
+  const colonIndex = bullet.indexOf(":")
+  if (colonIndex > 0 && colonIndex < 40) {
+    const lead = bullet.slice(0, colonIndex + 1)
+    const rest = bullet.slice(colonIndex + 1)
+    return (
+      <span>
+        <strong className="text-ink font-bold">{lead}</strong>
+        {highlightMetrics(rest)}
+      </span>
+    )
+  }
+  return <span>{highlightMetrics(bullet)}</span>
 }
 
 type ViewMode = "interactive" | "pdf" | "ats"

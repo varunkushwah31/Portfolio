@@ -66,7 +66,7 @@ export default function ResumePdfViewer({
               {fileName}
             </div>
             <div className="text-[11px] text-muted font-mono">
-              ATS-Optimized · PDF 1.4 · ~142 KB
+              ATS-Optimized 100% · Single Page · ~115 KB
             </div>
           </div>
         </div>

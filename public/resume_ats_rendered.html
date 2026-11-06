@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Varun Kushwah - Resume</title>
+<style>
+  @page {
+    size: letter;
+    margin: 0.32in 0.44in 0.32in 0.44in;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #111827;
+    background: #ffffff;
+    font-size: 9.35pt;
+    line-height: 1.30;
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: #111827;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  .header h1 {
+    font-size: 19.5pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 2.5px;
+  }
+  .contact-line {
+    font-size: 8.8pt;
+    color: #1f2937;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+  .contact-sep {
+    color: #9ca3af;
+    margin: 0 4px;
+  }
+  .section {
+    margin-top: 5px;
+  }
+  .section-title {
+    font-size: 9.9pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #000000;
+    border-bottom: 1px solid #111827;
+    padding-bottom: 1px;
+    margin-bottom: 3px;
+  }
+  .summary-text {
+    font-size: 9.0pt;
+    line-height: 1.32;
+    color: #1f2937;
+    text-align: justify;
+  }
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 9.35pt;
+    margin-top: 2px;
+  }
+  .entry-title {
+    font-weight: 700;
+    color: #000000;
+  }
+  .entry-date {
+    font-size: 8.7pt;
+    font-weight: 600;
+    color: #111827;
+    white-space: nowrap;
+  }
+  .entry-subtitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 8.8pt;
+    color: #374151;
+    margin-bottom: 1.5px;
+  }
+  .entry-role {
+    font-style: italic;
+    font-weight: 500;
+    color: #374151;
+  }
+  .entry-location {
+    font-size: 8.5pt;
+    font-style: italic;
+    color: #4b5563;
+    white-space: nowrap;
+  }
+  .tech-pills {
+    font-size: 8.75pt;
+    font-style: italic;
+    color: #374151;
+    margin-bottom: 2px;
+  }
+  ul.bullets {
+    list-style-type: disc;
+    padding-left: 14px;
+    margin-top: 1px;
+  }
+  ul.bullets li {
+    font-size: 8.95pt;
+    line-height: 1.30;
+    color: #1f2937;
+    margin-bottom: 1.5px;
+    text-align: justify;
+  }
+  ul.bullets li strong {
+    font-weight: 700;
+    color: #000000;
+  }
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+    font-size: 8.95pt;
+    line-height: 1.30;
+  }
+  .skills-row {
+    color: #1f2937;
+  }
+  .skills-label {
+    font-weight: 700;
+    color: #000000;
+  }
+  .achieve-list {
+    list-style-type: disc;
+    padding-left: 14px;
+  }
+  .achieve-list li {
+    font-size: 8.95pt;
+    line-height: 1.30;
+    color: #1f2937;
+    margin-bottom: 1.5px;
+  }
+  .achieve-list li strong {
+    font-weight: 700;
+    color: #000000;
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>Varun Kushwah</h1>
+    <div class="contact-line">
+      <span>+91 82185 68519</span>
+      <span class="contact-sep">&bull;</span>
+      <a href="mailto:varun.kush3@gmail.com">varun.kush3@gmail.com</a>
+      <span class="contact-sep">&bull;</span>
+      <a href="https://varunkushwah.xyz" target="_blank">varunkushwah.xyz</a>
+      <span class="contact-sep">&bull;</span>
+      <a href="https://linkedin.com/in/varun-kushwah" target="_blank">linkedin.com/in/varun-kushwah</a>
+    </div>
+    <div class="contact-line">
+      <a href="https://github.com/varunkushwah31" target="_blank">github.com/varunkushwah31</a>
+      <span class="contact-sep">&bull;</span>
+      <a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank">leetcode.com/u/Varun_Kushwah (500+ Solved)</a>
+      <span class="contact-sep">&bull;</span>
+      <span>India</span>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section">
+    <div class="section-title">Summary</div>
+    <div class="summary-text">
+      Computer Science undergraduate specializing in high-concurrency Java backend systems, distributed architectures, and real-time protocols. Proficient in Java 21/25, Spring Boot 3.3, PostgreSQL, Redis, WebRTC, STOMP WebSockets, and Docker. Java &amp; DSA Coordinator at devup mentoring 20+ peers; solved 500+ problems on LeetCode and recognized in Top 105 Nationally in Google Solution Challenge 2025.
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    
+    <div>
+      <div class="entry-header">
+        <span class="entry-title">KIET Group of Institutions</span>
+        <span class="entry-date">2024 &ndash; 2028</span>
+      </div>
+      <div class="entry-subtitle">
+        <span class="entry-role">B.Tech in Computer Science &amp; Engineering | CGPA: 8.27 / 10.0</span>
+        <span class="entry-location">Ghaziabad, India</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 1.5px;">
+      <div class="entry-header">
+        <span class="entry-title">New St. Stephens Public School</span>
+        <span class="entry-date">2021 &ndash; 2023</span>
+      </div>
+      <div class="entry-subtitle">
+        <span class="entry-role">Senior Secondary (CBSE Class XII: 80%) &bull; Secondary (CBSE Class X: 82%)</span>
+        <span class="entry-location">Agra, India</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-grid">
+      <div class="skills-row">
+        <span class="skills-label">Languages:</span> Java (17/21/25), SQL, TypeScript, JavaScript, Python
+      </div>
+      <div class="skills-row">
+        <span class="skills-label">Backend &amp; Frameworks:</span> Spring Boot 3.x, Spring MVC, Spring Security, Spring Data JPA, Hibernate, RESTful APIs, WebSockets, STOMP
+      </div>
+      <div class="skills-row">
+        <span class="skills-label">Distributed Systems &amp; Networking:</span> WebRTC (RTCDataChannel), Virtual Threads (Java 21/25), Redis 7 (Distributed Locking &amp; Caching), Resilience4j
+      </div>
+      <div class="skills-row">
+        <span class="skills-label">Databases &amp; Storage:</span> PostgreSQL, MySQL, MongoDB, Redis
+      </div>
+      <div class="skills-row">
+        <span class="skills-label">DevOps &amp; Tools:</span> Docker, Git, GitHub, Postman, Linux / Bash, Maven, Gradle, CI/CD, Prometheus, Grafana
+      </div>
+      <div class="skills-row">
+        <span class="skills-label">Core Competencies:</span> Data Structures &amp; Algorithms, Object-Oriented Design (OOP), Microservices Architecture, Concurrency &amp; Multithreading, Clean Architecture
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE & LEADERSHIP -->
+  <div class="section">
+    <div class="section-title">Experience &amp; Leadership</div>
+    
+    <div>
+      <div class="entry-header">
+        <span class="entry-title">devup &mdash; College Tech Club</span>
+        <span class="entry-date">Aug 2024 &ndash; Present</span>
+      </div>
+      <div class="entry-subtitle">
+        <span class="entry-role">Java &amp; DSA Coordinator &bull; Technical Mentor</span>
+        <span class="entry-location">KIET Campus</span>
+      </div>
+      <ul class="bullets">
+        <li><strong>Java Backend Curriculum:</strong> Spearheaded structured hands-on Java &amp; Spring Boot backend modules for <strong>20+ active student members</strong>, preparing juniors for software engineering internships and technical assessments.</li>
+        <li><strong>DSA Mentorship:</strong> Conducted weekly algorithmic problem-solving sessions on trees, graphs, and dynamic programming, improving juniors' average coding speed and benchmark accuracy by <strong>30%</strong>.</li>
+        <li><strong>Engineering Standards:</strong> Orchestrated code reviews and Git workflows, enforcing clean architecture patterns, OOP principles, and test-driven practices across collaborative cohort projects.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-title">Projects</div>
+
+    <!-- Project 1: MentorSync -->
+    <div>
+      <div class="entry-header">
+        <span class="entry-title">MentorSync | LeetCode &amp; Codeforces LMS</span>
+        <span class="entry-date"><a href="https://mentorssync.vercel.app/" target="_blank">Live Demo</a> | <a href="https://github.com/varunkushwah31/Leetcode-Tracker-Frontend" target="_blank">GitHub</a></span>
+      </div>
+      <div class="tech-pills">
+        Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, STOMP WebSockets, Resilience4j, Docker
+      </div>
+      <ul class="bullets">
+        <li><strong>Dual-Platform Telemetry:</strong> Architected a scalable two-sided LMS for bootcamps to automate LeetCode and Codeforces progress tracking, assignment distribution, and real-time leaderboards.</li>
+        <li><strong>Automated Verification Engine:</strong> Built an asynchronous verification engine consuming LeetCode GraphQL and Codeforces REST APIs with problem slug parsing, eliminating manual grading across <strong>100+ active submissions</strong>.</li>
+        <li><strong>Cache Warming &amp; Resilience:</strong> Engineered nightly Redis cache-warming worker (03:00 UTC) with atomic distributed locks (<code>setIfAbsent</code>) ensuring <strong>0ms peak latency</strong>, STOMP WebSockets, and Resilience4j circuit breakers.</li>
+      </ul>
+    </div>
+
+    <!-- Project 2: W2W Share -->
+    <div style="margin-top: 3.5px;">
+      <div class="entry-header">
+        <span class="entry-title">W2W Share | Offline Encrypted P2P File Transfer</span>
+        <span class="entry-date"><a href="https://w2wshare.vercel.app/" target="_blank">Live Demo</a> | <a href="https://github.com/varunkushwah31/W2WShare" target="_blank">GitHub</a></span>
+      </div>
+      <div class="tech-pills">
+        Java 25, Spring Boot 4.1, WebRTC, Bouncy Castle, Virtual Threads, ZXing, Docker, Prometheus
+      </div>
+      <ul class="bullets">
+        <li><strong>Zero-Relay P2P Protocol:</strong> Engineered an offline peer-to-peer file transfer platform on WebRTC RTCDataChannels over UDP that bypasses central servers with zero internet requirement.</li>
+        <li><strong>High-Concurrency Signaling Broker:</strong> Built a Java 25 Virtual Threads and WebSocket signaling broker supporting <strong>10,000 pooled connections</strong>, with ZXing QR pairing and UDP subnet auto-discovery.</li>
+        <li><strong>Encrypted Chunk Streaming:</strong> Designed a 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to <strong>50GB transfers with &lt;50MB of RAM</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <div class="section">
+    <div class="section-title">Achievements</div>
+    <ul class="achieve-list">
+      <li><strong>500+ Problems Solved on LeetCode:</strong> Demonstrated strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graph algorithms (<a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank">leetcode.com/u/Varun_Kushwah</a>).</li>
+      <li><strong>Top 105 Nationally &mdash; Google Solution Challenge 2025:</strong> Recognized out of thousands of submissions across India for engineering real-world social impact software.</li>
+      <li><strong>2nd Place &mdash; Innotech (Department Level):</strong> Awarded for technical innovation in high-throughput backend architecture.</li>
+    </ul>
+  </div>
+
+</body>
+</html>

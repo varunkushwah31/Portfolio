@@ -1,7 +1,7 @@
 %-------------------------
 % Resume in LaTeX
 % Author : Varun Kushwah
-% Targeted for : Java Developer / SDE
+% Targeted for : Java Backend Engineer / Software Engineer
 % License : MIT
 %------------------------
 
@@ -18,6 +18,7 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
+\usepackage[T1]{fontenc}
 
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer fields
@@ -82,35 +83,41 @@
 %----------HEADING-----------------
 \begin{center}
     \textbf{\Huge \scshape Varun Kushwah} \\ \vspace{2pt}
-    \small +91-8218568519 $|$ \href{mailto:varun.kush3@gmail.com}{\underline{varun.kush3@gmail.com}} $|$ 
-    \href{https://linkedin.com/in/varun-kushwah}{\underline{linkedin.com/in/varun-kushwah}} $|$
+    \small +91 82185 68519 $|$ \href{mailto:varun.kush3@gmail.com}{\underline{varun.kush3@gmail.com}} $|$ 
+    \href{https://varunkushwah.xyz}{\underline{varunkushwah.xyz}} $|$ 
+    \href{https://linkedin.com/in/varun-kushwah}{\underline{linkedin.com/in/varun-kushwah}} \\ \vspace{1pt}
     \href{https://github.com/varunkushwah31}{\underline{github.com/varunkushwah31}} $|$
-    \href{https://leetcode.com/u/Varun_Kushwah/}{\underline{leetcode.com/u/Varun\_Kushwah}} $|$
-    \href{https://www.varunkushwah.xyz}{\underline{varunkushwah.xyz}}
+    \href{https://leetcode.com/u/Varun_Kushwah/}{\underline{leetcode.com/u/Varun\_Kushwah (500+ Solved)}} $|$
+    \small India
 \end{center}
 
-%-----------TECHNICAL SKILLS-----------
-\section{Technical Skills}
- \begin{itemize}[leftmargin=*,label={}]
-    \small{\item{
-     \textbf{Languages}{: Java (Java 17/21/25, OOP, Multithreading, Concurrency, Virtual Threads, Stream API), SQL, TypeScript, JavaScript, Python} \\
-     \textbf{Backend \& Frameworks}{: Spring Boot 3/4, Spring MVC, Spring Security, Spring Data JPA, Hibernate, RESTful APIs, WebSockets, WebRTC} \\
-     \textbf{Databases \& Caching}{: PostgreSQL, MySQL, MongoDB, Redis} \\
-     \textbf{DevOps \& Tools}{: Git, GitHub, Docker, Postman, Linux/Bash, Maven, Gradle, CI/CD, Prometheus, Grafana} \\
-     \textbf{Core Competencies}{: Data Structures \& Algorithms, Object-Oriented Design (OOD), Microservices Basics, Distributed Systems Basics}
-    }}
- \end{itemize}
+%-----------SUMMARY-----------
+\section{Summary}
+\small{Computer Science undergraduate specializing in high-concurrency Java backend systems, distributed architectures, and real-time protocols. Proficient in Java 21/25, Spring Boot 3.3, PostgreSQL, Redis, WebRTC, STOMP WebSockets, and Docker. Java \& DSA Coordinator at devup mentoring 20+ peers; solved 500+ problems on LeetCode and recognized in Top 105 Nationally in Google Solution Challenge 2025.}
 
 %-----------EDUCATION-----------------
 \section{Education}
   \resumeSubHeadingListStart
     \resumeSubheading
       {KIET Group of Institutions}{2024 -- 2028}
-      {Bachelor of Technology in Computer Science \& Engineering (CGPA: 8.27 / 10.0)}{Ghaziabad, India}
+      {B.Tech in Computer Science \& Engineering $|$ CGPA: 8.27 / 10.0}{Ghaziabad, India}
     \resumeSubheading
       {New St. Stephens Public School}{2021 -- 2023}
       {Senior Secondary (CBSE Class XII: 80\%) $\cdot$ Secondary (CBSE Class X: 82\%)}{Agra, India}
   \resumeSubHeadingListEnd
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=*,label={}]
+    \small{\item{
+     \textbf{Languages}{: Java (17/21/25), SQL, TypeScript, JavaScript, Python} \\
+     \textbf{Backend \& Frameworks}{: Spring Boot 3.x, Spring MVC, Spring Security, Spring Data JPA, Hibernate, RESTful APIs, WebSockets, STOMP} \\
+     \textbf{Distributed Systems \& Networking}{: WebRTC (RTCDataChannel), Virtual Threads (Java 21/25), Redis 7 (Distributed Locking \& Caching), Resilience4j} \\
+     \textbf{Databases \& Storage}{: PostgreSQL, MySQL, MongoDB, Redis} \\
+     \textbf{DevOps \& Tools}{: Docker, Git, GitHub, Postman, Linux / Bash, Maven, Gradle, CI/CD, Prometheus, Grafana} \\
+     \textbf{Core Competencies}{: Data Structures \& Algorithms, Object-Oriented Design (OOP), Microservices Architecture, Concurrency \& Multithreading, Clean Architecture}
+    }}
+ \end{itemize}
 
 %-----------EXPERIENCE-----------------
 \section{Experience \& Leadership}
@@ -119,9 +126,9 @@
       {devup -- College Tech Club}{Aug 2024 -- Present}
       {Java \& DSA Coordinator $\cdot$ Technical Mentor}{KIET Campus}
       \resumeItemListStart
-        \resumeItem{Java Backend Curriculum}{Spearheaded structured Java & backend modules for 20+ active student members, accelerating peer readiness for software engineering internships and technical assessments.}
-        \resumeItem{DSA Mentorship}{Conducted weekly algorithmic problem-solving sessions on trees, graphs, and dynamic programming, mentoring juniors to improve average coding speed and accuracy by 30\%.}
-        \resumeItem{Engineering Standards}{Orchestrated code reviews and Git workflows, enforcing clean architecture patterns, OOP principles, and test-driven development practices across collaborative cohort projects.}
+        \resumeItem{Java Backend Curriculum}{Spearheaded structured hands-on Java \& Spring Boot backend modules for \textbf{20+ active student members}, preparing juniors for software engineering internships and technical assessments.}
+        \resumeItem{DSA Mentorship}{Conducted weekly algorithmic problem-solving sessions on trees, graphs, and dynamic programming, improving juniors' average coding speed and benchmark accuracy by \textbf{30\%}.}
+        \resumeItem{Engineering Standards}{Orchestrated code reviews and Git workflows, enforcing clean architecture patterns, OOP principles, and test-driven practices across collaborative cohort projects.}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
@@ -129,27 +136,19 @@
 \section{Key Projects}
     \resumeSubHeadingListStart
       \resumeProjectHeading
-          {\textbf{MentorSync -- LeetCode \& Codeforces LMS} $|$ \emph{Java 21, Spring Boot 4, React 19, Redis 7+, MongoDB, Docker}}{\href{https://mentorssync.vercel.app/}{\underline{Live Demo}} $|$ \href{https://github.com/varunkushwah31/Leetcode-Tracker-Frontend}{\underline{GitHub}}}
+          {\textbf{MentorSync -- LeetCode \& Codeforces LMS} $|$ \emph{Java 21, Spring Boot 3.3, React 19, TypeScript, Redis 7, MongoDB, Docker}}{\href{https://mentorssync.vercel.app/}{\underline{Live Demo}} $|$ \href{https://github.com/varunkushwah31/Leetcode-Tracker-Frontend}{\underline{GitHub}}}
           \resumeItemListStart
-            \resumeItem{Dual-Platform LMS}{Architected a scalable two-sided LMS for bootcamps to automate LeetCode \& Codeforces progress tracking, assignment distribution, and real-time leaderboards.}
-            \resumeItem{Automated Verification}{Built automated verification pipeline consuming LeetCode GraphQL/REST APIs and regex parsing to validate submissions, eliminating manual grading overhead across 100+ active submissions.}
-            \resumeItem{Cache Warming \& Resilience}{Engineered nightly Redis cache warming worker (03:00 UTC) with atomic distributed locks (setIfAbsent) ensuring 0ms peak latency, STOMP WebSockets, and Resilience4j circuit breakers.}
+            \resumeItem{Dual-Platform Telemetry}{Architected a scalable two-sided LMS for bootcamps to automate LeetCode and Codeforces progress tracking, assignment distribution, and real-time leaderboards.}
+            \resumeItem{Automated Verification Engine}{Built an asynchronous verification engine consuming LeetCode GraphQL and Codeforces REST APIs with problem slug parsing, eliminating manual grading across \textbf{100+ active submissions}.}
+            \resumeItem{Cache Warming \& Resilience}{Engineered nightly Redis cache-warming worker (03:00 UTC) with atomic distributed locks (\texttt{setIfAbsent}) ensuring \textbf{0ms peak latency}, STOMP WebSockets, and Resilience4j circuit breakers.}
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{W2W Share -- Offline Encrypted P2P File Transfer Platform} $|$ \emph{Java 25, Spring Boot 4.1, WebRTC, Bouncy Castle, Docker}}{\href{https://w2wshare.vercel.app/}{\underline{Live Demo}} $|$ \href{https://github.com/varunkushwah31/W2WShare}{\underline{GitHub}}}
+          {\textbf{W2W Share -- Offline Encrypted P2P File Transfer} $|$ \emph{Java 25, Spring Boot 4.1, WebRTC, Bouncy Castle, Virtual Threads, Docker}}{\href{https://w2wshare.vercel.app/}{\underline{Live Demo}} $|$ \href{https://github.com/varunkushwah31/W2WShare}{\underline{GitHub}}}
           \resumeItemListStart
-            \resumeItem{P2P Networking}{Engineered an offline peer-to-peer file transfer platform using WebRTC RTCDataChannels over UDP, bypassing central servers with zero internet required.}
-            \resumeItem{Signaling Broker}{Built high-concurrency Java 25 Virtual Threads \& Spring Boot 4 WebSocket signaling broker with 10k connection pooling, ZXing QR-pairing, and UDP subnet discovery.}
-            \resumeItem{Encrypted Streaming}{Engineered 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to 50GB transfers with $<$50MB RAM.}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{Stateless Authentication \& RBAC Service} $|$ \emph{Java, Spring Boot, Spring Security, JWT, OAuth 2.0, PostgreSQL, Docker}}{\href{https://github.com/varunkushwah31}{\underline{GitHub}}}
-          \resumeItemListStart
-            \resumeItem{Stateless Identity}{Designed a modular stateless authentication service implementing JWT access/refresh token rotation and OAuth 2.0 social sign-in, eliminating server-side session memory overhead.}
-            \resumeItem{Access Control}{Configured custom Spring Security filter chains with granular Role-Based Access Control (RBAC), securing 15+ REST endpoints with zero unauthorized access vulnerabilities.}
-            \resumeItem{Data Persistence}{Integrated relational persistence layer with connection pooling, automated validation filters, and comprehensive integration testing via Postman.}
+            \resumeItem{Zero-Relay P2P Protocol}{Engineered an offline peer-to-peer file transfer platform on WebRTC RTCDataChannels over UDP that bypasses central servers with zero internet requirement.}
+            \resumeItem{High-Concurrency Signaling Broker}{Built a Java 25 Virtual Threads and WebSocket signaling broker supporting \textbf{10,000 pooled connections}, with ZXing QR pairing and UDP subnet auto-discovery.}
+            \resumeItem{Encrypted Chunk Streaming}{Designed a 64KB chunk streaming protocol with Bouncy Castle AES-256-GCM encryption and backpressure control, handling up to \textbf{50GB transfers with $<$50MB of RAM}.}
           \resumeItemListEnd
     \resumeSubHeadingListEnd
 
@@ -158,7 +157,8 @@
  \begin{itemize}[leftmargin=12pt]
     \small{\item{
      \textbf{500+ Problems Solved on LeetCode} (\href{https://leetcode.com/u/Varun_Kushwah/}{\underline{leetcode.com/u/Varun\_Kushwah}}){: Demonstrated strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graph algorithms.} \\
-     \textbf{Top 105 Nationally -- Google Solution Challenge 2025}{: Recognized among the top 105 projects nationwide out of thousands of submissions for real-world engineering impact.}
+     \textbf{Top 105 Nationally -- Google Solution Challenge 2025}{: Recognized out of thousands of submissions across India for engineering real-world social impact software.} \\
+     \textbf{2nd Place -- Innotech (Department Level)}{: Awarded for technical innovation in high-throughput backend architecture.}
     }}
  \end{itemize}
 

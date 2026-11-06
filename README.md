@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# Varun Kushwah — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <a href="https://varunkushwah.xyz" target="_blank">
+    <img src="https://img.shields.io/badge/Live_Site-varunkushwah.xyz-0e75b6?style=for-the-badge&logo=GoogleChrome&logoColor=white" alt="Live Site" />
+  </a>
+  <img src="https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=React&logoColor=black" alt="React 19" />
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-4.x-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Vite-7.x-646CFF?style=for-the-badge&logo=Vite&logoColor=white" alt="Vite" />
+</p>
 
-Currently, two official plugins are available:
+A production-grade, minimalist developer portfolio engineered for high performance, accessibility, and ATS transparency. Built with React 19, TypeScript, Tailwind CSS, GSAP, and Three.js.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Architectural Highlights
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Interactive 3D WebGL Canvas:** Lightweight Three.js particle background dynamically reactive to pointer movement and theme switching.
+- **GSAP Physics & Micro-interactions:** Fluid magnetic buttons, spotlight cards, tilt perspective containers, and SVG path border sweeps.
+- **ATS Plaintext Parser & Resume Viewer:** In-browser ATS verification engine providing 1-click single-column plaintext resume copy alongside high-fidelity PDF inspection.
+- **Developer Command Palette (`Cmd+K` / `Ctrl+K`):** Global terminal modal supporting instant navigation, project searches, theme toggles, and simulated `$ curl contact` endpoint responses.
+- **Recruiter 30-Second Fast-Pitch:** Dedicated recruiter executive summary drawer providing hiring managers with immediate stack alignment, LeetCode milestones, and candidate contact links.
+- **Zero-Emoji Design System:** Clean typographic hierarchy, Phosphor icon integration, and accessible high-contrast color tokens.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Category | Technologies |
+| :--- | :--- |
+| **Framework & Core** | React 19, TypeScript, Vite 7 |
+| **Styling & Motion** | Tailwind CSS 4, GSAP 3 (GreenSock), Framer Motion |
+| **3D & Graphics** | Three.js, React Three Fiber |
+| **Icons & Typography** | Phosphor Icons (`@phosphor-icons/react`), Devicons |
+| **Quality & Linting** | ESLint 9 (Flat Config), TypeScript strict type-checking |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+### Prerequisites
+- Node.js (v20+ recommended)
+- npm or pnpm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/varunkushwah31/Portfolio.git
+
+# Navigate into project directory
+cd Portfolio
+
+# Install dependencies
+npm install
+
+# Start local development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Production Build & Linting
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Run ESLint validation
+npm run lint
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Compile production bundle with TypeScript type-checking
+npm run build
+
+# Preview production build locally
+npm run preview
 ```
+
+---
+
+## Candidate Contacts
+
+- **Portfolio:** [varunkushwah.xyz](https://varunkushwah.xyz)
+- **LinkedIn:** [linkedin.com/in/varun-kushwah](https://linkedin.com/in/varun-kushwah)
+- **LeetCode:** [leetcode.com/u/Varun_Kushwah](https://leetcode.com/u/Varun_Kushwah/)
+- **GitHub:** [github.com/varunkushwah31](https://github.com/varunkushwah31)
+- **Email:** varun.kush3@gmail.com
