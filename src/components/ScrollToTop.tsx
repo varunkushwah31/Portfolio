@@ -1,10 +1,7 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 
-/**
- * Scrolls to top on route change.
- * If navigating to /#hash, scrolls to that element instead.
- */
+
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation()
 
