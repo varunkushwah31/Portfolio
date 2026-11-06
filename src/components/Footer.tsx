@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { GithubLogoIcon, LinkedinLogoIcon, EnvelopeSimpleIcon } from '@phosphor-icons/react'
+import { LeetCodeIcon } from '@/components/TechIcons'
 
 interface NavLinkItem {
   label: string
@@ -35,6 +36,7 @@ const footerNav: NavColumn[] = [
     links: [
       { label: 'GitHub', href: 'https://github.com/varunkushwah31', external: true },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/varun-kushwah/', external: true },
+      { label: 'LeetCode', href: 'https://leetcode.com/u/Varun_Kushwah/', external: true },
       { label: 'Email', href: 'mailto:varun.kush3@gmail.com', external: true },
     ],
   },
@@ -103,6 +105,16 @@ export default function Footer() {
               className="p-1.5 text-muted hover:text-ink transition-colors"
             >
               <LinkedinLogoIcon size={16} />
+            </a>
+            <a
+              href="https://leetcode.com/u/Varun_Kushwah/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LeetCode"
+              title="LeetCode (500+ Solved)"
+              className="p-1.5 text-muted hover:text-amber-500 transition-colors"
+            >
+              <LeetCodeIcon size={16} />
             </a>
             <a
               href="mailto:varun.kush3@gmail.com"

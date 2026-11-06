@@ -48,7 +48,7 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
   }
 
   const rawResumeText = `VARUN KUSHWAH
-+91-8218568519 | varun.kush3@gmail.com | linkedin.com/in/varun-kushwah | github.com/varunkushwah31 | varunkushwah.xyz
++91-8218568519 | varun.kush3@gmail.com | linkedin.com/in/varun-kushwah | github.com/varunkushwah31 | leetcode.com/u/Varun_Kushwah | varunkushwah.xyz
 
 TECHNICAL SKILLS
 - Languages: Java (Java 17/21, OOP, Multithreading, Concurrency, Stream API, Collections), SQL, TypeScript, JavaScript, Python
@@ -192,9 +192,10 @@ ACHIEVEMENTS & COMPETITIVE PROGRAMMING
                   </div>
                   <div className="font-mono text-xs text-muted space-y-1 md:text-right">
                     <div>+91-8218568519</div>
-                    <div>varun.kush3@gmail.com</div>
-                    <div>github.com/varunkushwah31</div>
-                    <div>linkedin.com/in/varun-kushwah</div>
+                    <a href="mailto:varun.kush3@gmail.com" className="block hover:text-ink transition-colors">varun.kush3@gmail.com</a>
+                    <a href="https://github.com/varunkushwah31" target="_blank" rel="noopener noreferrer" className="block hover:text-ink transition-colors">github.com/varunkushwah31</a>
+                    <a href="https://linkedin.com/in/varun-kushwah" target="_blank" rel="noopener noreferrer" className="block hover:text-ink transition-colors">linkedin.com/in/varun-kushwah</a>
+                    <a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank" rel="noopener noreferrer" className="block text-amber-500 hover:text-amber-400 font-semibold transition-colors">leetcode.com/u/Varun_Kushwah</a>
                   </div>
                 </div>
                 <p className="body-light text-body text-sm leading-relaxed max-w-3xl">

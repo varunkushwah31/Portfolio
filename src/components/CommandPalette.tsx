@@ -24,6 +24,7 @@ import {
 import projects from "@/data/projects"
 import { useTheme } from "@/context/ThemeContext"
 import { sound } from "@/lib/sound"
+import { LeetCodeIcon } from "@/components/TechIcons"
 
 interface CommandPaletteProps {
   isOpen: boolean
@@ -304,7 +305,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   </a>
                 </div>
                 <div>
-                  <span className="text-amber-400 font-bold">availability:</span>{" "}
+                  <span className="text-amber-400 font-bold">leetcode:</span>{" "}
+                  <a
+                    href="https://leetcode.com/u/Varun_Kushwah/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-body-strong hover:text-amber-400 underline transition-colors"
+                  >
+                    https://leetcode.com/u/Varun_Kushwah/
+                  </a>
+                </div>
+                <div>
+                  <span className="text-emerald-400 font-bold">availability:</span>{" "}
                   <span className="text-emerald-400">Available for Software Developer Internships &amp; Roles</span>
                 </div>
               </div>
@@ -696,6 +708,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       icon: <LinkedinLogoIcon size={16} />,
       action: () => {
         window.open("https://www.linkedin.com/in/varun-kushwah/", "_blank", "noopener,noreferrer")
+        handleClose()
+      },
+    },
+    {
+      id: "action-leetcode",
+      title: "LeetCode Profile",
+      subtitle: "leetcode.com/u/Varun_Kushwah (500+ Solved)",
+      category: "Actions",
+      icon: <LeetCodeIcon size={16} className="text-[#FFA116]" />,
+      action: () => {
+        window.open("https://leetcode.com/u/Varun_Kushwah/", "_blank", "noopener,noreferrer")
         handleClose()
       },
     },

@@ -27,6 +27,7 @@ import {
   PostmanIcon,
   ThreeJSIcon,
   GSAPIcon,
+  LeetCodeIcon,
 } from "@/components/TechIcons"
 import TechStack, { type TechItem } from "@/components/TechStack"
 import MagneticButton from "@/components/gsap/MagneticButton"
@@ -54,6 +55,7 @@ const techStack: TechItem[] = [
 const socials = [
   { label: "GitHub", href: "https://github.com/varunkushwah31", icon: GithubLogoIcon },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/varun-kushwah/", icon: LinkedinLogoIcon },
+  { label: "LeetCode", href: "https://leetcode.com/u/Varun_Kushwah/", icon: LeetCodeIcon },
   { label: "Email", href: "mailto:varun.kush3@gmail.com", icon: EnvelopeSimpleIcon },
 ]
 
@@ -180,6 +182,19 @@ export default function About() {
                 <SparkleIcon size={12} className="inline text-emerald-500 dark:text-emerald-400" />
               </a>
               , I take ownership of designing, developing, and maintaining software that meets high technical standards while delivering tangible value. I work closely with peers to mentor 100+ emerging developers in object-oriented architecture, Spring Boot services, and clean Git workflows.
+            </p>
+
+            <p>
+              Driven by algorithmic problem solving, I have solved <strong className="text-strong font-semibold">500+ problems on </strong>
+              <a
+                href="https://leetcode.com/u/Varun_Kushwah/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-amber-500 font-semibold hover:text-amber-400 underline underline-offset-4 decoration-hairline hover:decoration-amber-500 transition-colors inline-flex items-center gap-1"
+              >
+                <span>LeetCode</span>
+              </a>
+              {" "}across data structures, trees, dynamic programming, and graph algorithms, and was recognized in the <strong className="text-strong font-semibold">Top 105 Nationally</strong> for Google Solution Challenge 2025.
             </p>
 
             <p>

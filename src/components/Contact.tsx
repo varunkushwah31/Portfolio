@@ -2,6 +2,7 @@ import { useState } from "react"
 import { EnvelopeSimpleIcon, ArrowRightIcon, CopyIcon, CheckIcon, PaperPlaneTiltIcon, CheckCircleIcon } from "@phosphor-icons/react"
 import { motion, AnimatePresence } from "framer-motion"
 import { sound } from "@/lib/sound"
+import { LeetCodeIcon } from "@/components/TechIcons"
 
 /* Simple Icons SVGs */
 const GitHubIcon = ({ size = 20 }: { size?: number }) => (
@@ -160,6 +161,18 @@ const Contact = () => {
                 aria-label="LinkedIn Profile"
               >
                 <LinkedInIcon size={20} />
+              </a>
+              <a
+                href="https://leetcode.com/u/Varun_Kushwah/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.click()}
+                onMouseEnter={() => sound.hover()}
+                className="w-12 h-12 flex items-center justify-center bg-surface-card text-ink rounded-full hover:bg-surface-elevated hover:text-amber-500 border border-hairline transition-colors duration-200"
+                aria-label="LeetCode Profile (500+ Solved)"
+                title="LeetCode (500+ Solved)"
+              >
+                <LeetCodeIcon size={20} />
               </a>
               <a
                 href={`mailto:${emailAddress}`}

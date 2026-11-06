@@ -20,6 +20,7 @@ import {
   CaretUpIcon,
   SparkleIcon,
   CpuIcon,
+  ArrowSquareOutIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -32,6 +33,7 @@ import {
   WebRTCIcon,
   PostgresIcon,
   LinuxIcon,
+  LeetCodeIcon,
 } from "@/components/TechIcons"
 import ResumePdfViewer from "@/components/ResumePdfViewer"
 import { sound } from "@/lib/sound"
@@ -179,8 +181,9 @@ const education: ResumeEntry[] = [
 ]
 
 const achievements = [
-  "500+ Problems Solved on LeetCode: Strong algorithmic mastery across arrays, trees, graphs, and dynamic programming.",
+  "500+ Problems Solved on LeetCode: Strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graphs.",
   "Top 105 Nationally — Google Solution Challenge 2025: Recognized out of thousands of submissions across India.",
+  "2nd Place, Innotech (Department Level).",
 ]
 
 const skillsList = [
@@ -207,7 +210,7 @@ const skillsList = [
 export const ATS_PLAIN_TEXT_RESUME = `VARUN KUSHWAH
 Software Engineer | Backend Developer
 Email: varun.kush3@gmail.com | Portfolio: https://varunkushwah.me
-GitHub: https://github.com/varunkushwah31 | LinkedIn: https://www.linkedin.com/in/varun-kushwah/
+GitHub: https://github.com/varunkushwah31 | LinkedIn: https://www.linkedin.com/in/varun-kushwah/ | LeetCode: https://leetcode.com/u/Varun_Kushwah/
 Location: India
 
 ================================================================================
@@ -269,8 +272,9 @@ Senior Secondary (CBSE XII) & Secondary (CBSE X) | New St. Stephens Public Schoo
 ================================================================================
 ACHIEVEMENTS & HONORS
 ================================================================================
-* 500+ Problems Solved on LeetCode: Strong algorithmic mastery across arrays, trees, graphs, and dynamic programming.
-* Top 105 Nationally - Google Solution Challenge 2025: Recognized out of thousands of submissions across India.`
+* 500+ Problems Solved on LeetCode: Strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graphs (Profile: https://leetcode.com/u/Varun_Kushwah/).
+* Top 105 Nationally - Google Solution Challenge 2025: Recognized out of thousands of submissions across India.
+* 2nd Place, Innotech (Department Level).`
 
 function renderBulletText(bullet: string) {
   if (bullet.startsWith("Tech Stack:")) {
@@ -332,6 +336,18 @@ export default function ResumePage() {
               <p className="text-muted text-sm sm:text-base font-normal leading-relaxed">
                 Technical background, architectural milestones, and leadership experience.
               </p>
+              <div className="flex items-center gap-2.5 sm:gap-3 mt-3 text-xs font-mono text-muted flex-wrap">
+                <a href="mailto:varun.kush3@gmail.com" className="hover:text-ink transition-colors">varun.kush3@gmail.com</a>
+                <span className="text-hairline-strong">•</span>
+                <a href="https://github.com/varunkushwah31" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors">GitHub</a>
+                <span className="text-hairline-strong">•</span>
+                <a href="https://www.linkedin.com/in/varun-kushwah/" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors">LinkedIn</a>
+                <span className="text-hairline-strong">•</span>
+                <a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 font-semibold transition-colors inline-flex items-center gap-1.5">
+                  <LeetCodeIcon size={13} />
+                  <span>LeetCode (500+)</span>
+                </a>
+              </div>
             </div>
 
             {/* Top Action Buttons */}
@@ -775,15 +791,35 @@ export default function ResumePage() {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                {achievements.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 rounded-xl bg-surface-card border border-hairline text-sm text-body-strong font-medium flex items-center gap-3 shadow-xs"
-                  >
-                    <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
+                {achievements.map((item, idx) => {
+                  const isLeetCode = item.includes("LeetCode")
+                  return (
+                    <div
+                      key={idx}
+                      className="p-4 rounded-xl bg-surface-card border border-hairline text-sm text-body-strong font-medium flex items-center justify-between gap-3 shadow-xs"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        {isLeetCode ? (
+                          <LeetCodeIcon size={18} className="text-[#FFA116] shrink-0" />
+                        ) : (
+                          <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                        )}
+                        <span className="truncate sm:whitespace-normal">{item}</span>
+                      </div>
+                      {isLeetCode && (
+                        <a
+                          href="https://leetcode.com/u/Varun_Kushwah/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="shrink-0 text-xs font-semibold text-amber-500 hover:text-amber-400 underline underline-offset-2 flex items-center gap-1"
+                        >
+                          <span>Profile</span>
+                          <ArrowSquareOutIcon size={12} weight="bold" />
+                        </a>
+                      )}
+                    </div>
+                  )
+                })}
               </div>
             </section>
 

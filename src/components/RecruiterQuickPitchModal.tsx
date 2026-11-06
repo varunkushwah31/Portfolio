@@ -34,6 +34,7 @@ const PITCH_TEXT_FOR_CLIPBOARD = `Varun Kushwah — Software Engineer / Backend 
 * Portfolio: https://varunkushwah.me
 * LinkedIn: https://www.linkedin.com/in/varun-kushwah/
 * GitHub: https://github.com/varunkushwah31
+* LeetCode: https://leetcode.com/u/Varun_Kushwah/
 * Resume: https://varunkushwah.me/Varun_Kushwah_Resume.pdf`
 
 export default function RecruiterQuickPitchModal({
@@ -243,7 +244,7 @@ export default function RecruiterQuickPitchModal({
                       <li className="flex items-start gap-2">
                         <span className="text-amber-500 mt-0.5 font-bold">•</span>
                         <span>
-                          <strong className="text-ink">500+ LeetCode Solved &amp; Top 105 Nationally:</strong> Recognized in Google Solution Challenge 2025; B.Tech CSE CGPA 8.27/10.00.
+                          <strong className="text-ink">500+ LeetCode Solved:</strong> Algorithmic mastery across trees, graphs, and dynamic programming (<a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 font-semibold underline underline-offset-2">leetcode.com/u/Varun_Kushwah</a>) · <strong className="text-ink">Top 105 Nationally</strong> (Google Solution Challenge 2025).
                         </span>
                       </li>
                     </ul>
