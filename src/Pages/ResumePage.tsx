@@ -33,6 +33,7 @@ import {
   PostgresIcon,
   LinuxIcon,
   LeetCodeIcon,
+  GoogleIcon,
 } from "@/components/TechIcons"
 import ResumePdfViewer from "@/components/ResumePdfViewer"
 import { sound } from "@/lib/sound"
@@ -713,15 +714,24 @@ export default function ResumePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 {achievements.map((item, idx) => {
                   const isLeetCode = item.includes("LeetCode")
+                  const isGoogle = item.includes("Google")
+                  const isInnotech = item.includes("Innotech")
                   return (
                     <div
                       key={idx}
                       className="p-4 rounded-xl bg-surface-card border border-hairline text-sm text-body-strong font-medium flex items-center justify-between gap-3 shadow-xs"
                     >
                       <div className="flex items-center gap-3 min-w-0">
-                        {isLeetCode ? (
-                          <LeetCodeIcon size={18} className="text-[#FFA116] shrink-0" />
-                        ) : (
+                        {isLeetCode && <LeetCodeIcon size={18} className="text-[#FFA116] shrink-0" />}
+                        {isGoogle && <GoogleIcon size={18} className="shrink-0" />}
+                        {isInnotech && (
+                          <img
+                            src="/innotech.png"
+                            alt="Innotech Logo"
+                            className="w-5 h-5 object-contain shrink-0 rounded-xs"
+                          />
+                        )}
+                        {!isLeetCode && !isGoogle && !isInnotech && (
                           <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
                         )}
                         <span className="truncate sm:whitespace-normal">{item}</span>

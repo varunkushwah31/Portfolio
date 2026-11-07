@@ -14,7 +14,7 @@ import {
   GithubLogoIcon,
   LinkedinLogoIcon,
 } from "@phosphor-icons/react"
-import { LeetCodeIcon } from "@/components/TechIcons"
+import { LeetCodeIcon, GoogleIcon } from "@/components/TechIcons"
 import { sound } from "@/lib/sound"
 import { ATS_PLAIN_TEXT_RESUME } from "@/Pages/ResumePage"
 
@@ -317,8 +317,11 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                 </div>
                 <div className="space-y-3">
                   <div className="bg-surface-soft p-4 border border-hairline-strong flex items-center justify-between gap-3">
-                    <div className="text-xs text-body leading-relaxed">
-                      <strong className="text-ink font-bold">500+ Problems Solved on LeetCode:</strong> Strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graph algorithms.
+                    <div className="flex items-center gap-3 text-xs text-body leading-relaxed">
+                      <LeetCodeIcon size={18} className="text-[#FFA116] shrink-0" />
+                      <div>
+                        <strong className="text-ink font-bold">500+ Problems Solved on LeetCode:</strong> Strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graph algorithms.
+                      </div>
                     </div>
                     <a
                       href="https://leetcode.com/u/Varun_Kushwah/"
@@ -329,11 +332,17 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                       [Profile]
                     </a>
                   </div>
-                  <div className="bg-surface-soft p-4 border border-hairline-strong text-xs text-body leading-relaxed">
-                    <strong className="text-ink font-bold">Top 105 Nationally — Google Solution Challenge 2025:</strong> Recognized out of thousands of submissions across India for engineering real-world social impact software.
+                  <div className="bg-surface-soft p-4 border border-hairline-strong flex items-center gap-3 text-xs text-body leading-relaxed">
+                    <GoogleIcon size={18} className="shrink-0" />
+                    <div>
+                      <strong className="text-ink font-bold">Top 105 Nationally — Google Solution Challenge 2025:</strong> Recognized out of thousands of submissions across India for engineering real-world social impact software.
+                    </div>
                   </div>
-                  <div className="bg-surface-soft p-4 border border-hairline-strong text-xs text-body leading-relaxed">
-                    <strong className="text-ink font-bold">2nd Place — Innotech (Department Level):</strong> Awarded for technical innovation in high-throughput backend architecture.
+                  <div className="bg-surface-soft p-4 border border-hairline-strong flex items-center gap-3 text-xs text-body leading-relaxed">
+                    <img src="/innotech.png" alt="Innotech Logo" className="w-4.5 h-4.5 object-contain shrink-0 rounded-xs" />
+                    <div>
+                      <strong className="text-ink font-bold">2nd Place — Innotech (Department Level):</strong> Awarded for technical innovation in high-throughput backend architecture.
+                    </div>
                   </div>
                 </div>
               </div>
