@@ -17,6 +17,9 @@ import {
   EyeIcon,
   SparkleIcon,
   ArrowSquareOutIcon,
+  EnvelopeSimpleIcon,
+  GithubLogoIcon,
+  LinkedinLogoIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -324,13 +327,40 @@ export default function ResumePage() {
                 Technical background, architectural milestones, and leadership experience.
               </p>
               <div className="flex items-center gap-2.5 sm:gap-3 mt-3 text-xs font-mono text-muted flex-wrap">
-                <a href="mailto:varun.kush3@gmail.com" className="hover:text-ink transition-colors">varun.kush3@gmail.com</a>
+                <a
+                  href="mailto:varun.kush3@gmail.com"
+                  className="hover:text-ink transition-colors inline-flex items-center gap-1.5"
+                >
+                  <EnvelopeSimpleIcon size={13} />
+                  <span>varun.kush3@gmail.com</span>
+                </a>
                 <span className="text-hairline-strong">•</span>
-                <a href="https://github.com/varunkushwah31" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors">GitHub</a>
+                <a
+                  href="https://github.com/varunkushwah31"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-ink transition-colors inline-flex items-center gap-1.5"
+                >
+                  <GithubLogoIcon size={13} />
+                  <span>GitHub</span>
+                </a>
                 <span className="text-hairline-strong">•</span>
-                <a href="https://www.linkedin.com/in/varun-kushwah/" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors">LinkedIn</a>
+                <a
+                  href="https://www.linkedin.com/in/varun-kushwah/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-ink transition-colors inline-flex items-center gap-1.5"
+                >
+                  <LinkedinLogoIcon size={13} />
+                  <span>LinkedIn</span>
+                </a>
                 <span className="text-hairline-strong">•</span>
-                <a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 font-semibold transition-colors inline-flex items-center gap-1.5">
+                <a
+                  href="https://leetcode.com/u/Varun_Kushwah/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-amber-500 hover:text-amber-400 font-semibold transition-colors inline-flex items-center gap-1.5"
+                >
                   <LeetCodeIcon size={13} />
                   <span>LeetCode (500+)</span>
                 </a>

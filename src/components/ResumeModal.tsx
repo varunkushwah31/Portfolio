@@ -10,7 +10,11 @@ import {
   BookOpenIcon,
   GitForkIcon,
   CpuIcon,
+  PhoneIcon,
+  GithubLogoIcon,
+  LinkedinLogoIcon,
 } from "@phosphor-icons/react"
+import { LeetCodeIcon } from "@/components/TechIcons"
 import { sound } from "@/lib/sound"
 import { ATS_PLAIN_TEXT_RESUME } from "@/Pages/ResumePage"
 
@@ -150,12 +154,35 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                       ASPIRING JAVA DEVELOPER · JAVA & DSA COORDINATOR @ DEVUP
                     </p>
                   </div>
-                  <div className="font-mono text-xs text-muted space-y-1 md:text-right">
-                    <div>+91-8218568519</div>
-                    <a href="mailto:varun.kush3@gmail.com" className="block hover:text-ink transition-colors">varun.kush3@gmail.com</a>
-                    <a href="https://github.com/varunkushwah31" target="_blank" rel="noopener noreferrer" className="block hover:text-ink transition-colors">github.com/varunkushwah31</a>
-                    <a href="https://linkedin.com/in/varun-kushwah" target="_blank" rel="noopener noreferrer" className="block hover:text-ink transition-colors">linkedin.com/in/varun-kushwah</a>
-                    <a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank" rel="noopener noreferrer" className="block text-amber-500 hover:text-amber-400 font-semibold transition-colors">leetcode.com/u/Varun_Kushwah</a>
+                  <div className="font-mono text-xs text-muted space-y-1.5 md:text-right">
+                    <div className="inline-flex items-center gap-1.5 md:justify-end">
+                      <PhoneIcon size={13} />
+                      <span>+91-8218568519</span>
+                    </div>
+                    <div>
+                      <a href="mailto:varun.kush3@gmail.com" className="hover:text-ink transition-colors inline-flex items-center gap-1.5 md:justify-end">
+                        <EnvelopeSimpleIcon size={13} />
+                        <span>varun.kush3@gmail.com</span>
+                      </a>
+                    </div>
+                    <div>
+                      <a href="https://github.com/varunkushwah31" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors inline-flex items-center gap-1.5 md:justify-end">
+                        <GithubLogoIcon size={13} />
+                        <span>github.com/varunkushwah31</span>
+                      </a>
+                    </div>
+                    <div>
+                      <a href="https://linkedin.com/in/varun-kushwah" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors inline-flex items-center gap-1.5 md:justify-end">
+                        <LinkedinLogoIcon size={13} />
+                        <span>linkedin.com/in/varun-kushwah</span>
+                      </a>
+                    </div>
+                    <div>
+                      <a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 font-semibold transition-colors inline-flex items-center gap-1.5 md:justify-end">
+                        <LeetCodeIcon size={13} />
+                        <span>leetcode.com/u/Varun_Kushwah</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
                 <p className="body-light text-body text-sm leading-relaxed max-w-3xl">
