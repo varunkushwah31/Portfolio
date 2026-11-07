@@ -34,6 +34,7 @@ import {
   LinuxIcon,
   LeetCodeIcon,
   GoogleIcon,
+  AWSIcon,
 } from "@/components/TechIcons"
 import ResumePdfViewer from "@/components/ResumePdfViewer"
 import { sound } from "@/lib/sound"
@@ -162,6 +163,7 @@ const education: ResumeEntry[] = [
 const achievements = [
   "500+ Problems Solved on LeetCode: Strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graphs.",
   "Top 105 Nationally — Google Solution Challenge 2025: Recognized out of thousands of submissions across India.",
+  "AWS Certified Cloud Practitioner: Validated foundational cloud architecture, security, compliance, and core AWS distributed services.",
   "2nd Place, Innotech (Department Level).",
 ]
 
@@ -178,6 +180,7 @@ const skillsList = [
   "MongoDB",
   "Redis",
   "Docker",
+  "AWS (Cloud Practitioner)",
   "Git & GitHub",
   "Linux / Bash",
   "Postman",
@@ -204,7 +207,7 @@ TECHNICAL SKILLS
 * Backend & Frameworks: Spring Boot 3.x, Spring MVC, Spring Security, Spring Data JPA, Hibernate, RESTful APIs, WebSockets, STOMP
 * Distributed Systems & Networking: WebRTC (RTCDataChannel), Virtual Threads (Java 21/25), Redis 7 (Distributed Locking & Caching), Resilience4j
 * Databases & Storage: PostgreSQL, MySQL, MongoDB, Redis
-* DevOps & Tools: Docker, Git, GitHub, Postman, Linux / Bash, Maven, Gradle, CI/CD, Prometheus, Grafana
+* DevOps & Cloud: AWS (Certified Cloud Practitioner), Docker, Git, GitHub, Postman, Linux / Bash, Maven, Gradle, CI/CD, Prometheus, Grafana
 * Core Competencies: Data Structures & Algorithms, Object-Oriented Design (OOP), Microservices Architecture, Concurrency & Multithreading, Clean Architecture
 
 ================================================================================
@@ -247,6 +250,7 @@ ACHIEVEMENTS & HONORS
 ================================================================================
 * 500+ Problems Solved on LeetCode: Demonstrated strong algorithmic mastery across arrays, strings, trees, dynamic programming, and graph algorithms (Profile: https://leetcode.com/u/Varun_Kushwah/).
 * Top 105 Nationally — Google Solution Challenge 2025: Recognized out of thousands of submissions across India for engineering real-world social impact software.
+* AWS Certified Cloud Practitioner: Validated foundational cloud architecture, security, compliance, and core AWS distributed services.
 * 2nd Place — Innotech (Department Level): Awarded for technical innovation in high-throughput backend architecture.`
 
 const METRICS_REGEX = /(\b\d+[\d,]*\+?%?|\b\d+k\b|<50MB\b|50GB\b|0ms\b|\b20\+\b|\b30%\b|\b100\+\b|\b10,000\b)/gi
@@ -716,6 +720,7 @@ export default function ResumePage() {
                   const isLeetCode = item.includes("LeetCode")
                   const isGoogle = item.includes("Google")
                   const isInnotech = item.includes("Innotech")
+                  const isAws = item.includes("AWS")
                   return (
                     <div
                       key={idx}
@@ -724,6 +729,7 @@ export default function ResumePage() {
                       <div className="flex items-center gap-3 min-w-0">
                         {isLeetCode && <LeetCodeIcon size={18} className="text-[#FFA116] shrink-0" />}
                         {isGoogle && <GoogleIcon size={18} className="shrink-0" />}
+                        {isAws && <AWSIcon size={18} className="shrink-0" />}
                         {isInnotech && (
                           <img
                             src="/innotech.png"
@@ -731,7 +737,7 @@ export default function ResumePage() {
                             className="w-5 h-5 object-contain shrink-0 rounded-xs"
                           />
                         )}
-                        {!isLeetCode && !isGoogle && !isInnotech && (
+                        {!isLeetCode && !isGoogle && !isInnotech && !isAws && (
                           <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
                         )}
                         <span className="truncate sm:whitespace-normal">{item}</span>

@@ -14,7 +14,7 @@ import {
   GithubLogoIcon,
   LinkedinLogoIcon,
 } from "@phosphor-icons/react"
-import { LeetCodeIcon, GoogleIcon } from "@/components/TechIcons"
+import { LeetCodeIcon, GoogleIcon, AWSIcon } from "@/components/TechIcons"
 import { sound } from "@/lib/sound"
 import { ATS_PLAIN_TEXT_RESUME } from "@/Pages/ResumePage"
 
@@ -342,6 +342,12 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                     <img src="/innotech.png" alt="Innotech Logo" className="w-4.5 h-4.5 object-contain shrink-0 rounded-xs" />
                     <div>
                       <strong className="text-ink font-bold">2nd Place — Innotech (Department Level):</strong> Awarded for technical innovation in high-throughput backend architecture.
+                    </div>
+                  </div>
+                  <div className="bg-surface-soft p-4 border border-hairline-strong flex items-center gap-3 text-xs text-body leading-relaxed">
+                    <AWSIcon size={18} className="shrink-0" />
+                    <div>
+                      <strong className="text-ink font-bold">AWS Certified Cloud Practitioner:</strong> Validated foundational cloud architecture, security, compliance, and core AWS distributed services.
                     </div>
                   </div>
                 </div>
