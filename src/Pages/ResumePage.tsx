@@ -326,12 +326,12 @@ export default function ResumePage() {
               <p className="text-muted text-sm sm:text-base font-normal leading-relaxed">
                 Technical background, architectural milestones, and leadership experience.
               </p>
-              <div className="flex items-center gap-2.5 sm:gap-3 mt-3 text-xs font-mono text-muted flex-wrap">
+              <div className="flex items-center gap-2.5 sm:gap-3 mt-3 text-xs font-mono flex-wrap">
                 <a
                   href="mailto:varun.kush3@gmail.com"
-                  className="hover:text-ink transition-colors inline-flex items-center gap-1.5"
+                  className="text-[#EA4335] hover:opacity-80 font-semibold transition-opacity inline-flex items-center gap-1.5"
                 >
-                  <EnvelopeSimpleIcon size={13} />
+                  <EnvelopeSimpleIcon size={13} weight="bold" />
                   <span>varun.kush3@gmail.com</span>
                 </a>
                 <span className="text-hairline-strong">•</span>
@@ -339,9 +339,9 @@ export default function ResumePage() {
                   href="https://github.com/varunkushwah31"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-ink transition-colors inline-flex items-center gap-1.5"
+                  className="text-[#24292f] dark:text-[#f0f6fc] hover:opacity-80 font-semibold transition-opacity inline-flex items-center gap-1.5"
                 >
-                  <GithubLogoIcon size={13} />
+                  <GithubLogoIcon size={13} weight="bold" />
                   <span>GitHub</span>
                 </a>
                 <span className="text-hairline-strong">•</span>
@@ -349,9 +349,9 @@ export default function ResumePage() {
                   href="https://www.linkedin.com/in/varun-kushwah/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-ink transition-colors inline-flex items-center gap-1.5"
+                  className="text-[#0A66C2] hover:opacity-80 font-semibold transition-opacity inline-flex items-center gap-1.5"
                 >
-                  <LinkedinLogoIcon size={13} />
+                  <LinkedinLogoIcon size={13} weight="bold" />
                   <span>LinkedIn</span>
                 </a>
                 <span className="text-hairline-strong">•</span>
@@ -359,10 +359,10 @@ export default function ResumePage() {
                   href="https://leetcode.com/u/Varun_Kushwah/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-amber-500 hover:text-amber-400 font-semibold transition-colors inline-flex items-center gap-1.5"
+                  className="text-[#FFA116] hover:opacity-80 font-semibold transition-opacity inline-flex items-center gap-1.5"
                 >
                   <LeetCodeIcon size={13} />
-                  <span>LeetCode (500+)</span>
+                  <span>LeetCode</span>
                 </a>
               </div>
             </div>

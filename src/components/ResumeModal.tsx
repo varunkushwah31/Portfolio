@@ -155,30 +155,30 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                     </p>
                   </div>
                   <div className="font-mono text-xs text-muted space-y-1.5 md:text-right">
-                    <div className="inline-flex items-center gap-1.5 md:justify-end">
+                    <div className="inline-flex items-center gap-1.5 md:justify-end text-muted">
                       <PhoneIcon size={13} />
                       <span>+91-8218568519</span>
                     </div>
                     <div>
-                      <a href="mailto:varun.kush3@gmail.com" className="hover:text-ink transition-colors inline-flex items-center gap-1.5 md:justify-end">
-                        <EnvelopeSimpleIcon size={13} />
+                      <a href="mailto:varun.kush3@gmail.com" className="text-[#EA4335] hover:opacity-80 font-medium transition-opacity inline-flex items-center gap-1.5 md:justify-end">
+                        <EnvelopeSimpleIcon size={13} weight="bold" />
                         <span>varun.kush3@gmail.com</span>
                       </a>
                     </div>
                     <div>
-                      <a href="https://github.com/varunkushwah31" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors inline-flex items-center gap-1.5 md:justify-end">
-                        <GithubLogoIcon size={13} />
+                      <a href="https://github.com/varunkushwah31" target="_blank" rel="noopener noreferrer" className="text-[#24292f] dark:text-[#f0f6fc] hover:opacity-80 font-medium transition-opacity inline-flex items-center gap-1.5 md:justify-end">
+                        <GithubLogoIcon size={13} weight="bold" />
                         <span>github.com/varunkushwah31</span>
                       </a>
                     </div>
                     <div>
-                      <a href="https://linkedin.com/in/varun-kushwah" target="_blank" rel="noopener noreferrer" className="hover:text-ink transition-colors inline-flex items-center gap-1.5 md:justify-end">
-                        <LinkedinLogoIcon size={13} />
+                      <a href="https://linkedin.com/in/varun-kushwah" target="_blank" rel="noopener noreferrer" className="text-[#0A66C2] hover:opacity-80 font-medium transition-opacity inline-flex items-center gap-1.5 md:justify-end">
+                        <LinkedinLogoIcon size={13} weight="bold" />
                         <span>linkedin.com/in/varun-kushwah</span>
                       </a>
                     </div>
                     <div>
-                      <a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:text-amber-400 font-semibold transition-colors inline-flex items-center gap-1.5 md:justify-end">
+                      <a href="https://leetcode.com/u/Varun_Kushwah/" target="_blank" rel="noopener noreferrer" className="text-[#FFA116] hover:opacity-80 font-medium transition-opacity inline-flex items-center gap-1.5 md:justify-end">
                         <LeetCodeIcon size={13} />
                         <span>leetcode.com/u/Varun_Kushwah</span>
                       </a>
