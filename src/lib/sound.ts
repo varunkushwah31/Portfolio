@@ -10,6 +10,7 @@ class SoundFX {
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem("portfolio-sound-enabled")
       this.enabled = stored === "true"
+      document.documentElement.dataset.sound = this.enabled ? "on" : "off"
     }
   }
 
@@ -28,6 +29,7 @@ class SoundFX {
     this.enabled = !this.enabled
     if (typeof window !== "undefined") {
       localStorage.setItem("portfolio-sound-enabled", String(this.enabled))
+      document.documentElement.dataset.sound = this.enabled ? "on" : "off"
     }
     this.listeners.forEach((fn) => fn(this.enabled))
     if (this.enabled) {

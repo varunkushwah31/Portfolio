@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { motion } from "framer-motion"
 import { usePageTitle } from "@/hooks/usePageTitle"
+import { useClipboardMachine } from "@/hooks"
 import {
   CheckCircleIcon,
   CodeIcon,
@@ -297,21 +298,14 @@ type ViewMode = "interactive" | "pdf" | "ats"
 export default function ResumePage() {
   usePageTitle("Resume")
   const [viewMode, setViewMode] = useState<ViewMode>("interactive")
-  const [copiedAts, setCopiedAts] = useState(false)
+  const atsClipboard = useClipboardMachine({ duration: 2400 })
 
-  const handleCopyAts = async () => {
-    try {
-      await navigator.clipboard.writeText(ATS_PLAIN_TEXT_RESUME)
-      sound.success()
-      setCopiedAts(true)
-      setTimeout(() => setCopiedAts(false), 2400)
-    } catch {
-      // Fallback
-    }
+  const handleCopyAts = () => {
+    void atsClipboard.copy(ATS_PLAIN_TEXT_RESUME)
   }
 
   return (
-    <div className="min-h-screen bg-transparent">
+    <div className="min-h-screen bg-transparent" data-view-mode={viewMode}>
       {/* Page Header */}
       <div className="max-w-4xl mx-auto px-5 sm:px-6 pt-12 sm:pt-16 pb-8">
         <motion.div
@@ -442,8 +436,10 @@ export default function ResumePage() {
               onClick={handleCopyAts}
               className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-xs font-medium text-ink transition-colors cursor-pointer active:scale-95 w-full sm:w-auto shadow-xs"
               title="Copy ATS plaintext directly to clipboard"
+              {...atsClipboard.triggerProps}
+              data-testid="resume-copy-ats-header-btn"
             >
-              {copiedAts ? (
+              {atsClipboard.isCopied ? (
                 <>
                   <CheckIcon size={14} weight="bold" className="text-emerald-500" />
                   <span className="text-emerald-600 dark:text-emerald-400 font-semibold">ATS Plaintext Copied!</span>
@@ -497,8 +493,10 @@ export default function ResumePage() {
               <button
                 onClick={handleCopyAts}
                 className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-ink text-canvas text-xs font-semibold transition-all hover:opacity-90 shrink-0 cursor-pointer"
+                {...atsClipboard.triggerProps}
+                data-testid="resume-copy-ats-full-btn"
               >
-                {copiedAts ? (
+                {atsClipboard.isCopied ? (
                   <>
                     <CheckIcon size={14} weight="bold" className="text-emerald-400" />
                     <span>Copied to Clipboard!</span>

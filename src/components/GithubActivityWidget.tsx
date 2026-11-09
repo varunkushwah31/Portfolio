@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback, useRef } from "react"
+import React, { useState, useMemo, useEffect, useRef } from "react"
 import {
   GithubLogoIcon,
   ArrowSquareOutIcon,
@@ -12,160 +12,19 @@ import {
   ArrowsClockwiseIcon,
 } from "@phosphor-icons/react"
 import { sound } from "@/lib/sound"
-import {
-  REAL_GITHUB_STATS,
-  REAL_GITHUB_CONTRIBUTIONS,
-  type ContributionDay,
-  type GitHubStatsData,
-} from "@/data/githubData"
-
-const getTodayDateStr = () => {
-  const d = new Date()
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
-}
-const getCacheKey = () => `portfolio_github_cache_v5_${getTodayDateStr()}`
-const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes cache within the same day
+import type { ContributionDay } from "@/data/githubData"
+import { useGithubSyncMachine } from "@/hooks"
 
 export const GithubActivityWidget: React.FC = () => {
   const [hoveredDay, setHoveredDay] = useState<ContributionDay | null>(null)
-  const [contributions, setContributions] = useState<ContributionDay[]>(REAL_GITHUB_CONTRIBUTIONS)
-  const [stats, setStats] = useState<GitHubStatsData>(REAL_GITHUB_STATS)
-  const [isRefreshing, setIsRefreshing] = useState(false)
-  const [lastSyncTime, setLastSyncTime] = useState<string>("Live")
-
-  // Real-time synchronization with GitHub Contributions proxy
-  const syncWithGithub = useCallback(async (isManual = false) => {
-    if (isManual) {
-      setIsRefreshing(true)
-      sound.click()
-    }
-
-    try {
-      // 1. Check local cache first if automatic mount
-      if (!isManual) {
-        try {
-          const cached = localStorage.getItem(getCacheKey())
-          if (cached) {
-            const parsed = JSON.parse(cached)
-            if (parsed.timestamp && Date.now() - parsed.timestamp < CACHE_TTL_MS) {
-              if (parsed.contributions?.length) setContributions(parsed.contributions)
-              if (parsed.stats) setStats(parsed.stats)
-              setLastSyncTime("Live")
-              return
-            }
-          }
-        } catch {
-          // ignore cache read failure
-        }
-      }
-
-      // 2. Fetch live contributions from public GitHub contributions proxy (no 403 rate-limits)
-      const res = await fetch("https://github-contributions-api.jogruber.de/v4/varunkushwah31")
-      if (!res.ok) return
-      const contribData = await res.json()
-
-      if (contribData?.contributions && Array.isArray(contribData.contributions)) {
-        // Filter past 53 weeks dynamically from today
-        const sorted = contribData.contributions.sort((a: ContributionDay, b: ContributionDay) =>
-          a.date.localeCompare(b.date)
-        )
-        const cutoffDate = new Date()
-        cutoffDate.setDate(cutoffDate.getDate() - 371) // 53 weeks back
-        const cutoffStr = cutoffDate.toISOString().split("T")[0]
-        const past53Weeks = sorted.filter((c: ContributionDay) => c.date >= cutoffStr)
-
-        if (past53Weeks.length > 0) {
-          setContributions(past53Weeks)
-        }
-
-        // Compute total contributions for last 365 days
-        const todayStr = getTodayDateStr()
-        const last365 = sorted.filter((c: ContributionDay) => c.date <= todayStr).slice(-365)
-        const totalPastYear = last365.reduce((acc: number, c: ContributionDay) => acc + c.count, 0)
-
-        // Compute real-time current streak
-        let curStreak = 0
-        let idx = sorted.length - 1
-        while (idx >= 0 && sorted[idx].date > todayStr) idx--
-        const streakEndIdx = (idx >= 0 && sorted[idx].count === 0) ? idx - 1 : idx
-        idx = streakEndIdx
-        while (idx >= 0 && sorted[idx].count > 0) {
-          curStreak++
-          idx--
-        }
-        const streakStartIdx = idx + 1
-
-        // Compute longest streak
-        let longest = 0
-        let tempStreak = 0
-        for (const item of sorted) {
-          if (item.count > 0) {
-            tempStreak++
-            if (tempStreak > longest) longest = tempStreak
-          } else {
-            tempStreak = 0
-          }
-        }
-
-        // Compute current streak range string dynamically from actual streak dates
-        let streakRange = REAL_GITHUB_STATS.currentStreakRange
-        if (curStreak > 0 && streakStartIdx >= 0 && streakEndIdx < sorted.length) {
-          const startDateObj = new Date(sorted[streakStartIdx].date + "T00:00:00Z")
-          const endDateObj = new Date(sorted[streakEndIdx].date + "T00:00:00Z")
-          const fmtOpts: Intl.DateTimeFormatOptions = { month: "short", day: "numeric", timeZone: "UTC" }
-          streakRange = `${startDateObj.toLocaleDateString("en-US", fmtOpts)} – ${endDateObj.toLocaleDateString("en-US", fmtOpts)}`
-        }
-
-        // Compute commits in current month dynamically
-        const now = new Date()
-        const currentMonthPrefix = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`
-        const currentMonthName = now.toLocaleDateString("en-US", { month: "long" })
-        const monthCommits = sorted
-          .filter((c: ContributionDay) => c.date.startsWith(currentMonthPrefix))
-          .reduce((acc: number, c: ContributionDay) => acc + c.count, 0)
-
-        // Compute total all-time commits from all contribution data
-        const totalAllTime = sorted.reduce((acc: number, c: ContributionDay) => acc + c.count, 0)
-
-        const freshStats: GitHubStatsData = {
-          ...REAL_GITHUB_STATS,
-          totalContributionsLastYear: totalPastYear > 0 ? totalPastYear : REAL_GITHUB_STATS.totalContributionsLastYear,
-          totalCommits: totalAllTime > 0 ? totalAllTime : REAL_GITHUB_STATS.totalCommits,
-          currentStreak: curStreak > 0 ? curStreak : REAL_GITHUB_STATS.currentStreak,
-          currentStreakRange: streakRange,
-          longestStreak: longest > 0 ? longest : REAL_GITHUB_STATS.longestStreak,
-          commitsThisMonth: monthCommits > 0 ? monthCommits : REAL_GITHUB_STATS.commitsThisMonth,
-          commitsThisMonthLabel: `${monthCommits > 0 ? monthCommits : REAL_GITHUB_STATS.commitsThisMonth} in ${currentMonthName}`,
-        }
-
-        setStats(freshStats)
-        setLastSyncTime("Live")
-
-        // Cache the fresh data
-        try {
-          localStorage.setItem(
-            getCacheKey(),
-            JSON.stringify({
-              timestamp: Date.now(),
-              contributions: past53Weeks.length > 0 ? past53Weeks : REAL_GITHUB_CONTRIBUTIONS,
-              stats: freshStats,
-            })
-          )
-        } catch {
-          // ignore storage quota error
-        }
-      }
-    } catch {
-      // Keep static verified fallback without console pollution
-    } finally {
-      setIsRefreshing(false)
-    }
-  }, [])
-
-  // Run on mount once
-  useEffect(() => {
-    void syncWithGithub(false)
-  }, [syncWithGithub])
+  const {
+    stats,
+    contributions,
+    lastSyncTime,
+    isRefreshing,
+    syncWithGithub,
+    containerProps,
+  } = useGithubSyncMachine()
 
   const calendarScrollRef = useRef<HTMLDivElement>(null)
 
@@ -228,7 +87,11 @@ export const GithubActivityWidget: React.FC = () => {
   const daysOfWeek = ["", "Mon", "", "Wed", "", "Fri", ""]
 
   return (
-    <div className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-6 shadow-xs transition-colors">
+    <div
+      className="rounded-2xl border border-hairline bg-surface-card p-4 sm:p-6 shadow-xs transition-colors"
+      {...containerProps}
+      data-testid="github-activity-widget"
+    >
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
         <div className="flex items-center gap-3">

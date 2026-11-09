@@ -1,19 +1,17 @@
-import { useState } from "react"
 import { motion } from "framer-motion"
 import { RocketLaunchIcon, CaretRightIcon, EnvelopeSimpleIcon, CopyIcon, CheckIcon } from "@phosphor-icons/react"
 import MagneticButton from "./gsap/MagneticButton"
 import GsapReveal from "./gsap/GsapReveal"
+import { useClipboardMachine } from "@/hooks"
 
 export default function LetsTalk() {
-  const [copied, setCopied] = useState(false)
   const email = "varun.kush3@gmail.com"
+  const clipboard = useClipboardMachine({ duration: 2200 })
 
   const handleCopy = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    void navigator.clipboard.writeText(email)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2200)
+    void clipboard.copy(email)
   }
 
   return (
@@ -66,8 +64,10 @@ export default function LetsTalk() {
               onClick={handleCopy}
               className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-lg border border-hairline hover:border-muted bg-surface-soft hover:bg-surface-elevated text-body-strong hover:text-ink text-xs sm:text-sm font-medium transition-colors cursor-pointer"
               title="Copy email to clipboard"
+              {...clipboard.triggerProps}
+              data-testid="lets-talk-copy-email-btn"
             >
-              {copied ? (
+              {clipboard.isCopied ? (
                 <>
                   <CheckIcon size={15} weight="bold" className="text-emerald-500 dark:text-emerald-400" />
                   <span className="text-emerald-500 dark:text-emerald-400 font-medium">Copied {email}</span>

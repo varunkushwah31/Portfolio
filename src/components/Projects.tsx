@@ -106,11 +106,22 @@ const Projects = () => {
   const isFiltered =
     selectedCategory !== "ALL" || selectedTech !== "ALL TECH" || searchQuery.trim().length > 0
 
+  const filterState: "all" | "filtered" | "empty" = !isFiltered
+    ? "all"
+    : filteredProjects.length === 0
+    ? "empty"
+    : "filtered"
+
   return (
     <section
       id="projects"
       className="w-full bg-canvas relative border-b border-hairline-strong"
       style={{ paddingTop: "96px", paddingBottom: "96px" }}
+      data-filter-state={filterState}
+      data-filtered-count={filteredProjects.length}
+      data-total-count={projects.length}
+      data-view-mode={viewMode}
+      data-testid="projects-section"
     >
       <div className="max-w-360 mx-auto px-6">
         {/* Section Telemetry Eyebrow */}

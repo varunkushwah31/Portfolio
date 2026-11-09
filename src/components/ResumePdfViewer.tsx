@@ -7,8 +7,10 @@ import {
   LinkSimpleIcon,
   CheckIcon,
   FilePdfIcon,
+  CircleNotchIcon,
 } from "@phosphor-icons/react"
 import { sound } from "@/lib/sound"
+import { useClipboardMachine } from "@/hooks"
 
 interface ResumePdfViewerProps {
   pdfUrl?: string
@@ -16,14 +18,16 @@ interface ResumePdfViewerProps {
   fileName?: string
 }
 
+export type ViewerState = "loading" | "ready" | "fallback"
+
 export default function ResumePdfViewer({
   pdfUrl = "/Varun_Kushwah_Resume.pdf",
   previewImgUrl = "/resume_preview.png",
   fileName = "Varun_Kushwah_Resume.pdf",
 }: Readonly<ResumePdfViewerProps>) {
   const [zoomLevel, setZoomLevel] = useState<number>(100)
-  const [copiedLink, setCopiedLink] = useState(false)
-  const [iframeError, setIframeError] = useState(false)
+  const [viewerState, setViewerState] = useState<ViewerState>("loading")
+  const clipboard = useClipboardMachine({ duration: 2200 })
 
   const handleZoomIn = () => {
     sound.click()
@@ -40,16 +44,9 @@ export default function ResumePdfViewer({
     setZoomLevel(100)
   }
 
-  const handleCopyLink = async () => {
-    try {
-      const fullUrl = window.location.origin + pdfUrl
-      await navigator.clipboard.writeText(fullUrl)
-      sound.success()
-      setCopiedLink(true)
-      setTimeout(() => setCopiedLink(false), 2200)
-    } catch {
-      // Fallback
-    }
+  const handleCopyLink = () => {
+    const fullUrl = window.location.origin + pdfUrl
+    void clipboard.copy(fullUrl)
   }
 
   return (
@@ -105,8 +102,10 @@ export default function ResumePdfViewer({
             onClick={handleCopyLink}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-hairline bg-canvas hover:bg-surface-elevated text-xs font-medium text-ink transition-colors cursor-pointer"
             title="Copy Direct PDF URL"
+            {...clipboard.triggerProps}
+            data-testid="pdf-viewer-copy-link-btn"
           >
-            {copiedLink ? (
+            {clipboard.isCopied ? (
               <>
                 <CheckIcon size={14} weight="bold" className="text-emerald-500" />
                 <span className="text-emerald-600 dark:text-emerald-400">Link Copied!</span>
@@ -145,8 +144,22 @@ export default function ResumePdfViewer({
       </div>
 
       {/* Main Document Viewer Canvas */}
-      <div className="relative w-full bg-zinc-900/10 dark:bg-zinc-950/40 min-h-145 sm:min-h-187.5 flex items-center justify-center p-2 sm:p-6 overflow-x-auto">
-        {!iframeError ? (
+      <div
+        className="relative w-full bg-zinc-900/10 dark:bg-zinc-950/40 min-h-145 sm:min-h-187.5 flex items-center justify-center p-2 sm:p-6 overflow-x-auto"
+        data-viewer-state={viewerState}
+      >
+        {viewerState === "loading" && (
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-canvas/60 backdrop-blur-xs z-10 pointer-events-none"
+            role="status"
+            aria-live="polite"
+          >
+            <CircleNotchIcon size={28} className="animate-spin text-emerald-500" />
+            <span className="text-xs font-mono text-muted uppercase tracking-wider">Rendering PDF Document...</span>
+          </div>
+        )}
+
+        {viewerState !== "fallback" ? (
           <div
             className="w-full max-w-4xl transition-all duration-200 shadow-xl rounded-lg overflow-hidden bg-white"
             style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: "top center" }}
@@ -155,7 +168,8 @@ export default function ResumePdfViewer({
               src={`${pdfUrl}#toolbar=0&navpanes=0&scrollbar=1`}
               title="Varun Kushwah Resume PDF"
               className="w-full h-162.5 sm:h-215 border-none"
-              onError={() => setIframeError(true)}
+              onLoad={() => setViewerState("ready")}
+              onError={() => setViewerState("fallback")}
             />
           </div>
         ) : (

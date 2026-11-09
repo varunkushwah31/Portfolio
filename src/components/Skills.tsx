@@ -2,6 +2,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { CopyIcon, CheckIcon, TerminalWindowIcon, ArrowSquareOutIcon, SparkleIcon } from "@phosphor-icons/react"
 import { sound } from "@/lib/sound"
+import { useClipboardMachine } from "@/hooks"
 
 interface SkillItem {
   value: string
@@ -211,7 +212,7 @@ const categories = ["ALL", "BACKEND", "FRONTEND & MOBILE", "SYSTEMS & DEVOPS", "
 const Skills = () => {
   const [activeCategory, setActiveCategory] = useState("ALL")
   const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(skills[0])
-  const [copied, setCopied] = useState(false)
+  const clipboard = useClipboardMachine({ duration: 2000 })
 
   const filteredSkills = skills.filter((s) => {
     if (activeCategory === "ALL") return true
@@ -221,9 +222,7 @@ const Skills = () => {
   const handleCopyCode = () => {
     if (!selectedSkill?.codeSnippet) return
     sound.click()
-    void navigator.clipboard.writeText(selectedSkill.codeSnippet.code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    void clipboard.copy(selectedSkill.codeSnippet.code)
   }
 
   return (
@@ -396,9 +395,11 @@ const Skills = () => {
                     onMouseEnter={() => sound.hover()}
                     className="btn-text px-3 py-1.5 bg-surface-soft hover:bg-surface-elevated text-ink border border-hairline text-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                     style={{ borderRadius: "0px" }}
+                    {...clipboard.triggerProps}
+                    data-testid="skills-copy-code-btn"
                   >
-                    {copied ? <CheckIcon size={13} className="text-success" /> : <CopyIcon size={13} />}
-                    <span>{copied ? "COPIED" : "COPY CODE"}</span>
+                    {clipboard.isCopied ? <CheckIcon size={13} className="text-success" /> : <CopyIcon size={13} />}
+                    <span>{clipboard.isCopied ? "COPIED" : "COPY CODE"}</span>
                   </button>
 
                   {selectedSkill.codeSnippet.linkedProject && (

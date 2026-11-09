@@ -25,6 +25,7 @@ import projects from "@/data/projects"
 import { useTheme } from "@/context/ThemeContext"
 import { sound } from "@/lib/sound"
 import { LeetCodeIcon } from "@/components/TechIcons"
+import { useClipboardMachine } from "@/hooks"
 
 interface CommandPaletteProps {
   isOpen: boolean
@@ -48,7 +49,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 }) => {
   const [query, setQuery] = useState("")
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [copied, setCopied] = useState(false)
+  const clipboard = useClipboardMachine({ duration: 2000 })
   const [cliOutput, setCliOutput] = useState<{ command: string; content: React.ReactNode } | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([])
@@ -60,13 +61,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       const timer = setTimeout(() => {
         setQuery("")
         setSelectedIndex(0)
-        setCopied(false)
+        clipboard.reset()
         setCliOutput(null)
         inputRef.current?.focus()
       }, 0)
       return () => clearTimeout(timer)
     }
-  }, [isOpen])
+  }, [isOpen, clipboard])
 
   const handleClose = () => {
     setQuery("")
@@ -257,9 +258,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       cleanCmd.includes("contact") ||
       cleanCmd === "varun --contact"
     ) {
-      void navigator.clipboard.writeText("varun.kush3@gmail.com").catch(() => {})
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2500)
+      void clipboard.copy("varun.kush3@gmail.com")
       setCliOutput({
         command: "curl contact",
         content: (
@@ -706,9 +705,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       category: "Actions",
       icon: <EnvelopeSimpleIcon size={16} />,
       action: () => {
-        void navigator.clipboard.writeText("varun.kush3@gmail.com")
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
+        void clipboard.copy("varun.kush3@gmail.com")
       },
     },
 
@@ -849,6 +846,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             transition={{ duration: 0.15, ease: "easeOut" }}
             className="relative w-full max-w-2xl rounded-t-3xl sm:rounded-2xl border border-hairline bg-surface-card shadow-2xl overflow-hidden z-10 flex flex-col max-h-[88dvh] sm:max-h-[80vh]"
             onClick={(e) => e.stopPropagation()}
+            data-palette-mode={cliOutput ? "terminal" : "search"}
+            data-active-index={selectedIndex}
+            data-testid="command-palette-dialog"
           >
             {/* Mobile Drag Handle Indicator */}
             <div className="w-12 h-1.5 bg-muted/30 rounded-full mx-auto mt-2.5 sm:hidden shrink-0" />
@@ -906,8 +906,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             )}
 
             {/* Copied Feedback */}
-            {copied && (
-              <div className="px-4.5 py-2 bg-surface-soft border-b border-hairline text-emerald-500 text-xs flex items-center gap-2">
+            {clipboard.isCopied && (
+              <div
+                className="px-4.5 py-2 bg-surface-soft border-b border-hairline text-emerald-500 text-xs flex items-center gap-2"
+                role="status"
+                aria-live="polite"
+                data-clipboard-state="copied"
+              >
                 <CheckIcon size={14} weight="bold" />
                 <span>Email copied to clipboard (varun.kush3@gmail.com)</span>
               </div>

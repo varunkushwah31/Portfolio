@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   XIcon,
@@ -17,6 +17,7 @@ import {
 import { LeetCodeIcon, GoogleIcon, AWSIcon } from "@/components/TechIcons"
 import { sound } from "@/lib/sound"
 import { ATS_PLAIN_TEXT_RESUME } from "@/Pages/ResumePage"
+import { useClipboardMachine } from "@/hooks"
 
 interface ResumeModalProps {
   isOpen: boolean
@@ -24,7 +25,7 @@ interface ResumeModalProps {
 }
 
 const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
-  const [copied, setCopied] = useState(false)
+  const clipboard = useClipboardMachine({ duration: 2000 })
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -56,9 +57,7 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
 
   const handleCopyText = () => {
     sound.click()
-    void navigator.clipboard.writeText(rawResumeText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    void clipboard.copy(rawResumeText)
   }
 
   return (
@@ -122,9 +121,11 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                   className="btn-text px-3 py-2 bg-surface-card hover:bg-surface-elevated text-ink border border-hairline text-xs inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                   style={{ borderRadius: "0px" }}
                   title="Copy Plain Text"
+                  {...clipboard.triggerProps}
+                  data-testid="resume-modal-copy-btn"
                 >
-                  {copied ? <CheckIcon size={14} className="text-success" /> : <CopyIcon size={14} />}
-                  <span className="hidden sm:inline">{copied ? "COPIED" : "COPY TEXT"}</span>
+                  {clipboard.isCopied ? <CheckIcon size={14} className="text-success" /> : <CopyIcon size={14} />}
+                  <span className="hidden sm:inline">{clipboard.isCopied ? "COPIED" : "COPY TEXT"}</span>
                 </button>
 
                 <button

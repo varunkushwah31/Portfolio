@@ -1,83 +1,41 @@
-import React, { useState, useEffect, useRef } from "react"
+import React from "react"
 import { PlayIcon, ArrowsClockwiseIcon, CheckCircleIcon, TerminalWindowIcon } from "@phosphor-icons/react"
 import type { ArchitectureNode } from "@/data/projects"
 import SpotlightCard from "@/components/gsap/SpotlightCard"
-import { sound } from "@/lib/sound"
+import { useSimulationMachine } from "@/hooks"
 
 interface InteractiveArchitectureFlowProps {
   flow: ArchitectureNode[]
   projectTitle: string
 }
 
+const STEP_DETAILS: Record<number, { latency: string; protocol: string; telemetry: string }> = {
+  0: { latency: "1.2ms", protocol: "TLS 1.3 / HTTP/2", telemetry: "Payload validated & JWT signed" },
+  1: { latency: "3.4ms", protocol: "Java 21 VThread", telemetry: "Spring security barrier passed · Worker allocated" },
+  2: { latency: "0.4ms", protocol: "Redis RESP3", telemetry: "Distributed Lock Acquired · Cache hit (TTL 24h)" },
+  3: { latency: "6.8ms", protocol: "SCTP / WebRTC", telemetry: "Zero-copy streaming pipeline flushed · 200 OK" },
+}
+
 export const InteractiveArchitectureFlow: React.FC<InteractiveArchitectureFlowProps> = ({
   flow,
   projectTitle,
 }) => {
-  const [activeStep, setActiveStep] = useState<number | null>(null)
-  const [isSimulating, setIsSimulating] = useState(false)
-  const [telemetryLog, setTelemetryLog] = useState<string[]>([])
-  const simTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const stepDetails: Record<number, { latency: string; protocol: string; telemetry: string }> = {
-    0: { latency: "1.2ms", protocol: "TLS 1.3 / HTTP/2", telemetry: "Payload validated & JWT signed" },
-    1: { latency: "3.4ms", protocol: "Java 21 VThread", telemetry: "Spring security barrier passed · Worker allocated" },
-    2: { latency: "0.4ms", protocol: "Redis RESP3", telemetry: "Distributed Lock Acquired · Cache hit (TTL 24h)" },
-    3: { latency: "6.8ms", protocol: "SCTP / WebRTC", telemetry: "Zero-copy streaming pipeline flushed · 200 OK" },
-  }
-
-  const startSimulation = () => {
-    if (isSimulating) return
-    setIsSimulating(true)
-    setActiveStep(0)
-    setTelemetryLog([`[${new Date().toLocaleTimeString()}] INITIATING PIPELINE SIMULATION FOR ${projectTitle}...`])
-    sound.click()
-
-    const runStep = (step: number) => {
-      setActiveStep(step)
-      const detail = stepDetails[step] || { latency: "2ms", protocol: "TCP", telemetry: "Processed" }
-      setTelemetryLog((prev) => [
-        ...prev,
-        `[Phase ${flow[step]?.step || step + 1}] ${flow[step]?.title} (${detail.protocol}) -> Latency: ${detail.latency} | ${detail.telemetry}`,
-      ])
-      sound.switchTab()
-
-      if (step < flow.length - 1) {
-        simTimeoutRef.current = setTimeout(() => {
-          runStep(step + 1)
-        }, 900)
-      } else {
-        simTimeoutRef.current = setTimeout(() => {
-          setIsSimulating(false)
-          setTelemetryLog((prev) => [
-            ...prev,
-            `[${new Date().toLocaleTimeString()}] PIPELINE VERIFIED SUCCESSFULLY: 11.8ms End-to-End Latency. Zero Dropped Packets.`,
-          ])
-          sound.success()
-        }, 800)
-      }
-    }
-
-    simTimeoutRef.current = setTimeout(() => {
-      runStep(0)
-    }, 400)
-  }
-
-  const resetSimulation = () => {
-    if (simTimeoutRef.current) clearTimeout(simTimeoutRef.current)
-    setIsSimulating(false)
-    setActiveStep(null)
-    setTelemetryLog([])
-    sound.click()
-  }
-
-  useEffect(() => {
-    return () => {
-      if (simTimeoutRef.current) clearTimeout(simTimeoutRef.current)
-    }
-  }, [])
+  const {
+    activeStep,
+    telemetryLog,
+    isSimulating,
+    startSimulation,
+    resetSimulation,
+    selectStep,
+    containerProps,
+  } = useSimulationMachine({
+    flow,
+    projectTitle,
+    stepDetails: STEP_DETAILS,
+  })
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" {...containerProps} data-testid="interactive-architecture-flow">
       {/* Header with Simulate Button */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
@@ -100,6 +58,7 @@ export const InteractiveArchitectureFlow: React.FC<InteractiveArchitectureFlowPr
                 ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 cursor-not-allowed"
                 : "bg-ink text-canvas hover:opacity-90"
             }`}
+            data-testid="simulate-request-btn"
           >
             <PlayIcon size={13} weight={isSimulating ? "fill" : "bold"} className={isSimulating ? "animate-pulse" : ""} />
             <span>{isSimulating ? "Simulating Request..." : "Simulate Request"}</span>
@@ -111,6 +70,7 @@ export const InteractiveArchitectureFlow: React.FC<InteractiveArchitectureFlowPr
               onClick={resetSimulation}
               className="p-1.5 rounded-lg border border-hairline bg-surface-card hover:bg-surface-elevated text-muted hover:text-ink transition-colors cursor-pointer"
               title="Reset simulation"
+              data-testid="reset-simulation-btn"
             >
               <ArrowsClockwiseIcon size={14} />
             </button>
@@ -123,15 +83,12 @@ export const InteractiveArchitectureFlow: React.FC<InteractiveArchitectureFlowPr
         {flow.map((node, i) => {
           const isActive = activeStep === i
           const isDone = activeStep !== null && activeStep > i
-          const detail = stepDetails[i]
+          const detail = STEP_DETAILS[i]
 
           return (
             <SpotlightCard
               key={node.step}
-              onClick={() => {
-                setActiveStep(i)
-                sound.click()
-              }}
+              onClick={() => selectStep(i)}
               className={`p-5 flex flex-col justify-between transition-all duration-300 cursor-pointer ${
                 isActive
                   ? "ring-2 ring-emerald-500 bg-surface-elevated/90 shadow-md"
@@ -139,6 +96,8 @@ export const InteractiveArchitectureFlow: React.FC<InteractiveArchitectureFlowPr
                   ? "border-emerald-500/40 bg-surface-card/90"
                   : "bg-surface-card"
               }`}
+              data-node-step={node.step}
+              data-node-state={isActive ? "active" : isDone ? "done" : "idle"}
             >
               <div>
                 {/* Step Top Bar */}

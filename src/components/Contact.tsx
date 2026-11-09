@@ -1,8 +1,8 @@
-import { useState } from "react"
-import { EnvelopeSimpleIcon, ArrowRightIcon, CopyIcon, CheckIcon, PaperPlaneTiltIcon, CheckCircleIcon } from "@phosphor-icons/react"
+﻿import { EnvelopeSimpleIcon, ArrowRightIcon, CopyIcon, CheckIcon, PaperPlaneTiltIcon, CheckCircleIcon, WarningCircleIcon } from "@phosphor-icons/react"
 import { motion, AnimatePresence } from "framer-motion"
 import { sound } from "@/lib/sound"
 import { LeetCodeIcon } from "@/components/TechIcons"
+import { useClipboardMachine, useContactFormMachine } from "@/hooks"
 
 /* Simple Icons SVGs */
 const GitHubIcon = ({ size = 20 }: { size?: number }) => (
@@ -18,35 +18,13 @@ const LinkedInIcon = ({ size = 20 }: { size?: number }) => (
 )
 
 const Contact = () => {
-  const [copied, setCopied] = useState(false)
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
   const emailAddress = "varun.kush3@gmail.com"
+  const clipboard = useClipboardMachine({ duration: 2500 })
+  const formMachine = useContactFormMachine({ resetDelay: 4500 })
 
   const handleCopyEmail = () => {
     sound.click()
-    void navigator.clipboard.writeText(emailAddress)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2500)
-  }
-
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!formData.name || !formData.email || !formData.message) return
-    sound.click()
-    setIsSubmitting(true)
-
-    // Simulate reliable submission
-    setTimeout(() => {
-      sound.success()
-      setIsSubmitting(false)
-      setSubmitted(true)
-      setTimeout(() => {
-        setSubmitted(false)
-        setFormData({ name: "", email: "", message: "" })
-      }, 4500)
-    }, 800)
+    void clipboard.copy(emailAddress)
   }
 
   return (
@@ -103,9 +81,11 @@ const Contact = () => {
                 onMouseEnter={() => sound.hover()}
                 className="btn-text inline-flex items-center gap-2 text-ink bg-surface-card border border-hairline px-4 py-2.5 hover:bg-surface-elevated transition-colors text-xs shrink-0 cursor-pointer"
                 style={{ borderRadius: "0px" }}
+                {...clipboard.triggerProps}
+                data-testid="contact-copy-email-btn"
               >
-                {copied ? <CheckIcon size={14} className="text-success" /> : <CopyIcon size={14} />}
-                {copied ? "COPIED TO CLIPBOARD" : "COPY EMAIL"}
+                {clipboard.isCopied ? <CheckIcon size={14} className="text-success" /> : <CopyIcon size={14} />}
+                {clipboard.isCopied ? "COPIED TO CLIPBOARD" : "COPY EMAIL"}
               </button>
             </div>
 
@@ -187,20 +167,28 @@ const Contact = () => {
           </div>
 
           {/* Right Column — Quick Contact Form */}
-          <div className="lg:col-span-6 bg-canvas border border-hairline-strong p-6 md:p-8" style={{ borderRadius: "0px" }}>
+          <div
+            className="lg:col-span-6 bg-canvas border border-hairline-strong p-6 md:p-8"
+            style={{ borderRadius: "0px" }}
+            data-state={formMachine.status}
+            data-testid="contact-console"
+          >
             <div className="flex items-center justify-between border-b border-hairline pb-4 mb-6">
               <div className="label-uppercase text-ink font-bold">TRANSMISSION CONSOLE</div>
               <span className="text-[11px] label-uppercase text-muted font-mono">[ DIRECT_INPUT ]</span>
             </div>
 
             <AnimatePresence mode="wait">
-              {submitted ? (
+              {formMachine.isSuccess ? (
                 <motion.div
                   key="submitted"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
                   className="bg-surface-soft border border-hairline p-8 text-center py-12"
+                  role="status"
+                  aria-live="polite"
+                  data-state="success"
                 >
                   <div className="w-12 h-12 bg-surface-card rounded-full flex items-center justify-center mx-auto mb-4 text-success border border-hairline">
                     <CheckCircleIcon size={26} />
@@ -211,7 +199,23 @@ const Contact = () => {
                   </p>
                 </motion.div>
               ) : (
-                <form key="form" onSubmit={handleSubmit} className="space-y-5">
+                <form
+                  key="form"
+                  onSubmit={formMachine.handleSubmit}
+                  className="space-y-5"
+                  {...formMachine.formProps}
+                >
+                  {formMachine.isError && formMachine.errorMessage && (
+                    <div
+                      className="p-3 bg-rose-500/10 border border-rose-500/20 text-rose-500 text-xs font-mono flex items-center gap-2"
+                      role="alert"
+                      aria-live="assertive"
+                    >
+                      <WarningCircleIcon size={16} className="shrink-0" />
+                      <span>{formMachine.errorMessage}</span>
+                    </div>
+                  )}
+
                   <div>
                     <label htmlFor="contact-name" className="block label-uppercase text-muted text-xs mb-2">
                       NAME / IDENTITY <span className="text-m-blue-light">*</span>
@@ -221,8 +225,8 @@ const Contact = () => {
                       type="text"
                       required
                       placeholder="e.g. Alex Morgan"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      value={formMachine.formData.name}
+                      onChange={(e) => formMachine.updateField("name", e.target.value)}
                       className="w-full bg-surface-card text-ink border border-hairline-strong px-4 py-3 text-sm focus:border-ink focus:outline-none transition-colors"
                       style={{ borderRadius: "0px", height: "48px" }}
                     />
@@ -237,8 +241,8 @@ const Contact = () => {
                       type="email"
                       required
                       placeholder="name@organization.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      value={formMachine.formData.email}
+                      onChange={(e) => formMachine.updateField("email", e.target.value)}
                       className="w-full bg-surface-card text-ink border border-hairline-strong px-4 py-3 text-sm focus:border-ink focus:outline-none transition-colors"
                       style={{ borderRadius: "0px", height: "48px" }}
                     />
@@ -253,8 +257,8 @@ const Contact = () => {
                       required
                       rows={4}
                       placeholder="Detail your inquiry, engineering requirement, or collaboration opportunity..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      value={formMachine.formData.message}
+                      onChange={(e) => formMachine.updateField("message", e.target.value)}
                       className="w-full bg-surface-card text-ink border border-hairline-strong p-4 text-sm focus:border-ink focus:outline-none transition-colors resize-none leading-relaxed"
                       style={{ borderRadius: "0px" }}
                     />
@@ -262,12 +266,12 @@ const Contact = () => {
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={formMachine.isTransmitting}
                     onMouseEnter={() => sound.hover()}
                     className="btn-text w-full inline-flex items-center justify-center gap-3 text-ink bg-transparent border border-ink py-4 hover:bg-ink hover:text-canvas transition-colors duration-200 cursor-pointer disabled:opacity-50"
                     style={{ borderRadius: "0px", height: "48px" }}
                   >
-                    {isSubmitting ? (
+                    {formMachine.isTransmitting ? (
                       <span className="font-mono text-xs">TRANSMITTING TELEMETRY...</span>
                     ) : (
                       <>

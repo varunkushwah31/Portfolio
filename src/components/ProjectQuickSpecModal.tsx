@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import {
@@ -11,6 +11,7 @@ import {
 import type { Project } from "@/data/projects"
 import ProjectVisual from "./ProjectVisual"
 import { sound } from "@/lib/sound"
+import { useClipboardMachine } from "@/hooks"
 
 interface ProjectQuickSpecModalProps {
   project: Project | null
@@ -18,7 +19,7 @@ interface ProjectQuickSpecModalProps {
 }
 
 const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps) => {
-  const [copied, setCopied] = useState(false)
+  const clipboard = useClipboardMachine({ duration: 2000 })
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -38,9 +39,7 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
     if (!project) return
     sound.click()
     const url = `${window.location.origin}/project/${project.slug}`
-    void navigator.clipboard.writeText(url)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    void clipboard.copy(url)
   }
 
   return (
@@ -216,8 +215,10 @@ const ProjectQuickSpecModal = ({ project, onClose }: ProjectQuickSpecModalProps)
                   onClick={handleCopyLink}
                   className="btn-text w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs bg-surface-card hover:bg-surface-elevated text-ink border border-hairline px-4 py-3 transition-colors duration-200 cursor-pointer"
                   style={{ borderRadius: "0px" }}
+                  {...clipboard.triggerProps}
+                  data-testid="project-spec-copy-link-btn"
                 >
-                  {copied ? (
+                  {clipboard.isCopied ? (
                     <>
                       <CheckIcon size={14} className="text-success" /> LINK COPIED
                     </>
